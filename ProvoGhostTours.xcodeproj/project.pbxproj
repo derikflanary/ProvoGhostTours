@@ -1,0 +1,445 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		EEB6652F1B7BEE6200FDA352 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = EEB6652E1B7BEE6200FDA352 /* main.m */; };
+		EEB665321B7BEE6200FDA352 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EEB665311B7BEE6200FDA352 /* AppDelegate.m */; };
+		EEB665351B7BEE6200FDA352 /* GameScene.m in Sources */ = {isa = PBXBuildFile; fileRef = EEB665341B7BEE6200FDA352 /* GameScene.m */; };
+		EEB665371B7BEE6200FDA352 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = EEB665361B7BEE6200FDA352 /* GameScene.sks */; };
+		EEB6653A1B7BEE6200FDA352 /* GameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EEB665391B7BEE6200FDA352 /* GameViewController.m */; };
+		EEB6653D1B7BEE6200FDA352 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EEB6653B1B7BEE6200FDA352 /* Main.storyboard */; };
+		EEB6653F1B7BEE6200FDA352 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EEB6653E1B7BEE6200FDA352 /* Images.xcassets */; };
+		EEB665421B7BEE6200FDA352 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = EEB665401B7BEE6200FDA352 /* LaunchScreen.xib */; };
+		EEB6654E1B7BEE6200FDA352 /* ProvoGhostToursTests.m in Sources */ = {isa = PBXBuildFile; fileRef = EEB6654D1B7BEE6200FDA352 /* ProvoGhostToursTests.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		EEB665481B7BEE6200FDA352 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EEB665211B7BEE6200FDA352 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = EEB665281B7BEE6200FDA352;
+			remoteInfo = ProvoGhostTours;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		EEB665291B7BEE6200FDA352 /* ProvoGhostTours.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ProvoGhostTours.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		EEB6652D1B7BEE6200FDA352 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		EEB6652E1B7BEE6200FDA352 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		EEB665301B7BEE6200FDA352 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		EEB665311B7BEE6200FDA352 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		EEB665331B7BEE6200FDA352 /* GameScene.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GameScene.h; sourceTree = "<group>"; };
+		EEB665341B7BEE6200FDA352 /* GameScene.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GameScene.m; sourceTree = "<group>"; };
+		EEB665361B7BEE6200FDA352 /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
+		EEB665381B7BEE6200FDA352 /* GameViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GameViewController.h; sourceTree = "<group>"; };
+		EEB665391B7BEE6200FDA352 /* GameViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GameViewController.m; sourceTree = "<group>"; };
+		EEB6653C1B7BEE6200FDA352 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		EEB6653E1B7BEE6200FDA352 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		EEB665411B7BEE6200FDA352 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+		EEB665471B7BEE6200FDA352 /* ProvoGhostToursTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ProvoGhostToursTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		EEB6654C1B7BEE6200FDA352 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		EEB6654D1B7BEE6200FDA352 /* ProvoGhostToursTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ProvoGhostToursTests.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		EEB665261B7BEE6200FDA352 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EEB665441B7BEE6200FDA352 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		EEB665201B7BEE6200FDA352 = {
+			isa = PBXGroup;
+			children = (
+				EEB6652B1B7BEE6200FDA352 /* ProvoGhostTours */,
+				EEB6654A1B7BEE6200FDA352 /* ProvoGhostToursTests */,
+				EEB6652A1B7BEE6200FDA352 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		EEB6652A1B7BEE6200FDA352 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				EEB665291B7BEE6200FDA352 /* ProvoGhostTours.app */,
+				EEB665471B7BEE6200FDA352 /* ProvoGhostToursTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		EEB6652B1B7BEE6200FDA352 /* ProvoGhostTours */ = {
+			isa = PBXGroup;
+			children = (
+				EEB665301B7BEE6200FDA352 /* AppDelegate.h */,
+				EEB665311B7BEE6200FDA352 /* AppDelegate.m */,
+				EEB665331B7BEE6200FDA352 /* GameScene.h */,
+				EEB665341B7BEE6200FDA352 /* GameScene.m */,
+				EEB665361B7BEE6200FDA352 /* GameScene.sks */,
+				EEB665381B7BEE6200FDA352 /* GameViewController.h */,
+				EEB665391B7BEE6200FDA352 /* GameViewController.m */,
+				EEB6653B1B7BEE6200FDA352 /* Main.storyboard */,
+				EEB6653E1B7BEE6200FDA352 /* Images.xcassets */,
+				EEB665401B7BEE6200FDA352 /* LaunchScreen.xib */,
+				EEB6652C1B7BEE6200FDA352 /* Supporting Files */,
+			);
+			path = ProvoGhostTours;
+			sourceTree = "<group>";
+		};
+		EEB6652C1B7BEE6200FDA352 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				EEB6652D1B7BEE6200FDA352 /* Info.plist */,
+				EEB6652E1B7BEE6200FDA352 /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		EEB6654A1B7BEE6200FDA352 /* ProvoGhostToursTests */ = {
+			isa = PBXGroup;
+			children = (
+				EEB6654D1B7BEE6200FDA352 /* ProvoGhostToursTests.m */,
+				EEB6654B1B7BEE6200FDA352 /* Supporting Files */,
+			);
+			path = ProvoGhostToursTests;
+			sourceTree = "<group>";
+		};
+		EEB6654B1B7BEE6200FDA352 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				EEB6654C1B7BEE6200FDA352 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		EEB665281B7BEE6200FDA352 /* ProvoGhostTours */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = EEB665511B7BEE6200FDA352 /* Build configuration list for PBXNativeTarget "ProvoGhostTours" */;
+			buildPhases = (
+				EEB665251B7BEE6200FDA352 /* Sources */,
+				EEB665261B7BEE6200FDA352 /* Frameworks */,
+				EEB665271B7BEE6200FDA352 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ProvoGhostTours;
+			productName = ProvoGhostTours;
+			productReference = EEB665291B7BEE6200FDA352 /* ProvoGhostTours.app */;
+			productType = "com.apple.product-type.application";
+		};
+		EEB665461B7BEE6200FDA352 /* ProvoGhostToursTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = EEB665541B7BEE6200FDA352 /* Build configuration list for PBXNativeTarget "ProvoGhostToursTests" */;
+			buildPhases = (
+				EEB665431B7BEE6200FDA352 /* Sources */,
+				EEB665441B7BEE6200FDA352 /* Frameworks */,
+				EEB665451B7BEE6200FDA352 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				EEB665491B7BEE6200FDA352 /* PBXTargetDependency */,
+			);
+			name = ProvoGhostToursTests;
+			productName = ProvoGhostToursTests;
+			productReference = EEB665471B7BEE6200FDA352 /* ProvoGhostToursTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		EEB665211B7BEE6200FDA352 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0640;
+				ORGANIZATIONNAME = "Derik Flanary";
+				TargetAttributes = {
+					EEB665281B7BEE6200FDA352 = {
+						CreatedOnToolsVersion = 6.4;
+					};
+					EEB665461B7BEE6200FDA352 = {
+						CreatedOnToolsVersion = 6.4;
+						TestTargetID = EEB665281B7BEE6200FDA352;
+					};
+				};
+			};
+			buildConfigurationList = EEB665241B7BEE6200FDA352 /* Build configuration list for PBXProject "ProvoGhostTours" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = EEB665201B7BEE6200FDA352;
+			productRefGroup = EEB6652A1B7BEE6200FDA352 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				EEB665281B7BEE6200FDA352 /* ProvoGhostTours */,
+				EEB665461B7BEE6200FDA352 /* ProvoGhostToursTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		EEB665271B7BEE6200FDA352 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EEB665421B7BEE6200FDA352 /* LaunchScreen.xib in Resources */,
+				EEB6653F1B7BEE6200FDA352 /* Images.xcassets in Resources */,
+				EEB665371B7BEE6200FDA352 /* GameScene.sks in Resources */,
+				EEB6653D1B7BEE6200FDA352 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EEB665451B7BEE6200FDA352 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		EEB665251B7BEE6200FDA352 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EEB6653A1B7BEE6200FDA352 /* GameViewController.m in Sources */,
+				EEB665321B7BEE6200FDA352 /* AppDelegate.m in Sources */,
+				EEB665351B7BEE6200FDA352 /* GameScene.m in Sources */,
+				EEB6652F1B7BEE6200FDA352 /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EEB665431B7BEE6200FDA352 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EEB6654E1B7BEE6200FDA352 /* ProvoGhostToursTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		EEB665491B7BEE6200FDA352 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = EEB665281B7BEE6200FDA352 /* ProvoGhostTours */;
+			targetProxy = EEB665481B7BEE6200FDA352 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		EEB6653B1B7BEE6200FDA352 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				EEB6653C1B7BEE6200FDA352 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		EEB665401B7BEE6200FDA352 /* LaunchScreen.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				EEB665411B7BEE6200FDA352 /* Base */,
+			);
+			name = LaunchScreen.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		EEB6654F1B7BEE6200FDA352 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		EEB665501B7BEE6200FDA352 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		EEB665521B7BEE6200FDA352 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = ProvoGhostTours/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		EEB665531B7BEE6200FDA352 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = ProvoGhostTours/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		EEB665551B7BEE6200FDA352 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = ProvoGhostToursTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ProvoGhostTours.app/ProvoGhostTours";
+			};
+			name = Debug;
+		};
+		EEB665561B7BEE6200FDA352 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = ProvoGhostToursTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ProvoGhostTours.app/ProvoGhostTours";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		EEB665241B7BEE6200FDA352 /* Build configuration list for PBXProject "ProvoGhostTours" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EEB6654F1B7BEE6200FDA352 /* Debug */,
+				EEB665501B7BEE6200FDA352 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		EEB665511B7BEE6200FDA352 /* Build configuration list for PBXNativeTarget "ProvoGhostTours" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EEB665521B7BEE6200FDA352 /* Debug */,
+				EEB665531B7BEE6200FDA352 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		EEB665541B7BEE6200FDA352 /* Build configuration list for PBXNativeTarget "ProvoGhostToursTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EEB665551B7BEE6200FDA352 /* Debug */,
+				EEB665561B7BEE6200FDA352 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = EEB665211B7BEE6200FDA352 /* Project object */;
+}
