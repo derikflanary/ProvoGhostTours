@@ -12,6 +12,8 @@
 
 @property (nonatomic) SKSpriteNode *player;
 @property (nonatomic) SKSpriteNode *movingBackground;
+@property (nonatomic) SKSpriteNode *backWheel;
+@property (nonatomic) SKSpriteNode *frontWheel;
 
 @end
 
@@ -40,11 +42,28 @@
         [self addChild:self.movingBackground];
         
         self.player = [SKSpriteNode spriteNodeWithImageNamed:@"Bike1_body_a.png"];
-        self.player.position = CGPointMake(self.frame.size.width/2, self.player.size.height);
+        self.player.position = CGPointMake(self.frame.size.width/2, self.player.size.height - 7);
         [self addChild:self.player];
         
+        self.backWheel = [SKSpriteNode spriteNodeWithImageNamed:@"Bike1_tire_a"];
+        self.backWheel.position = CGPointMake(self.player.position.x - 20, self.player.position.y - 10);
+        [self addChild:self.backWheel];
+        
+        self.frontWheel = [SKSpriteNode spriteNodeWithImageNamed:@"Bike1_tire_a"];
+        self.frontWheel.position = CGPointMake(self.player.position.x + 20, self.player.position.y - 10);
+        [self addChild:self.frontWheel];
+        
+        [self rotateWheels];
     }
     return self;
+}
+
+- (void)rotateWheels{
+    //create repeating rotation for wheels
+    SKAction *oneRevolution = [SKAction rotateByAngle:-M_PI*2 duration: 5.0];
+    SKAction *repeat = [SKAction repeatActionForever:oneRevolution];
+    [self.backWheel runAction:repeat];
+    [self.frontWheel runAction:repeat];
 }
 
 - (void)didMoveToView:(SKView *)view {
