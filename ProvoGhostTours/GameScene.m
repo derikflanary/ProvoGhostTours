@@ -8,7 +8,7 @@
 
 #import "GameScene.h"
 
-@interface GameScene()
+@interface GameScene() <SKPhysicsContactDelegate>
 
 @property (nonatomic) SKSpriteNode *player;
 @property (nonatomic) SKSpriteNode *movingBackground;
@@ -22,6 +22,9 @@
 @end
 
 @implementation GameScene
+
+static const uint32_t flashlightCategory     =  0x1 << 0;
+static const uint32_t ghostCategory        =  0x1 << 1;
 
 - (id)initWithSize:(CGSize)size{
     if (self = [super initWithSize:size]) {
@@ -60,29 +63,21 @@
         self.centerPoint.position = self.player.position;
         [self addChild:self.centerPoint];
         
-        self.light = [SKSpriteNode spriteNodeWithImageNamed:@"flashlight"];
+        self.light = [SKSpriteNode spriteNodeWithImageNamed:@"flashlight2"];
+        self.light.alpha = 0.25;
         self.light.position = CGPointMake(0, self.light.size.height/2);
-//        self.light.zRotation = M_PI;
         [self.centerPoint addChild:self.light];
         
-//        NSString *myParticlePath = [[NSBundle mainBundle] pathForResource:@"Smoke" ofType:@"sks"];
-//        SKEmitterNode *snowParticle = [NSKeyedUnarchiver unarchiveObjectWithFile:myParticlePath];
-//        snowParticle.particlePosition = self.player.position;
-//        
-//        
-//        [self addChild:snowParticle];
+        self.light.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:self.light.size];
+        self.light.physicsBody.dynamic = YES;
+        self.light.physicsBody.categoryBitMask = flashlightCategory;
+        self.light.physicsBody.contactTestBitMask = ghostCategory;
+        self.light.physicsBody.collisionBitMask = 0;
+        self.light.physicsBody.usesPreciseCollisionDetection = YES;
         
+        self.physicsWorld.gravity = CGVectorMake(0,0);
+        self.physicsWorld.contactDelegate = self;
         
-//        //setup a fire emitter
-//        NSString *fireEmmitterPath = [[NSBundle mainBundle] pathForResource:@"light" ofType:@"scnp"];
-//        SKEmitterNode *fireEmmitter = [NSKeyedUnarchiver unarchiveObjectWithFile:fireEmmitterPath];
-//        fireEmmitter.position = CGPointMake(self.frame.size.width/2, self.frame.size.height/2 - 200);
-//        fireEmmitter.name = @"fireEmmitter";
-//        fireEmmitter.zPosition = 1;
-//        fireEmmitter.targetNode = self;
-//        [self addChild: fireEmmitter];
-        
-                
         [self rotateWheels];
         [self addGhost];
     }
@@ -101,11 +96,6 @@
     //create sprite
     if (actualX > self.frame.size.width/2) {
         ghost.texture = [SKTexture textureWithImageNamed:@"Ghost2right"];
-//        double angle = atan2(self.player.position.y - ghost.position.y, self.player.position.x - ghost.position.x);
-//        ghost.zRotation = angle + M_PI/4;
-    }else{
-//        double angle = atan2(self.player.position.y - ghost.position.y, self.player.position.x - ghost.position.x);
-//        ghost.zRotation = angle - M_PI/4;
     }
     
     //Determine a random Y if the spawn's X is off screen
@@ -118,10 +108,15 @@
     // and along a random position along the X axis as calculated above
     if (actualX < 0 || actualX > self.frame.size.width) {
         ghost.position = CGPointMake(actualX, actualY);
-        NSLog(@"%d", actualY);
     }else{
         ghost.position = CGPointMake(actualX, self.frame.size.height + ghost.size.height/2);
     }
+    
+    ghost.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:ghost.size];
+    ghost.physicsBody.dynamic = YES;
+    ghost.physicsBody.categoryBitMask = ghostCategory;
+    ghost.physicsBody.contactTestBitMask = flashlightCategory;
+    ghost.physicsBody.collisionBitMask = 0;
     
     ghost.alpha = 0.4;
     
@@ -197,33 +192,12 @@
     [nodeA runAction:[SKAction rotateToAngle:angle duration:0]];
 }
 
-//Vector Methods
-static inline CGPoint rwAdd(CGPoint a, CGPoint b) {
-    return CGPointMake(a.x + b.x, a.y + b.y);
-}
-
-static inline CGPoint rwSub(CGPoint a, CGPoint b) {
-    return CGPointMake(a.x - b.x, a.y - b.y);
-}
-
-static inline CGPoint rwMult(CGPoint a, float b) {
-    return CGPointMake(a.x * b, a.y * b);
-}
-
-static inline float rwLength(CGPoint a) {
-    return sqrtf(a.x * a.x + a.y * a.y);
-}
-
-    // Makes a vector have a length of 1
-static inline CGPoint rwNormalize(CGPoint a) {
-    float length = rwLength(a);
-    return CGPointMake(a.x / length, a.y / length);
-}
 
 - (void)didMoveToView:(SKView *)view {
     /* Setup your scene here */
 }
 
+//Touch Methods for Flashlight
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     /* Called when a touch begins */
     
@@ -234,7 +208,7 @@ static inline CGPoint rwNormalize(CGPoint a) {
         float dY = self.centerPoint.position.y - location.y;
         float dX = self.centerPoint.position.x - location.x;
         float angle = atan2f(dY, dX) + 1.571f;
-        [self.centerPoint runAction:[SKAction rotateToAngle:angle duration:0.5 shortestUnitArc:YES]];
+        [self.centerPoint runAction:[SKAction rotateToAngle:angle duration:0.0 shortestUnitArc:YES]];
         return;
     }
 }
@@ -249,5 +223,37 @@ static inline CGPoint rwNormalize(CGPoint a) {
         self.centerPoint.zRotation = angle;
     }
 }
+
+- (void)flashlight:(SKSpriteNode *)flashlight didCollideWithGhost:(SKSpriteNode *)ghost {
+    NSLog(@"Hit");
+    [ghost removeFromParent];
+}
+
+- (void)didBeginContact:(SKPhysicsContact *)contact{
+    SKPhysicsBody *firstBody, *secondBody;
+    
+    if (contact.bodyA.categoryBitMask < contact.bodyB.categoryBitMask)
+    {
+        firstBody = contact.bodyA;
+        secondBody = contact.bodyB;
+    }
+    else
+    {
+        firstBody = contact.bodyB;
+        secondBody = contact.bodyA;
+    }
+    
+    // 2
+    if ((firstBody.categoryBitMask & flashlightCategory) != 0 &&
+        (secondBody.categoryBitMask & ghostCategory) != 0)
+    {
+        [self flashlight:(SKSpriteNode *)firstBody.node didCollideWithGhost:(SKSpriteNode *)secondBody.node];
+    }
+}
+
+- (void)didEndContact:(SKPhysicsContact *)contact{
+    
+}
+
 
 @end

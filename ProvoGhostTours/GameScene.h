@@ -9,6 +9,10 @@
 #import <SpriteKit/SpriteKit.h>
 #import <SceneKit/SceneKit.h>
 
+
+
 @interface GameScene : SKScene
+
+<SKPhysicsContactDelegate>
 
 @end
