@@ -370,8 +370,8 @@ static const uint32_t bikerCategory         = 0x1 << 2;
 #pragma mark collision methods
 
 - (void)flashlight:(SKSpriteNode *)flashlight didCollideWithGhost:(Ghost *)ghost {
-    if (ghost.alpha < .4) {
-        ghost.alpha = .4;
+    if (ghost.alpha < .05) {
+        ghost.alpha = .05;
     }
     
     NSUInteger indexOfGhost = [self.ghostArray indexOfObject:ghost];
