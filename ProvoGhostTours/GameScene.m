@@ -20,7 +20,7 @@
 @property (nonatomic) SKSpriteNode *light;
 @property (nonatomic) SKNode *centerPoint;
 @property (nonatomic) Ghost *contactedGhost;
-@property (nonatomic) int score;
+@property (nonatomic) NSInteger score;
 @property (nonatomic, strong) NSMutableArray *ghostArray;
 @property (nonatomic, strong) NSMutableArray *contactedGhostArray;
 
@@ -86,6 +86,8 @@ static const uint32_t ghostCategory        =  0x1 << 1;
         self.ghostArray = [NSMutableArray array];
         self.contactedGhostArray = [NSMutableArray array];
         
+        self.score = 0;
+        
         [self rotateWheels];
         [self addGhost];
     }
@@ -133,8 +135,8 @@ static const uint32_t ghostCategory        =  0x1 << 1;
     [self addChild:ghost];
     
     // Determine speed of the ghost
-    int minDuration = 8.0;
-    int maxDuration = 11.0;
+    int minDuration = 5.0;
+    int maxDuration = 10.0;
     int rangeDuration = maxDuration - minDuration;
     int actualDuration = (arc4random() % rangeDuration) + minDuration;
     
@@ -180,24 +182,20 @@ static const uint32_t ghostCategory        =  0x1 << 1;
     
     //Update the ghost if it is in the light
     if ([self.contactedGhostArray count] > 0) {
+        NSMutableArray *removedGhostsArray = [NSMutableArray array];
         for (Ghost *ghost in self.contactedGhostArray) {
             if (ghost.alpha >= .9) {
                 [ghost removeFromParent];
+                [self.ghostArray removeObject:ghost];
+                [removedGhostsArray addObject:ghost];
+                self.score = self.score + 1;
+                NSLog(@"%lu", (long)self.score);
             }else{
                 [ghost collidedWithFlashlight];
             }
-
         }
+        [self.contactedGhostArray removeObjectsInArray:removedGhostsArray];
     }
-    
-//    if (self.contactedGhost.isContacted == YES) {
-//        if (self.contactedGhost.alpha >= .9) {
-//            [self.contactedGhost removeFromParent];
-//        }else{
-//            [self.contactedGhost collidedWithFlashlight];
-//        }
-//        
-//    }
     
     [self updateWithTimeSinceLastUpdate:timeSinceLast];
     
@@ -266,12 +264,10 @@ static const uint32_t ghostCategory        =  0x1 << 1;
     ghost.isContacted = YES;
     [self.contactedGhostArray addObject:[self.ghostArray objectAtIndex:indexOfGhost]];
     
-//    self.contactedGhost = [self.ghostArray objectAtIndex:indexOfGhost];
-//    self.contactedGhost.isContacted = YES;
 }
 
 - (void)flashlight:(SKSpriteNode *)flashlight didStopCollidingWithGhost:(Ghost *)ghost{
-//    NSUInteger indexOfGhost = [self.contactedGhostArray indexOfObject:ghost];
+
     ghost.isContacted = NO;
     [self.contactedGhostArray removeObject:ghost];
 }
