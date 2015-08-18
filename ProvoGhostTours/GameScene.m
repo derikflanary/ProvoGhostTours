@@ -258,7 +258,6 @@ static const uint32_t ghostCategory        =  0x1 << 1;
 #pragma mark collision methods
 
 - (void)flashlight:(SKSpriteNode *)flashlight didCollideWithGhost:(Ghost *)ghost {
-    
     if (ghost.alpha < .4) {
         ghost.alpha = .4;
     }
@@ -272,8 +271,9 @@ static const uint32_t ghostCategory        =  0x1 << 1;
 }
 
 - (void)flashlight:(SKSpriteNode *)flashlight didStopCollidingWithGhost:(Ghost *)ghost{
-    self.contactedGhost = ghost;
-    self.contactedGhost.isContacted = NO;
+//    NSUInteger indexOfGhost = [self.contactedGhostArray indexOfObject:ghost];
+    ghost.isContacted = NO;
+    [self.contactedGhostArray removeObject:ghost];
 }
 
 - (void)didBeginContact:(SKPhysicsContact *)contact{
@@ -302,32 +302,32 @@ static const uint32_t ghostCategory        =  0x1 << 1;
     }
 }
 
-//- (void)didEndContact:(SKPhysicsContact *)contact{
-//    SKPhysicsBody *firstBody, *secondBody;
-//    
-//    if (contact.bodyA.categoryBitMask < contact.bodyB.categoryBitMask)
-//    {
-//        firstBody = contact.bodyA;
-//        secondBody = contact.bodyB;
-//    }
-//    else
-//    {
-//        firstBody = contact.bodyB;
-//        secondBody = contact.bodyA;
-//    }
-//    
-//    // 2
-//    if ((firstBody.categoryBitMask & flashlightCategory) != 0 &&
-//        (secondBody.categoryBitMask & ghostCategory) != 0)
-//    {
-//        if ([secondBody.node isKindOfClass:[Ghost class]]) {
-//            [self flashlight:(SKSpriteNode *)firstBody.node didStopCollidingWithGhost:(Ghost *)secondBody.node];
-//        }
-//        
-//        //        [(Ghost *)secondBody.node collidedWith:firstBody];
-//    }
-//
-//}
+- (void)didEndContact:(SKPhysicsContact *)contact{
+    SKPhysicsBody *firstBody, *secondBody;
+    
+    if (contact.bodyA.categoryBitMask < contact.bodyB.categoryBitMask)
+    {
+        firstBody = contact.bodyA;
+        secondBody = contact.bodyB;
+    }
+    else
+    {
+        firstBody = contact.bodyB;
+        secondBody = contact.bodyA;
+    }
+    
+    // 2
+    if ((firstBody.categoryBitMask & flashlightCategory) != 0 &&
+        (secondBody.categoryBitMask & ghostCategory) != 0)
+    {
+        if ([secondBody.node isKindOfClass:[Ghost class]]) {
+            [self flashlight:(SKSpriteNode *)firstBody.node didStopCollidingWithGhost:(Ghost *)secondBody.node];
+        }
+        
+        //        [(Ghost *)secondBody.node collidedWith:firstBody];
+    }
+
+}
 
 
 @end
