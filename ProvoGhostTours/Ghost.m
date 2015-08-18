@@ -12,7 +12,7 @@
 
 - (void)collidedWithFlashlight{
     if (self.alpha < 1) {
-        self.alpha = self.alpha + .02;
+        self.alpha = self.alpha + .01;
     }
     
 }

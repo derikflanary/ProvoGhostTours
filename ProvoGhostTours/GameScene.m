@@ -20,6 +20,9 @@
 @property (nonatomic) SKSpriteNode *light;
 @property (nonatomic) SKNode *centerPoint;
 @property (nonatomic) Ghost *contactedGhost;
+@property (nonatomic) int score;
+@property (nonatomic, strong) NSMutableArray *ghostArray;
+@property (nonatomic, strong) NSMutableArray *contactedGhostArray;
 
 @end
 
@@ -80,6 +83,9 @@ static const uint32_t ghostCategory        =  0x1 << 1;
         self.physicsWorld.gravity = CGVectorMake(0,0);
         self.physicsWorld.contactDelegate = self;
         
+        self.ghostArray = [NSMutableArray array];
+        self.contactedGhostArray = [NSMutableArray array];
+        
         [self rotateWheels];
         [self addGhost];
     }
@@ -95,6 +101,7 @@ static const uint32_t ghostCategory        =  0x1 << 1;
     int actualX = (arc4random() % rangeX) + minX;
     
     Ghost *ghost = [Ghost spriteNodeWithTexture:[SKTexture textureWithImageNamed:@"Ghost2"]];
+    [self.ghostArray addObject:ghost];
     //create sprite
     if (actualX > self.frame.size.width/2) {
         ghost.texture = [SKTexture textureWithImageNamed:@"Ghost2right"];
@@ -140,8 +147,8 @@ static const uint32_t ghostCategory        =  0x1 << 1;
 - (void)updateWithTimeSinceLastUpdate:(CFTimeInterval)timeSinceLast {
     
     //Set time between spawns
-    int minSpawn = 6.0;
-    int maxSpawn = 10.0;
+    int minSpawn = 1.0;
+    int maxSpawn = 3.0;
     int rangeSpawn = maxSpawn - minSpawn;
     int actualSpawn = (arc4random() % rangeSpawn) + minSpawn;
     
@@ -171,14 +178,26 @@ static const uint32_t ghostCategory        =  0x1 << 1;
         self.lastUpdateTimeInterval = currentTime;
     }
     
-    if (self.contactedGhost.isContacted == YES) {
-        if (self.contactedGhost.alpha >= .9) {
-            [self.contactedGhost removeFromParent];
-        }else{
-            [self.contactedGhost collidedWithFlashlight];
+    //Update the ghost if it is in the light
+    if ([self.contactedGhostArray count] > 0) {
+        for (Ghost *ghost in self.contactedGhostArray) {
+            if (ghost.alpha >= .9) {
+                [ghost removeFromParent];
+            }else{
+                [ghost collidedWithFlashlight];
+            }
+
         }
-        
     }
+    
+//    if (self.contactedGhost.isContacted == YES) {
+//        if (self.contactedGhost.alpha >= .9) {
+//            [self.contactedGhost removeFromParent];
+//        }else{
+//            [self.contactedGhost collidedWithFlashlight];
+//        }
+//        
+//    }
     
     [self updateWithTimeSinceLastUpdate:timeSinceLast];
     
@@ -236,14 +255,20 @@ static const uint32_t ghostCategory        =  0x1 << 1;
     }
 }
 
+#pragma mark collision methods
+
 - (void)flashlight:(SKSpriteNode *)flashlight didCollideWithGhost:(Ghost *)ghost {
-    
     
     if (ghost.alpha < .4) {
         ghost.alpha = .4;
     }
-    self.contactedGhost = ghost;
-    self.contactedGhost.isContacted = YES;
+    
+    NSUInteger indexOfGhost = [self.ghostArray indexOfObject:ghost];
+    ghost.isContacted = YES;
+    [self.contactedGhostArray addObject:[self.ghostArray objectAtIndex:indexOfGhost]];
+    
+//    self.contactedGhost = [self.ghostArray objectAtIndex:indexOfGhost];
+//    self.contactedGhost.isContacted = YES;
 }
 
 - (void)flashlight:(SKSpriteNode *)flashlight didStopCollidingWithGhost:(Ghost *)ghost{
@@ -277,32 +302,32 @@ static const uint32_t ghostCategory        =  0x1 << 1;
     }
 }
 
-- (void)didEndContact:(SKPhysicsContact *)contact{
-    SKPhysicsBody *firstBody, *secondBody;
-    
-    if (contact.bodyA.categoryBitMask < contact.bodyB.categoryBitMask)
-    {
-        firstBody = contact.bodyA;
-        secondBody = contact.bodyB;
-    }
-    else
-    {
-        firstBody = contact.bodyB;
-        secondBody = contact.bodyA;
-    }
-    
-    // 2
-    if ((firstBody.categoryBitMask & flashlightCategory) != 0 &&
-        (secondBody.categoryBitMask & ghostCategory) != 0)
-    {
-        if ([secondBody.node isKindOfClass:[Ghost class]]) {
-            [self flashlight:(SKSpriteNode *)firstBody.node didStopCollidingWithGhost:(Ghost *)secondBody.node];
-        }
-        
-        //        [(Ghost *)secondBody.node collidedWith:firstBody];
-    }
-
-}
+//- (void)didEndContact:(SKPhysicsContact *)contact{
+//    SKPhysicsBody *firstBody, *secondBody;
+//    
+//    if (contact.bodyA.categoryBitMask < contact.bodyB.categoryBitMask)
+//    {
+//        firstBody = contact.bodyA;
+//        secondBody = contact.bodyB;
+//    }
+//    else
+//    {
+//        firstBody = contact.bodyB;
+//        secondBody = contact.bodyA;
+//    }
+//    
+//    // 2
+//    if ((firstBody.categoryBitMask & flashlightCategory) != 0 &&
+//        (secondBody.categoryBitMask & ghostCategory) != 0)
+//    {
+//        if ([secondBody.node isKindOfClass:[Ghost class]]) {
+//            [self flashlight:(SKSpriteNode *)firstBody.node didStopCollidingWithGhost:(Ghost *)secondBody.node];
+//        }
+//        
+//        //        [(Ghost *)secondBody.node collidedWith:firstBody];
+//    }
+//
+//}
 
 
 @end
