@@ -23,6 +23,7 @@
 @property (nonatomic) NSInteger score;
 @property (nonatomic, strong) NSMutableArray *ghostArray;
 @property (nonatomic, strong) NSMutableArray *contactedGhostArray;
+@property (strong, nonatomic) SKLabelNode *scoreLabel;
 
 @end
 
@@ -79,6 +80,16 @@ static const uint32_t ghostCategory        =  0x1 << 1;
         self.light.physicsBody.contactTestBitMask = ghostCategory;
         self.light.physicsBody.collisionBitMask = 0;
         self.light.physicsBody.usesPreciseCollisionDetection = YES;
+        
+        float margin = 10;
+        
+        self.scoreLabel = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
+        self.scoreLabel.text = @"Score: 0";
+        self.scoreLabel.fontSize = [self convertFontSize:14];
+        self.scoreLabel.zPosition = 4;
+        self.scoreLabel.horizontalAlignmentMode = SKLabelHorizontalAlignmentModeLeft;
+        self.scoreLabel.position = CGPointMake(margin, margin);
+        [self addChild:self.scoreLabel];
         
         self.physicsWorld.gravity = CGVectorMake(0,0);
         self.physicsWorld.contactDelegate = self;
@@ -188,7 +199,8 @@ static const uint32_t ghostCategory        =  0x1 << 1;
                 [ghost removeFromParent];
                 [self.ghostArray removeObject:ghost];
                 [removedGhostsArray addObject:ghost];
-                self.score = self.score + 1;
+                self.score += 10;
+                [self.scoreLabel setText:[NSString stringWithFormat:@"Score: %d", self.score]];
                 NSLog(@"%lu", (long)self.score);
             }else{
                 [ghost collidedWithFlashlight];
@@ -323,6 +335,15 @@ static const uint32_t ghostCategory        =  0x1 << 1;
         //        [(Ghost *)secondBody.node collidedWith:firstBody];
     }
 
+}
+
+- (float)convertFontSize:(float)fontSize
+{
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+        return fontSize * 2;
+    } else {
+        return fontSize;
+    }
 }
 
 
