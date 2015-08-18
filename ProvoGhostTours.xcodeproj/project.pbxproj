@@ -18,6 +18,7 @@
 		EEB6654E1B7BEE6200FDA352 /* ProvoGhostToursTests.m in Sources */ = {isa = PBXBuildFile; fileRef = EEB6654D1B7BEE6200FDA352 /* ProvoGhostToursTests.m */; };
 		EEB665591B7D177300FDA352 /* light.scnp in Resources */ = {isa = PBXBuildFile; fileRef = EEB665571B7D177300FDA352 /* light.scnp */; };
 		EED599001B838EDC00A869B3 /* Ghost.m in Sources */ = {isa = PBXBuildFile; fileRef = EED598FF1B838EDC00A869B3 /* Ghost.m */; };
+		EED599061B83C08900A869B3 /* bikePedal.caf in Resources */ = {isa = PBXBuildFile; fileRef = EED599051B83C08900A869B3 /* bikePedal.caf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,6 +51,7 @@
 		EEB665571B7D177300FDA352 /* light.scnp */ = {isa = PBXFileReference; lastKnownFileType = file.scp; path = light.scnp; sourceTree = "<group>"; };
 		EED598FE1B838EDC00A869B3 /* Ghost.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Ghost.h; sourceTree = "<group>"; };
 		EED598FF1B838EDC00A869B3 /* Ghost.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Ghost.m; sourceTree = "<group>"; };
+		EED599051B83C08900A869B3 /* bikePedal.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = bikePedal.caf; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,6 +103,7 @@
 				EEB665361B7BEE6200FDA352 /* GameScene.sks */,
 				EEB665381B7BEE6200FDA352 /* GameViewController.h */,
 				EEB665391B7BEE6200FDA352 /* GameViewController.m */,
+				EED599051B83C08900A869B3 /* bikePedal.caf */,
 				EEB6653B1B7BEE6200FDA352 /* Main.storyboard */,
 				EEB6653E1B7BEE6200FDA352 /* Images.xcassets */,
 				EEB665401B7BEE6200FDA352 /* LaunchScreen.xib */,
@@ -217,6 +220,7 @@
 			files = (
 				EEB665421B7BEE6200FDA352 /* LaunchScreen.xib in Resources */,
 				EEB665591B7D177300FDA352 /* light.scnp in Resources */,
+				EED599061B83C08900A869B3 /* bikePedal.caf in Resources */,
 				EEB6653F1B7BEE6200FDA352 /* Images.xcassets in Resources */,
 				EEB665371B7BEE6200FDA352 /* GameScene.sks in Resources */,
 				EEB6653D1B7BEE6200FDA352 /* Main.storyboard in Resources */,

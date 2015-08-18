@@ -8,6 +8,7 @@
 
 #import "GameScene.h"
 #import "Ghost.h"
+#import <AVFoundation/AVFoundation.h>
 
 @interface GameScene() <SKPhysicsContactDelegate>
 
@@ -24,6 +25,9 @@
 @property (nonatomic, strong) NSMutableArray *ghostArray;
 @property (nonatomic, strong) NSMutableArray *contactedGhostArray;
 @property (strong, nonatomic) SKLabelNode *scoreLabel;
+@property (strong, nonatomic) AVAudioPlayer *audioPlayer;
+@property (strong, nonatomic) SKAction *ghostSound;
+@property (strong, nonatomic) SKAction *bikeSound;
 
 @end
 
@@ -91,14 +95,23 @@ static const uint32_t ghostCategory        =  0x1 << 1;
         self.scoreLabel.position = CGPointMake(margin, margin);
         [self addChild:self.scoreLabel];
         
+        //create Physics for collisions
         self.physicsWorld.gravity = CGVectorMake(0,0);
         self.physicsWorld.contactDelegate = self;
         
+        //Set up arrays for ghost spawning and deleting
         self.ghostArray = [NSMutableArray array];
         self.contactedGhostArray = [NSMutableArray array];
         
-        self.score = 0;
+        //Add Bike Sound Effect
+        NSURL *url = [[NSBundle mainBundle] URLForResource:@"bikePedal" withExtension:@"caf"];
+        NSError *error = nil;
+        self.audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:&error];
+        self.audioPlayer.numberOfLoops = -1;
+        [self.audioPlayer play];
         
+        self.score = 0;
+                
         [self rotateWheels];
         [self addGhost];
     }
@@ -200,7 +213,7 @@ static const uint32_t ghostCategory        =  0x1 << 1;
                 [self.ghostArray removeObject:ghost];
                 [removedGhostsArray addObject:ghost];
                 self.score += 10;
-                [self.scoreLabel setText:[NSString stringWithFormat:@"Score: %d", self.score]];
+                [self.scoreLabel setText:[NSString stringWithFormat:@"Score: %ld", (long)self.score]];
                 NSLog(@"%lu", (long)self.score);
             }else{
                 [ghost collidedWithFlashlight];
