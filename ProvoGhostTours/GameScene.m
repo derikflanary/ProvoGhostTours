@@ -7,6 +7,7 @@
 //
 
 #import "GameScene.h"
+#import "Ghost.h"
 
 @interface GameScene() <SKPhysicsContactDelegate>
 
@@ -18,6 +19,7 @@
 @property (nonatomic) NSTimeInterval lastUpdateTimeInterval;
 @property (nonatomic) SKSpriteNode *light;
 @property (nonatomic) SKNode *centerPoint;
+@property (nonatomic) Ghost *contactedGhost;
 
 @end
 
@@ -92,14 +94,14 @@ static const uint32_t ghostCategory        =  0x1 << 1;
     int rangeX = maxX - minX;
     int actualX = (arc4random() % rangeX) + minX;
     
-    SKSpriteNode *ghost = [SKSpriteNode spriteNodeWithTexture:[SKTexture textureWithImageNamed:@"Ghost2"]];
+    Ghost *ghost = [Ghost spriteNodeWithTexture:[SKTexture textureWithImageNamed:@"Ghost2"]];
     //create sprite
     if (actualX > self.frame.size.width/2) {
         ghost.texture = [SKTexture textureWithImageNamed:@"Ghost2right"];
     }
     
     //Determine a random Y if the spawn's X is off screen
-    int minY = self.frame.size.height - 200;
+    int minY = 50;
     int maxY = self.frame.size.height + 10;
     int rangeY = maxY - minY;
     int actualY = (arc4random() % rangeY) + minY;
@@ -109,6 +111,7 @@ static const uint32_t ghostCategory        =  0x1 << 1;
     if (actualX < 0 || actualX > self.frame.size.width) {
         ghost.position = CGPointMake(actualX, actualY);
     }else{
+        
         ghost.position = CGPointMake(actualX, self.frame.size.height + ghost.size.height/2);
     }
     
@@ -118,7 +121,7 @@ static const uint32_t ghostCategory        =  0x1 << 1;
     ghost.physicsBody.contactTestBitMask = flashlightCategory;
     ghost.physicsBody.collisionBitMask = 0;
     
-    ghost.alpha = 0.4;
+    ghost.alpha = 0.0;
     
     [self addChild:ghost];
     
@@ -166,6 +169,15 @@ static const uint32_t ghostCategory        =  0x1 << 1;
     if (timeSinceLast > 1) { // more than a second since last update
         timeSinceLast = 1.0 / 60.0;
         self.lastUpdateTimeInterval = currentTime;
+    }
+    
+    if (self.contactedGhost.isContacted == YES) {
+        if (self.contactedGhost.alpha >= .9) {
+            [self.contactedGhost removeFromParent];
+        }else{
+            [self.contactedGhost collidedWithFlashlight];
+        }
+        
     }
     
     [self updateWithTimeSinceLastUpdate:timeSinceLast];
@@ -224,9 +236,19 @@ static const uint32_t ghostCategory        =  0x1 << 1;
     }
 }
 
-- (void)flashlight:(SKSpriteNode *)flashlight didCollideWithGhost:(SKSpriteNode *)ghost {
-    NSLog(@"Hit");
-    [ghost removeFromParent];
+- (void)flashlight:(SKSpriteNode *)flashlight didCollideWithGhost:(Ghost *)ghost {
+    
+    
+    if (ghost.alpha < .4) {
+        ghost.alpha = .4;
+    }
+    self.contactedGhost = ghost;
+    self.contactedGhost.isContacted = YES;
+}
+
+- (void)flashlight:(SKSpriteNode *)flashlight didStopCollidingWithGhost:(Ghost *)ghost{
+    self.contactedGhost = ghost;
+    self.contactedGhost.isContacted = NO;
 }
 
 - (void)didBeginContact:(SKPhysicsContact *)contact{
@@ -247,12 +269,39 @@ static const uint32_t ghostCategory        =  0x1 << 1;
     if ((firstBody.categoryBitMask & flashlightCategory) != 0 &&
         (secondBody.categoryBitMask & ghostCategory) != 0)
     {
-        [self flashlight:(SKSpriteNode *)firstBody.node didCollideWithGhost:(SKSpriteNode *)secondBody.node];
+        if ([secondBody.node isKindOfClass:[Ghost class]]) {
+                [self flashlight:(SKSpriteNode *)firstBody.node didCollideWithGhost:(Ghost *)secondBody.node];
+        }
+        
+//        [(Ghost *)secondBody.node collidedWith:firstBody];
     }
 }
 
 - (void)didEndContact:(SKPhysicsContact *)contact{
+    SKPhysicsBody *firstBody, *secondBody;
     
+    if (contact.bodyA.categoryBitMask < contact.bodyB.categoryBitMask)
+    {
+        firstBody = contact.bodyA;
+        secondBody = contact.bodyB;
+    }
+    else
+    {
+        firstBody = contact.bodyB;
+        secondBody = contact.bodyA;
+    }
+    
+    // 2
+    if ((firstBody.categoryBitMask & flashlightCategory) != 0 &&
+        (secondBody.categoryBitMask & ghostCategory) != 0)
+    {
+        if ([secondBody.node isKindOfClass:[Ghost class]]) {
+            [self flashlight:(SKSpriteNode *)firstBody.node didStopCollidingWithGhost:(Ghost *)secondBody.node];
+        }
+        
+        //        [(Ghost *)secondBody.node collidedWith:firstBody];
+    }
+
 }
 
 

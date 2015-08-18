@@ -17,6 +17,7 @@
 		EEB665421B7BEE6200FDA352 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = EEB665401B7BEE6200FDA352 /* LaunchScreen.xib */; };
 		EEB6654E1B7BEE6200FDA352 /* ProvoGhostToursTests.m in Sources */ = {isa = PBXBuildFile; fileRef = EEB6654D1B7BEE6200FDA352 /* ProvoGhostToursTests.m */; };
 		EEB665591B7D177300FDA352 /* light.scnp in Resources */ = {isa = PBXBuildFile; fileRef = EEB665571B7D177300FDA352 /* light.scnp */; };
+		EED599001B838EDC00A869B3 /* Ghost.m in Sources */ = {isa = PBXBuildFile; fileRef = EED598FF1B838EDC00A869B3 /* Ghost.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +48,8 @@
 		EEB6654C1B7BEE6200FDA352 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EEB6654D1B7BEE6200FDA352 /* ProvoGhostToursTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ProvoGhostToursTests.m; sourceTree = "<group>"; };
 		EEB665571B7D177300FDA352 /* light.scnp */ = {isa = PBXFileReference; lastKnownFileType = file.scp; path = light.scnp; sourceTree = "<group>"; };
+		EED598FE1B838EDC00A869B3 /* Ghost.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Ghost.h; sourceTree = "<group>"; };
+		EED598FF1B838EDC00A869B3 /* Ghost.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Ghost.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -92,6 +95,8 @@
 				EEB665311B7BEE6200FDA352 /* AppDelegate.m */,
 				EEB665331B7BEE6200FDA352 /* GameScene.h */,
 				EEB665341B7BEE6200FDA352 /* GameScene.m */,
+				EED598FE1B838EDC00A869B3 /* Ghost.h */,
+				EED598FF1B838EDC00A869B3 /* Ghost.m */,
 				EEB665571B7D177300FDA352 /* light.scnp */,
 				EEB665361B7BEE6200FDA352 /* GameScene.sks */,
 				EEB665381B7BEE6200FDA352 /* GameViewController.h */,
@@ -234,6 +239,7 @@
 			files = (
 				EEB6653A1B7BEE6200FDA352 /* GameViewController.m in Sources */,
 				EEB665321B7BEE6200FDA352 /* AppDelegate.m in Sources */,
+				EED599001B838EDC00A869B3 /* Ghost.m in Sources */,
 				EEB665351B7BEE6200FDA352 /* GameScene.m in Sources */,
 				EEB6652F1B7BEE6200FDA352 /* main.m in Sources */,
 			);
