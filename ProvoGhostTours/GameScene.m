@@ -13,6 +13,7 @@
 @interface GameScene() <SKPhysicsContactDelegate>
 
 @property (nonatomic) SKSpriteNode *player;
+@property (nonatomic) SKSpriteNode *biker;
 @property (nonatomic) SKSpriteNode *movingBackground;
 @property (nonatomic) SKSpriteNode *backWheel;
 @property (nonatomic) SKSpriteNode *frontWheel;
@@ -27,7 +28,7 @@
 @property (strong, nonatomic) SKLabelNode *scoreLabel;
 @property (strong, nonatomic) AVAudioPlayer *audioPlayer;
 @property (strong, nonatomic) SKAction *ghostSound;
-@property (strong, nonatomic) SKAction *bikeSound;
+@property (strong, nonatomic) SKAction *bikerAnimation;
 
 @end
 
@@ -68,6 +69,11 @@ static const uint32_t ghostCategory        =  0x1 << 1;
         self.frontWheel = [SKSpriteNode spriteNodeWithImageNamed:@"Bike1_tire_a"];
         self.frontWheel.position = CGPointMake(self.player.position.x + 20, self.player.position.y - 10);
         [self addChild:self.frontWheel];
+        
+        self.biker = [SKSpriteNode spriteNodeWithImageNamed:@"Biker1_a"];
+        self.biker.position = CGPointMake(self.player.position.x, self.player.position.y + self.biker.size.height / 4);
+        [self addChild:self.biker];
+        self.bikerAnimation = [self animationFromPlist:@"bikerAnimation"];
         
         self.centerPoint = [SKNode new];
         self.centerPoint.position = self.player.position;
@@ -115,6 +121,8 @@ static const uint32_t ghostCategory        =  0x1 << 1;
         self.score = 0;
                 
         [self rotateWheels];
+        [self.biker runAction:self.bikerAnimation];
+        
         [self addGhost];
     }
     return self;
@@ -167,11 +175,12 @@ static const uint32_t ghostCategory        =  0x1 << 1;
     int actualDuration = (arc4random() % rangeDuration) + minDuration;
     
     // Create the actions
-    SKAction * actionMove = [SKAction moveTo:self.player.position duration:actualDuration];
-    SKAction * actionMoveDone = [SKAction removeFromParent];
+    SKAction *actionMove = [SKAction moveTo:self.biker.position duration:actualDuration];
+    SKAction *actionMoveDone = [SKAction removeFromParent];
     [ghost runAction:[SKAction sequence:@[actionMove, actionMoveDone]]];
 }
 
+#pragma mark Update Methods
 - (void)updateWithTimeSinceLastUpdate:(CFTimeInterval)timeSinceLast {
     
     //Set time between spawns
@@ -234,7 +243,7 @@ static const uint32_t ghostCategory        =  0x1 << 1;
         [self.contactedGhostArray removeObjectsInArray:removedGhostsArray];
 }
 
-//animations
+#pragma mark Animations
 - (void)rotateWheels{
     //create repeating rotation for wheels
     SKAction *oneRevolution = [SKAction rotateByAngle:-M_PI*2 duration: 5.0];
@@ -254,12 +263,26 @@ static const uint32_t ghostCategory        =  0x1 << 1;
     [nodeA runAction:[SKAction rotateToAngle:angle duration:0]];
 }
 
+- (SKAction *)animationFromPlist:(NSString *)animPlist{
+    
+    NSString *plistPath = [[NSBundle mainBundle] pathForResource:animPlist ofType:@"plist"]; // 1
+    NSArray *animImages = [NSArray arrayWithContentsOfFile:plistPath]; // 2
+    NSMutableArray *animFrames = [NSMutableArray array]; // 3
+    for (NSString *imageName in animImages) { // 4
+        [animFrames addObject:[SKTexture textureWithImageNamed:imageName]]; // 5
+    }
+    
+    float framesOverOneSecond = 1.0f/(float)[animFrames count];
+    
+    return [SKAction repeatActionForever:[SKAction animateWithTextures:animFrames timePerFrame:framesOverOneSecond resize:NO restore:YES]]; // 6
+}
+
 
 - (void)didMoveToView:(SKView *)view {
     /* Setup your scene here */
 }
 
-//Touch Methods for Flashlight
+#pragma mark - touches
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     /* Called when a touch begins */
     
