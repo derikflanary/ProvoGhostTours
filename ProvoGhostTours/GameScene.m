@@ -110,6 +110,8 @@ static const uint32_t ghostCategory        =  0x1 << 1;
         self.audioPlayer.numberOfLoops = -1;
         [self.audioPlayer play];
         
+        self.ghostSound = [SKAction playSoundFileNamed:@"ghostSound.caf" waitForCompletion:NO];
+        
         self.score = 0;
                 
         [self rotateWheels];
@@ -204,8 +206,16 @@ static const uint32_t ghostCategory        =  0x1 << 1;
         self.lastUpdateTimeInterval = currentTime;
     }
     
-    //Update the ghost if it is in the light
     if ([self.contactedGhostArray count] > 0) {
+        [self updateGhostInLight];
+    }
+    
+    [self updateWithTimeSinceLastUpdate:timeSinceLast];
+}
+
+- (void)updateGhostInLight{
+    //Update the ghost if it is in the light
+    
         NSMutableArray *removedGhostsArray = [NSMutableArray array];
         for (Ghost *ghost in self.contactedGhostArray) {
             if (ghost.alpha >= .9) {
@@ -215,15 +225,13 @@ static const uint32_t ghostCategory        =  0x1 << 1;
                 self.score += 10;
                 [self.scoreLabel setText:[NSString stringWithFormat:@"Score: %ld", (long)self.score]];
                 NSLog(@"%lu", (long)self.score);
+                
+                [self runAction:self.ghostSound];
             }else{
                 [ghost collidedWithFlashlight];
             }
         }
         [self.contactedGhostArray removeObjectsInArray:removedGhostsArray];
-    }
-    
-    [self updateWithTimeSinceLastUpdate:timeSinceLast];
-    
 }
 
 //animations
