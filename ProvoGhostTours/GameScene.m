@@ -137,7 +137,7 @@ static const uint32_t bikerCategory         = 0x1 << 2;
     [self rotateWheels];
     [self.biker runAction:self.bikerAnimation];
     
-    self.minDuration = 5;
+    self.minDuration = 8;
     self.maxDuration = 10;
     [self addGhost];
 }
@@ -191,8 +191,7 @@ static const uint32_t bikerCategory         = 0x1 << 2;
     // Create the actions
     SKAction *actionMove = [SKAction moveTo:self.biker.position duration:actualDuration];
     [ghost runAction:actionMove];
-    SKAction *actionMoveDone = [SKAction removeFromParent];
-//    [ghost runAction:[SKAction sequence:@[actionMove, actionMoveDone]]];
+
 }
 
 #pragma mark Update Methods
@@ -202,7 +201,7 @@ static const uint32_t bikerCategory         = 0x1 << 2;
         return;
     }
     
-    //Set time between spawns
+    //Set time between spawns and speeds
     int minSpawn = 1.0;
     int maxSpawn = 3.0;
 
@@ -279,13 +278,17 @@ static const uint32_t bikerCategory         = 0x1 << 2;
         NSMutableArray *removedGhostsArray = [NSMutableArray array];
         for (Ghost *ghost in self.contactedGhostArray) {
             if (ghost.alpha >= .9) {
-                [ghost removeFromParent];
+                SKAction *grow = [SKAction resizeToWidth:ghost.size.width * 1.5 duration:.15];
+                SKAction *shrink = [SKAction resizeToWidth:ghost.size.width * .75 duration:.15];
+                SKAction *die = [SKAction fadeOutWithDuration:.5];
+                SKAction *remove = [SKAction removeFromParent];
+                
                 [self.ghostArray removeObject:ghost];
                 [removedGhostsArray addObject:ghost];
                 self.score += 10;
                 [self.scoreLabel setText:[NSString stringWithFormat:@"Score: %ld", (long)self.score]];
-                NSLog(@"%lu", (long)self.score);
-                
+                [ghost runAction:[SKAction sequence:@[grow, shrink, remove]]];
+                [ghost runAction:die];
                 [self runAction:self.ghostSound];
             }else{
                 [ghost collidedWithFlashlight];
@@ -427,8 +430,7 @@ static const uint32_t bikerCategory         = 0x1 << 2;
         return;
     }
     SKPhysicsBody *firstBody, *secondBody;
-    NSLog(@"A is %u", contact.bodyA.categoryBitMask);
-    NSLog(@"B is %u", contact.bodyB.categoryBitMask);
+    
     if (contact.bodyA.categoryBitMask < contact.bodyB.categoryBitMask)
     {
         firstBody = contact.bodyA;
@@ -471,6 +473,22 @@ static const uint32_t bikerCategory         = 0x1 << 2;
     [restartButton addTarget:self action:@selector(restartButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     restartButton.tag = 321;
     [self.view addSubview:restartButton];
+    
+    NSInteger highScore = [[NSUserDefaults standardUserDefaults] integerForKey:@"highScore"];
+    if (self.score > highScore) {
+        [[NSUserDefaults standardUserDefaults] setInteger:self.score forKey:@"highScore"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        highScore = self.score;
+    }
+    
+    SKLabelNode *highScoreLabel = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
+    highScoreLabel.text = [NSString stringWithFormat:@"High Score: %lu", highScore];
+    highScoreLabel.fontSize = 20;
+    highScoreLabel.zPosition = 4;
+    highScoreLabel.position = CGPointMake(CGRectGetMidX(self.frame), gameOverLabel.position.y + 50);
+    [highScoreLabel setScale:0.1];
+    [self addChild:highScoreLabel];
+    [highScoreLabel runAction:[SKAction scaleTo:1 duration:.5]];
     
     [self.audioPlayer stop];
     
