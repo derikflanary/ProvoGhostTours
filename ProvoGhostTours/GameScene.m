@@ -415,34 +415,34 @@ static const uint32_t bikerCategory         = 0x1 << 2;
     }
     
     //Set time between spawns and speeds
-    int minSpawn = 1.0;
-    int maxSpawn = 3.0;
+    int minSpawn = 2.0;
+    int maxSpawn = 5.0;
 
     if (self.score < 100) {
-        minSpawn = 3;
+        minSpawn = 5;
         maxSpawn = 10;
         self.minDuration = 9;
         self.maxDuration = 13;
     }else if (self.score < 200){
-        minSpawn = 2;
-        maxSpawn = 7;
+        minSpawn = 4;
+        maxSpawn = 9;
         self.minDuration = 8;
         self.maxDuration = 12;
     }else if (self.score < 300){
-        minSpawn = 1;
-        maxSpawn = 5;
+        minSpawn = 3;
+        maxSpawn = 7;
         self.minDuration = 6;
-        self.maxDuration = 10;
+        self.maxDuration = 12;
     }else if (self.score < 400){
-        minSpawn = 1;
-        maxSpawn = 3;
+        minSpawn = 3;
+        maxSpawn = 6;
         self.minDuration = 5;
-        self.maxDuration = 9;
+        self.maxDuration = 11;
     }else{
-        minSpawn = 1;
-        maxSpawn = 2;
+        minSpawn = 3;
+        maxSpawn = 5;
         self.minDuration = 4;
-        self.maxDuration = 9;
+        self.maxDuration = 10;
     }
     
     int rangeSpawn = maxSpawn - minSpawn;
