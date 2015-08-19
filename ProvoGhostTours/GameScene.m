@@ -32,6 +32,10 @@
 @property (nonatomic, assign) int minDuration;
 @property (nonatomic, assign) int maxDuration;
 @property (nonatomic, assign) BOOL gameover;
+@property (nonatomic, assign) BOOL gameStart;
+@property (nonatomic, assign) BOOL firstPlay;
+@property (nonatomic) SKLabelNode *highscoreLabel;
+@property (nonatomic) SKLabelNode *titleLabel;
 
 @end
 
@@ -46,48 +50,170 @@ static const uint32_t bikerCategory         = 0x1 << 2;
         
         // 2
         NSLog(@"Size: %@", NSStringFromCGSize(size));
-        [self startGame];
         // 3
         self.backgroundColor = [SKColor blackColor];
         
+        SKSpriteNode* background = [SKSpriteNode spriteNodeWithImageNamed:@"Sky2"];
+        background.size = self.frame.size;
+        background.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame));
+        [self addChild:background];
+        
+        self.movingBackground = [SKSpriteNode spriteNodeWithImageNamed:@"All Buildings"];
+        self.movingBackground.size = CGSizeMake(2562, self.frame.size.height);
+        self.movingBackground.position = CGPointMake(self.frame.size.width, 0);
+        self.movingBackground.anchorPoint = CGPointZero;
+        [self addChild:self.movingBackground];
+        
+        self.player = [SKSpriteNode spriteNodeWithImageNamed:@"Bike1_body_a.png"];
+        self.player.position = CGPointMake(self.frame.size.width/2, self.player.size.height - 7);
+        [self addChild:self.player];
+        
+        self.backWheel = [SKSpriteNode spriteNodeWithImageNamed:@"Bike1_tire_a"];
+        self.backWheel.position = CGPointMake(self.player.position.x - 20, self.player.position.y - 10);
+        [self addChild:self.backWheel];
+        
+        self.frontWheel = [SKSpriteNode spriteNodeWithImageNamed:@"Bike1_tire_a"];
+        self.frontWheel.position = CGPointMake(self.player.position.x + 20, self.player.position.y - 10);
+        [self addChild:self.frontWheel];
+        
+        self.biker = [SKSpriteNode spriteNodeWithImageNamed:@"Biker1_a"];
+        self.biker.position = CGPointMake(self.player.position.x, self.player.position.y + self.biker.size.height / 4);
+        self.biker.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:self.biker.size];
+        self.biker.physicsBody.categoryBitMask = bikerCategory;
+        self.biker.physicsBody.contactTestBitMask = ghostCategory;
+        self.biker.physicsBody.collisionBitMask = 0;
+        [self addChild:self.biker];
+        self.bikerAnimation = [self animationFromPlist:@"bikerAnimation"];
+        
+        //create Physics for collisions
+        self.physicsWorld.gravity = CGVectorMake(0,0);
+        self.physicsWorld.contactDelegate = self;
+        
+        self.gameStart = NO;
+        
+        [self rotateWheels];
+        [self.biker runAction:self.bikerAnimation];
+        
+        //Add Bike Sound Effect
+        NSURL *url = [[NSBundle mainBundle] URLForResource:@"bikePedal" withExtension:@"caf"];
+        NSError *error = nil;
+        self.audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:&error];
+        self.audioPlayer.numberOfLoops = -1;
+        [self.audioPlayer play];
+        
+        self.ghostSound = [SKAction playSoundFileNamed:@"ghostSound.caf" waitForCompletion:NO];
         
     }
     return self;
 }
 
+- (void)playButtonPressed:(id)sender{
+//    [self removeAllChildren];
+//    [self removeAllActions];
+    self.gameStart = YES;
+    self.firstPlay = YES;
+    [self startGame];
+    [[self.view viewWithTag:200] removeFromSuperview];
+    [[self.view viewWithTag:100] removeFromSuperview];
+    [self.highscoreLabel removeFromParent];
+}
+
+- (void)rateButtonPressed:(id)sender{
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"itms-apps://itunes.apple.com/app/id123456789"]];
+}
+
+- (void)addStartScreenButtons{
+    
+    self.titleLabel = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
+    self.titleLabel.text = @"Provo Ghost Tours";
+    self.titleLabel.fontSize = 36;
+    self.titleLabel.zPosition = 4;
+    self.titleLabel.position = CGPointMake(CGRectGetMidX(self.frame),
+                                         CGRectGetMidY(self.frame) + 80);
+    
+    [self.titleLabel setScale:0.1];
+    [self addChild:self.titleLabel];
+    [self.titleLabel runAction:[SKAction scaleTo:1.0 duration:0.5]];
+
+    UIButton *startGameButton = [[UIButton alloc]initWithFrame:CGRectMake(0, CGRectGetMidY(self.frame) + 20, self.frame.size.width, 50)];
+    [startGameButton setTitle:@"Play" forState:UIControlStateNormal];
+    [startGameButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [startGameButton setTitleColor:[UIColor colorWithWhite:1 alpha:.4] forState:UIControlStateHighlighted];
+    [startGameButton setTintColor:[UIColor whiteColor]];
+    startGameButton.titleLabel.font = [UIFont fontWithName:@"Chalkduster" size:32];
+    [startGameButton addTarget:self action:@selector(playButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+    startGameButton.tag = 200;
+    [self.view addSubview:startGameButton];
+    
+    UIButton *rateButton = [[UIButton alloc]initWithFrame:CGRectMake(0, CGRectGetMinY(startGameButton.frame) + 40, self.frame.size.width, 50)];
+    [rateButton setTitle:@"Rate" forState:UIControlStateNormal];
+    [rateButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [rateButton setTitleColor:[UIColor colorWithWhite:1 alpha:.4] forState:UIControlStateHighlighted];
+    [rateButton setTintColor:[UIColor whiteColor]];
+    rateButton.titleLabel.font = [UIFont fontWithName:@"Chalkduster" size:14];
+    [rateButton addTarget:self action:@selector(rateButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+    rateButton.tag = 100;
+    [self.view addSubview:rateButton];
+    
+    NSInteger highscore = [[NSUserDefaults standardUserDefaults] integerForKey:@"highscore"];
+    self.highscoreLabel = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
+    self.highscoreLabel.text = [NSString stringWithFormat:@"High Score: %lu", (long)highscore];
+    self.highscoreLabel.fontSize = 14;
+    self.highscoreLabel.zPosition = 4;
+    self.highscoreLabel.position = CGPointMake(CGRectGetMidX(self.frame), self.titleLabel.position.y - 40);
+    [self.highscoreLabel setScale:0.1];
+    [self addChild:self.highscoreLabel];
+    [self.highscoreLabel runAction:[SKAction scaleTo:1 duration:.5]];
+
+}
+
+
 - (void)startGame{
-    // 4
-    SKSpriteNode* background = [SKSpriteNode spriteNodeWithImageNamed:@"Sky2"];
-    background.size = self.frame.size;
-    background.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame));
-    [self addChild:background];
     
-    self.movingBackground = [SKSpriteNode spriteNodeWithImageNamed:@"All Buildings"];
-    self.movingBackground.size = CGSizeMake(2562, self.frame.size.height);
-    self.movingBackground.position = CGPointMake(self.frame.size.width, 0);
-    self.movingBackground.anchorPoint = CGPointZero;
-    [self addChild:self.movingBackground];
-    
-    self.player = [SKSpriteNode spriteNodeWithImageNamed:@"Bike1_body_a.png"];
-    self.player.position = CGPointMake(self.frame.size.width/2, self.player.size.height - 7);
-    [self addChild:self.player];
-    
-    self.backWheel = [SKSpriteNode spriteNodeWithImageNamed:@"Bike1_tire_a"];
-    self.backWheel.position = CGPointMake(self.player.position.x - 20, self.player.position.y - 10);
-    [self addChild:self.backWheel];
-    
-    self.frontWheel = [SKSpriteNode spriteNodeWithImageNamed:@"Bike1_tire_a"];
-    self.frontWheel.position = CGPointMake(self.player.position.x + 20, self.player.position.y - 10);
-    [self addChild:self.frontWheel];
-    
-    self.biker = [SKSpriteNode spriteNodeWithImageNamed:@"Biker1_a"];
-    self.biker.position = CGPointMake(self.player.position.x, self.player.position.y + self.biker.size.height / 4);
-    self.biker.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:self.biker.size];
-    self.biker.physicsBody.categoryBitMask = bikerCategory;
-    self.biker.physicsBody.contactTestBitMask = ghostCategory;
-    self.biker.physicsBody.collisionBitMask = 0;
-    [self addChild:self.biker];
-    self.bikerAnimation = [self animationFromPlist:@"bikerAnimation"];
+    if (!self.firstPlay) {
+        SKSpriteNode* background = [SKSpriteNode spriteNodeWithImageNamed:@"Sky2"];
+        background.size = self.frame.size;
+        background.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame));
+        [self addChild:background];
+        
+        self.movingBackground = [SKSpriteNode spriteNodeWithImageNamed:@"All Buildings"];
+        self.movingBackground.size = CGSizeMake(2562, self.frame.size.height);
+        self.movingBackground.position = CGPointMake(self.frame.size.width, 0);
+        self.movingBackground.anchorPoint = CGPointZero;
+        [self addChild:self.movingBackground];
+        
+        self.player = [SKSpriteNode spriteNodeWithImageNamed:@"Bike1_body_a.png"];
+        self.player.position = CGPointMake(self.frame.size.width/2, self.player.size.height - 7);
+        [self addChild:self.player];
+        
+        self.backWheel = [SKSpriteNode spriteNodeWithImageNamed:@"Bike1_tire_a"];
+        self.backWheel.position = CGPointMake(self.player.position.x - 20, self.player.position.y - 10);
+        [self addChild:self.backWheel];
+        
+        self.frontWheel = [SKSpriteNode spriteNodeWithImageNamed:@"Bike1_tire_a"];
+        self.frontWheel.position = CGPointMake(self.player.position.x + 20, self.player.position.y - 10);
+        [self addChild:self.frontWheel];
+        
+        self.biker = [SKSpriteNode spriteNodeWithImageNamed:@"Biker1_a"];
+        self.biker.position = CGPointMake(self.player.position.x, self.player.position.y + self.biker.size.height / 4);
+        self.biker.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:self.biker.size];
+        self.biker.physicsBody.categoryBitMask = bikerCategory;
+        self.biker.physicsBody.contactTestBitMask = ghostCategory;
+        self.biker.physicsBody.collisionBitMask = 0;
+        [self addChild:self.biker];
+        self.bikerAnimation = [self animationFromPlist:@"bikerAnimation"];
+        
+        [self rotateWheels];
+        [self.biker runAction:self.bikerAnimation];
+        
+        [self.audioPlayer play];
+        
+        //create Physics for collisions
+        self.physicsWorld.gravity = CGVectorMake(0,0);
+        self.physicsWorld.contactDelegate = self;
+    }
+    self.firstPlay = NO;
+    self.gameStart = YES;
     
     self.centerPoint = [SKNode new];
     self.centerPoint.position = self.player.position;
@@ -115,27 +241,11 @@ static const uint32_t bikerCategory         = 0x1 << 2;
     self.scoreLabel.position = CGPointMake(margin, margin);
     [self addChild:self.scoreLabel];
     
-    //create Physics for collisions
-    self.physicsWorld.gravity = CGVectorMake(0,0);
-    self.physicsWorld.contactDelegate = self;
-    
     //Set up arrays for ghost spawning and deleting
     self.ghostArray = [NSMutableArray array];
     self.contactedGhostArray = [NSMutableArray array];
     
-    //Add Bike Sound Effect
-    NSURL *url = [[NSBundle mainBundle] URLForResource:@"bikePedal" withExtension:@"caf"];
-    NSError *error = nil;
-    self.audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:&error];
-    self.audioPlayer.numberOfLoops = -1;
-    [self.audioPlayer play];
-    
-    self.ghostSound = [SKAction playSoundFileNamed:@"ghostSound.caf" waitForCompletion:NO];
-    
     self.score = 0;
-    
-    [self rotateWheels];
-    [self.biker runAction:self.bikerAnimation];
     
     self.minDuration = 8;
     self.maxDuration = 10;
@@ -198,6 +308,10 @@ static const uint32_t bikerCategory         = 0x1 << 2;
 - (void)updateWithTimeSinceLastUpdate:(CFTimeInterval)timeSinceLast {
     
     if (self.gameover) {
+        return;
+    }
+    
+    if (!self.gameStart) {
         return;
     }
     
@@ -334,6 +448,7 @@ static const uint32_t bikerCategory         = 0x1 << 2;
 
 - (void)didMoveToView:(SKView *)view {
     /* Setup your scene here */
+    [self addStartScreenButtons];
 }
 
 #pragma mark - touches
