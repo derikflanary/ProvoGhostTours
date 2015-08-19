@@ -19,6 +19,7 @@
 @property (nonatomic) SKSpriteNode *frontWheel;
 @property (nonatomic) NSTimeInterval lastSpawnTimeInterval;
 @property (nonatomic) NSTimeInterval lastUpdateTimeInterval;
+@property (nonatomic) NSTimeInterval lastTreeSpawnInterval;
 @property (nonatomic) SKSpriteNode *light;
 @property (nonatomic) SKNode *centerPoint;
 @property (nonatomic) Ghost *contactedGhost;
@@ -36,6 +37,7 @@
 @property (nonatomic, assign) BOOL firstPlay;
 @property (nonatomic) SKLabelNode *highscoreLabel;
 @property (nonatomic) SKLabelNode *titleLabel;
+@property (nonatomic) SKSpriteNode *tree;
 
 @end
 
@@ -52,47 +54,12 @@ static const uint32_t bikerCategory         = 0x1 << 2;
         NSLog(@"Size: %@", NSStringFromCGSize(size));
         // 3
         self.backgroundColor = [SKColor blackColor];
+        self.gameStart = NO;
         
-        SKSpriteNode* background = [SKSpriteNode spriteNodeWithImageNamed:@"Sky2"];
-        background.size = self.frame.size;
-        background.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame));
-        [self addChild:background];
-        
-        self.movingBackground = [SKSpriteNode spriteNodeWithImageNamed:@"All Buildings"];
-        self.movingBackground.size = CGSizeMake(2562, self.frame.size.height);
-        self.movingBackground.position = CGPointMake(self.frame.size.width, 0);
-        self.movingBackground.anchorPoint = CGPointZero;
-        [self addChild:self.movingBackground];
-        
-        self.player = [SKSpriteNode spriteNodeWithImageNamed:@"Bike1_body_a.png"];
-        self.player.position = CGPointMake(self.frame.size.width/2, self.player.size.height - 7);
-        [self addChild:self.player];
-        
-        self.backWheel = [SKSpriteNode spriteNodeWithImageNamed:@"Bike1_tire_a"];
-        self.backWheel.position = CGPointMake(self.player.position.x - 20, self.player.position.y - 10);
-        [self addChild:self.backWheel];
-        
-        self.frontWheel = [SKSpriteNode spriteNodeWithImageNamed:@"Bike1_tire_a"];
-        self.frontWheel.position = CGPointMake(self.player.position.x + 20, self.player.position.y - 10);
-        [self addChild:self.frontWheel];
-        
-        self.biker = [SKSpriteNode spriteNodeWithImageNamed:@"Biker1_a"];
-        self.biker.position = CGPointMake(self.player.position.x, self.player.position.y + self.biker.size.height / 4);
-        self.biker.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:self.biker.size];
-        self.biker.physicsBody.categoryBitMask = bikerCategory;
-        self.biker.physicsBody.contactTestBitMask = ghostCategory;
-        self.biker.physicsBody.collisionBitMask = 0;
-        [self addChild:self.biker];
-        self.bikerAnimation = [self animationFromPlist:@"bikerAnimation"];
-        
+        [self addMainSprites];
         //create Physics for collisions
         self.physicsWorld.gravity = CGVectorMake(0,0);
         self.physicsWorld.contactDelegate = self;
-        
-        self.gameStart = NO;
-        
-        [self rotateWheels];
-        [self.biker runAction:self.bikerAnimation];
         
         //Add Bike Sound Effect
         NSURL *url = [[NSBundle mainBundle] URLForResource:@"bikePedal" withExtension:@"caf"];
@@ -108,8 +75,7 @@ static const uint32_t bikerCategory         = 0x1 << 2;
 }
 
 - (void)playButtonPressed:(id)sender{
-//    [self removeAllChildren];
-//    [self removeAllActions];
+
     self.gameStart = YES;
     self.firstPlay = YES;
     [self startGame];
@@ -168,45 +134,54 @@ static const uint32_t bikerCategory         = 0x1 << 2;
 
 }
 
+- (void)addMainSprites{
+    SKSpriteNode* background = [SKSpriteNode spriteNodeWithImageNamed:@"Sky2"];
+    background.size = self.frame.size;
+    background.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame));
+    [self addChild:background];
+    
+    self.movingBackground = [SKSpriteNode spriteNodeWithImageNamed:@"All Buildings"];
+    self.movingBackground.size = CGSizeMake(2562, self.frame.size.height);
+    self.movingBackground.position = CGPointMake(self.frame.size.width, 0);
+    self.movingBackground.anchorPoint = CGPointZero;
+    self.movingBackground.zPosition = 1;
+    [self addChild:self.movingBackground];
+    
+    self.player = [SKSpriteNode spriteNodeWithImageNamed:@"Bike1_body_a.png"];
+    self.player.position = CGPointMake(self.frame.size.width/2, self.player.size.height - 7);
+    self.player.zPosition = 2;
+    [self addChild:self.player];
+    
+    self.backWheel = [SKSpriteNode spriteNodeWithImageNamed:@"Bike1_tire_a"];
+    self.backWheel.position = CGPointMake(self.player.position.x - 20, self.player.position.y - 10);
+    self.backWheel.zPosition = 2;
+    [self addChild:self.backWheel];
+    
+    self.frontWheel = [SKSpriteNode spriteNodeWithImageNamed:@"Bike1_tire_a"];
+    self.frontWheel.position = CGPointMake(self.player.position.x + 20, self.player.position.y - 10);
+    self.frontWheel.zPosition = 2;
+    [self addChild:self.frontWheel];
+    
+    self.biker = [SKSpriteNode spriteNodeWithImageNamed:@"Biker1_a"];
+    self.biker.position = CGPointMake(self.player.position.x, self.player.position.y + self.biker.size.height / 4);
+    self.biker.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:self.biker.size];
+    self.biker.physicsBody.categoryBitMask = bikerCategory;
+    self.biker.physicsBody.contactTestBitMask = ghostCategory;
+    self.biker.physicsBody.collisionBitMask = 0;
+    self.biker.zPosition = 2;
+    [self addChild:self.biker];
+    self.bikerAnimation = [self animationFromPlist:@"bikerAnimation"];
+    
+    [self rotateWheels];
+    [self.biker runAction:self.bikerAnimation];
+    [self addTreeAtX:self.frame.size.width - 100];
+
+}
 
 - (void)startGame{
     
     if (!self.firstPlay) {
-        SKSpriteNode* background = [SKSpriteNode spriteNodeWithImageNamed:@"Sky2"];
-        background.size = self.frame.size;
-        background.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame));
-        [self addChild:background];
-        
-        self.movingBackground = [SKSpriteNode spriteNodeWithImageNamed:@"All Buildings"];
-        self.movingBackground.size = CGSizeMake(2562, self.frame.size.height);
-        self.movingBackground.position = CGPointMake(self.frame.size.width, 0);
-        self.movingBackground.anchorPoint = CGPointZero;
-        [self addChild:self.movingBackground];
-        
-        self.player = [SKSpriteNode spriteNodeWithImageNamed:@"Bike1_body_a.png"];
-        self.player.position = CGPointMake(self.frame.size.width/2, self.player.size.height - 7);
-        [self addChild:self.player];
-        
-        self.backWheel = [SKSpriteNode spriteNodeWithImageNamed:@"Bike1_tire_a"];
-        self.backWheel.position = CGPointMake(self.player.position.x - 20, self.player.position.y - 10);
-        [self addChild:self.backWheel];
-        
-        self.frontWheel = [SKSpriteNode spriteNodeWithImageNamed:@"Bike1_tire_a"];
-        self.frontWheel.position = CGPointMake(self.player.position.x + 20, self.player.position.y - 10);
-        [self addChild:self.frontWheel];
-        
-        self.biker = [SKSpriteNode spriteNodeWithImageNamed:@"Biker1_a"];
-        self.biker.position = CGPointMake(self.player.position.x, self.player.position.y + self.biker.size.height / 4);
-        self.biker.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:self.biker.size];
-        self.biker.physicsBody.categoryBitMask = bikerCategory;
-        self.biker.physicsBody.contactTestBitMask = ghostCategory;
-        self.biker.physicsBody.collisionBitMask = 0;
-        [self addChild:self.biker];
-        self.bikerAnimation = [self animationFromPlist:@"bikerAnimation"];
-        
-        [self rotateWheels];
-        [self.biker runAction:self.bikerAnimation];
-        
+        [self addMainSprites];
         [self.audioPlayer play];
         
         //create Physics for collisions
@@ -225,7 +200,32 @@ static const uint32_t bikerCategory         = 0x1 << 2;
     self.light.position = CGPointMake(0, self.light.size.height/2);
     [self.centerPoint addChild:self.light];
     
-    self.light.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:self.light.size];
+    CGFloat offsetX = self.light.frame.size.width/2;
+    CGFloat offsetY = self.light.frame.size.height/2;
+    
+    CGMutablePathRef path = CGPathCreateMutable();
+    
+    if (([[UIScreen mainScreen] scale] == 2.0)) {
+        CGPathMoveToPoint(path, NULL, 154 - offsetX, 325 - offsetY);
+        CGPathAddLineToPoint(path, NULL, 0 - offsetX, 324 - offsetY);
+        CGPathAddLineToPoint(path, NULL, 59 - offsetX, 1 - offsetY);
+        CGPathAddLineToPoint(path, NULL, 98 - offsetX, 1 - offsetY);
+        CGPathCloseSubpath(path);
+    }else if (([[UIScreen mainScreen] scale] == 3.0)){
+        CGPathMoveToPoint(path, NULL, 231 - offsetX, 415 - offsetY);
+        CGPathAddLineToPoint(path, NULL, -1 - offsetX, 413 - offsetY);
+        CGPathAddLineToPoint(path, NULL, 83 - offsetX, -1 - offsetY);
+        CGPathAddLineToPoint(path, NULL, 145 - offsetX, 3 - offsetY);
+    }else{
+        CGPathMoveToPoint(path, NULL, 76 - offsetX, 168 - offsetY);
+        CGPathAddLineToPoint(path, NULL, 0 - offsetX, 167 - offsetY);
+        CGPathAddLineToPoint(path, NULL, 31 - offsetX, 0 - offsetY);
+        CGPathAddLineToPoint(path, NULL, 50 - offsetX, 0 - offsetY);
+    }
+    
+    
+    self.light.physicsBody = [SKPhysicsBody bodyWithPolygonFromPath:path];
+//    self.light.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:self.light.size];
     self.light.physicsBody.dynamic = YES;
     self.light.physicsBody.categoryBitMask = flashlightCategory;
     self.light.physicsBody.contactTestBitMask = ghostCategory;
@@ -289,6 +289,7 @@ static const uint32_t bikerCategory         = 0x1 << 2;
     ghost.physicsBody.contactTestBitMask = flashlightCategory;
     ghost.physicsBody.contactTestBitMask = bikerCategory;
     ghost.physicsBody.collisionBitMask = 0;
+    ghost.zPosition = 2;
     
     ghost.alpha = 0.0;
     
@@ -303,6 +304,25 @@ static const uint32_t bikerCategory         = 0x1 << 2;
     SKAction *actionMove = [SKAction moveTo:self.biker.position duration:actualDuration];
     [ghost runAction:actionMove];
 
+}
+
+- (void)addTreeAtX:(CGFloat)X{
+    int minZ = 0;
+    int maxZ = 4;
+    int rangeZ = maxZ - minZ;
+    int actualZ = (arc4random() % rangeZ) + minZ;
+    NSLog(@"%d", actualZ);
+
+    self.tree = [SKSpriteNode spriteNodeWithImageNamed:@"Tree1"];
+    self.tree.position = CGPointMake(X, 0);
+    self.tree.anchorPoint = CGPointZero;
+    self.tree.zPosition = actualZ;
+    [self addChild:self.tree];
+    
+//    SKAction *move = [SKAction moveToX:-tree.size.width duration:8];
+//    SKAction *die = [SKAction removeFromParent];
+//    [tree runAction:[SKAction sequence:@[move, die]]];
+    
 }
 
 #pragma mark Update Methods
@@ -352,10 +372,12 @@ static const uint32_t bikerCategory         = 0x1 << 2;
     
     //spawn new ghost if time between spawns has happended
     self.lastSpawnTimeInterval += timeSinceLast;
+    
     if (self.lastSpawnTimeInterval > actualSpawn) {
         self.lastSpawnTimeInterval = 0;
         [self addGhost];
     }
+    
 }
 
 - (void)update:(NSTimeInterval)currentTime {
@@ -367,6 +389,14 @@ static const uint32_t bikerCategory         = 0x1 << 2;
         self.movingBackground.position = CGPointMake(self.frame.size.width, 0);
     }else{
         self.movingBackground.position = CGPointMake(self.movingBackground.position.x-1, self.movingBackground.position.y);
+    }
+    
+    if (self.tree.position.x <= -250) {
+        [self.tree removeFromParent];
+        int actualSpawn = (arc4random() % 200) + 10;
+        [self addTreeAtX:self.view.frame.size.width + actualSpawn];
+    }else{
+        self.tree.position = CGPointMake(self.tree.position.x - 1, self.tree.position.y);
     }
 
     // Handle time delta.
@@ -598,7 +628,7 @@ static const uint32_t bikerCategory         = 0x1 << 2;
     }
     
     SKLabelNode *highScoreLabel = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
-    highScoreLabel.text = [NSString stringWithFormat:@"High Score: %lu", highScore];
+    highScoreLabel.text = [NSString stringWithFormat:@"High Score: %lu", (long)highScore];
     highScoreLabel.fontSize = 20;
     highScoreLabel.zPosition = 4;
     highScoreLabel.position = CGPointMake(CGRectGetMidX(self.frame), gameOverLabel.position.y + 50);
