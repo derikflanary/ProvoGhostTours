@@ -76,24 +76,11 @@ static const uint32_t bikerCategory         = 0x1 << 2;
     return self;
 }
 
+#pragma mark - Start Screen
+
 - (void)didMoveToView:(SKView *)view {
     /* Setup your scene here */
     [self addStartScreenButtons];
-}
-
-- (void)playButtonPressed:(id)sender{
-
-    self.gameStart = YES;
-    self.firstPlay = YES;
-    [self startGame];
-    [[self.view viewWithTag:200] removeFromSuperview];
-    [[self.view viewWithTag:100] removeFromSuperview];
-    [self.highscoreLabel removeFromParent];
-    [self.titleLabel removeFromParent];
-}
-
-- (void)rateButtonPressed:(id)sender{
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"itms-apps://itunes.apple.com/app/id123456789"]];
 }
 
 - (void)addStartScreenButtons{
@@ -140,6 +127,8 @@ static const uint32_t bikerCategory         = 0x1 << 2;
     [self.highscoreLabel runAction:[SKAction scaleTo:1 duration:.5]];
 
 }
+
+#pragma mark - Main Scene Setup
 
 - (void)addMainSprites{
     SKSpriteNode* background = [SKSpriteNode spriteNodeWithImageNamed:@"Sky2"];
@@ -205,6 +194,7 @@ static const uint32_t bikerCategory         = 0x1 << 2;
     self.light.alpha = 0.25;
     self.light.position = CGPointMake(0, self.light.size.height/2);
     [self.centerPoint addChild:self.light];
+    self.light.zPosition = 2;
     
     //create a physics body for the light's shape
     CGFloat offsetX = self.light.frame.size.width/2;
@@ -247,10 +237,10 @@ static const uint32_t bikerCategory         = 0x1 << 2;
     self.scoreLabel.position = CGPointMake(margin, margin);
     [self addChild:self.scoreLabel];
     
-    self.detector = [SKSpriteNode spriteNodeWithImageNamed:@"redcircle"];
-    self.detector.position = CGPointMake(self.biker.position.x + 20, self.biker.position.y);
-    self.detector.zPosition = 2;
-    [self addChild:self.detector];
+//    self.detector = [SKSpriteNode spriteNodeWithImageNamed:@"redcircle"];
+//    self.detector.position = CGPointMake(self.biker.position.x + 20, self.biker.position.y);
+//    self.detector.zPosition = 2;
+//    [self addChild:self.detector];
     
     //Set up arrays for ghost spawning and deleting
     self.ghostArray = [NSMutableArray array];
@@ -262,6 +252,24 @@ static const uint32_t bikerCategory         = 0x1 << 2;
     self.maxDuration = 10;
     [self addGhost];
 }
+
+#pragma mark - Start Screen Button Methods
+
+- (void)playButtonPressed:(id)sender{
+    
+    self.gameStart = YES;
+    self.firstPlay = YES;
+    [self startGame];
+    [[self.view viewWithTag:200] removeFromSuperview];
+    [[self.view viewWithTag:100] removeFromSuperview];
+    [self.highscoreLabel removeFromParent];
+    [self.titleLabel removeFromParent];
+}
+
+- (void)rateButtonPressed:(id)sender{
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"itms-apps://itunes.apple.com/app/id123456789"]];
+}
+
 
 #pragma mark - Ghost Methods
 
@@ -363,32 +371,37 @@ static const uint32_t bikerCategory         = 0x1 << 2;
 
 #pragma mark - Detector Methods
 
-- (void)updateDistanceFromDetector{
-    CGFloat smallestDist = 300.0;
-    for (Ghost *ghost in self.ghostArray) {
-        CGFloat distance = [self SDistanceBetweenPoints:ghost.position andSecond:self.biker.position];
-        if (distance < smallestDist) {
-            smallestDist = distance;
-        }
-    }
-    
-    float percent = (smallestDist - 299)/300;
-    [self animateDetectorWithPercent:percent];
-}
+//- (void)updateDistanceFromDetector{
+//    CGFloat smallestDist = 300.0;
+//    for (Ghost *ghost in self.ghostArray) {
+//        CGFloat distance = [self SDistanceBetweenPoints:ghost.position andSecond:self.biker.position];
+//        if (distance < smallestDist) {
+//            smallestDist = distance;
+//        }
+//    }
+//    
+//    float percent = 1 - (smallestDist/350);
+//    if (percent < 1) {
+//        [self animateDetectorWithPercent:percent];
+//    }
+//    
+//}
 
 - (CGFloat)SDistanceBetweenPoints:(CGPoint)first andSecond:(CGPoint)second{
     return hypotf(second.x - first.x, second.y - first.y);
 }
 
-- (void)animateDetectorWithPercent:(CGFloat)percent{
-    float duration = 1 - percent;
-    SKAction *grow = [SKAction scaleBy:1.25 duration:duration/2];
-    SKAction *shrink = [SKAction scaleBy:0.8 duration:duration/2];
-    SKAction *brighten = [SKAction colorizeWithColor:[UIColor redColor] colorBlendFactor:1 duration:duration];
-    SKAction *darken = [SKAction colorizeWithColor:[UIColor darkGrayColor] colorBlendFactor:1 duration:duration];
+//- (void)animateDetectorWithPercent:(CGFloat)percent{
+//    float duration = 1 - percent;
+//    int count = 1 / duration;
+//    SKAction *grow = [SKAction scaleBy:2 duration:duration/2];
+//    SKAction *shrink = [SKAction scaleBy:0.5 duration:duration/2];
+//    SKAction *brighten = [SKAction colorizeWithColor:[UIColor redColor] colorBlendFactor:1 duration:duration/2];
+//    SKAction *darken = [SKAction colorizeWithColor:[UIColor darkGrayColor] colorBlendFactor:1 duration:duration/2];
 //    [self.detector runAction:[SKAction sequence:@[grow, shrink]]];
-    [self.detector runAction:[SKAction repeatActionForever:[SKAction sequence:@[brighten, darken]]]];
-}
+//    [self.detector runAction:[SKAction repeatAction:[SKAction sequence:@[grow, shrink]] count:count]];
+////    [self.detector runAction:[SKAction repeatActionForever:[SKAction sequence:@[brighten, darken]]]];
+//}
 
 #pragma mark Update Methods
 - (void)updateWithTimeSinceLastUpdate:(CFTimeInterval)timeSinceLast {
@@ -449,11 +462,14 @@ static const uint32_t bikerCategory         = 0x1 << 2;
     if (self.gameover) {
         return;
     }
+    
+    CFTimeInterval timeSinceLast = currentTime - self.lastUpdateTimeInterval;
+
     /* Called before each frame is rendered */
     if (self.movingBackground.position.x <= - 2600) {
         self.movingBackground.position = CGPointMake(self.frame.size.width, 0);
     }else{
-        self.movingBackground.position = CGPointMake(self.movingBackground.position.x-1, self.movingBackground.position.y);
+        self.movingBackground.position = CGPointMake(self.movingBackground.position.x - 1, self.movingBackground.position.y);
     }
     
     if (self.tree.position.x <= -250) {
@@ -465,28 +481,26 @@ static const uint32_t bikerCategory         = 0x1 << 2;
     }
 
     // Handle time delta.
-    // If we drop below 60fps, we still want everything to move the same distance.
-    CFTimeInterval timeSinceLast = currentTime - self.lastUpdateTimeInterval;
-    if (timeSinceLast > .02) { // more than a second since last update
-//        timeSinceLast = .02;
+        if (timeSinceLast > .02) {
         self.lastUpdateTimeInterval = currentTime;
         if ([self.contactedGhostArray count] > 0) {
             [self updateGhostInLight:timeSinceLast];
         }
     }
     
+//    CFTimeInterval delta = currentTime - self.delta;
+//    if (delta >= 1) {
+//        self.delta = currentTime;
+//        [self updateDistanceFromDetector];
+//    }
     
-    
-    
-    [self updateDistanceFromDetector];
     [self updateWithTimeSinceLastUpdate:timeSinceLast];
 }
 
-
-#pragma mark Animations
+#pragma mark - Animations
 - (void)rotateWheels{
     //create repeating rotation for wheels
-    SKAction *oneRevolution = [SKAction rotateByAngle:-M_PI*2 duration: 5.0];
+    SKAction *oneRevolution = [SKAction rotateByAngle:-M_PI*2 duration: 4.0];
     SKAction *repeat = [SKAction repeatActionForever:oneRevolution];
     [self.backWheel runAction:repeat];
     [self.frontWheel runAction:repeat];
@@ -553,22 +567,6 @@ static const uint32_t bikerCategory         = 0x1 << 2;
 
 #pragma mark collision methods
 
-- (void)flashlight:(SKSpriteNode *)flashlight didCollideWithGhost:(Ghost *)ghost {
-    if (ghost.alpha < .05) {
-        ghost.alpha = .05;
-    }
-    
-    NSUInteger indexOfGhost = [self.ghostArray indexOfObject:ghost];
-    ghost.isContacted = YES;
-    [self.contactedGhostArray addObject:[self.ghostArray objectAtIndex:indexOfGhost]];
-}
-
-- (void)flashlight:(SKSpriteNode *)flashlight didStopCollidingWithGhost:(Ghost *)ghost{
-
-    ghost.isContacted = NO;
-    [self.contactedGhostArray removeObject:ghost];
-}
-
 - (void)didBeginContact:(SKPhysicsContact *)contact{
     if (self.gameover) {
         return;
@@ -631,6 +629,21 @@ static const uint32_t bikerCategory         = 0x1 << 2;
         }
        
     }
+}
+
+- (void)flashlight:(SKSpriteNode *)flashlight didCollideWithGhost:(Ghost *)ghost {
+    if (ghost.alpha < .05) {
+        ghost.alpha = .05;
+    }
+    
+    ghost.isContacted = YES;
+    [self.contactedGhostArray addObject:ghost];
+}
+
+- (void)flashlight:(SKSpriteNode *)flashlight didStopCollidingWithGhost:(Ghost *)ghost{
+    
+    ghost.isContacted = NO;
+    [self.contactedGhostArray removeObject:ghost];
 }
 
 - (void)ghostCollidesWithBiker{
