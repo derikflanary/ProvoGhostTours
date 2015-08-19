@@ -116,6 +116,7 @@ static const uint32_t bikerCategory         = 0x1 << 2;
     [[self.view viewWithTag:200] removeFromSuperview];
     [[self.view viewWithTag:100] removeFromSuperview];
     [self.highscoreLabel removeFromParent];
+    [self.titleLabel removeFromParent];
 }
 
 - (void)rateButtonPressed:(id)sender{
