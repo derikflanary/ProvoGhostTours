@@ -38,6 +38,8 @@
 @property (nonatomic) SKLabelNode *highscoreLabel;
 @property (nonatomic) SKLabelNode *titleLabel;
 @property (nonatomic) SKSpriteNode *tree;
+@property (nonatomic) SKSpriteNode *detector;
+@property (nonatomic) NSTimeInterval delta;
 
 @end
 
@@ -72,6 +74,11 @@ static const uint32_t bikerCategory         = 0x1 << 2;
         
     }
     return self;
+}
+
+- (void)didMoveToView:(SKView *)view {
+    /* Setup your scene here */
+    [self addStartScreenButtons];
 }
 
 - (void)playButtonPressed:(id)sender{
@@ -175,7 +182,6 @@ static const uint32_t bikerCategory         = 0x1 << 2;
     [self rotateWheels];
     [self.biker runAction:self.bikerAnimation];
     [self addTreeAtX:self.frame.size.width - 100];
-
 }
 
 - (void)startGame{
@@ -200,6 +206,7 @@ static const uint32_t bikerCategory         = 0x1 << 2;
     self.light.position = CGPointMake(0, self.light.size.height/2);
     [self.centerPoint addChild:self.light];
     
+    //create a physics body for the light's shape
     CGFloat offsetX = self.light.frame.size.width/2;
     CGFloat offsetY = self.light.frame.size.height/2;
     
@@ -223,9 +230,7 @@ static const uint32_t bikerCategory         = 0x1 << 2;
         CGPathAddLineToPoint(path, NULL, 50 - offsetX, 0 - offsetY);
     }
     
-    
     self.light.physicsBody = [SKPhysicsBody bodyWithPolygonFromPath:path];
-//    self.light.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:self.light.size];
     self.light.physicsBody.dynamic = YES;
     self.light.physicsBody.categoryBitMask = flashlightCategory;
     self.light.physicsBody.contactTestBitMask = ghostCategory;
@@ -242,6 +247,11 @@ static const uint32_t bikerCategory         = 0x1 << 2;
     self.scoreLabel.position = CGPointMake(margin, margin);
     [self addChild:self.scoreLabel];
     
+    self.detector = [SKSpriteNode spriteNodeWithImageNamed:@"redcircle"];
+    self.detector.position = CGPointMake(self.biker.position.x + 20, self.biker.position.y);
+    self.detector.zPosition = 2;
+    [self addChild:self.detector];
+    
     //Set up arrays for ghost spawning and deleting
     self.ghostArray = [NSMutableArray array];
     self.contactedGhostArray = [NSMutableArray array];
@@ -252,6 +262,8 @@ static const uint32_t bikerCategory         = 0x1 << 2;
     self.maxDuration = 10;
     [self addGhost];
 }
+
+#pragma mark - Ghost Methods
 
 - (void)addGhost{
     
@@ -306,6 +318,35 @@ static const uint32_t bikerCategory         = 0x1 << 2;
 
 }
 
+- (void)updateGhostInLight:(NSTimeInterval)delta{
+    //Update the ghost if it is in the light
+    if (self.gameover) {
+        return;
+    }
+    NSMutableArray *removedGhostsArray = [NSMutableArray array];
+    for (Ghost *ghost in self.contactedGhostArray) {
+        if (ghost.alpha >= .9) {
+            SKAction *grow = [SKAction resizeToWidth:ghost.size.width * 1.5 duration:.10];
+            SKAction *shrink = [SKAction resizeToWidth:ghost.size.width * .75 duration:.10];
+            SKAction *die = [SKAction fadeOutWithDuration:.5];
+            SKAction *remove = [SKAction removeFromParent];
+            
+            [self.ghostArray removeObject:ghost];
+            [removedGhostsArray addObject:ghost];
+            self.score += 10;
+            [self.scoreLabel setText:[NSString stringWithFormat:@"Score: %ld", (long)self.score]];
+            [ghost runAction:[SKAction sequence:@[grow, shrink, remove]]];
+            [ghost runAction:die];
+            [self runAction:self.ghostSound];
+        }else{
+            [ghost collidedWithFlashlight:delta];
+        }
+    }
+    [self.contactedGhostArray removeObjectsInArray:removedGhostsArray];
+}
+
+#pragma mark - Tree Methods
+
 - (void)addTreeAtX:(CGFloat)X{
     int minZ = 0;
     int maxZ = 4;
@@ -318,11 +359,35 @@ static const uint32_t bikerCategory         = 0x1 << 2;
     self.tree.anchorPoint = CGPointZero;
     self.tree.zPosition = actualZ;
     [self addChild:self.tree];
+}
+
+#pragma mark - Detector Methods
+
+- (void)updateDistanceFromDetector{
+    CGFloat smallestDist = 300.0;
+    for (Ghost *ghost in self.ghostArray) {
+        CGFloat distance = [self SDistanceBetweenPoints:ghost.position andSecond:self.biker.position];
+        if (distance < smallestDist) {
+            smallestDist = distance;
+        }
+    }
     
-//    SKAction *move = [SKAction moveToX:-tree.size.width duration:8];
-//    SKAction *die = [SKAction removeFromParent];
-//    [tree runAction:[SKAction sequence:@[move, die]]];
-    
+    float percent = (smallestDist - 299)/300;
+    [self animateDetectorWithPercent:percent];
+}
+
+- (CGFloat)SDistanceBetweenPoints:(CGPoint)first andSecond:(CGPoint)second{
+    return hypotf(second.x - first.x, second.y - first.y);
+}
+
+- (void)animateDetectorWithPercent:(CGFloat)percent{
+    float duration = 1 - percent;
+    SKAction *grow = [SKAction scaleBy:1.25 duration:duration/2];
+    SKAction *shrink = [SKAction scaleBy:0.8 duration:duration/2];
+    SKAction *brighten = [SKAction colorizeWithColor:[UIColor redColor] colorBlendFactor:1 duration:duration];
+    SKAction *darken = [SKAction colorizeWithColor:[UIColor darkGrayColor] colorBlendFactor:1 duration:duration];
+//    [self.detector runAction:[SKAction sequence:@[grow, shrink]]];
+    [self.detector runAction:[SKAction repeatActionForever:[SKAction sequence:@[brighten, darken]]]];
 }
 
 #pragma mark Update Methods
@@ -402,45 +467,21 @@ static const uint32_t bikerCategory         = 0x1 << 2;
     // Handle time delta.
     // If we drop below 60fps, we still want everything to move the same distance.
     CFTimeInterval timeSinceLast = currentTime - self.lastUpdateTimeInterval;
-    self.lastUpdateTimeInterval = currentTime;
-    if (timeSinceLast > 1) { // more than a second since last update
-        timeSinceLast = 1.0 / 60.0;
+    if (timeSinceLast > .02) { // more than a second since last update
+//        timeSinceLast = .02;
         self.lastUpdateTimeInterval = currentTime;
+        if ([self.contactedGhostArray count] > 0) {
+            [self updateGhostInLight:timeSinceLast];
+        }
     }
     
-    if ([self.contactedGhostArray count] > 0) {
-        [self updateGhostInLight];
-    }
     
+    
+    
+    [self updateDistanceFromDetector];
     [self updateWithTimeSinceLastUpdate:timeSinceLast];
 }
 
-- (void)updateGhostInLight{
-    //Update the ghost if it is in the light
-    if (self.gameover) {
-        return;
-    }
-        NSMutableArray *removedGhostsArray = [NSMutableArray array];
-        for (Ghost *ghost in self.contactedGhostArray) {
-            if (ghost.alpha >= .9) {
-                SKAction *grow = [SKAction resizeToWidth:ghost.size.width * 1.5 duration:.15];
-                SKAction *shrink = [SKAction resizeToWidth:ghost.size.width * .75 duration:.15];
-                SKAction *die = [SKAction fadeOutWithDuration:.5];
-                SKAction *remove = [SKAction removeFromParent];
-                
-                [self.ghostArray removeObject:ghost];
-                [removedGhostsArray addObject:ghost];
-                self.score += 10;
-                [self.scoreLabel setText:[NSString stringWithFormat:@"Score: %ld", (long)self.score]];
-                [ghost runAction:[SKAction sequence:@[grow, shrink, remove]]];
-                [ghost runAction:die];
-                [self runAction:self.ghostSound];
-            }else{
-                [ghost collidedWithFlashlight];
-            }
-        }
-        [self.contactedGhostArray removeObjectsInArray:removedGhostsArray];
-}
 
 #pragma mark Animations
 - (void)rotateWheels{
@@ -474,12 +515,6 @@ static const uint32_t bikerCategory         = 0x1 << 2;
     float framesOverOneSecond = 1.0f/(float)[animFrames count];
     
     return [SKAction repeatActionForever:[SKAction animateWithTextures:animFrames timePerFrame:framesOverOneSecond resize:NO restore:YES]]; // 6
-}
-
-
-- (void)didMoveToView:(SKView *)view {
-    /* Setup your scene here */
-    [self addStartScreenButtons];
 }
 
 #pragma mark - touches
@@ -526,7 +561,6 @@ static const uint32_t bikerCategory         = 0x1 << 2;
     NSUInteger indexOfGhost = [self.ghostArray indexOfObject:ghost];
     ghost.isContacted = YES;
     [self.contactedGhostArray addObject:[self.ghostArray objectAtIndex:indexOfGhost]];
-    
 }
 
 - (void)flashlight:(SKSpriteNode *)flashlight didStopCollidingWithGhost:(Ghost *)ghost{

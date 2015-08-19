@@ -10,9 +10,9 @@
 
 @implementation Ghost
 
-- (void)collidedWithFlashlight{
+- (void)collidedWithFlashlight:(NSTimeInterval)delta{
     if (self.alpha < 1) {
-        self.alpha = self.alpha + .01;
+        self.alpha = self.alpha + delta/2;
     }
     
 }
