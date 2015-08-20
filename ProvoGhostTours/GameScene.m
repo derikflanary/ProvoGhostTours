@@ -334,9 +334,9 @@ static const uint32_t bikerCategory         = 0x1 << 2;
     NSMutableArray *removedGhostsArray = [NSMutableArray array];
     for (Ghost *ghost in self.contactedGhostArray) {
         if (ghost.alpha >= .9) {
-            SKAction *grow = [SKAction resizeToWidth:ghost.size.width * 1.5 duration:.10];
-            SKAction *shrink = [SKAction resizeToWidth:ghost.size.width * .75 duration:.10];
-            SKAction *die = [SKAction fadeOutWithDuration:.5];
+            SKAction *grow = [SKAction resizeToWidth:ghost.size.width * 1.5 duration:.075];
+            SKAction *shrink = [SKAction resizeToWidth:ghost.size.width * .75 duration:.075];
+            SKAction *die = [SKAction fadeOutWithDuration:.15];
             SKAction *remove = [SKAction removeFromParent];
             
             [self.ghostArray removeObject:ghost];
@@ -583,7 +583,7 @@ static const uint32_t bikerCategory         = 0x1 << 2;
         secondBody = contact.bodyA;
     }
     
-    // 2
+    
     if ((firstBody.categoryBitMask & flashlightCategory) != 0 &&
         (secondBody.categoryBitMask & ghostCategory) != 0)
     {
@@ -598,7 +598,6 @@ static const uint32_t bikerCategory         = 0x1 << 2;
         ghost.alpha = .8;
         [self ghostCollidesWithBiker];
     }
-
 }
 
 - (void)didEndContact:(SKPhysicsContact *)contact{
@@ -618,7 +617,6 @@ static const uint32_t bikerCategory         = 0x1 << 2;
         secondBody = contact.bodyA;
     }
     
-    // 2
     if ((firstBody.categoryBitMask & flashlightCategory) != 0 &&
         (secondBody.categoryBitMask & ghostCategory) != 0)
     {
