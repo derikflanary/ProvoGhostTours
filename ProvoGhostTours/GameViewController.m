@@ -8,6 +8,7 @@
 
 #import "GameViewController.h"
 #import "GameScene.h"
+#import <MPCoachMarks/MPCoachMarks.h>
 
 @implementation SKScene (Unarchive)
 
@@ -71,6 +72,10 @@
 
 - (BOOL)prefersStatusBarHidden {
     return YES;
+}
+
+- (void)showCoachMarks{
+    
 }
 
 @end

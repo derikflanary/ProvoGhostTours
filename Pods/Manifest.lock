@@ -1,0 +1,10 @@
+PODS:
+  - MPCoachMarks (0.0.7)
+
+DEPENDENCIES:
+  - MPCoachMarks
+
+SPEC CHECKSUMS:
+  MPCoachMarks: 71e28c2841a4f3e89331cb9f4124dc33ec4c3f0b
+
+COCOAPODS: 0.38.2

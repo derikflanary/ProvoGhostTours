@@ -9,8 +9,9 @@
 #import "GameScene.h"
 #import "Ghost.h"
 #import <AVFoundation/AVFoundation.h>
+#import <MPCoachMarks/MPCoachMarks.h>
 
-@interface GameScene() <SKPhysicsContactDelegate>
+@interface GameScene() <SKPhysicsContactDelegate, MPCoachMarksViewDelegate>
 
 @property (nonatomic) SKSpriteNode *player;
 @property (nonatomic) SKSpriteNode *biker;
@@ -182,9 +183,21 @@ static const uint32_t bikerCategory         = 0x1 << 2;
         //create Physics for collisions
         self.physicsWorld.gravity = CGVectorMake(0,0);
         self.physicsWorld.contactDelegate = self;
+        
+        }
+    
+    BOOL coachMarksShown = [[NSUserDefaults standardUserDefaults] boolForKey:@"MPCoachMarksShown"];
+    if (!coachMarksShown) {
+        // Don't show again
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"MPCoachMarksShown"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        
+        [self showCoachMarks];
+    }else{
+        self.gameStart = YES;
     }
+
     self.firstPlay = NO;
-    self.gameStart = YES;
     
     self.centerPoint = [SKNode new];
     self.centerPoint.position = self.player.position;
@@ -250,14 +263,56 @@ static const uint32_t bikerCategory         = 0x1 << 2;
     
     self.minDuration = 8;
     self.maxDuration = 10;
-    [self addGhost];
+    if (coachMarksShown) {
+        [self addGhost];
+    }
+    
 }
+
+- (void)showCoachMarks{
+    
+    CGRect coachmark1 = CGRectMake(([UIScreen mainScreen].bounds.size.width - 125) / 2, 20, 125, 125);
+    NSArray *coachMarks = @[
+                            @{
+                                @"rect": [NSValue valueWithCGRect:coachmark1],
+                                @"caption": @"Touch screen to move flashlight and find ghosts",
+                                @"shape": [NSNumber numberWithInteger:SHAPE_CIRCLE],
+                                @"position":[NSNumber numberWithInteger:LABEL_POSITION_BOTTOM],
+                                @"alignment":[NSNumber numberWithInteger:LABEL_ALIGNMENT_RIGHT],
+                                @"showArrow":[NSNumber numberWithBool:YES]
+                                },
+                            @{  @"rect": [NSValue valueWithCGRect:coachmark1],
+                                @"caption": @"Hold the light on a ghost to defeat it",
+                                @"shape": [NSNumber numberWithInteger:SHAPE_CIRCLE],
+                                @"position":[NSNumber numberWithInteger:LABEL_POSITION_BOTTOM],
+                                @"alignment":[NSNumber numberWithInteger:LABEL_ALIGNMENT_RIGHT]
+                                }];
+    MPCoachMarks *coachMarksView = [[MPCoachMarks alloc] initWithFrame:self.view.bounds coachMarks:coachMarks];
+    [self.view addSubview:coachMarksView];
+    coachMarksView.enableContinueLabel = NO;
+    coachMarksView.enableSkipButton = NO;
+    coachMarksView.maskColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:.3];
+    coachMarksView.delegate = self;
+    [coachMarksView start];
+    
+}
+
+- (void)coachMarksViewDidCleanup:(MPCoachMarks *)coachMarksView{
+    self.gameStart = YES;
+}
+
+- (void)coachMarksView:(MPCoachMarks *)coachMarksView willNavigateToIndex:(NSUInteger)index{
+    if (index == 1) {
+        [self addTutorialGhost];
+    }
+    
+}
+
 
 #pragma mark - Start Screen Button Methods
 
 - (void)playButtonPressed:(id)sender{
     
-    self.gameStart = YES;
     self.firstPlay = YES;
     [self startGame];
     [[self.view viewWithTag:200] removeFromSuperview];
@@ -299,7 +354,6 @@ static const uint32_t bikerCategory         = 0x1 << 2;
     if (actualX < 0 || actualX > self.frame.size.width) {
         ghost.position = CGPointMake(actualX, actualY);
     }else{
-        
         ghost.position = CGPointMake(actualX, self.frame.size.height + ghost.size.height/2);
     }
     
@@ -343,14 +397,38 @@ static const uint32_t bikerCategory         = 0x1 << 2;
             [removedGhostsArray addObject:ghost];
             self.score += 10;
             [self.scoreLabel setText:[NSString stringWithFormat:@"Score: %ld", (long)self.score]];
-            [ghost runAction:[SKAction sequence:@[grow, shrink, remove]]];
             [ghost runAction:die];
+            [ghost runAction:[SKAction sequence:@[grow, shrink, remove]]];
             [self runAction:self.ghostSound];
         }else{
             [ghost collidedWithFlashlight:delta];
         }
     }
     [self.contactedGhostArray removeObjectsInArray:removedGhostsArray];
+}
+
+- (void)addTutorialGhost{
+    
+    Ghost *ghost = [Ghost spriteNodeWithTexture:[SKTexture textureWithImageNamed:@"Ghost2"]];
+    [self.ghostArray addObject:ghost];
+    //create sprite
+    ghost.texture = [SKTexture textureWithImageNamed:@"Ghost2right"];
+    ghost.position = CGPointMake(CGRectGetMidX(self.frame) + 10, self.frame.size.height);
+    ghost.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:ghost.size];
+    ghost.physicsBody.dynamic = YES;
+    ghost.physicsBody.categoryBitMask = ghostCategory;
+    ghost.physicsBody.contactTestBitMask = flashlightCategory;
+    ghost.physicsBody.contactTestBitMask = bikerCategory;
+    ghost.physicsBody.collisionBitMask = 0;
+    ghost.zPosition = 2;
+    ghost.alpha = 0.0;
+    
+    [self addChild:ghost];
+    
+    // Create the actions
+    SKAction *actionMove = [SKAction moveTo:CGPointMake(CGRectGetMidX(self.frame), 100) duration:3];
+    [ghost runAction:actionMove];
+
 }
 
 #pragma mark - Tree Methods
@@ -537,6 +615,9 @@ static const uint32_t bikerCategory         = 0x1 << 2;
     if (self.gameover) {
         return;
     }
+    if (!self.gameStart) {
+        return;
+    }
     
     for (UITouch *touch in touches) {
         CGPoint location = [touch locationInNode:self];
@@ -551,6 +632,9 @@ static const uint32_t bikerCategory         = 0x1 << 2;
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event{
     
     if (self.gameover) {
+        return;
+    }
+    if (!self.gameStart) {
         return;
     }
     for (UITouch *touch in touches) {
