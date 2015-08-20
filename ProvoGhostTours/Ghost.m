@@ -12,7 +12,7 @@
 
 - (void)collidedWithFlashlight:(NSTimeInterval)delta{
     if (self.alpha < 1) {
-        self.alpha = self.alpha + delta/2;
+        self.alpha = self.alpha + delta/2.5;
     }
     
 }

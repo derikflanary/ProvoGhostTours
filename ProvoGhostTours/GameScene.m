@@ -116,7 +116,7 @@ static const uint32_t bikerCategory         = 0x1 << 2;
     rateButton.tag = 100;
     [self.view addSubview:rateButton];
     
-    NSInteger highscore = [[NSUserDefaults standardUserDefaults] integerForKey:@"highscore"];
+    NSInteger highscore = [[NSUserDefaults standardUserDefaults] integerForKey:@"highScore"];
     self.highscoreLabel = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
     self.highscoreLabel.text = [NSString stringWithFormat:@"High Score: %lu", (long)highscore];
     self.highscoreLabel.fontSize = 14;
@@ -267,7 +267,7 @@ static const uint32_t bikerCategory         = 0x1 << 2;
 }
 
 - (void)rateButtonPressed:(id)sender{
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"itms-apps://itunes.apple.com/app/id123456789"]];
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"itms-apps://itunes.apple.com/app/id1031990080"]];
 }
 
 
@@ -431,17 +431,17 @@ static const uint32_t bikerCategory         = 0x1 << 2;
     }else if (self.score < 300){
         minSpawn = 3;
         maxSpawn = 7;
-        self.minDuration = 6;
+        self.minDuration = 7;
         self.maxDuration = 12;
     }else if (self.score < 400){
         minSpawn = 3;
         maxSpawn = 6;
-        self.minDuration = 5;
+        self.minDuration = 7;
         self.maxDuration = 11;
     }else{
         minSpawn = 3;
         maxSpawn = 5;
-        self.minDuration = 4;
+        self.minDuration = 7;
         self.maxDuration = 10;
     }
     
@@ -540,8 +540,6 @@ static const uint32_t bikerCategory         = 0x1 << 2;
     
     for (UITouch *touch in touches) {
         CGPoint location = [touch locationInNode:self];
-        
-        
         float dY = self.centerPoint.position.y - location.y;
         float dX = self.centerPoint.position.x - location.x;
         float angle = atan2f(dY, dX) + 1.571f;
