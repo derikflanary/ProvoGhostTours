@@ -69,6 +69,7 @@ static const uint32_t bikerCategory         = 0x1 << 2;
         NSError *error = nil;
         self.audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:&error];
         self.audioPlayer.numberOfLoops = -1;
+        self.audioPlayer.volume = 0.7;
         [self.audioPlayer play];
         
         self.ghostSound = [SKAction playSoundFileNamed:@"ghostSound.caf" waitForCompletion:NO];
@@ -117,6 +118,13 @@ static const uint32_t bikerCategory         = 0x1 << 2;
     rateButton.tag = 100;
     [self.view addSubview:rateButton];
     
+    UIButton *muteButton = [[UIButton alloc]initWithFrame:CGRectMake(self.frame.size.width - 50, 25, 25, 25)];
+    [muteButton setImage:[UIImage imageNamed:@"Mute"] forState:UIControlStateNormal];
+    [muteButton setImage:[UIImage imageNamed:@"MuteFilled"] forState:UIControlStateSelected];
+    [muteButton addTarget:self action:@selector(mutePressed:) forControlEvents:UIControlEventTouchUpInside];
+    muteButton.tag = 300;
+    [self.view addSubview:muteButton];
+    
     NSInteger highscore = [[NSUserDefaults standardUserDefaults] integerForKey:@"highScore"];
     self.highscoreLabel = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
     self.highscoreLabel.text = [NSString stringWithFormat:@"High Score: %lu", (long)highscore];
@@ -126,6 +134,17 @@ static const uint32_t bikerCategory         = 0x1 << 2;
     [self.highscoreLabel setScale:0.1];
     [self addChild:self.highscoreLabel];
     [self.highscoreLabel runAction:[SKAction scaleTo:1 duration:.5]];
+    
+    if (![[NSUserDefaults standardUserDefaults]boolForKey:@"SoundDisabled"]) {
+        self.audioPlayer.volume = 0.7;
+        self.ghostSound = [SKAction playSoundFileNamed:@"ghostSound.caf" waitForCompletion:NO];
+        muteButton.selected = NO;
+    }else{
+        self.audioPlayer.volume = 0.0;
+        self.ghostSound = nil;
+        muteButton.selected = YES;
+    }
+
 
 }
 
@@ -317,12 +336,14 @@ static const uint32_t bikerCategory         = 0x1 << 2;
     [self startGame];
     [[self.view viewWithTag:200] removeFromSuperview];
     [[self.view viewWithTag:100] removeFromSuperview];
+    [[self.view viewWithTag:300] removeFromSuperview];
     [self.highscoreLabel removeFromParent];
     [self.titleLabel removeFromParent];
 }
 
 - (void)rateButtonPressed:(id)sender{
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"itms-apps://itunes.apple.com/app/id1031990080"]];
+    NSLog(@"rate pressed");
 }
 
 
@@ -398,7 +419,7 @@ static const uint32_t bikerCategory         = 0x1 << 2;
             self.score += 10;
             [self.scoreLabel setText:[NSString stringWithFormat:@"Score: %ld", (long)self.score]];
             [ghost runAction:die];
-            [ghost runAction:[SKAction sequence:@[grow, shrink, remove]]];
+            [ghost runAction:[SKAction sequence:@[grow, shrink, die, remove]]];
             [self runAction:self.ghostSound];
         }else{
             [ghost collidedWithFlashlight:delta];
@@ -726,6 +747,8 @@ static const uint32_t bikerCategory         = 0x1 << 2;
     [self.contactedGhostArray removeObject:ghost];
 }
 
+#pragma mark - Game Over
+
 - (void)ghostCollidesWithBiker{
     SKLabelNode *gameOverLabel = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
     gameOverLabel.text = @"Game Over!";
@@ -763,6 +786,13 @@ static const uint32_t bikerCategory         = 0x1 << 2;
     [self addChild:highScoreLabel];
     [highScoreLabel runAction:[SKAction scaleTo:1 duration:.5]];
     
+    UIButton *muteButton = [[UIButton alloc]initWithFrame:CGRectMake(self.frame.size.width - 50, 25, 25, 25)];
+    [muteButton setImage:[UIImage imageNamed:@"Mute"] forState:UIControlStateNormal];
+    [muteButton setImage:[UIImage imageNamed:@"MuteFilled"] forState:UIControlStateSelected];
+    [muteButton addTarget:self action:@selector(mutePressed:) forControlEvents:UIControlEventTouchUpInside];
+    muteButton.tag = 300;
+    [self.view addSubview:muteButton];
+    
     [self.audioPlayer stop];
     
     self.gameover = YES;
@@ -774,6 +804,8 @@ static const uint32_t bikerCategory         = 0x1 << 2;
     [self removeAllActions];
     self.gameover = NO;
     [[self.view viewWithTag:321] removeFromSuperview];
+    [[self.view viewWithTag:100] removeFromSuperview];
+    [[self.view viewWithTag:300] removeFromSuperview];
     
     [self startGame];
 }
@@ -786,6 +818,30 @@ static const uint32_t bikerCategory         = 0x1 << 2;
         return fontSize;
     }
 }
+
+- (void)mutePressed:(UIButton*)sender{
+    NSLog(@"mute pressed");
+    if ([[NSUserDefaults standardUserDefaults]boolForKey:@"SoundDisabled"]) {
+        sender.highlighted = NO;
+        sender.selected = NO;
+        [[NSUserDefaults standardUserDefaults]setBool:NO forKey:@"SoundDisabled"];
+        self.audioPlayer.volume = 0.7;
+        self.ghostSound = [SKAction playSoundFileNamed:@"ghostSound.caf" waitForCompletion:NO];
+    }else{
+        sender.highlighted = YES;
+        sender.selected = YES;
+        [[NSUserDefaults standardUserDefaults]setBool:YES forKey:@"SoundDisabled"];
+        self.audioPlayer.volume = 0.0;
+        self.ghostSound = nil;
+    }
+    
+    [[NSUserDefaults standardUserDefaults]synchronize];
+    
+    
+}
+
+
+
 
 
 @end
