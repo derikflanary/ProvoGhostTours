@@ -10,6 +10,7 @@
 #import "Ghost.h"
 #import <AVFoundation/AVFoundation.h>
 #import <MPCoachMarks/MPCoachMarks.h>
+#import <GameKit/GameKit.h>
 
 @interface GameScene() <SKPhysicsContactDelegate, MPCoachMarksViewDelegate>
 
@@ -41,6 +42,8 @@
 @property (nonatomic) SKSpriteNode *tree;
 @property (nonatomic) SKSpriteNode *detector;
 @property (nonatomic) NSTimeInterval delta;
+@property (nonatomic, assign) BOOL gameCenterEnabled;
+@property (nonatomic, strong) NSString *leaderboardIdentifier;
 
 @end
 
@@ -73,6 +76,8 @@ static const uint32_t bikerCategory         = 0x1 << 2;
         [self.audioPlayer play];
         
         self.ghostSound = [SKAction playSoundFileNamed:@"ghostSound.caf" waitForCompletion:NO];
+        
+        [self authenticateLocalPlayer];
         
     }
     return self;
@@ -139,13 +144,13 @@ static const uint32_t bikerCategory         = 0x1 << 2;
         self.audioPlayer.volume = 0.7;
         self.ghostSound = [SKAction playSoundFileNamed:@"ghostSound.caf" waitForCompletion:NO];
         muteButton.selected = NO;
+        NSLog(@"sound on");
     }else{
         self.audioPlayer.volume = 0.0;
         self.ghostSound = nil;
         muteButton.selected = YES;
+        NSLog(@"sound off");
     }
-
-
 }
 
 #pragma mark - Main Scene Setup
@@ -189,7 +194,7 @@ static const uint32_t bikerCategory         = 0x1 << 2;
     self.bikerAnimation = [self animationFromPlist:@"bikerAnimation"];
     
     [self rotateWheels];
-    [self.biker runAction:self.bikerAnimation];
+    [self.biker runAction:self.bikerAnimation withKey:@"biker"];
     [self addTreeAtX:self.frame.size.width - 100];
 }
 
@@ -601,8 +606,8 @@ static const uint32_t bikerCategory         = 0x1 << 2;
     //create repeating rotation for wheels
     SKAction *oneRevolution = [SKAction rotateByAngle:-M_PI*2 duration: 4.0];
     SKAction *repeat = [SKAction repeatActionForever:oneRevolution];
-    [self.backWheel runAction:repeat];
-    [self.frontWheel runAction:repeat];
+    [self.backWheel runAction:repeat withKey:@"backWheel"];
+    [self.frontWheel runAction:repeat withKey:@"frontWheel"];
 }
 
 - (void)rotateNode:(SKSpriteNode *)nodeA toFaceNode:(SKSpriteNode *)nodeB {
@@ -786,6 +791,17 @@ static const uint32_t bikerCategory         = 0x1 << 2;
     [self addChild:highScoreLabel];
     [highScoreLabel runAction:[SKAction scaleTo:1 duration:.5]];
     
+    UIButton *rateButton = [[UIButton alloc]initWithFrame:CGRectMake(0, CGRectGetMinY(restartButton.frame) + 40, self.frame.size.width, 50)];
+    [rateButton setTitle:@"Rate" forState:UIControlStateNormal];
+    [rateButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [rateButton setTitleColor:[UIColor colorWithWhite:1 alpha:.4] forState:UIControlStateHighlighted];
+    [rateButton setTintColor:[UIColor whiteColor]];
+    rateButton.titleLabel.font = [UIFont fontWithName:@"Chalkduster" size:14];
+    [rateButton addTarget:self action:@selector(rateButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+    rateButton.tag = 100;
+    [self.view addSubview:rateButton];
+
+    
     UIButton *muteButton = [[UIButton alloc]initWithFrame:CGRectMake(self.frame.size.width - 50, 25, 25, 25)];
     [muteButton setImage:[UIImage imageNamed:@"Mute"] forState:UIControlStateNormal];
     [muteButton setImage:[UIImage imageNamed:@"MuteFilled"] forState:UIControlStateSelected];
@@ -793,11 +809,29 @@ static const uint32_t bikerCategory         = 0x1 << 2;
     muteButton.tag = 300;
     [self.view addSubview:muteButton];
     
+    if (![[NSUserDefaults standardUserDefaults]boolForKey:@"SoundDisabled"]) {
+        self.audioPlayer.volume = 0.7;
+        self.ghostSound = [SKAction playSoundFileNamed:@"ghostSound.caf" waitForCompletion:NO];
+        muteButton.selected = NO;
+        NSLog(@"sound on");
+    }else{
+        self.audioPlayer.volume = 0.0;
+        self.ghostSound = nil;
+        muteButton.selected = YES;
+        NSLog(@"sound off");
+    }
+    [self.frontWheel removeActionForKey:@"frontWheel"];
+    [self.backWheel removeActionForKey:@"backWheel"];
+    [self.biker removeActionForKey:@"biker"];
     [self.audioPlayer stop];
     
     self.gameover = YES;
+    
+    [self reportScore:self.score];
 
 }
+
+
 
 - (void) restartButtonPressed:(id)sender{
     [self removeAllChildren];
@@ -820,19 +854,21 @@ static const uint32_t bikerCategory         = 0x1 << 2;
 }
 
 - (void)mutePressed:(UIButton*)sender{
-    NSLog(@"mute pressed");
+   
     if ([[NSUserDefaults standardUserDefaults]boolForKey:@"SoundDisabled"]) {
         sender.highlighted = NO;
         sender.selected = NO;
         [[NSUserDefaults standardUserDefaults]setBool:NO forKey:@"SoundDisabled"];
         self.audioPlayer.volume = 0.7;
         self.ghostSound = [SKAction playSoundFileNamed:@"ghostSound.caf" waitForCompletion:NO];
+        NSLog(@"sound on");
     }else{
         sender.highlighted = YES;
         sender.selected = YES;
         [[NSUserDefaults standardUserDefaults]setBool:YES forKey:@"SoundDisabled"];
         self.audioPlayer.volume = 0.0;
         self.ghostSound = nil;
+        NSLog(@"sound off");
     }
     
     [[NSUserDefaults standardUserDefaults]synchronize];
@@ -840,8 +876,51 @@ static const uint32_t bikerCategory         = 0x1 << 2;
     
 }
 
+#pragma mark - Game Center
 
+- (void)authenticateLocalPlayer{
+    GKLocalPlayer *localPlayer = [GKLocalPlayer localPlayer];
+    
+    localPlayer.authenticateHandler = ^(UIViewController *viewController, NSError *error){
+        if (viewController != nil) {
+            [self.gameViewController presentViewController:viewController animated:YES completion:nil];
+        }
+        else{
+            if ([GKLocalPlayer localPlayer].authenticated) {
+                self.gameCenterEnabled = YES;
+                NSLog(@"gamecenter enabled");
+                // Get the default leaderboard identifier.
+                [[GKLocalPlayer localPlayer] loadDefaultLeaderboardIdentifierWithCompletionHandler:^(NSString *leaderboardIdentifier, NSError *error) {
+                    
+                    if (error != nil) {
+                        NSLog(@"%@", [error localizedDescription]);
+                    }
+                    else{
+                        self.leaderboardIdentifier = leaderboardIdentifier;
+                    }
+                }];
+            }
+            
+            else{
+                self.gameCenterEnabled = NO;
+            }
+        }
+    };
+}
 
+- (void)reportScore:(NSInteger)score{
+    
+    if (self.gameCenterEnabled) {
+        GKScore *theScore = [[GKScore alloc] initWithLeaderboardIdentifier:_leaderboardIdentifier];
+        theScore.value = score;
+        
+        [GKScore reportScores:@[theScore] withCompletionHandler:^(NSError *error) {
+            if (error != nil) {
+                NSLog(@"%@", [error localizedDescription]);
+            }
+        }];
+    }
+}
 
 
 @end

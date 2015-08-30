@@ -8,9 +8,10 @@
 
 #import <SpriteKit/SpriteKit.h>
 #import <SceneKit/SceneKit.h>
+#import "GameViewController.h"
 
 @interface GameScene : SKScene
 
-<SKPhysicsContactDelegate>
+@property (nonatomic, strong) GameViewController *gameViewController;
 
 @end

@@ -11,6 +11,4 @@
 
 @interface GameViewController : UIViewController
 
-- (void)showCoachMarks;
-
 @end

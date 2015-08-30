@@ -10,6 +10,10 @@
 #import "GameScene.h"
 #import <MPCoachMarks/MPCoachMarks.h>
 
+@interface GameViewController()
+
+@end
+
 @implementation SKScene (Unarchive)
 
 + (instancetype)unarchiveFromFile:(NSString *)file {
@@ -42,8 +46,9 @@
         skView.showsNodeCount = NO;
         
         // Create and configure the scene.
-        SKScene * scene = [GameScene sceneWithSize:skView.bounds.size];
+        GameScene *scene = [GameScene sceneWithSize:skView.bounds.size];
         scene.scaleMode = SKSceneScaleModeAspectFill;
+        scene.gameViewController = self;
         
         // Present the scene.
         [skView presentScene:scene];
@@ -74,8 +79,5 @@
     return YES;
 }
 
-- (void)showCoachMarks{
-    
-}
 
 @end
