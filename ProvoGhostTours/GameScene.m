@@ -12,7 +12,7 @@
 #import <MPCoachMarks/MPCoachMarks.h>
 #import <GameKit/GameKit.h>
 
-@interface GameScene() <SKPhysicsContactDelegate, MPCoachMarksViewDelegate>
+@interface GameScene() <SKPhysicsContactDelegate, MPCoachMarksViewDelegate, GKGameCenterControllerDelegate>
 
 @property (nonatomic) SKSpriteNode *player;
 @property (nonatomic) SKSpriteNode *biker;
@@ -129,6 +129,13 @@ static const uint32_t bikerCategory         = 0x1 << 2;
     [muteButton addTarget:self action:@selector(mutePressed:) forControlEvents:UIControlEventTouchUpInside];
     muteButton.tag = 300;
     [self.view addSubview:muteButton];
+    
+    UIButton *leaderButton = [[UIButton alloc]initWithFrame:CGRectMake(25, 25, 25, 25)];
+    [leaderButton setImage:[UIImage imageNamed:@"Leaderboard"] forState:UIControlStateNormal];
+    [leaderButton setImage:[UIImage imageNamed:@"Leaderboard_alpha"] forState:UIControlStateSelected];
+    [leaderButton addTarget:self action:@selector(leaderButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+    leaderButton.tag = 400;
+    [self.view addSubview:leaderButton];
     
     NSInteger highscore = [[NSUserDefaults standardUserDefaults] integerForKey:@"highScore"];
     self.highscoreLabel = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
@@ -274,11 +281,6 @@ static const uint32_t bikerCategory         = 0x1 << 2;
     self.scoreLabel.position = CGPointMake(margin, margin);
     [self addChild:self.scoreLabel];
     
-//    self.detector = [SKSpriteNode spriteNodeWithImageNamed:@"redcircle"];
-//    self.detector.position = CGPointMake(self.biker.position.x + 20, self.biker.position.y);
-//    self.detector.zPosition = 2;
-//    [self addChild:self.detector];
-    
     //Set up arrays for ghost spawning and deleting
     self.ghostArray = [NSMutableArray array];
     self.contactedGhostArray = [NSMutableArray array];
@@ -329,19 +331,18 @@ static const uint32_t bikerCategory         = 0x1 << 2;
     if (index == 1) {
         [self addTutorialGhost];
     }
-    
 }
 
 
 #pragma mark - Start Screen Button Methods
 
 - (void)playButtonPressed:(id)sender{
-    
     self.firstPlay = YES;
     [self startGame];
     [[self.view viewWithTag:200] removeFromSuperview];
     [[self.view viewWithTag:100] removeFromSuperview];
     [[self.view viewWithTag:300] removeFromSuperview];
+    [[self.view viewWithTag:400] removeFromSuperview];
     [self.highscoreLabel removeFromParent];
     [self.titleLabel removeFromParent];
 }
@@ -475,37 +476,9 @@ static const uint32_t bikerCategory         = 0x1 << 2;
 
 #pragma mark - Detector Methods
 
-//- (void)updateDistanceFromDetector{
-//    CGFloat smallestDist = 300.0;
-//    for (Ghost *ghost in self.ghostArray) {
-//        CGFloat distance = [self SDistanceBetweenPoints:ghost.position andSecond:self.biker.position];
-//        if (distance < smallestDist) {
-//            smallestDist = distance;
-//        }
-//    }
-//    
-//    float percent = 1 - (smallestDist/350);
-//    if (percent < 1) {
-//        [self animateDetectorWithPercent:percent];
-//    }
-//    
-//}
-
 - (CGFloat)SDistanceBetweenPoints:(CGPoint)first andSecond:(CGPoint)second{
     return hypotf(second.x - first.x, second.y - first.y);
 }
-
-//- (void)animateDetectorWithPercent:(CGFloat)percent{
-//    float duration = 1 - percent;
-//    int count = 1 / duration;
-//    SKAction *grow = [SKAction scaleBy:2 duration:duration/2];
-//    SKAction *shrink = [SKAction scaleBy:0.5 duration:duration/2];
-//    SKAction *brighten = [SKAction colorizeWithColor:[UIColor redColor] colorBlendFactor:1 duration:duration/2];
-//    SKAction *darken = [SKAction colorizeWithColor:[UIColor darkGrayColor] colorBlendFactor:1 duration:duration/2];
-//    [self.detector runAction:[SKAction sequence:@[grow, shrink]]];
-//    [self.detector runAction:[SKAction repeatAction:[SKAction sequence:@[grow, shrink]] count:count]];
-////    [self.detector runAction:[SKAction repeatActionForever:[SKAction sequence:@[brighten, darken]]]];
-//}
 
 #pragma mark Update Methods
 - (void)updateWithTimeSinceLastUpdate:(CFTimeInterval)timeSinceLast {
@@ -801,13 +774,19 @@ static const uint32_t bikerCategory         = 0x1 << 2;
     rateButton.tag = 100;
     [self.view addSubview:rateButton];
 
-    
     UIButton *muteButton = [[UIButton alloc]initWithFrame:CGRectMake(self.frame.size.width - 50, 25, 25, 25)];
     [muteButton setImage:[UIImage imageNamed:@"Mute"] forState:UIControlStateNormal];
     [muteButton setImage:[UIImage imageNamed:@"MuteFilled"] forState:UIControlStateSelected];
     [muteButton addTarget:self action:@selector(mutePressed:) forControlEvents:UIControlEventTouchUpInside];
     muteButton.tag = 300;
     [self.view addSubview:muteButton];
+    
+    UIButton *leaderButton = [[UIButton alloc]initWithFrame:CGRectMake(25, 25, 25, 25)];
+    [leaderButton setImage:[UIImage imageNamed:@"Leaderboard"] forState:UIControlStateNormal];
+    [leaderButton setImage:[UIImage imageNamed:@"Leaderboard_alpha"] forState:UIControlStateSelected];
+    [leaderButton addTarget:self action:@selector(leaderButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+    leaderButton.tag = 400;
+    [self.view addSubview:leaderButton];
     
     if (![[NSUserDefaults standardUserDefaults]boolForKey:@"SoundDisabled"]) {
         self.audioPlayer.volume = 0.7;
@@ -831,8 +810,6 @@ static const uint32_t bikerCategory         = 0x1 << 2;
 
 }
 
-
-
 - (void) restartButtonPressed:(id)sender{
     [self removeAllChildren];
     [self removeAllActions];
@@ -840,8 +817,15 @@ static const uint32_t bikerCategory         = 0x1 << 2;
     [[self.view viewWithTag:321] removeFromSuperview];
     [[self.view viewWithTag:100] removeFromSuperview];
     [[self.view viewWithTag:300] removeFromSuperview];
+    [[self.view viewWithTag:400] removeFromSuperview];
     
     [self startGame];
+}
+
+- (void)leaderButtonPressed:(id)sender{
+    if (self.gameCenterEnabled) {
+        [self showLeaderboardAndAchievements:YES];
+    }
 }
 
 - (float)convertFontSize:(float)fontSize
@@ -872,8 +856,6 @@ static const uint32_t bikerCategory         = 0x1 << 2;
     }
     
     [[NSUserDefaults standardUserDefaults]synchronize];
-    
-    
 }
 
 #pragma mark - Game Center
@@ -920,6 +902,28 @@ static const uint32_t bikerCategory         = 0x1 << 2;
             }
         }];
     }
+}
+
+-(void)showLeaderboardAndAchievements:(BOOL)shouldShowLeaderboard{
+    if (self.gameCenterEnabled) {
+        GKGameCenterViewController *gcViewController = [[GKGameCenterViewController alloc] init];
+        
+        gcViewController.gameCenterDelegate = self;
+        
+        if (shouldShowLeaderboard) {
+            gcViewController.viewState = GKGameCenterViewControllerStateLeaderboards;
+            gcViewController.leaderboardIdentifier = _leaderboardIdentifier;
+        }
+        else{
+            gcViewController.viewState = GKGameCenterViewControllerStateAchievements;
+        }
+        
+        [self.gameViewController presentViewController:gcViewController animated:YES completion:nil];
+    }
+}
+
+- (void)gameCenterViewControllerDidFinish:(GKGameCenterViewController *)gameCenterViewController{
+    [gameCenterViewController dismissViewControllerAnimated:YES completion:nil];
 }
 
 
