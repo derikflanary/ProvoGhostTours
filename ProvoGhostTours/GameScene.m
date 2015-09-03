@@ -44,6 +44,8 @@
 @property (nonatomic) NSTimeInterval delta;
 @property (nonatomic, assign) BOOL gameCenterEnabled;
 @property (nonatomic, strong) NSString *leaderboardIdentifier;
+@property (nonatomic, assign) BOOL gamePaused;
+@property (nonatomic, assign) NSTimeInterval theCurrentTime;
 
 @end
 
@@ -289,12 +291,12 @@ static const uint32_t bikerCategory         = 0x1 << 2;
     self.scoreLabel.position = CGPointMake(margin, margin);
     [self addChild:self.scoreLabel];
     
-    UIButton *pauseButton = [[UIButton alloc]initWithFrame:CGRectMake(self.frame.size.width - 50, 25, 25, 25)];
-    [pauseButton setImage:[UIImage imageNamed:@"Pause"] forState:UIControlStateNormal];
-    [pauseButton setImage:[UIImage imageNamed:@"Pause_Filled"] forState:UIControlStateSelected];
-    [pauseButton addTarget:self action:@selector(pausePressed:) forControlEvents:UIControlEventTouchUpInside];
-    pauseButton.tag = 50;
-    [self.view addSubview:pauseButton];
+//    UIButton *pauseButton = [[UIButton alloc]initWithFrame:CGRectMake(self.frame.size.width - 50, 25, 25, 25)];
+//    [pauseButton setImage:[UIImage imageNamed:@"Pause"] forState:UIControlStateNormal];
+//    [pauseButton setImage:[UIImage imageNamed:@"Pause_Filled"] forState:UIControlStateSelected];
+//    [pauseButton addTarget:self action:@selector(pausePressed:) forControlEvents:UIControlEventTouchUpInside];
+//    pauseButton.tag = 50;
+//    [self.view addSubview:pauseButton];
     
     //Set up arrays for ghost spawning and deleting
     self.ghostArray = [NSMutableArray array];
@@ -376,9 +378,12 @@ static const uint32_t bikerCategory         = 0x1 << 2;
     if (!sender.selected) {
         sender.selected = YES;
         self.scene.view.paused = YES;
+        self.gamePaused = YES;
     }else{
         sender.selected = NO;
         self.scene.view.paused = NO;
+        self.gamePaused = NO;
+//        self.lastUpdateTimeInterval = self.theCurrentTime;
     }
 }
 
@@ -579,8 +584,16 @@ static const uint32_t bikerCategory         = 0x1 << 2;
     }
     
     CFTimeInterval timeSinceLast = currentTime - self.lastUpdateTimeInterval;
-
-    /* Called before each frame is rendered */
+//    if (!self.lastUpdateTimeInterval) {
+//        timeSinceLast = 0;
+//        self.lastUpdateTimeInterval = currentTime;
+//    }
+//    NSLog(@"%f", timeSinceLast);
+//    if (timeSinceLast > .5) {
+//        timeSinceLast = .01;
+//    }
+    self.theCurrentTime = currentTime;
+        /* Called before each frame is rendered */
     if (self.movingBackground.position.x <= - 2600) {
         self.movingBackground.position = CGPointMake(self.frame.size.width, 0);
     }else{
@@ -596,6 +609,7 @@ static const uint32_t bikerCategory         = 0x1 << 2;
     }
 
     // Handle time delta.
+    
         if (timeSinceLast > .02) {
         self.lastUpdateTimeInterval = currentTime;
         if ([self.contactedGhostArray count] > 0) {
