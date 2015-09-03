@@ -97,7 +97,7 @@ static const uint32_t bikerCategory         = 0x1 << 2;
     self.titleLabel.fontSize = 36;
     self.titleLabel.zPosition = 4;
     self.titleLabel.position = CGPointMake(CGRectGetMidX(self.frame),
-                                         CGRectGetMidY(self.frame) + 70);
+                                         CGRectGetMidY(self.frame) + 85);
     
     [self.titleLabel setScale:0.1];
     [self addChild:self.titleLabel];
