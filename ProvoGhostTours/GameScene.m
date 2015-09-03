@@ -97,7 +97,7 @@ static const uint32_t bikerCategory         = 0x1 << 2;
     self.titleLabel.fontSize = 36;
     self.titleLabel.zPosition = 4;
     self.titleLabel.position = CGPointMake(CGRectGetMidX(self.frame),
-                                         CGRectGetMidY(self.frame) + 80);
+                                         CGRectGetMidY(self.frame) + 70);
     
     [self.titleLabel setScale:0.1];
     [self addChild:self.titleLabel];
@@ -136,6 +136,13 @@ static const uint32_t bikerCategory         = 0x1 << 2;
     [leaderButton addTarget:self action:@selector(leaderButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     leaderButton.tag = 400;
     [self.view addSubview:leaderButton];
+    
+    UIButton *shopButton = [[UIButton alloc]initWithFrame:CGRectMake(self.frame.size.width/2 - 15, 25, 25, 25)];
+    [shopButton setImage:[UIImage imageNamed:@"shop_icon"] forState:UIControlStateNormal];
+    [shopButton setImage:[UIImage imageNamed:@"shop_icon_alpha"] forState:UIControlStateSelected];
+    [shopButton addTarget:self action:@selector(shopButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+    shopButton.tag = 500;
+    [self.view addSubview:shopButton];
     
     NSInteger highscore = [[NSUserDefaults standardUserDefaults] integerForKey:@"highScore"];
     self.highscoreLabel = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
@@ -343,6 +350,7 @@ static const uint32_t bikerCategory         = 0x1 << 2;
     [[self.view viewWithTag:100] removeFromSuperview];
     [[self.view viewWithTag:300] removeFromSuperview];
     [[self.view viewWithTag:400] removeFromSuperview];
+    [[self.view viewWithTag:500] removeFromSuperview];
     [self.highscoreLabel removeFromParent];
     [self.titleLabel removeFromParent];
 }
@@ -350,6 +358,10 @@ static const uint32_t bikerCategory         = 0x1 << 2;
 - (void)rateButtonPressed:(id)sender{
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"itms-apps://itunes.apple.com/app/id1031990080"]];
     NSLog(@"rate pressed");
+}
+
+- (void)shopButtonPressed:(id)sender{
+    NSLog(@"shop pressed");
 }
 
 
@@ -466,9 +478,12 @@ static const uint32_t bikerCategory         = 0x1 << 2;
     int rangeZ = maxZ - minZ;
     int actualZ = (arc4random() % rangeZ) + minZ;
     NSLog(@"%d", actualZ);
-
-    self.tree = [SKSpriteNode spriteNodeWithImageNamed:@"Tree1"];
-    self.tree.position = CGPointMake(X, 0);
+    if (actualZ == 2) {
+        self.tree = [SKSpriteNode spriteNodeWithImageNamed:@"Tree3"];
+    }else{
+        self.tree = [SKSpriteNode spriteNodeWithImageNamed:@"Tree4"];
+    }
+    self.tree.position = CGPointMake(X, -7);
     self.tree.anchorPoint = CGPointZero;
     self.tree.zPosition = actualZ;
     [self addChild:self.tree];
@@ -549,7 +564,7 @@ static const uint32_t bikerCategory         = 0x1 << 2;
         self.movingBackground.position = CGPointMake(self.movingBackground.position.x - 1, self.movingBackground.position.y);
     }
     
-    if (self.tree.position.x <= -250) {
+    if (self.tree.position.x <= -175) {
         [self.tree removeFromParent];
         int actualSpawn = (arc4random() % 200) + 10;
         [self addTreeAtX:self.view.frame.size.width + actualSpawn];
@@ -603,7 +618,7 @@ static const uint32_t bikerCategory         = 0x1 << 2;
         [animFrames addObject:[SKTexture textureWithImageNamed:imageName]]; // 5
     }
     
-    float framesOverOneSecond = 1.0f/(float)[animFrames count];
+    float framesOverOneSecond = 1.0f/3.0f;
     
     return [SKAction repeatActionForever:[SKAction animateWithTextures:animFrames timePerFrame:framesOverOneSecond resize:NO restore:YES]]; // 6
 }
@@ -781,6 +796,13 @@ static const uint32_t bikerCategory         = 0x1 << 2;
     muteButton.tag = 300;
     [self.view addSubview:muteButton];
     
+    UIButton *shopButton = [[UIButton alloc]initWithFrame:CGRectMake(self.frame.size.width/2 - 13, 25, 25, 25)];
+    [shopButton setImage:[UIImage imageNamed:@"shop_icon"] forState:UIControlStateNormal];
+    [shopButton setImage:[UIImage imageNamed:@"shop_icon_alpha"] forState:UIControlStateSelected];
+    [shopButton addTarget:self action:@selector(shopButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+    shopButton.tag = 500;
+    [self.view addSubview:shopButton];
+    
     UIButton *leaderButton = [[UIButton alloc]initWithFrame:CGRectMake(25, 25, 25, 25)];
     [leaderButton setImage:[UIImage imageNamed:@"Leaderboard"] forState:UIControlStateNormal];
     [leaderButton setImage:[UIImage imageNamed:@"Leaderboard_alpha"] forState:UIControlStateSelected];
@@ -818,7 +840,7 @@ static const uint32_t bikerCategory         = 0x1 << 2;
     [[self.view viewWithTag:100] removeFromSuperview];
     [[self.view viewWithTag:300] removeFromSuperview];
     [[self.view viewWithTag:400] removeFromSuperview];
-    
+    [[self.view viewWithTag:500] removeFromSuperview];
     [self startGame];
 }
 
