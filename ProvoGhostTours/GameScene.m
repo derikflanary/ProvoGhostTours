@@ -137,7 +137,8 @@ static const uint32_t bikerCategory         = 0x1 << 2;
     leaderButton.tag = 400;
     [self.view addSubview:leaderButton];
     
-    UIButton *shopButton = [[UIButton alloc]initWithFrame:CGRectMake(self.frame.size.width/2 - 15, 25, 25, 25)];
+    UIButton *shopButton = [[UIButton alloc]initWithFrame:CGRectMake(CGRectGetMidX(self.frame) - 12.5, 25, 25, 25)];
+    shopButton.center = [self.view convertPoint:self.view.center fromScene:self];
     [shopButton setImage:[UIImage imageNamed:@"shop_icon"] forState:UIControlStateNormal];
     [shopButton setImage:[UIImage imageNamed:@"shop_icon_alpha"] forState:UIControlStateSelected];
     [shopButton addTarget:self action:@selector(shopButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
@@ -288,6 +289,13 @@ static const uint32_t bikerCategory         = 0x1 << 2;
     self.scoreLabel.position = CGPointMake(margin, margin);
     [self addChild:self.scoreLabel];
     
+    UIButton *pauseButton = [[UIButton alloc]initWithFrame:CGRectMake(self.frame.size.width - 50, 25, 25, 25)];
+    [pauseButton setImage:[UIImage imageNamed:@"Pause"] forState:UIControlStateNormal];
+    [pauseButton setImage:[UIImage imageNamed:@"Pause_Filled"] forState:UIControlStateSelected];
+    [pauseButton addTarget:self action:@selector(pausePressed:) forControlEvents:UIControlEventTouchUpInside];
+    pauseButton.tag = 50;
+    [self.view addSubview:pauseButton];
+    
     //Set up arrays for ghost spawning and deleting
     self.ghostArray = [NSMutableArray array];
     self.contactedGhostArray = [NSMutableArray array];
@@ -362,6 +370,16 @@ static const uint32_t bikerCategory         = 0x1 << 2;
 
 - (void)shopButtonPressed:(id)sender{
     NSLog(@"shop pressed");
+}
+
+- (void)pausePressed:(UIButton*)sender{
+    if (!sender.selected) {
+        sender.selected = YES;
+        self.scene.view.paused = YES;
+    }else{
+        sender.selected = NO;
+        self.scene.view.paused = NO;
+    }
 }
 
 
@@ -478,12 +496,17 @@ static const uint32_t bikerCategory         = 0x1 << 2;
     int rangeZ = maxZ - minZ;
     int actualZ = (arc4random() % rangeZ) + minZ;
     NSLog(@"%d", actualZ);
-    if (actualZ == 2) {
+    if (actualZ == 2 || 0) {
         self.tree = [SKSpriteNode spriteNodeWithImageNamed:@"Tree3"];
     }else{
         self.tree = [SKSpriteNode spriteNodeWithImageNamed:@"Tree4"];
     }
-    self.tree.position = CGPointMake(X, -7);
+    if (actualZ == 0) {
+        self.tree.position = CGPointMake(X, 0);
+    }else{
+        self.tree.position = CGPointMake(X, -7);
+    }
+    
     self.tree.anchorPoint = CGPointZero;
     self.tree.zPosition = actualZ;
     [self addChild:self.tree];
@@ -561,7 +584,7 @@ static const uint32_t bikerCategory         = 0x1 << 2;
     if (self.movingBackground.position.x <= - 2600) {
         self.movingBackground.position = CGPointMake(self.frame.size.width, 0);
     }else{
-        self.movingBackground.position = CGPointMake(self.movingBackground.position.x - 1, self.movingBackground.position.y);
+        self.movingBackground.position = CGPointMake(self.movingBackground.position.x - .75, self.movingBackground.position.y);
     }
     
     if (self.tree.position.x <= -175) {
@@ -569,7 +592,7 @@ static const uint32_t bikerCategory         = 0x1 << 2;
         int actualSpawn = (arc4random() % 200) + 10;
         [self addTreeAtX:self.view.frame.size.width + actualSpawn];
     }else{
-        self.tree.position = CGPointMake(self.tree.position.x - 1, self.tree.position.y);
+        self.tree.position = CGPointMake(self.tree.position.x - .75, self.tree.position.y);
     }
 
     // Handle time delta.
@@ -743,6 +766,8 @@ static const uint32_t bikerCategory         = 0x1 << 2;
 #pragma mark - Game Over
 
 - (void)ghostCollidesWithBiker{
+    [[self.view viewWithTag:50] removeFromSuperview];
+    
     SKLabelNode *gameOverLabel = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
     gameOverLabel.text = @"Game Over!";
     gameOverLabel.fontSize = 48;
