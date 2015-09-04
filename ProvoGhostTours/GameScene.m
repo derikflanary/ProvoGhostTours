@@ -24,7 +24,6 @@
 @property (nonatomic) NSTimeInterval lastTreeSpawnInterval;
 @property (nonatomic) SKSpriteNode *light;
 @property (nonatomic) SKNode *centerPoint;
-@property (nonatomic) Ghost *contactedGhost;
 @property (nonatomic) NSInteger score;
 @property (nonatomic, strong) NSMutableArray *ghostArray;
 @property (nonatomic, strong) NSMutableArray *contactedGhostArray;
@@ -240,6 +239,41 @@ static const uint32_t bikerCategory         = 0x1 << 2;
 
     self.firstPlay = NO;
     
+    [self addFlashlight];
+    
+    float margin = 10;
+    
+    self.scoreLabel = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
+    self.scoreLabel.text = @"Score: 0";
+    self.scoreLabel.fontSize = [self convertFontSize:14];
+    self.scoreLabel.zPosition = 4;
+    self.scoreLabel.horizontalAlignmentMode = SKLabelHorizontalAlignmentModeLeft;
+    self.scoreLabel.position = CGPointMake(margin, margin);
+    [self addChild:self.scoreLabel];
+    
+    UIButton *pauseButton = [[UIButton alloc]initWithFrame:CGRectMake(self.frame.size.width - 50, 25, 25, 25)];
+    [pauseButton setImage:[UIImage imageNamed:@"Pause"] forState:UIControlStateNormal];
+    [pauseButton setImage:[UIImage imageNamed:@"Pause_Filled"] forState:UIControlStateSelected];
+    [pauseButton addTarget:self action:@selector(pausePressed:) forControlEvents:UIControlEventTouchUpInside];
+    pauseButton.tag = 50;
+    [self.view addSubview:pauseButton];
+    
+    //Set up arrays for ghost spawning and deleting
+    self.ghostArray = [NSMutableArray array];
+    self.contactedGhostArray = [NSMutableArray array];
+    
+    self.score = 0;
+    
+    self.minDuration = 8;
+    self.maxDuration = 10;
+    if (coachMarksShown) {
+        [self addGhost];
+    }
+    
+}
+
+- (void)addFlashlight{
+    //add the flashlight
     self.centerPoint = [SKNode new];
     self.centerPoint.position = self.player.position;
     [self addChild:self.centerPoint];
@@ -280,36 +314,6 @@ static const uint32_t bikerCategory         = 0x1 << 2;
     self.light.physicsBody.contactTestBitMask = ghostCategory;
     self.light.physicsBody.collisionBitMask = 0;
     self.light.physicsBody.usesPreciseCollisionDetection = YES;
-    
-    float margin = 10;
-    
-    self.scoreLabel = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
-    self.scoreLabel.text = @"Score: 0";
-    self.scoreLabel.fontSize = [self convertFontSize:14];
-    self.scoreLabel.zPosition = 4;
-    self.scoreLabel.horizontalAlignmentMode = SKLabelHorizontalAlignmentModeLeft;
-    self.scoreLabel.position = CGPointMake(margin, margin);
-    [self addChild:self.scoreLabel];
-    
-//    UIButton *pauseButton = [[UIButton alloc]initWithFrame:CGRectMake(self.frame.size.width - 50, 25, 25, 25)];
-//    [pauseButton setImage:[UIImage imageNamed:@"Pause"] forState:UIControlStateNormal];
-//    [pauseButton setImage:[UIImage imageNamed:@"Pause_Filled"] forState:UIControlStateSelected];
-//    [pauseButton addTarget:self action:@selector(pausePressed:) forControlEvents:UIControlEventTouchUpInside];
-//    pauseButton.tag = 50;
-//    [self.view addSubview:pauseButton];
-    
-    //Set up arrays for ghost spawning and deleting
-    self.ghostArray = [NSMutableArray array];
-    self.contactedGhostArray = [NSMutableArray array];
-    
-    self.score = 0;
-    
-    self.minDuration = 8;
-    self.maxDuration = 10;
-    if (coachMarksShown) {
-        [self addGhost];
-    }
-    
 }
 
 - (void)showCoachMarks{
@@ -375,16 +379,17 @@ static const uint32_t bikerCategory         = 0x1 << 2;
 }
 
 - (void)pausePressed:(UIButton*)sender{
-    if (!sender.selected) {
-        sender.selected = YES;
-        self.scene.view.paused = YES;
-        self.gamePaused = YES;
-    }else{
-        sender.selected = NO;
-        self.scene.view.paused = NO;
-        self.gamePaused = NO;
-//        self.lastUpdateTimeInterval = self.theCurrentTime;
-    }
+//    if (!sender.selected) {
+//        sender.selected = YES;
+//        self.scene.view.paused = YES;
+//        self.gamePaused = YES;
+//    }else{
+//        sender.selected = NO;
+//        self.scene.view.paused = NO;
+//        self.gamePaused = NO;
+////        self.lastUpdateTimeInterval = self.theCurrentTime;
+//    }
+    [self flashAnimation];
 }
 
 
@@ -450,15 +455,20 @@ static const uint32_t bikerCategory         = 0x1 << 2;
     NSMutableArray *removedGhostsArray = [NSMutableArray array];
     for (Ghost *ghost in self.contactedGhostArray) {
         if (ghost.alpha >= .9) {
+            
+            
+            //update score
+            self.score += 10;
+            [self.scoreLabel setText:[NSString stringWithFormat:@"Score: %ld", (long)self.score]];
+            
+            //kill ghost
+            [self.ghostArray removeObject:ghost];
+            [removedGhostsArray addObject:ghost];
+            
             SKAction *grow = [SKAction resizeToWidth:ghost.size.width * 1.5 duration:.075];
             SKAction *shrink = [SKAction resizeToWidth:ghost.size.width * .75 duration:.075];
             SKAction *die = [SKAction fadeOutWithDuration:.15];
             SKAction *remove = [SKAction removeFromParent];
-            
-            [self.ghostArray removeObject:ghost];
-            [removedGhostsArray addObject:ghost];
-            self.score += 10;
-            [self.scoreLabel setText:[NSString stringWithFormat:@"Score: %ld", (long)self.score]];
             [ghost runAction:die];
             [ghost runAction:[SKAction sequence:@[grow, shrink, die, remove]]];
             [self runAction:self.ghostSound];
@@ -466,6 +476,7 @@ static const uint32_t bikerCategory         = 0x1 << 2;
             [ghost collidedWithFlashlight:delta];
         }
     }
+    //remove dead ghosts
     [self.contactedGhostArray removeObjectsInArray:removedGhostsArray];
 }
 
@@ -496,6 +507,7 @@ static const uint32_t bikerCategory         = 0x1 << 2;
 #pragma mark - Tree Methods
 
 - (void)addTreeAtX:(CGFloat)X{
+    
     int minZ = 0;
     int maxZ = 4;
     int rangeZ = maxZ - minZ;
@@ -516,6 +528,26 @@ static const uint32_t bikerCategory         = 0x1 << 2;
     self.tree.zPosition = actualZ;
     [self addChild:self.tree];
 }
+
+#pragma mark - Flash Bang
+- (void)flashAnimation{
+    SKSpriteNode *flashBackground = [SKSpriteNode spriteNodeWithColor:[SKColor clearColor] size:self.size];
+    [self addChild:flashBackground];
+    flashBackground.anchorPoint = CGPointZero;
+    flashBackground.zPosition = 10;
+    SKAction *flash = [SKAction colorizeWithColor:[UIColor whiteColor] colorBlendFactor:1 duration:.25];
+    SKAction *showGhosts = [SKAction performSelector:@selector(makeEveryGhostVisable) onTarget:self];
+    SKAction *unflash = [SKAction colorizeWithColor:[UIColor clearColor] colorBlendFactor:1 duration:.25];
+    [flashBackground runAction:[SKAction sequence:@[flash, showGhosts, unflash]]];
+
+}
+
+- (void)makeEveryGhostVisable{
+    for (Ghost *ghost in self.ghostArray) {
+        ghost.alpha = .89;
+    }
+}
+
 
 #pragma mark - Detector Methods
 
@@ -551,13 +583,13 @@ static const uint32_t bikerCategory         = 0x1 << 2;
     }else if (self.score < 300){
         minSpawn = 3;
         maxSpawn = 7;
-        self.minDuration = 7;
-        self.maxDuration = 12;
+        self.minDuration = 8;
+        self.maxDuration = 11;
     }else if (self.score < 400){
         minSpawn = 3;
         maxSpawn = 6;
-        self.minDuration = 7;
-        self.maxDuration = 11;
+        self.minDuration = 8;
+        self.maxDuration = 10;
     }else{
         minSpawn = 3;
         maxSpawn = 5;
@@ -593,13 +625,15 @@ static const uint32_t bikerCategory         = 0x1 << 2;
 //        timeSinceLast = .01;
 //    }
     self.theCurrentTime = currentTime;
-        /* Called before each frame is rendered */
+
+    //Move the background
     if (self.movingBackground.position.x <= - 2600) {
         self.movingBackground.position = CGPointMake(self.frame.size.width, 0);
     }else{
         self.movingBackground.position = CGPointMake(self.movingBackground.position.x - .75, self.movingBackground.position.y);
     }
     
+    //Move the trees
     if (self.tree.position.x <= -175) {
         [self.tree removeFromParent];
         int actualSpawn = (arc4random() % 200) + 10;
@@ -610,7 +644,7 @@ static const uint32_t bikerCategory         = 0x1 << 2;
 
     // Handle time delta.
     
-        if (timeSinceLast > .02) {
+    if (timeSinceLast > .02) {
         self.lastUpdateTimeInterval = currentTime;
         if ([self.contactedGhostArray count] > 0) {
             [self updateGhostInLight:timeSinceLast];
@@ -636,7 +670,7 @@ static const uint32_t bikerCategory         = 0x1 << 2;
 }
 
 - (void)rotateNode:(SKSpriteNode *)nodeA toFaceNode:(SKSpriteNode *)nodeB {
-    
+    //rotation for flashlight
     double angle = atan2(nodeB.position.y - nodeA.position.y, nodeB.position.x - nodeA.position.x);
     
     if (nodeA.zRotation < 0) {
@@ -648,16 +682,17 @@ static const uint32_t bikerCategory         = 0x1 << 2;
 
 - (SKAction *)animationFromPlist:(NSString *)animPlist{
     
-    NSString *plistPath = [[NSBundle mainBundle] pathForResource:animPlist ofType:@"plist"]; // 1
-    NSArray *animImages = [NSArray arrayWithContentsOfFile:plistPath]; // 2
-    NSMutableArray *animFrames = [NSMutableArray array]; // 3
-    for (NSString *imageName in animImages) { // 4
-        [animFrames addObject:[SKTexture textureWithImageNamed:imageName]]; // 5
+    NSString *plistPath = [[NSBundle mainBundle] pathForResource:animPlist ofType:@"plist"];
+    NSArray *animImages = [NSArray arrayWithContentsOfFile:plistPath];
+    NSMutableArray *animFrames = [NSMutableArray array];
+    for (NSString *imageName in animImages) {
+        [animFrames addObject:[SKTexture textureWithImageNamed:imageName]];
     }
     
     float framesOverOneSecond = 1.0f/4.0f;
     
     return [SKAction repeatActionForever:[SKAction animateWithTextures:animFrames timePerFrame:framesOverOneSecond resize:NO restore:YES]]; // 6
+    
 }
 
 #pragma mark - touches
@@ -776,6 +811,7 @@ static const uint32_t bikerCategory         = 0x1 << 2;
     ghost.isContacted = NO;
     [self.contactedGhostArray removeObject:ghost];
 }
+
 
 #pragma mark - Game Over
 
@@ -915,7 +951,6 @@ static const uint32_t bikerCategory         = 0x1 << 2;
         self.ghostSound = nil;
         NSLog(@"sound off");
     }
-    
     [[NSUserDefaults standardUserDefaults]synchronize];
 }
 
