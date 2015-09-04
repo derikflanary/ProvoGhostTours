@@ -23,7 +23,12 @@
 }
 
 - (void)didMoveToView:(SKView *)view {
-    //Add Bike Sound Effect
+    
+    SKSpriteNode* background = [SKSpriteNode spriteNodeWithImageNamed:@"Sky2"];
+    background.size = self.frame.size;
+    background.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame));
+    [self addChild:background];
+
     UIButton *backButton = [[UIButton alloc]initWithFrame:CGRectMake(25, 25, 25, 25)];
     [backButton setImage:[UIImage imageNamed:@"Back"] forState:UIControlStateNormal];
     [backButton setImage:[UIImage imageNamed:@"Back_Alpha"] forState:UIControlStateSelected];

@@ -253,8 +253,8 @@ static const uint32_t bikerCategory         = 0x1 << 2;
     [self addChild:self.scoreLabel];
     
     UIButton *pauseButton = [[UIButton alloc]initWithFrame:CGRectMake(self.frame.size.width - 50, 25, 25, 25)];
-    [pauseButton setImage:[UIImage imageNamed:@"Pause"] forState:UIControlStateNormal];
-    [pauseButton setImage:[UIImage imageNamed:@"Pause_Filled"] forState:UIControlStateSelected];
+    [pauseButton setImage:[UIImage imageNamed:@"Flashbang"] forState:UIControlStateNormal];
+    [pauseButton setImage:[UIImage imageNamed:@"Flashbang"] forState:UIControlStateSelected];
     [pauseButton addTarget:self action:@selector(pausePressed:) forControlEvents:UIControlEventTouchUpInside];
     pauseButton.tag = 50;
     [self.view addSubview:pauseButton];
