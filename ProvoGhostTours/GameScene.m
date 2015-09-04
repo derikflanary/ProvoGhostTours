@@ -275,10 +275,10 @@ static const uint32_t bikerCategory         = 0x1 << 2;
 - (void)addFlashlight{
     //add the flashlight
     self.centerPoint = [SKNode new];
-    self.centerPoint.position = self.player.position;
+    self.centerPoint.position = CGPointMake(self.player.position.x, self.player.position.y + 20);
     [self addChild:self.centerPoint];
     
-    self.light = [SKSpriteNode spriteNodeWithImageNamed:@"flashlight2"];
+    self.light = [SKSpriteNode spriteNodeWithImageNamed:@"LampLight"];
     self.light.alpha = 0.25;
     self.light.position = CGPointMake(0, self.light.size.height/2);
     [self.centerPoint addChild:self.light];
