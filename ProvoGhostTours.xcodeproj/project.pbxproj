@@ -23,6 +23,7 @@
 		EED599061B83C08900A869B3 /* bikePedal.caf in Resources */ = {isa = PBXBuildFile; fileRef = EED599051B83C08900A869B3 /* bikePedal.caf */; };
 		EED599081B83C5C500A869B3 /* ghostSound.caf in Resources */ = {isa = PBXBuildFile; fileRef = EED599071B83C5C500A869B3 /* ghostSound.caf */; };
 		EED5990A1B83CBA100A869B3 /* bikerAnimation.plist in Resources */ = {isa = PBXBuildFile; fileRef = EED599091B83CBA100A869B3 /* bikerAnimation.plist */; };
+		EEF8DBDD1B99468A003ADB20 /* characterAnimation.plist in Resources */ = {isa = PBXBuildFile; fileRef = EEF8DBDC1B99468A003ADB20 /* characterAnimation.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -62,6 +63,7 @@
 		EED599051B83C08900A869B3 /* bikePedal.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = bikePedal.caf; sourceTree = "<group>"; };
 		EED599071B83C5C500A869B3 /* ghostSound.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = ghostSound.caf; sourceTree = "<group>"; };
 		EED599091B83CBA100A869B3 /* bikerAnimation.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = bikerAnimation.plist; sourceTree = "<group>"; };
+		EEF8DBDC1B99468A003ADB20 /* characterAnimation.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = characterAnimation.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -139,6 +141,7 @@
 				EED599071B83C5C500A869B3 /* ghostSound.caf */,
 				EEB6653B1B7BEE6200FDA352 /* Main.storyboard */,
 				EEB6653E1B7BEE6200FDA352 /* Images.xcassets */,
+				EEF8DBDC1B99468A003ADB20 /* characterAnimation.plist */,
 				EED599091B83CBA100A869B3 /* bikerAnimation.plist */,
 				EEB665401B7BEE6200FDA352 /* LaunchScreen.xib */,
 				EEB6652C1B7BEE6200FDA352 /* Supporting Files */,
@@ -260,6 +263,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EEF8DBDD1B99468A003ADB20 /* characterAnimation.plist in Resources */,
 				EED599081B83C5C500A869B3 /* ghostSound.caf in Resources */,
 				EEB665421B7BEE6200FDA352 /* LaunchScreen.xib in Resources */,
 				EEB665591B7D177300FDA352 /* light.scnp in Resources */,

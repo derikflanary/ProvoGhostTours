@@ -200,15 +200,15 @@ static const uint32_t bikerCategory         = 0x1 << 2;
     self.frontWheel.zPosition = 2;
     [self addChild:self.frontWheel];
     
-    self.biker = [SKSpriteNode spriteNodeWithImageNamed:@"Biker1_a"];
-    self.biker.position = CGPointMake(self.player.position.x, self.player.position.y + self.biker.size.height / 4);
+    self.biker = [SKSpriteNode spriteNodeWithImageNamed:@"Character1"];
+    self.biker.position = CGPointMake(self.player.position.x - 5, self.player.position.y + self.biker.size.height / 3);
     self.biker.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:self.biker.size];
     self.biker.physicsBody.categoryBitMask = bikerCategory;
     self.biker.physicsBody.contactTestBitMask = ghostCategory;
     self.biker.physicsBody.collisionBitMask = 0;
     self.biker.zPosition = 2;
     [self addChild:self.biker];
-    self.bikerAnimation = [self animationFromPlist:@"bikerAnimation"];
+    self.bikerAnimation = [self animationFromPlist:@"characterAnimation"];
     
     [self rotateWheels];
     [self.biker runAction:self.bikerAnimation withKey:@"biker"];
@@ -655,7 +655,7 @@ static const uint32_t bikerCategory         = 0x1 << 2;
         [animFrames addObject:[SKTexture textureWithImageNamed:imageName]]; // 5
     }
     
-    float framesOverOneSecond = 1.0f/3.0f;
+    float framesOverOneSecond = 1.0f/4.0f;
     
     return [SKAction repeatActionForever:[SKAction animateWithTextures:animFrames timePerFrame:framesOverOneSecond resize:NO restore:YES]]; // 6
 }
