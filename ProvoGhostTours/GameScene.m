@@ -200,7 +200,7 @@ static const uint32_t bikerCategory         = 0x1 << 2;
     self.frontWheel.zPosition = 2;
     [self addChild:self.frontWheel];
     
-    self.biker = [SKSpriteNode spriteNodeWithImageNamed:@"Character1"];
+    self.biker = [SKSpriteNode spriteNodeWithImageNamed:@"Ninja_1"];
     self.biker.position = CGPointMake(self.player.position.x - 5, self.player.position.y + self.biker.size.height / 3);
     self.biker.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:self.biker.size];
     self.biker.physicsBody.categoryBitMask = bikerCategory;
@@ -208,7 +208,7 @@ static const uint32_t bikerCategory         = 0x1 << 2;
     self.biker.physicsBody.collisionBitMask = 0;
     self.biker.zPosition = 2;
     [self addChild:self.biker];
-    self.bikerAnimation = [self animationFromPlist:@"characterAnimation"];
+    self.bikerAnimation = [self animationFromPlist:@"ninjaAnimation"];
     
     [self rotateWheels];
     [self.biker runAction:self.bikerAnimation withKey:@"biker"];
