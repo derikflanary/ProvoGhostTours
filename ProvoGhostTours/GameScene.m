@@ -11,6 +11,7 @@
 #import <AVFoundation/AVFoundation.h>
 #import <MPCoachMarks/MPCoachMarks.h>
 #import <GameKit/GameKit.h>
+#import "StoreScene.h"
 
 @interface GameScene() <SKPhysicsContactDelegate, MPCoachMarksViewDelegate, GKGameCenterControllerDelegate>
 
@@ -316,6 +317,7 @@ static const uint32_t bikerCategory         = 0x1 << 2;
     self.light.physicsBody.usesPreciseCollisionDetection = YES;
 }
 
+#pragma mark - Coach Marks
 - (void)showCoachMarks{
     
     CGRect coachmark1 = CGRectMake(([UIScreen mainScreen].bounds.size.width - 125) / 2, 20, 125, 125);
@@ -376,6 +378,14 @@ static const uint32_t bikerCategory         = 0x1 << 2;
 
 - (void)shopButtonPressed:(id)sender{
     NSLog(@"shop pressed");
+    StoreScene *storeScene = [[StoreScene alloc]initWithSize:self.size];
+    SKTransition *transition = [SKTransition doorsOpenVerticalWithDuration:.35];
+    [self.view presentScene:storeScene transition:transition];
+    [[self.view viewWithTag:200] removeFromSuperview];
+    [[self.view viewWithTag:100] removeFromSuperview];
+    [[self.view viewWithTag:300] removeFromSuperview];
+    [[self.view viewWithTag:400] removeFromSuperview];
+    [[self.view viewWithTag:500] removeFromSuperview];
 }
 
 - (void)pausePressed:(UIButton*)sender{

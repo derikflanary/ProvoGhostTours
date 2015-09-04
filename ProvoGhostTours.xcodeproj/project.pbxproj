@@ -12,19 +12,18 @@
 		EEA1916F1B92D8F1005B0BE9 /* GameScene.m in Sources */ = {isa = PBXBuildFile; fileRef = EEA1916E1B92D8F1005B0BE9 /* GameScene.m */; };
 		EEB6652F1B7BEE6200FDA352 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = EEB6652E1B7BEE6200FDA352 /* main.m */; };
 		EEB665321B7BEE6200FDA352 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EEB665311B7BEE6200FDA352 /* AppDelegate.m */; };
-		EEB665371B7BEE6200FDA352 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = EEB665361B7BEE6200FDA352 /* GameScene.sks */; };
 		EEB6653A1B7BEE6200FDA352 /* GameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EEB665391B7BEE6200FDA352 /* GameViewController.m */; };
 		EEB6653D1B7BEE6200FDA352 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EEB6653B1B7BEE6200FDA352 /* Main.storyboard */; };
 		EEB6653F1B7BEE6200FDA352 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EEB6653E1B7BEE6200FDA352 /* Images.xcassets */; };
 		EEB665421B7BEE6200FDA352 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = EEB665401B7BEE6200FDA352 /* LaunchScreen.xib */; };
 		EEB6654E1B7BEE6200FDA352 /* ProvoGhostToursTests.m in Sources */ = {isa = PBXBuildFile; fileRef = EEB6654D1B7BEE6200FDA352 /* ProvoGhostToursTests.m */; };
-		EEB665591B7D177300FDA352 /* light.scnp in Resources */ = {isa = PBXBuildFile; fileRef = EEB665571B7D177300FDA352 /* light.scnp */; };
 		EED599001B838EDC00A869B3 /* Ghost.m in Sources */ = {isa = PBXBuildFile; fileRef = EED598FF1B838EDC00A869B3 /* Ghost.m */; };
 		EED599061B83C08900A869B3 /* bikePedal.caf in Resources */ = {isa = PBXBuildFile; fileRef = EED599051B83C08900A869B3 /* bikePedal.caf */; };
 		EED599081B83C5C500A869B3 /* ghostSound.caf in Resources */ = {isa = PBXBuildFile; fileRef = EED599071B83C5C500A869B3 /* ghostSound.caf */; };
 		EED5990A1B83CBA100A869B3 /* bikerAnimation.plist in Resources */ = {isa = PBXBuildFile; fileRef = EED599091B83CBA100A869B3 /* bikerAnimation.plist */; };
 		EEF8DBDD1B99468A003ADB20 /* characterAnimation.plist in Resources */ = {isa = PBXBuildFile; fileRef = EEF8DBDC1B99468A003ADB20 /* characterAnimation.plist */; };
 		EEF8DBDF1B99FC68003ADB20 /* ninjaAnimation.plist in Resources */ = {isa = PBXBuildFile; fileRef = EEF8DBDE1B99FC68003ADB20 /* ninjaAnimation.plist */; };
+		EEF8DBE41B9A425F003ADB20 /* StoreScene.m in Sources */ = {isa = PBXBuildFile; fileRef = EEF8DBE31B9A425F003ADB20 /* StoreScene.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,7 +48,6 @@
 		EEB665301B7BEE6200FDA352 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		EEB665311B7BEE6200FDA352 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		EEB665331B7BEE6200FDA352 /* GameScene.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GameScene.h; sourceTree = "<group>"; };
-		EEB665361B7BEE6200FDA352 /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
 		EEB665381B7BEE6200FDA352 /* GameViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GameViewController.h; sourceTree = "<group>"; };
 		EEB665391B7BEE6200FDA352 /* GameViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GameViewController.m; sourceTree = "<group>"; };
 		EEB6653C1B7BEE6200FDA352 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -58,7 +56,6 @@
 		EEB665471B7BEE6200FDA352 /* ProvoGhostToursTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ProvoGhostToursTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		EEB6654C1B7BEE6200FDA352 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EEB6654D1B7BEE6200FDA352 /* ProvoGhostToursTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ProvoGhostToursTests.m; sourceTree = "<group>"; };
-		EEB665571B7D177300FDA352 /* light.scnp */ = {isa = PBXFileReference; lastKnownFileType = file.scp; path = light.scnp; sourceTree = "<group>"; };
 		EED598FE1B838EDC00A869B3 /* Ghost.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Ghost.h; sourceTree = "<group>"; };
 		EED598FF1B838EDC00A869B3 /* Ghost.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Ghost.m; sourceTree = "<group>"; };
 		EED599051B83C08900A869B3 /* bikePedal.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = bikePedal.caf; sourceTree = "<group>"; };
@@ -66,6 +63,8 @@
 		EED599091B83CBA100A869B3 /* bikerAnimation.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = bikerAnimation.plist; sourceTree = "<group>"; };
 		EEF8DBDC1B99468A003ADB20 /* characterAnimation.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = characterAnimation.plist; sourceTree = "<group>"; };
 		EEF8DBDE1B99FC68003ADB20 /* ninjaAnimation.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = ninjaAnimation.plist; sourceTree = "<group>"; };
+		EEF8DBE21B9A425F003ADB20 /* StoreScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StoreScene.h; sourceTree = "<group>"; };
+		EEF8DBE31B9A425F003ADB20 /* StoreScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StoreScene.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -135,8 +134,8 @@
 				EEA1916E1B92D8F1005B0BE9 /* GameScene.m */,
 				EED598FE1B838EDC00A869B3 /* Ghost.h */,
 				EED598FF1B838EDC00A869B3 /* Ghost.m */,
-				EEB665571B7D177300FDA352 /* light.scnp */,
-				EEB665361B7BEE6200FDA352 /* GameScene.sks */,
+				EEF8DBE21B9A425F003ADB20 /* StoreScene.h */,
+				EEF8DBE31B9A425F003ADB20 /* StoreScene.m */,
 				EEB665381B7BEE6200FDA352 /* GameViewController.h */,
 				EEB665391B7BEE6200FDA352 /* GameViewController.m */,
 				EED599051B83C08900A869B3 /* bikePedal.caf */,
@@ -269,12 +268,10 @@
 				EEF8DBDD1B99468A003ADB20 /* characterAnimation.plist in Resources */,
 				EED599081B83C5C500A869B3 /* ghostSound.caf in Resources */,
 				EEB665421B7BEE6200FDA352 /* LaunchScreen.xib in Resources */,
-				EEB665591B7D177300FDA352 /* light.scnp in Resources */,
 				EEF8DBDF1B99FC68003ADB20 /* ninjaAnimation.plist in Resources */,
 				EED5990A1B83CBA100A869B3 /* bikerAnimation.plist in Resources */,
 				EED599061B83C08900A869B3 /* bikePedal.caf in Resources */,
 				EEB6653F1B7BEE6200FDA352 /* Images.xcassets in Resources */,
-				EEB665371B7BEE6200FDA352 /* GameScene.sks in Resources */,
 				EEB6653D1B7BEE6200FDA352 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -328,6 +325,7 @@
 			files = (
 				EEB6653A1B7BEE6200FDA352 /* GameViewController.m in Sources */,
 				EEB665321B7BEE6200FDA352 /* AppDelegate.m in Sources */,
+				EEF8DBE41B9A425F003ADB20 /* StoreScene.m in Sources */,
 				EEA1916F1B92D8F1005B0BE9 /* GameScene.m in Sources */,
 				EED599001B838EDC00A869B3 /* Ghost.m in Sources */,
 				EEB6652F1B7BEE6200FDA352 /* main.m in Sources */,
