@@ -24,6 +24,11 @@
 		EEF8DBDD1B99468A003ADB20 /* characterAnimation.plist in Resources */ = {isa = PBXBuildFile; fileRef = EEF8DBDC1B99468A003ADB20 /* characterAnimation.plist */; };
 		EEF8DBDF1B99FC68003ADB20 /* ninjaAnimation.plist in Resources */ = {isa = PBXBuildFile; fileRef = EEF8DBDE1B99FC68003ADB20 /* ninjaAnimation.plist */; };
 		EEF8DBE41B9A425F003ADB20 /* StoreScene.m in Sources */ = {isa = PBXBuildFile; fileRef = EEF8DBE31B9A425F003ADB20 /* StoreScene.m */; };
+		EEF8DBE81B9CEA82003ADB20 /* CFCoverFlowView.m in Sources */ = {isa = PBXBuildFile; fileRef = EEF8DBE71B9CEA82003ADB20 /* CFCoverFlowView.m */; };
+		EEF8DBEA1B9CEFED003ADB20 /* mayorAnimation.plist in Resources */ = {isa = PBXBuildFile; fileRef = EEF8DBE91B9CEFED003ADB20 /* mayorAnimation.plist */; };
+		EEF8DBED1B9D30C4003ADB20 /* derikAnimation.plist in Resources */ = {isa = PBXBuildFile; fileRef = EEF8DBEC1B9D30C4003ADB20 /* derikAnimation.plist */; };
+		EEF8DBEF1B9F4A6D003ADB20 /* maxAnimation.plist in Resources */ = {isa = PBXBuildFile; fileRef = EEF8DBEE1B9F4A6D003ADB20 /* maxAnimation.plist */; };
+		EEF8DBF11B9F4ADE003ADB20 /* dinoAnimation.plist in Resources */ = {isa = PBXBuildFile; fileRef = EEF8DBF01B9F4ADE003ADB20 /* dinoAnimation.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -65,6 +70,12 @@
 		EEF8DBDE1B99FC68003ADB20 /* ninjaAnimation.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = ninjaAnimation.plist; sourceTree = "<group>"; };
 		EEF8DBE21B9A425F003ADB20 /* StoreScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StoreScene.h; sourceTree = "<group>"; };
 		EEF8DBE31B9A425F003ADB20 /* StoreScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StoreScene.m; sourceTree = "<group>"; };
+		EEF8DBE61B9CEA82003ADB20 /* CFCoverFlowView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CFCoverFlowView.h; sourceTree = "<group>"; };
+		EEF8DBE71B9CEA82003ADB20 /* CFCoverFlowView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CFCoverFlowView.m; sourceTree = "<group>"; };
+		EEF8DBE91B9CEFED003ADB20 /* mayorAnimation.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = mayorAnimation.plist; sourceTree = "<group>"; };
+		EEF8DBEC1B9D30C4003ADB20 /* derikAnimation.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = derikAnimation.plist; sourceTree = "<group>"; };
+		EEF8DBEE1B9F4A6D003ADB20 /* maxAnimation.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = maxAnimation.plist; sourceTree = "<group>"; };
+		EEF8DBF01B9F4ADE003ADB20 /* dinoAnimation.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = dinoAnimation.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -138,13 +149,12 @@
 				EEF8DBE31B9A425F003ADB20 /* StoreScene.m */,
 				EEB665381B7BEE6200FDA352 /* GameViewController.h */,
 				EEB665391B7BEE6200FDA352 /* GameViewController.m */,
+				EEF8DBE51B9CEA82003ADB20 /* CFCoverFlowView */,
 				EED599051B83C08900A869B3 /* bikePedal.caf */,
 				EED599071B83C5C500A869B3 /* ghostSound.caf */,
 				EEB6653B1B7BEE6200FDA352 /* Main.storyboard */,
 				EEB6653E1B7BEE6200FDA352 /* Images.xcassets */,
-				EEF8DBDC1B99468A003ADB20 /* characterAnimation.plist */,
-				EEF8DBDE1B99FC68003ADB20 /* ninjaAnimation.plist */,
-				EED599091B83CBA100A869B3 /* bikerAnimation.plist */,
+				EEF8DBEB1B9CEFF8003ADB20 /* Animations */,
 				EEB665401B7BEE6200FDA352 /* LaunchScreen.xib */,
 				EEB6652C1B7BEE6200FDA352 /* Supporting Files */,
 			);
@@ -175,6 +185,29 @@
 				EEB6654C1B7BEE6200FDA352 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		EEF8DBE51B9CEA82003ADB20 /* CFCoverFlowView */ = {
+			isa = PBXGroup;
+			children = (
+				EEF8DBE61B9CEA82003ADB20 /* CFCoverFlowView.h */,
+				EEF8DBE71B9CEA82003ADB20 /* CFCoverFlowView.m */,
+			);
+			path = CFCoverFlowView;
+			sourceTree = "<group>";
+		};
+		EEF8DBEB1B9CEFF8003ADB20 /* Animations */ = {
+			isa = PBXGroup;
+			children = (
+				EEF8DBDC1B99468A003ADB20 /* characterAnimation.plist */,
+				EEF8DBDE1B99FC68003ADB20 /* ninjaAnimation.plist */,
+				EED599091B83CBA100A869B3 /* bikerAnimation.plist */,
+				EEF8DBE91B9CEFED003ADB20 /* mayorAnimation.plist */,
+				EEF8DBEC1B9D30C4003ADB20 /* derikAnimation.plist */,
+				EEF8DBEE1B9F4A6D003ADB20 /* maxAnimation.plist */,
+				EEF8DBF01B9F4ADE003ADB20 /* dinoAnimation.plist */,
+			);
+			name = Animations;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -265,13 +298,17 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EEF8DBEF1B9F4A6D003ADB20 /* maxAnimation.plist in Resources */,
 				EEF8DBDD1B99468A003ADB20 /* characterAnimation.plist in Resources */,
 				EED599081B83C5C500A869B3 /* ghostSound.caf in Resources */,
 				EEB665421B7BEE6200FDA352 /* LaunchScreen.xib in Resources */,
+				EEF8DBED1B9D30C4003ADB20 /* derikAnimation.plist in Resources */,
 				EEF8DBDF1B99FC68003ADB20 /* ninjaAnimation.plist in Resources */,
 				EED5990A1B83CBA100A869B3 /* bikerAnimation.plist in Resources */,
+				EEF8DBF11B9F4ADE003ADB20 /* dinoAnimation.plist in Resources */,
 				EED599061B83C08900A869B3 /* bikePedal.caf in Resources */,
 				EEB6653F1B7BEE6200FDA352 /* Images.xcassets in Resources */,
+				EEF8DBEA1B9CEFED003ADB20 /* mayorAnimation.plist in Resources */,
 				EEB6653D1B7BEE6200FDA352 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -323,6 +360,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EEF8DBE81B9CEA82003ADB20 /* CFCoverFlowView.m in Sources */,
 				EEB6653A1B7BEE6200FDA352 /* GameViewController.m in Sources */,
 				EEB665321B7BEE6200FDA352 /* AppDelegate.m in Sources */,
 				EEF8DBE41B9A425F003ADB20 /* StoreScene.m in Sources */,

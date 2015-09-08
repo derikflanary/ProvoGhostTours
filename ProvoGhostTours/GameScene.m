@@ -200,7 +200,7 @@ static const uint32_t bikerCategory         = 0x1 << 2;
     self.frontWheel.zPosition = 2;
     [self addChild:self.frontWheel];
     
-    self.biker = [SKSpriteNode spriteNodeWithImageNamed:@"Ninja_1"];
+    self.biker = [SKSpriteNode spriteNodeWithImageNamed:@"Derik_1"];
     self.biker.position = CGPointMake(self.player.position.x - 5, self.player.position.y + self.biker.size.height / 3);
     self.biker.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:self.biker.size];
     self.biker.physicsBody.categoryBitMask = bikerCategory;
@@ -208,7 +208,7 @@ static const uint32_t bikerCategory         = 0x1 << 2;
     self.biker.physicsBody.collisionBitMask = 0;
     self.biker.zPosition = 2;
     [self addChild:self.biker];
-    self.bikerAnimation = [self animationFromPlist:@"ninjaAnimation"];
+    self.bikerAnimation = [self animationFromPlist:@"derikAnimation"];
     
     [self rotateWheels];
     [self.biker runAction:self.bikerAnimation withKey:@"biker"];
@@ -252,12 +252,19 @@ static const uint32_t bikerCategory         = 0x1 << 2;
     self.scoreLabel.position = CGPointMake(margin, margin);
     [self addChild:self.scoreLabel];
     
-    UIButton *pauseButton = [[UIButton alloc]initWithFrame:CGRectMake(self.frame.size.width - 50, 25, 25, 25)];
-    [pauseButton setImage:[UIImage imageNamed:@"Flashbang"] forState:UIControlStateNormal];
-    [pauseButton setImage:[UIImage imageNamed:@"Flashbang"] forState:UIControlStateSelected];
-    [pauseButton addTarget:self action:@selector(pausePressed:) forControlEvents:UIControlEventTouchUpInside];
-    pauseButton.tag = 50;
-    [self.view addSubview:pauseButton];
+//    UIButton *pauseButton = [[UIButton alloc]initWithFrame:CGRectMake(self.frame.size.width - 50, 25, 25, 25)];
+//    [pauseButton setImage:[UIImage imageNamed:@"Flashed"] forState:UIControlStateNormal];
+//    [pauseButton setImage:[UIImage imageNamed:@"Flashbang"] forState:UIControlStateSelected];
+//    [pauseButton addTarget:self action:@selector(pausePressed:) forControlEvents:UIControlEventTouchUpInside];
+//    pauseButton.tag = 50;
+//    [self.view addSubview:pauseButton];
+    
+    UIButton *flashButton = [[UIButton alloc]initWithFrame:CGRectMake(self.frame.size.width -50, self.frame.size.height - 50, 25, 25)];
+    [flashButton setImage:[UIImage imageNamed:@"Flashed"] forState:UIControlStateNormal];
+    [flashButton setImage:[UIImage imageNamed:@"Flashbang"] forState:UIControlStateSelected];
+    [flashButton addTarget:self action:@selector(flashPressed:) forControlEvents:UIControlEventTouchUpInside];
+    flashButton.tag = 10;
+    [self.view addSubview:flashButton];
     
     //Set up arrays for ghost spawning and deleting
     self.ghostArray = [NSMutableArray array];
@@ -356,7 +363,6 @@ static const uint32_t bikerCategory         = 0x1 << 2;
     }
 }
 
-
 #pragma mark - Start Screen Button Methods
 
 - (void)playButtonPressed:(id)sender{
@@ -386,6 +392,7 @@ static const uint32_t bikerCategory         = 0x1 << 2;
     [[self.view viewWithTag:300] removeFromSuperview];
     [[self.view viewWithTag:400] removeFromSuperview];
     [[self.view viewWithTag:500] removeFromSuperview];
+    [[self.view viewWithTag:321] removeFromSuperview];
 }
 
 - (void)pausePressed:(UIButton*)sender{
@@ -540,6 +547,10 @@ static const uint32_t bikerCategory         = 0x1 << 2;
 }
 
 #pragma mark - Flash Bang
+- (void)flashPressed:(UIButton*)sender{
+    [self flashAnimation];
+}
+
 - (void)flashAnimation{
     SKSpriteNode *flashBackground = [SKSpriteNode spriteNodeWithColor:[SKColor clearColor] size:self.size];
     [self addChild:flashBackground];
