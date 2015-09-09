@@ -29,6 +29,9 @@
 		EEF8DBED1B9D30C4003ADB20 /* derikAnimation.plist in Resources */ = {isa = PBXBuildFile; fileRef = EEF8DBEC1B9D30C4003ADB20 /* derikAnimation.plist */; };
 		EEF8DBEF1B9F4A6D003ADB20 /* maxAnimation.plist in Resources */ = {isa = PBXBuildFile; fileRef = EEF8DBEE1B9F4A6D003ADB20 /* maxAnimation.plist */; };
 		EEF8DBF11B9F4ADE003ADB20 /* dinoAnimation.plist in Resources */ = {isa = PBXBuildFile; fileRef = EEF8DBF01B9F4ADE003ADB20 /* dinoAnimation.plist */; };
+		EEF8DBF31B9F5B05003ADB20 /* elfAnimation.plist in Resources */ = {isa = PBXBuildFile; fileRef = EEF8DBF21B9F5B05003ADB20 /* elfAnimation.plist */; };
+		EEF8DBFC1BA095F5003ADB20 /* GameData.m in Sources */ = {isa = PBXBuildFile; fileRef = EEF8DBFB1BA095F5003ADB20 /* GameData.m */; };
+		EEF8DC001BA09B24003ADB20 /* KeychainWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = EEF8DBFF1BA09B24003ADB20 /* KeychainWrapper.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -76,6 +79,11 @@
 		EEF8DBEC1B9D30C4003ADB20 /* derikAnimation.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = derikAnimation.plist; sourceTree = "<group>"; };
 		EEF8DBEE1B9F4A6D003ADB20 /* maxAnimation.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = maxAnimation.plist; sourceTree = "<group>"; };
 		EEF8DBF01B9F4ADE003ADB20 /* dinoAnimation.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = dinoAnimation.plist; sourceTree = "<group>"; };
+		EEF8DBF21B9F5B05003ADB20 /* elfAnimation.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = elfAnimation.plist; sourceTree = "<group>"; };
+		EEF8DBFA1BA095F5003ADB20 /* GameData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameData.h; sourceTree = "<group>"; };
+		EEF8DBFB1BA095F5003ADB20 /* GameData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameData.m; sourceTree = "<group>"; };
+		EEF8DBFE1BA09B24003ADB20 /* KeychainWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeychainWrapper.h; sourceTree = "<group>"; };
+		EEF8DBFF1BA09B24003ADB20 /* KeychainWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeychainWrapper.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -145,10 +153,13 @@
 				EEA1916E1B92D8F1005B0BE9 /* GameScene.m */,
 				EED598FE1B838EDC00A869B3 /* Ghost.h */,
 				EED598FF1B838EDC00A869B3 /* Ghost.m */,
+				EEF8DBFA1BA095F5003ADB20 /* GameData.h */,
+				EEF8DBFB1BA095F5003ADB20 /* GameData.m */,
 				EEF8DBE21B9A425F003ADB20 /* StoreScene.h */,
 				EEF8DBE31B9A425F003ADB20 /* StoreScene.m */,
 				EEB665381B7BEE6200FDA352 /* GameViewController.h */,
 				EEB665391B7BEE6200FDA352 /* GameViewController.m */,
+				EEF8DBFD1BA09B24003ADB20 /* KeychainWrapper */,
 				EEF8DBE51B9CEA82003ADB20 /* CFCoverFlowView */,
 				EED599051B83C08900A869B3 /* bikePedal.caf */,
 				EED599071B83C5C500A869B3 /* ghostSound.caf */,
@@ -206,8 +217,18 @@
 				EEF8DBEC1B9D30C4003ADB20 /* derikAnimation.plist */,
 				EEF8DBEE1B9F4A6D003ADB20 /* maxAnimation.plist */,
 				EEF8DBF01B9F4ADE003ADB20 /* dinoAnimation.plist */,
+				EEF8DBF21B9F5B05003ADB20 /* elfAnimation.plist */,
 			);
 			name = Animations;
+			sourceTree = "<group>";
+		};
+		EEF8DBFD1BA09B24003ADB20 /* KeychainWrapper */ = {
+			isa = PBXGroup;
+			children = (
+				EEF8DBFE1BA09B24003ADB20 /* KeychainWrapper.h */,
+				EEF8DBFF1BA09B24003ADB20 /* KeychainWrapper.m */,
+			);
+			path = KeychainWrapper;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -304,6 +325,7 @@
 				EEB665421B7BEE6200FDA352 /* LaunchScreen.xib in Resources */,
 				EEF8DBED1B9D30C4003ADB20 /* derikAnimation.plist in Resources */,
 				EEF8DBDF1B99FC68003ADB20 /* ninjaAnimation.plist in Resources */,
+				EEF8DBF31B9F5B05003ADB20 /* elfAnimation.plist in Resources */,
 				EED5990A1B83CBA100A869B3 /* bikerAnimation.plist in Resources */,
 				EEF8DBF11B9F4ADE003ADB20 /* dinoAnimation.plist in Resources */,
 				EED599061B83C08900A869B3 /* bikePedal.caf in Resources */,
@@ -360,7 +382,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EEF8DC001BA09B24003ADB20 /* KeychainWrapper.m in Sources */,
 				EEF8DBE81B9CEA82003ADB20 /* CFCoverFlowView.m in Sources */,
+				EEF8DBFC1BA095F5003ADB20 /* GameData.m in Sources */,
 				EEB6653A1B7BEE6200FDA352 /* GameViewController.m in Sources */,
 				EEB665321B7BEE6200FDA352 /* AppDelegate.m in Sources */,
 				EEF8DBE41B9A425F003ADB20 /* StoreScene.m in Sources */,

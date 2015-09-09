@@ -56,7 +56,7 @@ typedef NS_ENUM(NSInteger, CharacterIndex) {
     backButton.tag = 10;
     [self.view addSubview:backButton];
     
-    self.characterNamesArray = @[@"Main", @"Max", @"Derik", @"Ninja", @"Provo Mayor", @"Elf", @"Dinosaur", @"Retro"];
+    self.characterNamesArray = @[@"Max", @"Derik", @"Ninja", @"Provo Mayor", @"Elf", @"Dinosaur", @"Retro"];
     
     self.characterLabel = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
     self.characterLabel.text = [self.characterNamesArray objectAtIndex:0];
@@ -89,7 +89,7 @@ typedef NS_ENUM(NSInteger, CharacterIndex) {
     coverFlowView.pageItemCoverWidth = 0.0;
     coverFlowView.pageItemHeight = 55.0;
     coverFlowView.pageItemCornerRadius = 5.0;
-    [coverFlowView setPageItemsWithImageNames:@[@"Character1",@"Max_1", @"Derik_1", @"Ninja_1",@"Mayor", @"Elf_1", @"Dino_1", @"Biker1_a"]];
+    [coverFlowView setPageItemsWithImageNames:@[@"Max_1", @"Derik_1", @"Ninja_1",@"Mayor", @"Elf_1", @"Dino_1", @"Biker1_a"]];
     coverFlowView.tag = 20;
     [self.view addSubview:coverFlowView];
     

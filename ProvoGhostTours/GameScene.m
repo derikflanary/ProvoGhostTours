@@ -12,6 +12,7 @@
 #import <MPCoachMarks/MPCoachMarks.h>
 #import <GameKit/GameKit.h>
 #import "StoreScene.h"
+#import "GameData.h"
 
 @interface GameScene() <SKPhysicsContactDelegate, MPCoachMarksViewDelegate, GKGameCenterControllerDelegate>
 
@@ -25,7 +26,6 @@
 @property (nonatomic) NSTimeInterval lastTreeSpawnInterval;
 @property (nonatomic) SKSpriteNode *light;
 @property (nonatomic) SKNode *centerPoint;
-@property (nonatomic) NSInteger score;
 @property (nonatomic, strong) NSMutableArray *ghostArray;
 @property (nonatomic, strong) NSMutableArray *contactedGhostArray;
 @property (strong, nonatomic) SKLabelNode *scoreLabel;
@@ -75,6 +75,15 @@ static const uint32_t bikerCategory         = 0x1 << 2;
         self.audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:&error];
         self.audioPlayer.numberOfLoops = -1;
         self.audioPlayer.volume = 0.7;
+        if (![[NSUserDefaults standardUserDefaults]boolForKey:@"SoundDisabled"]) {
+            self.audioPlayer.volume = 0.7;
+            self.ghostSound = [SKAction playSoundFileNamed:@"ghostSound.caf" waitForCompletion:NO];
+        }else{
+            self.audioPlayer.volume = 0.0;
+            self.ghostSound = nil;
+        }
+
+        
         [self.audioPlayer play];
         
         self.ghostSound = [SKAction playSoundFileNamed:@"ghostSound.caf" waitForCompletion:NO];
@@ -147,9 +156,13 @@ static const uint32_t bikerCategory         = 0x1 << 2;
     shopButton.tag = 500;
     [self.view addSubview:shopButton];
     
-    NSInteger highscore = [[NSUserDefaults standardUserDefaults] integerForKey:@"highScore"];
+    if ([[NSUserDefaults standardUserDefaults] integerForKey:@"highScore"]) {
+        [GameData sharedGameData].highScore = [[NSUserDefaults standardUserDefaults] integerForKey:@"highScore"];
+        [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"highScore"];
+    }
+    
     self.highscoreLabel = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
-    self.highscoreLabel.text = [NSString stringWithFormat:@"High Score: %lu", (long)highscore];
+    self.highscoreLabel.text = [NSString stringWithFormat:@"High Score: %lu", [GameData sharedGameData].highScore];
     self.highscoreLabel.fontSize = 14;
     self.highscoreLabel.zPosition = 4;
     self.highscoreLabel.position = CGPointMake(CGRectGetMidX(self.frame), self.titleLabel.position.y - 40);
@@ -158,13 +171,9 @@ static const uint32_t bikerCategory         = 0x1 << 2;
     [self.highscoreLabel runAction:[SKAction scaleTo:1 duration:.5]];
     
     if (![[NSUserDefaults standardUserDefaults]boolForKey:@"SoundDisabled"]) {
-        self.audioPlayer.volume = 0.7;
-        self.ghostSound = [SKAction playSoundFileNamed:@"ghostSound.caf" waitForCompletion:NO];
         muteButton.selected = NO;
         NSLog(@"sound on");
     }else{
-        self.audioPlayer.volume = 0.0;
-        self.ghostSound = nil;
         muteButton.selected = YES;
         NSLog(@"sound off");
     }
@@ -200,7 +209,7 @@ static const uint32_t bikerCategory         = 0x1 << 2;
     self.frontWheel.zPosition = 2;
     [self addChild:self.frontWheel];
     
-    self.biker = [SKSpriteNode spriteNodeWithImageNamed:@"Derik_1"];
+    self.biker = [SKSpriteNode spriteNodeWithImageNamed:@"Elf_1"];
     self.biker.position = CGPointMake(self.player.position.x - 5, self.player.position.y + self.biker.size.height / 3);
     self.biker.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:self.biker.size];
     self.biker.physicsBody.categoryBitMask = bikerCategory;
@@ -208,7 +217,7 @@ static const uint32_t bikerCategory         = 0x1 << 2;
     self.biker.physicsBody.collisionBitMask = 0;
     self.biker.zPosition = 2;
     [self addChild:self.biker];
-    self.bikerAnimation = [self animationFromPlist:@"derikAnimation"];
+    self.bikerAnimation = [self animationFromPlist:@"elfAnimation"];
     
     [self rotateWheels];
     [self.biker runAction:self.bikerAnimation withKey:@"biker"];
@@ -270,7 +279,7 @@ static const uint32_t bikerCategory         = 0x1 << 2;
     self.ghostArray = [NSMutableArray array];
     self.contactedGhostArray = [NSMutableArray array];
     
-    self.score = 0;
+    ;
     
     self.minDuration = 8;
     self.maxDuration = 10;
@@ -322,45 +331,6 @@ static const uint32_t bikerCategory         = 0x1 << 2;
     self.light.physicsBody.contactTestBitMask = ghostCategory;
     self.light.physicsBody.collisionBitMask = 0;
     self.light.physicsBody.usesPreciseCollisionDetection = YES;
-}
-
-#pragma mark - Coach Marks
-- (void)showCoachMarks{
-    
-    CGRect coachmark1 = CGRectMake(([UIScreen mainScreen].bounds.size.width - 125) / 2, 20, 125, 125);
-    NSArray *coachMarks = @[
-                            @{
-                                @"rect": [NSValue valueWithCGRect:coachmark1],
-                                @"caption": @"Touch screen to move flashlight and find ghosts",
-                                @"shape": [NSNumber numberWithInteger:SHAPE_CIRCLE],
-                                @"position":[NSNumber numberWithInteger:LABEL_POSITION_BOTTOM],
-                                @"alignment":[NSNumber numberWithInteger:LABEL_ALIGNMENT_RIGHT],
-                                @"showArrow":[NSNumber numberWithBool:YES]
-                                },
-                            @{  @"rect": [NSValue valueWithCGRect:coachmark1],
-                                @"caption": @"Hold the light on a ghost to defeat it",
-                                @"shape": [NSNumber numberWithInteger:SHAPE_CIRCLE],
-                                @"position":[NSNumber numberWithInteger:LABEL_POSITION_BOTTOM],
-                                @"alignment":[NSNumber numberWithInteger:LABEL_ALIGNMENT_RIGHT]
-                                }];
-    MPCoachMarks *coachMarksView = [[MPCoachMarks alloc] initWithFrame:self.view.bounds coachMarks:coachMarks];
-    [self.view addSubview:coachMarksView];
-    coachMarksView.enableContinueLabel = NO;
-    coachMarksView.enableSkipButton = NO;
-    coachMarksView.maskColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:.3];
-    coachMarksView.delegate = self;
-    [coachMarksView start];
-    
-}
-
-- (void)coachMarksViewDidCleanup:(MPCoachMarks *)coachMarksView{
-    self.gameStart = YES;
-}
-
-- (void)coachMarksView:(MPCoachMarks *)coachMarksView willNavigateToIndex:(NSUInteger)index{
-    if (index == 1) {
-        [self addTutorialGhost];
-    }
 }
 
 #pragma mark - Start Screen Button Methods
@@ -475,8 +445,9 @@ static const uint32_t bikerCategory         = 0x1 << 2;
             
             
             //update score
-            self.score += 10;
-            [self.scoreLabel setText:[NSString stringWithFormat:@"Score: %ld", (long)self.score]];
+            [GameData sharedGameData].score += 10;
+//            self.score += 10;
+            [self.scoreLabel setText:[NSString stringWithFormat:@"Score: %ld", [GameData sharedGameData].score]];
             
             //kill ghost
             [self.ghostArray removeObject:ghost];
@@ -591,22 +562,22 @@ static const uint32_t bikerCategory         = 0x1 << 2;
     int minSpawn = 2.0;
     int maxSpawn = 5.0;
 
-    if (self.score < 100) {
+    if ([GameData sharedGameData].score < 100) {
         minSpawn = 5;
         maxSpawn = 10;
         self.minDuration = 9;
         self.maxDuration = 13;
-    }else if (self.score < 200){
+    }else if ([GameData sharedGameData].score < 200){
         minSpawn = 4;
         maxSpawn = 9;
         self.minDuration = 8;
         self.maxDuration = 12;
-    }else if (self.score < 300){
+    }else if ([GameData sharedGameData].score < 300){
         minSpawn = 3;
         maxSpawn = 7;
         self.minDuration = 8;
         self.maxDuration = 11;
-    }else if (self.score < 400){
+    }else if ([GameData sharedGameData].score < 400){
         minSpawn = 3;
         maxSpawn = 6;
         self.minDuration = 8;
@@ -859,15 +830,16 @@ static const uint32_t bikerCategory         = 0x1 << 2;
     restartButton.tag = 321;
     [self.view addSubview:restartButton];
     
-    NSInteger highScore = [[NSUserDefaults standardUserDefaults] integerForKey:@"highScore"];
-    if (self.score > highScore) {
-        [[NSUserDefaults standardUserDefaults] setInteger:self.score forKey:@"highScore"];
-        [[NSUserDefaults standardUserDefaults] synchronize];
-        highScore = self.score;
+//    NSInteger highScore = [[NSUserDefaults standardUserDefaults] integerForKey:@"highScore"];
+    if ([GameData sharedGameData].score > [GameData sharedGameData].highScore) {
+        [GameData sharedGameData].highScore = [GameData sharedGameData].score;
+//        [[NSUserDefaults standardUserDefaults] setInteger:self.score forKey:@"highScore"];
+//        [[NSUserDefaults standardUserDefaults] synchronize];
+//        highScore = self.score;
     }
-    
+    [[GameData sharedGameData]save];
     SKLabelNode *highScoreLabel = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
-    highScoreLabel.text = [NSString stringWithFormat:@"High Score: %lu", (long)highScore];
+    highScoreLabel.text = [NSString stringWithFormat:@"High Score: %lu", [GameData sharedGameData].highScore];
     highScoreLabel.fontSize = 20;
     highScoreLabel.zPosition = 4;
     highScoreLabel.position = CGPointMake(CGRectGetMidX(self.frame), gameOverLabel.position.y + 50);
@@ -892,7 +864,7 @@ static const uint32_t bikerCategory         = 0x1 << 2;
     muteButton.tag = 300;
     [self.view addSubview:muteButton];
     
-    UIButton *shopButton = [[UIButton alloc]initWithFrame:CGRectMake(self.frame.size.width/2 - 13, 25, 25, 25)];
+    UIButton *shopButton = [[UIButton alloc]initWithFrame:CGRectMake(CGRectGetMidX(self.frame) - 25, 25, 25, 25)];
     [shopButton setImage:[UIImage imageNamed:@"shop_icon"] forState:UIControlStateNormal];
     [shopButton setImage:[UIImage imageNamed:@"shop_icon_alpha"] forState:UIControlStateSelected];
     [shopButton addTarget:self action:@selector(shopButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
@@ -924,7 +896,7 @@ static const uint32_t bikerCategory         = 0x1 << 2;
     
     self.gameover = YES;
     
-    [self reportScore:self.score];
+    [self reportScore:[GameData sharedGameData].score];
 
 }
 
@@ -937,6 +909,7 @@ static const uint32_t bikerCategory         = 0x1 << 2;
     [[self.view viewWithTag:300] removeFromSuperview];
     [[self.view viewWithTag:400] removeFromSuperview];
     [[self.view viewWithTag:500] removeFromSuperview];
+    [[GameData sharedGameData]reset];
     [self startGame];
 }
 
@@ -1042,6 +1015,47 @@ static const uint32_t bikerCategory         = 0x1 << 2;
 - (void)gameCenterViewControllerDidFinish:(GKGameCenterViewController *)gameCenterViewController{
     [gameCenterViewController dismissViewControllerAnimated:YES completion:nil];
 }
+
+#pragma mark - Coach Marks
+- (void)showCoachMarks{
+    
+    CGRect coachmark1 = CGRectMake(([UIScreen mainScreen].bounds.size.width - 125) / 2, 20, 125, 125);
+    NSArray *coachMarks = @[
+                            @{
+                                @"rect": [NSValue valueWithCGRect:coachmark1],
+                                @"caption": @"Touch screen to move flashlight and find ghosts",
+                                @"shape": [NSNumber numberWithInteger:SHAPE_CIRCLE],
+                                @"position":[NSNumber numberWithInteger:LABEL_POSITION_BOTTOM],
+                                @"alignment":[NSNumber numberWithInteger:LABEL_ALIGNMENT_RIGHT],
+                                @"showArrow":[NSNumber numberWithBool:YES]
+                                },
+                            @{  @"rect": [NSValue valueWithCGRect:coachmark1],
+                                @"caption": @"Hold the light on a ghost to defeat it",
+                                @"shape": [NSNumber numberWithInteger:SHAPE_CIRCLE],
+                                @"position":[NSNumber numberWithInteger:LABEL_POSITION_BOTTOM],
+                                @"alignment":[NSNumber numberWithInteger:LABEL_ALIGNMENT_RIGHT]
+                                }];
+    MPCoachMarks *coachMarksView = [[MPCoachMarks alloc] initWithFrame:self.view.bounds coachMarks:coachMarks];
+    [self.view addSubview:coachMarksView];
+    coachMarksView.enableContinueLabel = NO;
+    coachMarksView.enableSkipButton = NO;
+    coachMarksView.maskColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:.3];
+    coachMarksView.delegate = self;
+    [coachMarksView start];
+    
+}
+
+- (void)coachMarksViewDidCleanup:(MPCoachMarks *)coachMarksView{
+    self.gameStart = YES;
+}
+
+- (void)coachMarksView:(MPCoachMarks *)coachMarksView willNavigateToIndex:(NSUInteger)index{
+    if (index == 1) {
+        [self addTutorialGhost];
+    }
+}
+
+
 
 
 @end
