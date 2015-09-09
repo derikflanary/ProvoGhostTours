@@ -433,13 +433,11 @@ static const uint32_t bikerCategory         = 0x1 << 2;
     ghost.physicsBody.contactTestBitMask = bikerCategory;
     ghost.physicsBody.collisionBitMask = 0;
     ghost.zPosition = 2;
-    
     ghost.alpha = 0.0;
     
     [self addChild:ghost];
     
     // Determine speed of the ghost
-    
     int rangeDuration = self.maxDuration - self.minDuration;
     int actualDuration = (arc4random() % rangeDuration) + self.minDuration;
     
@@ -454,10 +452,10 @@ static const uint32_t bikerCategory         = 0x1 << 2;
     if (self.gameover) {
         return;
     }
+    
     NSMutableArray *removedGhostsArray = [NSMutableArray array];
     for (Ghost *ghost in self.contactedGhostArray) {
         if (ghost.alpha >= .9) {
-            
             
             //update score
             [GameData sharedGameData].score += 10;
@@ -500,7 +498,6 @@ static const uint32_t bikerCategory         = 0x1 << 2;
     // Create the actions
     SKAction *actionMove = [SKAction moveTo:CGPointMake(CGRectGetMidX(self.frame), 100) duration:3];
     [ghost runAction:actionMove];
-
 }
 
 #pragma mark - Tree Methods
@@ -550,7 +547,6 @@ static const uint32_t bikerCategory         = 0x1 << 2;
         ghost.alpha = .89;
     }
 }
-
 
 #pragma mark - Detector Methods
 
@@ -619,14 +615,7 @@ static const uint32_t bikerCategory         = 0x1 << 2;
     }
     
     CFTimeInterval timeSinceLast = currentTime - self.lastUpdateTimeInterval;
-//    if (!self.lastUpdateTimeInterval) {
-//        timeSinceLast = 0;
-//        self.lastUpdateTimeInterval = currentTime;
-//    }
-//    NSLog(@"%f", timeSinceLast);
-//    if (timeSinceLast > .5) {
-//        timeSinceLast = .01;
-//    }
+
     self.theCurrentTime = currentTime;
 
     //Move the background
@@ -653,12 +642,6 @@ static const uint32_t bikerCategory         = 0x1 << 2;
             [self updateGhostInLight:timeSinceLast];
         }
     }
-    
-//    CFTimeInterval delta = currentTime - self.delta;
-//    if (delta >= 1) {
-//        self.delta = currentTime;
-//        [self updateDistanceFromDetector];
-//    }
     
     [self updateWithTimeSinceLastUpdate:timeSinceLast];
 }
@@ -740,9 +723,9 @@ static const uint32_t bikerCategory         = 0x1 << 2;
     [self.centerPoint removeFromParent];
     
     for (Ghost *ghost in self.contactedGhostArray) {
-        [self flashlight:self.light didStopCollidingWithGhost:ghost];
+        ghost.isContacted = NO;
     }
-    
+    [self.contactedGhostArray removeAllObjects];
 
 }
 
