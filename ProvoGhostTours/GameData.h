@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+static NSString* const GTGameDataUpdatedFromiCloud = @"GTGameDataUpdatedFromiCloud";
+
 @interface GameData : NSObject
 
 @property (assign, nonatomic) long score;
@@ -18,4 +20,6 @@
 + (instancetype)sharedGameData;
 - (void)reset;
 -(void)save;
+
+
 @end

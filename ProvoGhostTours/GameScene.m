@@ -58,13 +58,18 @@ static const uint32_t bikerCategory         = 0x1 << 2;
 - (id)initWithSize:(CGSize)size{
     if (self = [super initWithSize:size]) {
         
-        // 2
+        
         NSLog(@"Size: %@", NSStringFromCGSize(size));
-        // 3
+        
         self.backgroundColor = [SKColor blackColor];
         self.gameStart = NO;
         
         [self addMainSprites];
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(didUpdateGameData:)
+                                                     name:GTGameDataUpdatedFromiCloud
+                                                   object:nil];
         //create Physics for collisions
         self.physicsWorld.gravity = CGVectorMake(0,0);
         self.physicsWorld.contactDelegate = self;
@@ -92,6 +97,10 @@ static const uint32_t bikerCategory         = 0x1 << 2;
         
     }
     return self;
+}
+
+- (void)dealloc{
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:GTGameDataUpdatedFromiCloud object:nil];
 }
 
 #pragma mark - Start Screen
@@ -1053,6 +1062,11 @@ static const uint32_t bikerCategory         = 0x1 << 2;
     if (index == 1) {
         [self addTutorialGhost];
     }
+}
+
+#pragma mark - Cloud Updating
+- (void)didUpdateGameData:(NSNotification*)n{
+    self.highscoreLabel.text = [NSString stringWithFormat:@"High: %li", [GameData sharedGameData].highScore];
 }
 
 

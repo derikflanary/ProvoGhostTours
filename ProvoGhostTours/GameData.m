@@ -7,6 +7,7 @@
 //
 
 #import "GameData.h"
+#import "KeychainWrapper/KeychainWrapper.h"
 
 @interface GameData () <NSCoding>
 
@@ -16,7 +17,7 @@
 
 static NSString* const GTGameDataHighScoreKey = @"highScore";
 static NSString* const GTGameDataTotalCoinsKey = @"totalCoins";
-
+static NSString* const GTGameDataChecksumKey = @"GameDataChecksumKey";
 
 + (instancetype)sharedGameData {
     static id sharedInstance = nil;
@@ -28,6 +29,8 @@ static NSString* const GTGameDataTotalCoinsKey = @"totalCoins";
     
     return sharedInstance;
 }
+
+#pragma mark - Local Storage
 
 - (instancetype)initWithCoder:(NSCoder *)decoder{
     self = [self init];
@@ -46,8 +49,14 @@ static NSString* const GTGameDataTotalCoinsKey = @"totalCoins";
 + (instancetype)loadInstance{
     NSData* decodedData = [NSData dataWithContentsOfFile: [GameData filePath]];
     if (decodedData) {
-        GameData* gameData = [NSKeyedUnarchiver unarchiveObjectWithData:decodedData];
-        return gameData;
+        NSString* checksumOfSavedFile = [KeychainWrapper computeSHA256DigestForData: decodedData];
+        
+        NSString* checksumInKeychain = [KeychainWrapper keychainStringFromMatchingIdentifier: GTGameDataChecksumKey];
+        
+        if ([checksumOfSavedFile isEqualToString: checksumInKeychain]) {
+            GameData* gameData = [NSKeyedUnarchiver unarchiveObjectWithData:decodedData];
+            return gameData;
+        }
     }
     
     return [[GameData alloc] init];
@@ -62,8 +71,43 @@ static NSString* const GTGameDataTotalCoinsKey = @"totalCoins";
     }
     return filePath;
 }
+#pragma mark - iCloud
 
+- (instancetype)init{
+    self = [super init];
+    if (self) {
+        //1
+        if([NSUbiquitousKeyValueStore defaultStore]) {
+            
+            //2
+            [[NSNotificationCenter defaultCenter] addObserver:self
+                                                     selector:@selector(updateFromiCloud:)
+                                                         name:NSUbiquitousKeyValueStoreDidChangeExternallyNotification
+                                                       object:nil];
+        }
+    }
+    return self;
+}
 
+- (void)updateFromiCloud:(NSNotification*) notificationObject{
+    NSUbiquitousKeyValueStore *iCloudStore = [NSUbiquitousKeyValueStore defaultStore];
+    long cloudHighScore = [iCloudStore doubleForKey: GTGameDataHighScoreKey];
+    self.highScore = MAX(cloudHighScore, self.highScore);
+    [[NSNotificationCenter defaultCenter] postNotificationName: GTGameDataUpdatedFromiCloud object:nil];
+    
+}
+
+-(void)updateiCloud{
+    NSUbiquitousKeyValueStore *iCloudStore = [NSUbiquitousKeyValueStore defaultStore];
+    long cloudHighScore = [iCloudStore doubleForKey: GTGameDataHighScoreKey];
+    
+    if (self.highScore > cloudHighScore) {
+        [iCloudStore setDouble:self.highScore forKey: GTGameDataHighScoreKey];
+        [iCloudStore synchronize];
+    }
+}
+
+#pragma mark - Action Methods
 - (void)reset{
     self.score = 0;
 }
@@ -71,6 +115,19 @@ static NSString* const GTGameDataTotalCoinsKey = @"totalCoins";
 - (void)save{
     NSData* encodedData = [NSKeyedArchiver archivedDataWithRootObject: self];
     [encodedData writeToFile:[GameData filePath] atomically:YES];
+    
+    //hash data with keychain
+    NSString* checksum = [KeychainWrapper computeSHA256DigestForData: encodedData];
+    if ([KeychainWrapper keychainStringFromMatchingIdentifier: GTGameDataChecksumKey]) {
+        [KeychainWrapper updateKeychainValue:checksum forIdentifier:GTGameDataChecksumKey];
+    } else {
+        [KeychainWrapper createKeychainValue:checksum forIdentifier:GTGameDataChecksumKey];
+    }
+    
+    if([NSUbiquitousKeyValueStore defaultStore]) {
+        [self updateiCloud];
+    }
+
 }
 
 @end

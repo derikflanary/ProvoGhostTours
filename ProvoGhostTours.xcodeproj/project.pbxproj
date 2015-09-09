@@ -84,6 +84,7 @@
 		EEF8DBFB1BA095F5003ADB20 /* GameData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameData.m; sourceTree = "<group>"; };
 		EEF8DBFE1BA09B24003ADB20 /* KeychainWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeychainWrapper.h; sourceTree = "<group>"; };
 		EEF8DBFF1BA09B24003ADB20 /* KeychainWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeychainWrapper.m; sourceTree = "<group>"; };
+		EEF8DC011BA0AC19003ADB20 /* ProvoGhostTours.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = ProvoGhostTours.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -147,6 +148,7 @@
 		EEB6652B1B7BEE6200FDA352 /* ProvoGhostTours */ = {
 			isa = PBXGroup;
 			children = (
+				EEF8DC011BA0AC19003ADB20 /* ProvoGhostTours.entitlements */,
 				EEB665301B7BEE6200FDA352 /* AppDelegate.h */,
 				EEB665311B7BEE6200FDA352 /* AppDelegate.m */,
 				EEB665331B7BEE6200FDA352 /* GameScene.h */,
@@ -285,6 +287,9 @@
 						DevelopmentTeam = 92H4P6C5WB;
 						SystemCapabilities = {
 							com.apple.GameCenter = {
+								enabled = 1;
+							};
+							com.apple.iCloud = {
 								enabled = 1;
 							};
 						};
@@ -519,6 +524,7 @@
 			baseConfigurationReference = 3CAA61AD23E236AF4B403FBA /* Pods-ProvoGhostTours.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = ProvoGhostTours/ProvoGhostTours.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = ProvoGhostTours/Info.plist;
@@ -535,6 +541,7 @@
 			baseConfigurationReference = 2D35FA64800B4667499F13B5 /* Pods-ProvoGhostTours.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = ProvoGhostTours/ProvoGhostTours.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = ProvoGhostTours/Info.plist;
