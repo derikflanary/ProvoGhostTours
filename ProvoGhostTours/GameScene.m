@@ -248,10 +248,11 @@ static const uint32_t bikerCategory         = 0x1 << 2;
     BOOL coachMarksShown = [[NSUserDefaults standardUserDefaults] boolForKey:@"MPCoachMarksShown"];
     if (!coachMarksShown) {
         // Don't show again
+        [self showCoachMarks];
+        
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"MPCoachMarksShown"];
         [[NSUserDefaults standardUserDefaults] synchronize];
         
-        [self showCoachMarks];
     }else{
         self.gameStart = YES;
     }
@@ -260,35 +261,11 @@ static const uint32_t bikerCategory         = 0x1 << 2;
     
     [self addFlashlight];
     
-    float margin = 10;
-    
-    self.scoreLabel = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
-    self.scoreLabel.text = @"Score: 0";
-    self.scoreLabel.fontSize = [self convertFontSize:14];
-    self.scoreLabel.zPosition = 4;
-    self.scoreLabel.horizontalAlignmentMode = SKLabelHorizontalAlignmentModeLeft;
-    self.scoreLabel.position = CGPointMake(margin, margin);
-    [self addChild:self.scoreLabel];
-    
-//    UIButton *pauseButton = [[UIButton alloc]initWithFrame:CGRectMake(self.frame.size.width - 50, 25, 25, 25)];
-//    [pauseButton setImage:[UIImage imageNamed:@"Flashed"] forState:UIControlStateNormal];
-//    [pauseButton setImage:[UIImage imageNamed:@"Flashbang"] forState:UIControlStateSelected];
-//    [pauseButton addTarget:self action:@selector(pausePressed:) forControlEvents:UIControlEventTouchUpInside];
-//    pauseButton.tag = 50;
-//    [self.view addSubview:pauseButton];
-    
-    UIButton *flashButton = [[UIButton alloc]initWithFrame:CGRectMake(self.frame.size.width -50, self.frame.size.height - 50, 25, 25)];
-    [flashButton setImage:[UIImage imageNamed:@"Flashed"] forState:UIControlStateNormal];
-    [flashButton setImage:[UIImage imageNamed:@"Flashbang"] forState:UIControlStateSelected];
-    [flashButton addTarget:self action:@selector(flashPressed:) forControlEvents:UIControlEventTouchUpInside];
-    flashButton.tag = 10;
-    [self.view addSubview:flashButton];
+    [self addInGameObjects];
     
     //Set up arrays for ghost spawning and deleting
     self.ghostArray = [NSMutableArray array];
     self.contactedGhostArray = [NSMutableArray array];
-    
-    ;
     
     self.minDuration = 8;
     self.maxDuration = 10;
@@ -298,11 +275,41 @@ static const uint32_t bikerCategory         = 0x1 << 2;
     
 }
 
+- (void)addInGameObjects{
+    
+    float margin = 10;
+
+    self.scoreLabel = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
+    self.scoreLabel.text = @"Score: 0";
+    self.scoreLabel.fontSize = [self convertFontSize:14];
+    self.scoreLabel.zPosition = 4;
+    self.scoreLabel.horizontalAlignmentMode = SKLabelHorizontalAlignmentModeLeft;
+    self.scoreLabel.position = CGPointMake(margin, margin);
+    [self addChild:self.scoreLabel];
+    
+    UIButton *flashButton = [[UIButton alloc]initWithFrame:CGRectMake(self.frame.size.width -50, self.frame.size.height - 50, 25, 25)];
+    [flashButton setImage:[UIImage imageNamed:@"Flashed"] forState:UIControlStateNormal];
+    [flashButton setImage:[UIImage imageNamed:@"Flashbang"] forState:UIControlStateSelected];
+    [flashButton addTarget:self action:@selector(flashPressed:) forControlEvents:UIControlEventTouchUpInside];
+    flashButton.tag = 10;
+    [self.view addSubview:flashButton];
+    
+    //    UIButton *pauseButton = [[UIButton alloc]initWithFrame:CGRectMake(self.frame.size.width - 50, 25, 25, 25)];
+    //    [pauseButton setImage:[UIImage imageNamed:@"Flashed"] forState:UIControlStateNormal];
+    //    [pauseButton setImage:[UIImage imageNamed:@"Flashbang"] forState:UIControlStateSelected];
+    //    [pauseButton addTarget:self action:@selector(pausePressed:) forControlEvents:UIControlEventTouchUpInside];
+    //    pauseButton.tag = 50;
+    //    [self.view addSubview:pauseButton];
+}
+
 - (void)addFlashlight{
+    
     //add the flashlight
     self.centerPoint = [SKNode new];
     self.centerPoint.position = CGPointMake(self.player.position.x, self.player.position.y + 20);
-    [self addChild:self.centerPoint];
+    if (!self.gameStart) {
+        [self addChild:self.centerPoint];
+    }
     
     self.light = [SKSpriteNode spriteNodeWithImageNamed:@"LampLight"];
     self.light.alpha = 0.25;
@@ -385,7 +392,6 @@ static const uint32_t bikerCategory         = 0x1 << 2;
 //        self.gamePaused = NO;
 ////        self.lastUpdateTimeInterval = self.theCurrentTime;
 //    }
-    [self flashAnimation];
 }
 
 
@@ -462,12 +468,8 @@ static const uint32_t bikerCategory         = 0x1 << 2;
             [self.ghostArray removeObject:ghost];
             [removedGhostsArray addObject:ghost];
             
-            SKAction *grow = [SKAction resizeToWidth:ghost.size.width * 1.5 duration:.075];
-            SKAction *shrink = [SKAction resizeToWidth:ghost.size.width * .75 duration:.075];
-            SKAction *die = [SKAction fadeOutWithDuration:.15];
-            SKAction *remove = [SKAction removeFromParent];
-            [ghost runAction:die];
-            [ghost runAction:[SKAction sequence:@[grow, shrink, die, remove]]];
+            [ghost die];
+
             [self runAction:self.ghostSound];
         }else{
             [ghost collidedWithFlashlight:delta];
@@ -670,17 +672,6 @@ static const uint32_t bikerCategory         = 0x1 << 2;
     [self.frontWheel runAction:repeat withKey:@"frontWheel"];
 }
 
-- (void)rotateNode:(SKSpriteNode *)nodeA toFaceNode:(SKSpriteNode *)nodeB {
-    //rotation for flashlight
-    double angle = atan2(nodeB.position.y - nodeA.position.y, nodeB.position.x - nodeA.position.x);
-    
-    if (nodeA.zRotation < 0) {
-        nodeA.zRotation = nodeA.zRotation + M_PI * 2;
-    }
-    
-    [nodeA runAction:[SKAction rotateToAngle:angle duration:0]];
-}
-
 - (SKAction *)animationFromPlist:(NSString *)animPlist{
     
     NSString *plistPath = [[NSBundle mainBundle] pathForResource:animPlist ofType:@"plist"];
@@ -705,6 +696,10 @@ static const uint32_t bikerCategory         = 0x1 << 2;
     if (!self.gameStart) {
         return;
     }
+    if (![self.children containsObject:self.centerPoint]) {
+        [self addChild:self.centerPoint];
+    }
+    
     
     for (UITouch *touch in touches) {
         CGPoint location = [touch locationInNode:self];
@@ -724,6 +719,7 @@ static const uint32_t bikerCategory         = 0x1 << 2;
     if (!self.gameStart) {
         return;
     }
+    
     for (UITouch *touch in touches) {
         CGPoint location = [touch locationInNode:self];
         
@@ -732,6 +728,22 @@ static const uint32_t bikerCategory         = 0x1 << 2;
         float angle = (atan2f(dY, dX)) + 1.571f;
         self.centerPoint.zRotation = angle;
     }
+}
+
+- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event{
+    if (self.gameover) {
+        return;
+    }
+    if (!self.gameStart) {
+        return;
+    }
+    [self.centerPoint removeFromParent];
+    
+    for (Ghost *ghost in self.contactedGhostArray) {
+        [self flashlight:self.light didStopCollidingWithGhost:ghost];
+    }
+    
+
 }
 
 #pragma mark collision methods
@@ -747,9 +759,7 @@ static const uint32_t bikerCategory         = 0x1 << 2;
     {
         firstBody = contact.bodyA;
         secondBody = contact.bodyB;
-    }
-    else
-    {
+    }else{
         firstBody = contact.bodyB;
         secondBody = contact.bodyA;
     }
@@ -799,9 +809,7 @@ static const uint32_t bikerCategory         = 0x1 << 2;
 }
 
 - (void)flashlight:(SKSpriteNode *)flashlight didCollideWithGhost:(Ghost *)ghost {
-    if (ghost.alpha < .05) {
-        ghost.alpha = .05;
-    }
+    [ghost initialCollisionWithLight];
     
     ghost.isContacted = YES;
     [self.contactedGhostArray addObject:ghost];
@@ -1032,7 +1040,7 @@ static const uint32_t bikerCategory         = 0x1 << 2;
     NSArray *coachMarks = @[
                             @{
                                 @"rect": [NSValue valueWithCGRect:coachmark1],
-                                @"caption": @"Touch screen to move flashlight and find ghosts",
+                                @"caption": @"Touch screen to activate flashlight and find ghosts",
                                 @"shape": [NSNumber numberWithInteger:SHAPE_CIRCLE],
                                 @"position":[NSNumber numberWithInteger:LABEL_POSITION_BOTTOM],
                                 @"alignment":[NSNumber numberWithInteger:LABEL_ALIGNMENT_RIGHT],
@@ -1056,6 +1064,7 @@ static const uint32_t bikerCategory         = 0x1 << 2;
 
 - (void)coachMarksViewDidCleanup:(MPCoachMarks *)coachMarksView{
     self.gameStart = YES;
+    [self.centerPoint removeFromParent];
 }
 
 - (void)coachMarksView:(MPCoachMarks *)coachMarksView willNavigateToIndex:(NSUInteger)index{

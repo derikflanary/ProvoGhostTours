@@ -14,7 +14,22 @@
     if (self.alpha < 1) {
         self.alpha = self.alpha + delta/2.5;
     }
-    
+}
+
+- (void)initialCollisionWithLight{
+    if (self.alpha < .05) {
+        self.alpha = .05;
+    }
+
+}
+
+- (void)die{
+    SKAction *grow = [SKAction resizeToWidth:self.size.width * 1.5 duration:.075];
+    SKAction *shrink = [SKAction resizeToWidth:self.size.width * .75 duration:.075];
+    SKAction *die = [SKAction fadeOutWithDuration:.15];
+    SKAction *remove = [SKAction removeFromParent];
+    [self runAction:die];
+    [self runAction:[SKAction sequence:@[grow, shrink, die, remove]]];
 }
 
 @end

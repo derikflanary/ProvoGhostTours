@@ -14,5 +14,6 @@
 @property (nonatomic, assign) BOOL isContacted;
 
 - (void)collidedWithFlashlight:(NSTimeInterval)delta;
-
+- (void)initialCollisionWithLight;
+- (void)die;
 @end
