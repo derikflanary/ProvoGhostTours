@@ -203,23 +203,23 @@ static const uint32_t bikerCategory         = 0x1 << 2;
     self.movingBackground.zPosition = 1;
     [self addChild:self.movingBackground];
     
-    self.player = [SKSpriteNode spriteNodeWithImageNamed:@"Bike1_body_a.png"];
-    self.player.position = CGPointMake(self.frame.size.width/2, self.player.size.height - 7);
+    self.player = [SKSpriteNode spriteNodeWithImageNamed:@"BikeFrame"];
+    self.player.position = CGPointMake(self.frame.size.width/2, self.player.size.height - 15);
     self.player.zPosition = 2;
     [self addChild:self.player];
     
     self.backWheel = [SKSpriteNode spriteNodeWithImageNamed:@"Bike1_tire_a"];
-    self.backWheel.position = CGPointMake(self.player.position.x - 20, self.player.position.y - 10);
+    self.backWheel.position = CGPointMake(self.player.position.x - 22, self.player.position.y - 10);
     self.backWheel.zPosition = 2;
     [self addChild:self.backWheel];
     
     self.frontWheel = [SKSpriteNode spriteNodeWithImageNamed:@"Bike1_tire_a"];
-    self.frontWheel.position = CGPointMake(self.player.position.x + 20, self.player.position.y - 10);
+    self.frontWheel.position = CGPointMake(self.player.position.x + 22, self.player.position.y - 10);
     self.frontWheel.zPosition = 2;
     [self addChild:self.frontWheel];
     
     self.biker = [SKSpriteNode spriteNodeWithImageNamed:@"Elf_1"];
-    self.biker.position = CGPointMake(self.player.position.x - 5, self.player.position.y + self.biker.size.height / 3);
+    self.biker.position = CGPointMake(self.player.position.x - 2, self.player.position.y + self.biker.size.height / 3);
     self.biker.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:self.biker.size];
     self.biker.physicsBody.categoryBitMask = bikerCategory;
     self.biker.physicsBody.contactTestBitMask = ghostCategory;
@@ -782,8 +782,8 @@ static const uint32_t bikerCategory         = 0x1 << 2;
     }
     
     if ((firstBody.categoryBitMask & flashlightCategory) != 0 &&
-        (secondBody.categoryBitMask & ghostCategory) != 0)
-    {
+        (secondBody.categoryBitMask & ghostCategory) != 0){
+        
         if ([secondBody.node isKindOfClass:[Ghost class]]) {
             [self flashlight:(SKSpriteNode *)firstBody.node didStopCollidingWithGhost:(Ghost *)secondBody.node];
         }
