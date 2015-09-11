@@ -17,6 +17,7 @@
 
 static NSString* const GTGameDataHighScoreKey = @"highScore";
 static NSString* const GTGameDataTotalCoinsKey = @"totalCoins";
+static NSString* const GTGameDataCharacterKey = @"selectedCharacterIndex";
 static NSString* const GTGameDataChecksumKey = @"GameDataChecksumKey";
 
 + (instancetype)sharedGameData {
@@ -37,6 +38,7 @@ static NSString* const GTGameDataChecksumKey = @"GameDataChecksumKey";
     if (self) {
         _highScore = [decoder decodeDoubleForKey: GTGameDataHighScoreKey];
         _coins = [decoder decodeDoubleForKey: GTGameDataTotalCoinsKey];
+        _selectedCharacterIndex = [decoder decodeIntegerForKey:GTGameDataCharacterKey];
     }
     return self;
 }
@@ -44,6 +46,7 @@ static NSString* const GTGameDataChecksumKey = @"GameDataChecksumKey";
 - (void)encodeWithCoder:(NSCoder *)encoder{
     [encoder encodeDouble:self.highScore forKey: GTGameDataHighScoreKey];
     [encoder encodeDouble:self.coins forKey: GTGameDataTotalCoinsKey];
+    [encoder encodeInteger:self.selectedCharacterIndex forKey:GTGameDataCharacterKey];
 }
 
 + (instancetype)loadInstance{

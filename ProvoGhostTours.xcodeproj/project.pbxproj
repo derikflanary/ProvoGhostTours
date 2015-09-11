@@ -21,6 +21,7 @@
 		EED599061B83C08900A869B3 /* bikePedal.caf in Resources */ = {isa = PBXBuildFile; fileRef = EED599051B83C08900A869B3 /* bikePedal.caf */; };
 		EED599081B83C5C500A869B3 /* ghostSound.caf in Resources */ = {isa = PBXBuildFile; fileRef = EED599071B83C5C500A869B3 /* ghostSound.caf */; };
 		EED5990A1B83CBA100A869B3 /* bikerAnimation.plist in Resources */ = {isa = PBXBuildFile; fileRef = EED599091B83CBA100A869B3 /* bikerAnimation.plist */; };
+		EEDDFCE31BA33A7800A64486 /* AGSpriteButton.m in Sources */ = {isa = PBXBuildFile; fileRef = EEDDFCE21BA33A7800A64486 /* AGSpriteButton.m */; };
 		EEF8DBDD1B99468A003ADB20 /* characterAnimation.plist in Resources */ = {isa = PBXBuildFile; fileRef = EEF8DBDC1B99468A003ADB20 /* characterAnimation.plist */; };
 		EEF8DBDF1B99FC68003ADB20 /* ninjaAnimation.plist in Resources */ = {isa = PBXBuildFile; fileRef = EEF8DBDE1B99FC68003ADB20 /* ninjaAnimation.plist */; };
 		EEF8DBE41B9A425F003ADB20 /* StoreScene.m in Sources */ = {isa = PBXBuildFile; fileRef = EEF8DBE31B9A425F003ADB20 /* StoreScene.m */; };
@@ -69,6 +70,8 @@
 		EED599051B83C08900A869B3 /* bikePedal.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = bikePedal.caf; sourceTree = "<group>"; };
 		EED599071B83C5C500A869B3 /* ghostSound.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = ghostSound.caf; sourceTree = "<group>"; };
 		EED599091B83CBA100A869B3 /* bikerAnimation.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = bikerAnimation.plist; sourceTree = "<group>"; };
+		EEDDFCE11BA33A7800A64486 /* AGSpriteButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AGSpriteButton.h; path = ../AGSpriteButton.h; sourceTree = "<group>"; };
+		EEDDFCE21BA33A7800A64486 /* AGSpriteButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AGSpriteButton.m; path = ../AGSpriteButton.m; sourceTree = "<group>"; };
 		EEF8DBDC1B99468A003ADB20 /* characterAnimation.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = characterAnimation.plist; sourceTree = "<group>"; };
 		EEF8DBDE1B99FC68003ADB20 /* ninjaAnimation.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = ninjaAnimation.plist; sourceTree = "<group>"; };
 		EEF8DBE21B9A425F003ADB20 /* StoreScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StoreScene.h; sourceTree = "<group>"; };
@@ -153,22 +156,20 @@
 				EEB665311B7BEE6200FDA352 /* AppDelegate.m */,
 				EEB665331B7BEE6200FDA352 /* GameScene.h */,
 				EEA1916E1B92D8F1005B0BE9 /* GameScene.m */,
+				EEF8DBE21B9A425F003ADB20 /* StoreScene.h */,
+				EEF8DBE31B9A425F003ADB20 /* StoreScene.m */,
 				EED598FE1B838EDC00A869B3 /* Ghost.h */,
 				EED598FF1B838EDC00A869B3 /* Ghost.m */,
 				EEF8DBFA1BA095F5003ADB20 /* GameData.h */,
 				EEF8DBFB1BA095F5003ADB20 /* GameData.m */,
-				EEF8DBE21B9A425F003ADB20 /* StoreScene.h */,
-				EEF8DBE31B9A425F003ADB20 /* StoreScene.m */,
 				EEB665381B7BEE6200FDA352 /* GameViewController.h */,
 				EEB665391B7BEE6200FDA352 /* GameViewController.m */,
 				EEF8DBFD1BA09B24003ADB20 /* KeychainWrapper */,
-				EEF8DBE51B9CEA82003ADB20 /* CFCoverFlowView */,
-				EED599051B83C08900A869B3 /* bikePedal.caf */,
-				EED599071B83C5C500A869B3 /* ghostSound.caf */,
 				EEB6653B1B7BEE6200FDA352 /* Main.storyboard */,
 				EEB6653E1B7BEE6200FDA352 /* Images.xcassets */,
 				EEF8DBEB1B9CEFF8003ADB20 /* Animations */,
 				EEB665401B7BEE6200FDA352 /* LaunchScreen.xib */,
+				EEF8DBE51B9CEA82003ADB20 /* CFCoverFlowView */,
 				EEB6652C1B7BEE6200FDA352 /* Supporting Files */,
 			);
 			path = ProvoGhostTours;
@@ -203,6 +204,8 @@
 		EEF8DBE51B9CEA82003ADB20 /* CFCoverFlowView */ = {
 			isa = PBXGroup;
 			children = (
+				EEDDFCE11BA33A7800A64486 /* AGSpriteButton.h */,
+				EEDDFCE21BA33A7800A64486 /* AGSpriteButton.m */,
 				EEF8DBE61B9CEA82003ADB20 /* CFCoverFlowView.h */,
 				EEF8DBE71B9CEA82003ADB20 /* CFCoverFlowView.m */,
 			);
@@ -212,6 +215,8 @@
 		EEF8DBEB1B9CEFF8003ADB20 /* Animations */ = {
 			isa = PBXGroup;
 			children = (
+				EED599051B83C08900A869B3 /* bikePedal.caf */,
+				EED599071B83C5C500A869B3 /* ghostSound.caf */,
 				EEF8DBDC1B99468A003ADB20 /* characterAnimation.plist */,
 				EEF8DBDE1B99FC68003ADB20 /* ninjaAnimation.plist */,
 				EED599091B83CBA100A869B3 /* bikerAnimation.plist */,
@@ -389,6 +394,7 @@
 			files = (
 				EEF8DC001BA09B24003ADB20 /* KeychainWrapper.m in Sources */,
 				EEF8DBE81B9CEA82003ADB20 /* CFCoverFlowView.m in Sources */,
+				EEDDFCE31BA33A7800A64486 /* AGSpriteButton.m in Sources */,
 				EEF8DBFC1BA095F5003ADB20 /* GameData.m in Sources */,
 				EEB6653A1B7BEE6200FDA352 /* GameViewController.m in Sources */,
 				EEB665321B7BEE6200FDA352 /* AppDelegate.m in Sources */,

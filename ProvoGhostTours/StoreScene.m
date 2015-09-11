@@ -9,9 +9,10 @@
 #import "StoreScene.h"
 #import "GameScene.h"
 #import "CFCoverFlowView.h"
+#import "GameData.h"
+#import "AGSpriteButton.h"
 
 typedef NS_ENUM(NSInteger, CharacterIndex) {
-    Main,
     Maxxx,
     Derik,
     Ninja,
@@ -26,6 +27,8 @@ typedef NS_ENUM(NSInteger, CharacterIndex) {
 
 @property (nonatomic, strong) SKLabelNode *characterLabel;
 @property (nonatomic, strong) NSArray *characterNamesArray;
+@property (nonatomic, strong) AGSpriteButton *button;
+@property (nonatomic, assign) NSInteger characterIndex;
 
 @end
 
@@ -62,11 +65,21 @@ typedef NS_ENUM(NSInteger, CharacterIndex) {
     self.characterLabel.text = [self.characterNamesArray objectAtIndex:0];
     self.characterLabel.fontSize = 24;
     self.characterLabel.zPosition = 2;
-    self.characterLabel.position = CGPointMake(CGRectGetMidX(self.frame),80);
+    self.characterLabel.position = CGPointMake(CGRectGetMidX(self.frame),300);
     [self.characterLabel setScale:0.1];
     [self addChild:self.characterLabel];
     [self.characterLabel runAction:[SKAction scaleTo:1 duration:.5]];
-   
+    
+    self.button = [AGSpriteButton buttonWithColor:[UIColor blackColor] andSize:CGSizeMake(200, 50)];
+    self.button.position = CGPointMake(self.frame.size.width/2, 100);
+    if ([GameData sharedGameData].selectedCharacterIndex == 0) {
+        [self.button setLabelWithText:@"Selected" andFont:[UIFont fontWithName:@"Chalkduster" size:18] withColor:[UIColor whiteColor]];
+    }else{
+        [self.button setLabelWithText:@"Select" andFont:[UIFont fontWithName:@"Chalkduster" size:18] withColor:[UIColor whiteColor]];
+    }
+    [self.button addTarget:self selector:@selector(characterSelected) withObject:nil forControlEvent:AGButtonControlEventTouchUpInside];
+    [self addChild:self.button];
+    
     [self addCoverView];
 
 }
@@ -82,23 +95,46 @@ typedef NS_ENUM(NSInteger, CharacterIndex) {
 }
 
 - (void)addCoverView{
-    CFCoverFlowView *coverFlowView = [[CFCoverFlowView alloc] initWithFrame:CGRectMake(100.0, 100.0, self.view.frame.size.width, 200.0)];
+    CFCoverFlowView *coverFlowView = [[CFCoverFlowView alloc] initWithFrame:CGRectMake(100.0, 100.0, self.view.frame.size.width, 100.0)];
     coverFlowView.center = [self.view convertPoint:self.view.center fromScene:self];
     coverFlowView.delegate = self;
     coverFlowView.pageItemWidth = self.view.frame.size.width/2;
     coverFlowView.pageItemCoverWidth = 0.0;
     coverFlowView.pageItemHeight = 55.0;
     coverFlowView.pageItemCornerRadius = 5.0;
-    [coverFlowView setPageItemsWithImageNames:@[@"Max_1", @"Derik_1", @"Ninja_1",@"Mayor", @"Elf_1", @"Dino_1", @"Biker1_a"]];
+    [coverFlowView setPageItemsWithImageNames:@[@"Max_1", @"Derik_1", @"Ninja_1",@"Mayor_1", @"Elf_1", @"Dino_1", @"Retro_1"]];
     coverFlowView.tag = 20;
     [self.view addSubview:coverFlowView];
     
+    self.characterIndex = 0;
 }
 
 - (void)coverFlowView:(CFCoverFlowView *)coverFlowView didScrollPageItemToIndex:(NSInteger)index{
 
     self.characterLabel.text = [self.characterNamesArray objectAtIndex:index];
+    if ([GameData sharedGameData].selectedCharacterIndex == index) {
+        [self.button setLabelWithText:@"Selected" andFont:[UIFont fontWithName:@"Chalkduster" size:18] withColor:[UIColor whiteColor]];
+    }else{
+        [self.button setLabelWithText:@"Select" andFont:[UIFont fontWithName:@"Chalkduster" size:18] withColor:[UIColor whiteColor]];
+    }
+    self.characterIndex = index;
+    
+}
 
+-(void)coverFlowView:(CFCoverFlowView *)coverFlowView didSelectPageItemAtIndex:(NSInteger)index{
+    [GameData sharedGameData].selectedCharacterIndex = index;
+    [[GameData sharedGameData] save];
+    [self.button setLabelWithText:@"Selected" andFont:[UIFont fontWithName:@"Chalkduster" size:18] withColor:[UIColor whiteColor]];
+}
+
+- (void)characterSelected{
+    if ([self.button.label.text isEqualToString:@"Selected"]) {
+        return;
+    }
+    [self.button setLabelWithText:@"Selected" andFont:[UIFont fontWithName:@"Chalkduster" size:18] withColor:[UIColor whiteColor]];
+    [GameData sharedGameData].selectedCharacterIndex = self.characterIndex;
+    [[GameData sharedGameData] save];
+       NSLog(@"Selected");
     
 }
 

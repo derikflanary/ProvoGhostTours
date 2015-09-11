@@ -46,6 +46,8 @@
 @property (nonatomic, strong) NSString *leaderboardIdentifier;
 @property (nonatomic, assign) BOOL gamePaused;
 @property (nonatomic, assign) NSTimeInterval theCurrentTime;
+@property (nonatomic, strong) NSArray *characterImageArray;
+@property (nonatomic, strong) NSArray *characterAnimationArray;
 
 @end
 
@@ -88,12 +90,12 @@ static const uint32_t bikerCategory         = 0x1 << 2;
             self.ghostSound = nil;
         }
 
-        
         [self.audioPlayer play];
-        
         self.ghostSound = [SKAction playSoundFileNamed:@"ghostSound.caf" waitForCompletion:NO];
         
         [self authenticateLocalPlayer];
+        
+        
         
     }
     return self;
@@ -107,6 +109,8 @@ static const uint32_t bikerCategory         = 0x1 << 2;
 
 - (void)didMoveToView:(SKView *)view {
     /* Setup your scene here */
+
+    
     [self addStartScreenButtons];
 }
 
@@ -218,7 +222,15 @@ static const uint32_t bikerCategory         = 0x1 << 2;
     self.frontWheel.zPosition = 2;
     [self addChild:self.frontWheel];
     
-    self.biker = [SKSpriteNode spriteNodeWithImageNamed:@"Elf_1"];
+    if (![GameData sharedGameData].selectedCharacterIndex) {
+        [GameData sharedGameData].selectedCharacterIndex = 0;
+    }
+    
+    NSUInteger selectedInt = [GameData sharedGameData].selectedCharacterIndex;
+    self.characterImageArray = @[@"Max_1", @"Derik_1", @"Ninja_1", @"Mayor_1", @"Elf_1", @"Dino_1", @"Retro_1"];
+    self.characterAnimationArray = @[@"maxAnimation", @"derikAnimation", @"ninjaAnimation", @"mayorAnimation", @"elfAnimation", @"dinoAnimation", @"bikerAnimation"];
+    
+    self.biker = [SKSpriteNode spriteNodeWithImageNamed:[self.characterImageArray objectAtIndex:selectedInt]];
     self.biker.position = CGPointMake(self.player.position.x - 2, self.player.position.y + self.biker.size.height / 3);
     self.biker.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:self.biker.size];
     self.biker.physicsBody.categoryBitMask = bikerCategory;
@@ -226,7 +238,8 @@ static const uint32_t bikerCategory         = 0x1 << 2;
     self.biker.physicsBody.collisionBitMask = 0;
     self.biker.zPosition = 2;
     [self addChild:self.biker];
-    self.bikerAnimation = [self animationFromPlist:@"elfAnimation"];
+    
+    self.bikerAnimation = [self animationFromPlist:[self.characterAnimationArray objectAtIndex:selectedInt]];
     
     [self rotateWheels];
     [self.biker runAction:self.bikerAnimation withKey:@"biker"];
@@ -830,14 +843,12 @@ static const uint32_t bikerCategory         = 0x1 << 2;
     restartButton.tag = 321;
     [self.view addSubview:restartButton];
     
-//    NSInteger highScore = [[NSUserDefaults standardUserDefaults] integerForKey:@"highScore"];
+
     if ([GameData sharedGameData].score > [GameData sharedGameData].highScore) {
         [GameData sharedGameData].highScore = [GameData sharedGameData].score;
-//        [[NSUserDefaults standardUserDefaults] setInteger:self.score forKey:@"highScore"];
-//        [[NSUserDefaults standardUserDefaults] synchronize];
-//        highScore = self.score;
     }
     [[GameData sharedGameData]save];
+    
     SKLabelNode *highScoreLabel = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
     highScoreLabel.text = [NSString stringWithFormat:@"High Score: %lu", [GameData sharedGameData].highScore];
     highScoreLabel.fontSize = 20;
