@@ -15,8 +15,11 @@
     static PGTIAPManager * sharedInstance;
     dispatch_once(&once, ^{
         NSSet * productIdentifiers = [NSSet setWithObjects:
-                                      @"com.patter.hashed.upgradetopro",
-                                      @"com.patter.hashed.trial",
+                                      @"com.derikflanary.ProvoGhostTours.ninja",
+                                      @"com.derikflanary.ProvoGhostTours.mayor",
+                                      @"com.derikflanary.ProvoGhostTours.elf",
+                                      @"com.derikflanary.ProvoGhostTours.dinosaur",
+                                      @"com.derikflanary.ProvoGhostTours.retro",
                                       nil];
         sharedInstance = [[self alloc] initWithProductIdentifiers:productIdentifiers];
     });

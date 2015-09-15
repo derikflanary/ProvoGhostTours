@@ -12,6 +12,8 @@
 #import "GameData.h"
 #import "AGSpriteButton.h"
 #import "BWSegmentedControl.h"
+#import "PGTIAPManager.h"
+#import <StoreKit/StoreKit.h>
 
 typedef NS_ENUM(NSInteger, CharacterIndex) {
     Maxxx,
@@ -38,10 +40,13 @@ typedef NS_ENUM(NSInteger, CharacterIndex) {
 @property (nonatomic, strong) BWSegmentedControl *segmentedControl;
 @property (nonatomic, strong) CFCoverFlowView *coverFlowView;
 @property (nonatomic, strong) SKLabelNode *coinLabel;
+@property (nonatomic, strong) NSArray *products;
 
 @end
 
 @implementation StoreScene
+
+static NSString* const CharacterCost = @"$0.99";
 
 - (id)initWithSize:(CGSize)size{
     if (self = [super initWithSize:size]) {
@@ -61,9 +66,10 @@ typedef NS_ENUM(NSInteger, CharacterIndex) {
     background.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame));
     [self addChild:background];
 
+    [self requestProducts];
+    
     [self addSegmentedControl];
     [self addCoverView];
-    
     
     UIButton *backButton = [[UIButton alloc]initWithFrame:CGRectMake(25, 25, 25, 25)];
     [backButton setImage:[UIImage imageNamed:@"Back"] forState:UIControlStateNormal];
@@ -74,7 +80,7 @@ typedef NS_ENUM(NSInteger, CharacterIndex) {
     
     self.characterNamesArray = @[@"Max", @"Derik", @"Ninja", @"Provo Mayor", @"Elf", @"Dinosaur", @"Retro"];
     self.coinAmounts = [NSMutableArray array];
-    self.coinAmounts = @[@"0", @"0", @"10", @"150", @"200", @"300", @"400"].mutableCopy;
+    self.coinAmounts = @[@"0", @"0", @"10", @"500", @"500", @"500", @"500"].mutableCopy;
     
     self.characterLabel = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
     self.characterLabel.text = [self.characterNamesArray objectAtIndex:0];
@@ -121,8 +127,12 @@ typedef NS_ENUM(NSInteger, CharacterIndex) {
         [self.characterButton setTitle:@"Select" forState:UIControlStateNormal];
         
     }
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(productPurchased) name:IAPHelperProductPurchasedNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(productRestored) name:IAPHelperProductRestoredNotification object:nil];
 }
 
+#pragma mark - Segmented Control
 - (void)addSegmentedControl{
     UIImage *bike = [UIImage imageNamed:@"Biking"];
     UIImage *flashlight = [UIImage imageNamed:@"FlashLight"];
@@ -136,6 +146,20 @@ typedef NS_ENUM(NSInteger, CharacterIndex) {
     [self.view addSubview:self.segmentedControl];
     
 }
+
+- (void)segmentChanged:(id)sender{
+    
+    self.imageNamesArray = @[@"Max_1", @"Derik_1", @"Ninja_1",@"Mayor_1", @"Elf_1", @"Dino_1", @"Retro_1"];
+    self.itemsArray = @[@"Flashed", @"Flashlight"];
+    //    if (self.segmentedControl.selectedItemIndex == 0) {
+    //        [self.coverFlowView setPageItemsWithImageNames:self.imageNamesArray];
+    //    }else{
+    //        [self.coverFlowView setPageItemsWithImageNames:self.itemsArray];
+    //    }
+    NSLog(@"segment changed");
+}
+
+#pragma mark - Cover Flow
 
 - (void)addCoverView{
     self.imageNamesArray = @[@"Max_1", @"Derik_1", @"Ninja_1",@"Mayor_1", @"Elf_1", @"Dino_1", @"Retro_1"];
@@ -171,6 +195,7 @@ typedef NS_ENUM(NSInteger, CharacterIndex) {
     NSString *amountString = [self.coinAmounts objectAtIndex:index];
     int amount = [amountString intValue];
     
+    //Check if enough coins
     if ([GameData sharedGameData].coins < amount) {
         [self.purchaseWithCoinButton setTitleColor:[UIColor colorWithRed:1 green:1 blue:0 alpha:.6] forState:UIControlStateNormal];
         self.purchaseWithCoinButton.enabled = NO;
@@ -179,21 +204,20 @@ typedef NS_ENUM(NSInteger, CharacterIndex) {
         self.purchaseWithCoinButton.enabled = YES;
     }
     
+    //Check if character is current selected one
     if ([GameData sharedGameData].selectedCharacterIndex == index) {
         [self.characterButton setTitle:@"Selected" forState:UIControlStateNormal];
     }else{
         [self.characterButton setTitle:@"Select" forState:UIControlStateNormal];
     }
     
+    //Check if character has been purchased already
     if ([[[GameData sharedGameData].purchasesCharacters objectAtIndex:index] isEqualToString:@"N"]) {
         self.purchaseWithCoinButton.hidden = NO;
-        [self.characterButton setTitle:@"$0.99" forState:UIControlStateNormal];
+        [self.characterButton setTitle:CharacterCost forState:UIControlStateNormal];
     }else{
         self.purchaseWithCoinButton.hidden = YES;
     }
-
-    
-    
 }
 
 -(void)coverFlowView:(CFCoverFlowView *)coverFlowView didSelectPageItemAtIndex:(NSInteger)index{
@@ -207,34 +231,72 @@ typedef NS_ENUM(NSInteger, CharacterIndex) {
 - (void)characterSelected{
     if ([self.characterButton.titleLabel.text isEqualToString:@"Selected"]) {
         return;
+    }else if ([self.characterButton.titleLabel.text isEqualToString:CharacterCost]){
+        [self purchaseCharacter];
+
+    }else{
+        
+        
+        [self.characterButton setTitle:@"Selected" forState:UIControlStateNormal];
+        [GameData sharedGameData].selectedCharacterIndex = self.characterIndex;
+        [[GameData sharedGameData] save];
+        NSLog(@"Selected");
+ 
     }
-    [self.characterButton setTitle:@"Selected" forState:UIControlStateNormal];
-    [GameData sharedGameData].selectedCharacterIndex = self.characterIndex;
-    [[GameData sharedGameData] save];
-       NSLog(@"Selected");
+}
+
+#pragma mark - Purchasing
+
+- (void)purchaseCharacter{
+    NSArray *characters = @[@"max", @"derik", @"ninja", @"mayor", @"elf", @"dinosaur", @"retro"];
+    NSString *character = [characters objectAtIndex:self.characterIndex];
+    SKProduct *pro = [SKProduct new];
+    
+    
+    for (SKProduct *product in self.products) {
+        if ([product.productIdentifier isEqualToString:[NSString stringWithFormat:@"com.derikflanary.ProvoGhostTours.%@", character]]) {
+            pro = product;
+        }
+    }
+    [[PGTIAPManager sharedInstance] buyProduct:pro];
+}
+
+- (void)requestProducts{
+    [[PGTIAPManager sharedInstance] requestProductsWithCompletionHandler:^(BOOL success, NSArray *products) {
+        self.products = products;
+        NSLog(@"products: %@", products);
+    }];
+    
+}
+
+- (void)productPurchased{
+    
+}
+
+- (void)productRestored{
     
 }
 
 - (void)purchaseWithCoinsSelected{
+    //update purchased characters
     NSMutableArray *mutableCharactersPurchased = [GameData sharedGameData].purchasesCharacters.mutableCopy;
     [mutableCharactersPurchased replaceObjectAtIndex:self.characterIndex withObject:@"P"];
     [GameData sharedGameData].purchasesCharacters = mutableCharactersPurchased;
+    
+    //update coins
+    NSString *amountString = [self.coinAmounts objectAtIndex:self.characterIndex];
+    int amount = [amountString intValue];
+    [GameData sharedGameData].coins = [GameData sharedGameData].coins - amount;
+    self.coinLabel.text = [NSString stringWithFormat:@"Coins: %ld", [GameData sharedGameData].coins];
+    
+    //save purchase
     [[GameData sharedGameData] save];
+    
     [self.characterButton setTitle:@"Select" forState:UIControlStateNormal];
     self.purchaseWithCoinButton.hidden = YES;
 }
 
-- (void)segmentChanged:(id)sender{
-    
-    self.imageNamesArray = @[@"Max_1", @"Derik_1", @"Ninja_1",@"Mayor_1", @"Elf_1", @"Dino_1", @"Retro_1"];
-    self.itemsArray = @[@"Flashed", @"Flashlight"];
-//    if (self.segmentedControl.selectedItemIndex == 0) {
-//        [self.coverFlowView setPageItemsWithImageNames:self.imageNamesArray];
-//    }else{
-//        [self.coverFlowView setPageItemsWithImageNames:self.itemsArray];
-//    }
-    NSLog(@"segment changed");
-}
+#pragma mark - Other Methods
 
 - (void)backButtonPressed:(id)sender{
     GameScene *gameScene = [[GameScene alloc]initWithSize:self.size];
@@ -256,6 +318,10 @@ typedef NS_ENUM(NSInteger, CharacterIndex) {
     } else {
         return fontSize;
     }
+}
+
+- (void)dealloc{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 
