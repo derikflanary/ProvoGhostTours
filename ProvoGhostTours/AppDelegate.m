@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import "GameData.h"
 
 @interface AppDelegate ()
 
@@ -22,7 +23,36 @@
         [[NSUserDefaults standardUserDefaults] setInteger:0 forKey:@"highScore"];
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"firstLaunch"];
         [[NSUserDefaults standardUserDefaults] synchronize];
+        
+            }
+    
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSString *currentAppVersion = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"];
+    NSString *previousVersion = [defaults objectForKey:@"appVersion"];
+    
+    if (!previousVersion) {
+        // first launch
+        [defaults setObject:currentAppVersion forKey:@"appVersion"];
+        [defaults synchronize];
+        
+        [GameData sharedGameData].purchasesCharacters = @[@"P", @"P", @"N", @"N", @"N", @"N", @"N"];
+        [GameData sharedGameData].selectedCharacterIndex = 0;
+        [GameData sharedGameData].coins = 0;
+        [[GameData sharedGameData] save];
+
+    } else if ([previousVersion isEqualToString:currentAppVersion]) {
+        // same version
+    } else {
+        // other version
+        [defaults setObject:currentAppVersion forKey:@"appVersion"];
+        [defaults synchronize];
+        NSLog(@"updated");
+        [GameData sharedGameData].purchasesCharacters = @[@"P", @"P", @"N", @"N", @"N", @"N", @"N"];
+        [GameData sharedGameData].selectedCharacterIndex = 0;
+        [GameData sharedGameData].coins = 0;
+        [[GameData sharedGameData] save];
     }
+
     
     return YES;
 }

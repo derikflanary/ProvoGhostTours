@@ -19,6 +19,7 @@ static NSString* const GTGameDataHighScoreKey = @"highScore";
 static NSString* const GTGameDataTotalCoinsKey = @"totalCoins";
 static NSString* const GTGameDataCharacterKey = @"selectedCharacterIndex";
 static NSString* const GTGameDataChecksumKey = @"GameDataChecksumKey";
+static NSString* const GTGameDataCharactersKey = @"GameDataCharactersKey";
 
 + (instancetype)sharedGameData {
     static id sharedInstance = nil;
@@ -39,6 +40,7 @@ static NSString* const GTGameDataChecksumKey = @"GameDataChecksumKey";
         _highScore = [decoder decodeDoubleForKey: GTGameDataHighScoreKey];
         _coins = [decoder decodeDoubleForKey: GTGameDataTotalCoinsKey];
         _selectedCharacterIndex = [decoder decodeIntegerForKey:GTGameDataCharacterKey];
+        _purchasesCharacters = [decoder decodeObjectForKey:GTGameDataCharactersKey];
     }
     return self;
 }
@@ -47,6 +49,7 @@ static NSString* const GTGameDataChecksumKey = @"GameDataChecksumKey";
     [encoder encodeDouble:self.highScore forKey: GTGameDataHighScoreKey];
     [encoder encodeDouble:self.coins forKey: GTGameDataTotalCoinsKey];
     [encoder encodeInteger:self.selectedCharacterIndex forKey:GTGameDataCharacterKey];
+    [encoder encodeObject:self.purchasesCharacters forKey:GTGameDataCharactersKey];
 }
 
 + (instancetype)loadInstance{
@@ -96,8 +99,10 @@ static NSString* const GTGameDataChecksumKey = @"GameDataChecksumKey";
     NSUbiquitousKeyValueStore *iCloudStore = [NSUbiquitousKeyValueStore defaultStore];
     long cloudHighScore = [iCloudStore doubleForKey: GTGameDataHighScoreKey];
     self.highScore = MAX(cloudHighScore, self.highScore);
+    
     long cloudCoins = [iCloudStore doubleForKey:GTGameDataTotalCoinsKey];
     self.coins = MAX(cloudCoins, self.coins);
+    
     [[NSNotificationCenter defaultCenter] postNotificationName: GTGameDataUpdatedFromiCloud object:nil];
 }
 

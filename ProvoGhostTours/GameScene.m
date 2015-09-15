@@ -303,6 +303,7 @@ static const uint32_t bikerCategory         = 0x1 << 2;
     
     self.coinLabel = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
     self.coinLabel.text = [NSString stringWithFormat:@"Coins: %ld", [GameData sharedGameData].coins];
+    self.coinLabel.fontColor = [UIColor yellowColor];
     self.coinLabel.fontSize = [self convertFontSize:14];
     self.coinLabel.zPosition = 4;
     self.coinLabel.horizontalAlignmentMode = SKLabelHorizontalAlignmentModeLeft;
@@ -463,8 +464,7 @@ static const uint32_t bikerCategory         = 0x1 << 2;
             [GameData sharedGameData].score += 10;
             [self.scoreLabel setText:[NSString stringWithFormat:@"Score: %ld", [GameData sharedGameData].score]];
             
-            [GameData sharedGameData].coins += 1;
-            [self.coinLabel setText:[NSString stringWithFormat:@"Coins: %ld", [GameData sharedGameData].coins]];
+            
             
             //kill ghost
             [self.ghostArray removeObject:ghost];
@@ -474,7 +474,6 @@ static const uint32_t bikerCategory         = 0x1 << 2;
             [self runAction:self.ghostSound];
             
             int randomInt = (arc4random() % 10) + 1;
-            NSLog(@"%d", randomInt);
             if (randomInt > 4) {
                 //update coins
                 SKSpriteNode *coin = [SKSpriteNode spriteNodeWithImageNamed:@"coin"];
@@ -485,6 +484,9 @@ static const uint32_t bikerCategory         = 0x1 << 2;
                 SKAction *die = [SKAction fadeOutWithDuration:1];
                 SKAction *remove = [SKAction removeFromParent];
                 [coin runAction:[SKAction sequence:@[die, remove]]];
+                
+                [GameData sharedGameData].coins += 1;
+                [self.coinLabel setText:[NSString stringWithFormat:@"Coins: %ld", [GameData sharedGameData].coins]];
             }
             
         }else{
