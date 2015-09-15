@@ -17,11 +17,15 @@
 		EEB6653F1B7BEE6200FDA352 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EEB6653E1B7BEE6200FDA352 /* Images.xcassets */; };
 		EEB665421B7BEE6200FDA352 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = EEB665401B7BEE6200FDA352 /* LaunchScreen.xib */; };
 		EEB6654E1B7BEE6200FDA352 /* ProvoGhostToursTests.m in Sources */ = {isa = PBXBuildFile; fileRef = EEB6654D1B7BEE6200FDA352 /* ProvoGhostToursTests.m */; };
+		EEC1F0491BA769AB00CFA72F /* IAPManager.m in Sources */ = {isa = PBXBuildFile; fileRef = EEC1F0481BA769AB00CFA72F /* IAPManager.m */; };
+		EEC1F04C1BA769C200CFA72F /* PGTIAPManager.m in Sources */ = {isa = PBXBuildFile; fileRef = EEC1F04B1BA769C200CFA72F /* PGTIAPManager.m */; };
+		EEC1F0511BA76EA100CFA72F /* BWSegment.m in Sources */ = {isa = PBXBuildFile; fileRef = EEC1F0501BA76EA100CFA72F /* BWSegment.m */; };
 		EED599001B838EDC00A869B3 /* Ghost.m in Sources */ = {isa = PBXBuildFile; fileRef = EED598FF1B838EDC00A869B3 /* Ghost.m */; };
 		EED599061B83C08900A869B3 /* bikePedal.caf in Resources */ = {isa = PBXBuildFile; fileRef = EED599051B83C08900A869B3 /* bikePedal.caf */; };
 		EED599081B83C5C500A869B3 /* ghostSound.caf in Resources */ = {isa = PBXBuildFile; fileRef = EED599071B83C5C500A869B3 /* ghostSound.caf */; };
 		EED5990A1B83CBA100A869B3 /* bikerAnimation.plist in Resources */ = {isa = PBXBuildFile; fileRef = EED599091B83CBA100A869B3 /* bikerAnimation.plist */; };
 		EEDDFCE31BA33A7800A64486 /* AGSpriteButton.m in Sources */ = {isa = PBXBuildFile; fileRef = EEDDFCE21BA33A7800A64486 /* AGSpriteButton.m */; };
+		EEDDFCEA1BA3734100A64486 /* BWSegmentedControl.m in Sources */ = {isa = PBXBuildFile; fileRef = EEDDFCE81BA3734100A64486 /* BWSegmentedControl.m */; };
 		EEF8DBDD1B99468A003ADB20 /* characterAnimation.plist in Resources */ = {isa = PBXBuildFile; fileRef = EEF8DBDC1B99468A003ADB20 /* characterAnimation.plist */; };
 		EEF8DBDF1B99FC68003ADB20 /* ninjaAnimation.plist in Resources */ = {isa = PBXBuildFile; fileRef = EEF8DBDE1B99FC68003ADB20 /* ninjaAnimation.plist */; };
 		EEF8DBE41B9A425F003ADB20 /* StoreScene.m in Sources */ = {isa = PBXBuildFile; fileRef = EEF8DBE31B9A425F003ADB20 /* StoreScene.m */; };
@@ -65,6 +69,11 @@
 		EEB665471B7BEE6200FDA352 /* ProvoGhostToursTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ProvoGhostToursTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		EEB6654C1B7BEE6200FDA352 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EEB6654D1B7BEE6200FDA352 /* ProvoGhostToursTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ProvoGhostToursTests.m; sourceTree = "<group>"; };
+		EEC1F0471BA769AB00CFA72F /* IAPManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IAPManager.h; sourceTree = "<group>"; };
+		EEC1F0481BA769AB00CFA72F /* IAPManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IAPManager.m; sourceTree = "<group>"; };
+		EEC1F04A1BA769C200CFA72F /* PGTIAPManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PGTIAPManager.h; sourceTree = "<group>"; };
+		EEC1F04B1BA769C200CFA72F /* PGTIAPManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PGTIAPManager.m; sourceTree = "<group>"; };
+		EEC1F0501BA76EA100CFA72F /* BWSegment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BWSegment.m; sourceTree = "<group>"; };
 		EED598FE1B838EDC00A869B3 /* Ghost.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Ghost.h; sourceTree = "<group>"; };
 		EED598FF1B838EDC00A869B3 /* Ghost.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Ghost.m; sourceTree = "<group>"; };
 		EED599051B83C08900A869B3 /* bikePedal.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = bikePedal.caf; sourceTree = "<group>"; };
@@ -72,6 +81,9 @@
 		EED599091B83CBA100A869B3 /* bikerAnimation.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = bikerAnimation.plist; sourceTree = "<group>"; };
 		EEDDFCE11BA33A7800A64486 /* AGSpriteButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AGSpriteButton.h; path = ../AGSpriteButton.h; sourceTree = "<group>"; };
 		EEDDFCE21BA33A7800A64486 /* AGSpriteButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AGSpriteButton.m; path = ../AGSpriteButton.m; sourceTree = "<group>"; };
+		EEDDFCE51BA3734100A64486 /* BWSegment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BWSegment.h; sourceTree = "<group>"; };
+		EEDDFCE71BA3734100A64486 /* BWSegmentedControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BWSegmentedControl.h; sourceTree = "<group>"; };
+		EEDDFCE81BA3734100A64486 /* BWSegmentedControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BWSegmentedControl.m; sourceTree = "<group>"; };
 		EEF8DBDC1B99468A003ADB20 /* characterAnimation.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = characterAnimation.plist; sourceTree = "<group>"; };
 		EEF8DBDE1B99FC68003ADB20 /* ninjaAnimation.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = ninjaAnimation.plist; sourceTree = "<group>"; };
 		EEF8DBE21B9A425F003ADB20 /* StoreScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StoreScene.h; sourceTree = "<group>"; };
@@ -164,8 +176,9 @@
 				EEF8DBFB1BA095F5003ADB20 /* GameData.m */,
 				EEB665381B7BEE6200FDA352 /* GameViewController.h */,
 				EEB665391B7BEE6200FDA352 /* GameViewController.m */,
+				EEC1F04D1BA76A3900CFA72F /* Purchasing */,
+				EEDDFCE41BA3734100A64486 /* Segmented Control */,
 				EEF8DBFD1BA09B24003ADB20 /* KeychainWrapper */,
-				EEB6653B1B7BEE6200FDA352 /* Main.storyboard */,
 				EEB6653E1B7BEE6200FDA352 /* Images.xcassets */,
 				EEF8DBEB1B9CEFF8003ADB20 /* Animations */,
 				EEB665401B7BEE6200FDA352 /* LaunchScreen.xib */,
@@ -178,6 +191,7 @@
 		EEB6652C1B7BEE6200FDA352 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				EEB6653B1B7BEE6200FDA352 /* Main.storyboard */,
 				EEB6652D1B7BEE6200FDA352 /* Info.plist */,
 				EEB6652E1B7BEE6200FDA352 /* main.m */,
 			);
@@ -199,6 +213,28 @@
 				EEB6654C1B7BEE6200FDA352 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		EEC1F04D1BA76A3900CFA72F /* Purchasing */ = {
+			isa = PBXGroup;
+			children = (
+				EEC1F0471BA769AB00CFA72F /* IAPManager.h */,
+				EEC1F0481BA769AB00CFA72F /* IAPManager.m */,
+				EEC1F04A1BA769C200CFA72F /* PGTIAPManager.h */,
+				EEC1F04B1BA769C200CFA72F /* PGTIAPManager.m */,
+			);
+			name = Purchasing;
+			sourceTree = "<group>";
+		};
+		EEDDFCE41BA3734100A64486 /* Segmented Control */ = {
+			isa = PBXGroup;
+			children = (
+				EEDDFCE51BA3734100A64486 /* BWSegment.h */,
+				EEC1F0501BA76EA100CFA72F /* BWSegment.m */,
+				EEDDFCE71BA3734100A64486 /* BWSegmentedControl.h */,
+				EEDDFCE81BA3734100A64486 /* BWSegmentedControl.m */,
+			);
+			path = "Segmented Control";
 			sourceTree = "<group>";
 		};
 		EEF8DBE51B9CEA82003ADB20 /* CFCoverFlowView */ = {
@@ -394,12 +430,16 @@
 			files = (
 				EEF8DC001BA09B24003ADB20 /* KeychainWrapper.m in Sources */,
 				EEF8DBE81B9CEA82003ADB20 /* CFCoverFlowView.m in Sources */,
+				EEC1F0511BA76EA100CFA72F /* BWSegment.m in Sources */,
+				EEC1F0491BA769AB00CFA72F /* IAPManager.m in Sources */,
 				EEDDFCE31BA33A7800A64486 /* AGSpriteButton.m in Sources */,
 				EEF8DBFC1BA095F5003ADB20 /* GameData.m in Sources */,
+				EEC1F04C1BA769C200CFA72F /* PGTIAPManager.m in Sources */,
 				EEB6653A1B7BEE6200FDA352 /* GameViewController.m in Sources */,
 				EEB665321B7BEE6200FDA352 /* AppDelegate.m in Sources */,
 				EEF8DBE41B9A425F003ADB20 /* StoreScene.m in Sources */,
 				EEA1916F1B92D8F1005B0BE9 /* GameScene.m in Sources */,
+				EEDDFCEA1BA3734100A64486 /* BWSegmentedControl.m in Sources */,
 				EED599001B838EDC00A869B3 /* Ghost.m in Sources */,
 				EEB6652F1B7BEE6200FDA352 /* main.m in Sources */,
 			);

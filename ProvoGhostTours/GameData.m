@@ -96,18 +96,23 @@ static NSString* const GTGameDataChecksumKey = @"GameDataChecksumKey";
     NSUbiquitousKeyValueStore *iCloudStore = [NSUbiquitousKeyValueStore defaultStore];
     long cloudHighScore = [iCloudStore doubleForKey: GTGameDataHighScoreKey];
     self.highScore = MAX(cloudHighScore, self.highScore);
+    long cloudCoins = [iCloudStore doubleForKey:GTGameDataTotalCoinsKey];
+    self.coins = MAX(cloudCoins, self.coins);
     [[NSNotificationCenter defaultCenter] postNotificationName: GTGameDataUpdatedFromiCloud object:nil];
-    
 }
 
 -(void)updateiCloud{
     NSUbiquitousKeyValueStore *iCloudStore = [NSUbiquitousKeyValueStore defaultStore];
     long cloudHighScore = [iCloudStore doubleForKey: GTGameDataHighScoreKey];
-    
+    long cloudCoins = [iCloudStore doubleForKey:GTGameDataTotalCoinsKey];
     if (self.highScore > cloudHighScore) {
         [iCloudStore setDouble:self.highScore forKey: GTGameDataHighScoreKey];
-        [iCloudStore synchronize];
     }
+    if (self.coins > cloudCoins) {
+        [iCloudStore setDouble:self.coins forKey:GTGameDataTotalCoinsKey];
+    }
+        [iCloudStore synchronize];
+    
 }
 
 #pragma mark - Action Methods

@@ -29,6 +29,7 @@
 @property (nonatomic, strong) NSMutableArray *ghostArray;
 @property (nonatomic, strong) NSMutableArray *contactedGhostArray;
 @property (strong, nonatomic) SKLabelNode *scoreLabel;
+@property (strong, nonatomic) SKLabelNode *coinLabel;
 @property (strong, nonatomic) AVAudioPlayer *audioPlayer;
 @property (strong, nonatomic) SKAction *ghostSound;
 @property (strong, nonatomic) SKAction *bikerAnimation;
@@ -300,6 +301,14 @@ static const uint32_t bikerCategory         = 0x1 << 2;
     self.scoreLabel.position = CGPointMake(margin, margin);
     [self addChild:self.scoreLabel];
     
+    self.coinLabel = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
+    self.coinLabel.text = [NSString stringWithFormat:@"Coins: %ld", [GameData sharedGameData].coins];
+    self.coinLabel.fontSize = [self convertFontSize:14];
+    self.coinLabel.zPosition = 4;
+    self.coinLabel.horizontalAlignmentMode = SKLabelHorizontalAlignmentModeLeft;
+    self.coinLabel.position = CGPointMake(self.scoreLabel.position.x, self.scoreLabel.position.y + margin * 2);
+    [self addChild:self.coinLabel];
+    
     UIButton *flashButton = [[UIButton alloc]initWithFrame:CGRectMake(self.frame.size.width -50, self.frame.size.height - 50, 25, 25)];
     [flashButton setImage:[UIImage imageNamed:@"Flashed"] forState:UIControlStateNormal];
     [flashButton setImage:[UIImage imageNamed:@"Flashbang"] forState:UIControlStateSelected];
@@ -307,12 +316,6 @@ static const uint32_t bikerCategory         = 0x1 << 2;
     flashButton.tag = 10;
     [self.view addSubview:flashButton];
     
-    //    UIButton *pauseButton = [[UIButton alloc]initWithFrame:CGRectMake(self.frame.size.width - 50, 25, 25, 25)];
-    //    [pauseButton setImage:[UIImage imageNamed:@"Flashed"] forState:UIControlStateNormal];
-    //    [pauseButton setImage:[UIImage imageNamed:@"Flashbang"] forState:UIControlStateSelected];
-    //    [pauseButton addTarget:self action:@selector(pausePressed:) forControlEvents:UIControlEventTouchUpInside];
-    //    pauseButton.tag = 50;
-    //    [self.view addSubview:pauseButton];
 }
 
 - (void)addFlashlight{
@@ -384,7 +387,7 @@ static const uint32_t bikerCategory         = 0x1 << 2;
 - (void)shopButtonPressed:(id)sender{
     NSLog(@"shop pressed");
     StoreScene *storeScene = [[StoreScene alloc]initWithSize:self.size];
-    SKTransition *transition = [SKTransition doorsOpenVerticalWithDuration:.35];
+    SKTransition *transition = [SKTransition fadeWithDuration:.65];
     [self.view presentScene:storeScene transition:transition];
     [[self.view viewWithTag:200] removeFromSuperview];
     [[self.view viewWithTag:100] removeFromSuperview];
@@ -393,20 +396,6 @@ static const uint32_t bikerCategory         = 0x1 << 2;
     [[self.view viewWithTag:500] removeFromSuperview];
     [[self.view viewWithTag:321] removeFromSuperview];
 }
-
-- (void)pausePressed:(UIButton*)sender{
-//    if (!sender.selected) {
-//        sender.selected = YES;
-//        self.scene.view.paused = YES;
-//        self.gamePaused = YES;
-//    }else{
-//        sender.selected = NO;
-//        self.scene.view.paused = NO;
-//        self.gamePaused = NO;
-////        self.lastUpdateTimeInterval = self.theCurrentTime;
-//    }
-}
-
 
 #pragma mark - Ghost Methods
 
@@ -418,11 +407,11 @@ static const uint32_t bikerCategory         = 0x1 << 2;
     int rangeX = maxX - minX;
     int actualX = (arc4random() % rangeX) + minX;
     
-    Ghost *ghost = [Ghost spriteNodeWithTexture:[SKTexture textureWithImageNamed:@"Ghost2"]];
+    Ghost *ghost = [Ghost spriteNodeWithTexture:[SKTexture textureWithImageNamed:@"Ghost1"]];
     [self.ghostArray addObject:ghost];
     //create sprite
     if (actualX > self.frame.size.width/2) {
-        ghost.texture = [SKTexture textureWithImageNamed:@"Ghost2right"];
+        ghost.texture = [SKTexture textureWithImageNamed:@"Ghost1right"];
     }
     
     //Determine a random Y if the spawn's X is off screen
@@ -472,16 +461,32 @@ static const uint32_t bikerCategory         = 0x1 << 2;
             
             //update score
             [GameData sharedGameData].score += 10;
-//            self.score += 10;
             [self.scoreLabel setText:[NSString stringWithFormat:@"Score: %ld", [GameData sharedGameData].score]];
+            
+            [GameData sharedGameData].coins += 1;
+            [self.coinLabel setText:[NSString stringWithFormat:@"Coins: %ld", [GameData sharedGameData].coins]];
             
             //kill ghost
             [self.ghostArray removeObject:ghost];
             [removedGhostsArray addObject:ghost];
             
             [ghost die];
-
             [self runAction:self.ghostSound];
+            
+            int randomInt = (arc4random() % 10) + 1;
+            NSLog(@"%d", randomInt);
+            if (randomInt > 4) {
+                //update coins
+                SKSpriteNode *coin = [SKSpriteNode spriteNodeWithImageNamed:@"coin"];
+                coin.position = ghost.position;
+                coin.zPosition = 2;
+                [self addChild:coin];
+                
+                SKAction *die = [SKAction fadeOutWithDuration:1];
+                SKAction *remove = [SKAction removeFromParent];
+                [coin runAction:[SKAction sequence:@[die, remove]]];
+            }
+            
         }else{
             [ghost collidedWithFlashlight:delta];
         }
@@ -835,7 +840,7 @@ static const uint32_t bikerCategory         = 0x1 << 2;
     [gameOverLabel runAction:[SKAction scaleTo:1.0 duration:0.5]];
     
     UIButton *restartButton = [[UIButton alloc]initWithFrame:CGRectMake(0, CGRectGetMidY(self.frame) + 20, self.frame.size.width, 50)];
-    [restartButton setTitle:@"Try Again" forState:UIControlStateNormal];
+    [restartButton setTitle:@"Play Again" forState:UIControlStateNormal];
     [restartButton setTitleColor:[UIColor colorWithWhite:1 alpha:.4] forState:UIControlStateHighlighted];
     [restartButton setTintColor:[UIColor whiteColor]];
     restartButton.titleLabel.font = [UIFont fontWithName:@"Chalkduster" size:14];
