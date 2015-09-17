@@ -25,6 +25,7 @@
 @property (nonatomic) NSTimeInterval lastUpdateTimeInterval;
 @property (nonatomic) NSTimeInterval lastTreeSpawnInterval;
 @property (nonatomic) SKSpriteNode *light;
+@property (nonatomic) SKSpriteNode *superLight;
 @property (nonatomic) SKNode *centerPoint;
 @property (nonatomic, strong) NSMutableArray *ghostArray;
 @property (nonatomic, strong) NSMutableArray *contactedGhostArray;
@@ -286,7 +287,7 @@ static const uint32_t bikerCategory         = 0x1 << 2;
     self.firstPlay = NO;
     
     [self addFlashlight];
-    
+//    [self addSuperLight];
     [self addInGameObjects];
     
     //Set up arrays for ghost spawning and deleting
@@ -341,7 +342,7 @@ static const uint32_t bikerCategory         = 0x1 << 2;
     }
     
     self.light = [SKSpriteNode spriteNodeWithImageNamed:@"LampLight"];
-    self.light.alpha = 0.25;
+    self.light.alpha = 0.35;
     self.light.position = CGPointMake(0, self.light.size.height/2);
     [self.centerPoint addChild:self.light];
     self.light.zPosition = 2;
@@ -376,6 +377,52 @@ static const uint32_t bikerCategory         = 0x1 << 2;
     self.light.physicsBody.contactTestBitMask = ghostCategory;
     self.light.physicsBody.collisionBitMask = 0;
     self.light.physicsBody.usesPreciseCollisionDetection = YES;
+}
+
+- (void)addSuperLight{
+    
+    //add the flashlight
+    
+    self.superLight = [SKSpriteNode spriteNodeWithImageNamed:@"superlight.png"];
+    self.superLight.alpha = .8;
+    self.superLight.position = CGPointMake(0, self.superLight.size.height/2);
+    [self.centerPoint addChild:self.superLight];
+    self.light.zPosition = 2;
+    
+    CGFloat offsetX = self.superLight.frame.size.width/2;
+    CGFloat offsetY = self.superLight.frame.size.height/2;
+    
+    CGMutablePathRef path = CGPathCreateMutable();
+    if (([[UIScreen mainScreen] scale] == 2.0)) {
+        CGPathMoveToPoint(path, NULL, 294 - offsetX, 368 - offsetY);
+        CGPathAddLineToPoint(path, NULL, 0 - offsetX, 368 - offsetY);
+        CGPathAddLineToPoint(path, NULL, 140 - offsetX, 0 - offsetY);
+        CGPathAddLineToPoint(path, NULL, 174 - offsetX, 0 - offsetY);
+        CGPathCloseSubpath(path);
+    }else if (([[UIScreen mainScreen] scale] == 3.0)){
+        CGPathMoveToPoint(path, NULL, 441 - offsetX, 552 - offsetY);
+        CGPathAddLineToPoint(path, NULL, 0 - offsetX, 552 - offsetY);
+        CGPathAddLineToPoint(path, NULL, 210 - offsetX, 0 - offsetY);
+        CGPathAddLineToPoint(path, NULL, 261 - offsetX, 0 - offsetY);
+        CGPathCloseSubpath(path);
+    }else{
+        CGPathMoveToPoint(path, NULL, 147 - offsetX, 184 - offsetY);
+        CGPathAddLineToPoint(path, NULL, 0 - offsetX, 184 - offsetY);
+        CGPathAddLineToPoint(path, NULL, 70 - offsetX, 1 - offsetY);
+        CGPathAddLineToPoint(path, NULL, 87 - offsetX, 0 - offsetY);
+        CGPathCloseSubpath(path);
+    }
+
+    
+    
+    CGPathCloseSubpath(path);
+    
+    self.superLight.physicsBody = [SKPhysicsBody bodyWithPolygonFromPath:path];
+    self.superLight.physicsBody.dynamic = YES;
+    self.superLight.physicsBody.categoryBitMask = flashlightCategory;
+    self.superLight.physicsBody.contactTestBitMask = ghostCategory;
+    self.superLight.physicsBody.collisionBitMask = 0;
+    self.superLight.physicsBody.usesPreciseCollisionDetection = YES;
 }
 
 #pragma mark - Start Screen Button Methods
