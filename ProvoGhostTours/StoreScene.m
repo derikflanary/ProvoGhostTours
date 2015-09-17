@@ -29,7 +29,7 @@ typedef NS_ENUM(NSInteger, CharacterIndex) {
 @interface StoreScene() <CFCoverFlowViewDelegate>
 
 @property (nonatomic, strong) SKLabelNode *characterLabel;
-@property (nonatomic, strong) NSArray *characterNamesArray;
+@property (nonatomic, strong) NSMutableArray *characterNamesArray;
 @property (nonatomic, strong) NSMutableArray *imageNamesArray;
 @property (nonatomic, strong) NSArray *itemsArray;
 @property (nonatomic, strong) NSMutableArray *coinAmounts;
@@ -78,9 +78,13 @@ static NSString* const CharacterCost = @"$0.99";
     backButton.tag = 40;
     [self.view addSubview:backButton];
     
-    self.characterNamesArray = @[@"Max", @"Derik", @"Ninja", @"Provo Mayor", @"Elf", @"Dinosaur", @"Retro"];
+    self.characterNamesArray = [NSMutableArray array];
+    for (NSDictionary *dict in [GameData sharedGameData].purchasesCharacters) {
+        [self.characterNamesArray addObject:dict[@"title"]];
+        
+    }
     self.coinAmounts = [NSMutableArray array];
-    self.coinAmounts = @[@"0", @"0", @"10", @"500", @"500", @"500", @"500"].mutableCopy;
+    self.coinAmounts = @[@"0", @"0", @"100", @"500", @"500", @"500", @"500"].mutableCopy;
     
     self.characterLabel = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
     self.characterLabel.text = [self.characterNamesArray objectAtIndex:0];
@@ -142,7 +146,7 @@ static NSString* const CharacterCost = @"$0.99";
     self.segmentedControl.segmentImageTintColor = [UIColor lightGrayColor];
     [self.segmentedControl addTarget:self action:@selector(segmentChanged:) forControlEvents:UIControlEventValueChanged];
     self.segmentedControl.frame = CGRectMake(100, 15, self.frame.size.width - 200, 60);
-    self.segmentedControl.tag = 10;
+    self.segmentedControl.tag = 70;
     [self.view addSubview:self.segmentedControl];
     
 }
@@ -320,11 +324,11 @@ static NSString* const CharacterCost = @"$0.99";
     GameScene *gameScene = [[GameScene alloc]initWithSize:self.size];
     SKTransition *transition = [SKTransition fadeWithDuration:.65];
     [self.view presentScene:gameScene transition:transition];
-    [[self.view viewWithTag:10] removeFromSuperview];
     [[self.view viewWithTag:20] removeFromSuperview];
     [[self.view viewWithTag:30] removeFromSuperview];
     [[self.view viewWithTag:40] removeFromSuperview];
     [[self.view viewWithTag:50] removeFromSuperview];
+    [[self.view viewWithTag:70] removeFromSuperview];
     [self.characterLabel removeFromParent];
     
 }

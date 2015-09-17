@@ -23,7 +23,7 @@
 		EED599001B838EDC00A869B3 /* Ghost.m in Sources */ = {isa = PBXBuildFile; fileRef = EED598FF1B838EDC00A869B3 /* Ghost.m */; };
 		EED599061B83C08900A869B3 /* bikePedal.caf in Resources */ = {isa = PBXBuildFile; fileRef = EED599051B83C08900A869B3 /* bikePedal.caf */; };
 		EED599081B83C5C500A869B3 /* ghostSound.caf in Resources */ = {isa = PBXBuildFile; fileRef = EED599071B83C5C500A869B3 /* ghostSound.caf */; };
-		EED5990A1B83CBA100A869B3 /* bikerAnimation.plist in Resources */ = {isa = PBXBuildFile; fileRef = EED599091B83CBA100A869B3 /* bikerAnimation.plist */; };
+		EED5990A1B83CBA100A869B3 /* retroAnimation.plist in Resources */ = {isa = PBXBuildFile; fileRef = EED599091B83CBA100A869B3 /* retroAnimation.plist */; };
 		EEDDFCE31BA33A7800A64486 /* AGSpriteButton.m in Sources */ = {isa = PBXBuildFile; fileRef = EEDDFCE21BA33A7800A64486 /* AGSpriteButton.m */; };
 		EEDDFCEA1BA3734100A64486 /* BWSegmentedControl.m in Sources */ = {isa = PBXBuildFile; fileRef = EEDDFCE81BA3734100A64486 /* BWSegmentedControl.m */; };
 		EEF8DBDD1B99468A003ADB20 /* characterAnimation.plist in Resources */ = {isa = PBXBuildFile; fileRef = EEF8DBDC1B99468A003ADB20 /* characterAnimation.plist */; };
@@ -33,7 +33,7 @@
 		EEF8DBEA1B9CEFED003ADB20 /* mayorAnimation.plist in Resources */ = {isa = PBXBuildFile; fileRef = EEF8DBE91B9CEFED003ADB20 /* mayorAnimation.plist */; };
 		EEF8DBED1B9D30C4003ADB20 /* derikAnimation.plist in Resources */ = {isa = PBXBuildFile; fileRef = EEF8DBEC1B9D30C4003ADB20 /* derikAnimation.plist */; };
 		EEF8DBEF1B9F4A6D003ADB20 /* maxAnimation.plist in Resources */ = {isa = PBXBuildFile; fileRef = EEF8DBEE1B9F4A6D003ADB20 /* maxAnimation.plist */; };
-		EEF8DBF11B9F4ADE003ADB20 /* dinoAnimation.plist in Resources */ = {isa = PBXBuildFile; fileRef = EEF8DBF01B9F4ADE003ADB20 /* dinoAnimation.plist */; };
+		EEF8DBF11B9F4ADE003ADB20 /* dinosaurAnimation.plist in Resources */ = {isa = PBXBuildFile; fileRef = EEF8DBF01B9F4ADE003ADB20 /* dinosaurAnimation.plist */; };
 		EEF8DBF31B9F5B05003ADB20 /* elfAnimation.plist in Resources */ = {isa = PBXBuildFile; fileRef = EEF8DBF21B9F5B05003ADB20 /* elfAnimation.plist */; };
 		EEF8DBFC1BA095F5003ADB20 /* GameData.m in Sources */ = {isa = PBXBuildFile; fileRef = EEF8DBFB1BA095F5003ADB20 /* GameData.m */; };
 		EEF8DC001BA09B24003ADB20 /* KeychainWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = EEF8DBFF1BA09B24003ADB20 /* KeychainWrapper.m */; };
@@ -78,7 +78,7 @@
 		EED598FF1B838EDC00A869B3 /* Ghost.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Ghost.m; sourceTree = "<group>"; };
 		EED599051B83C08900A869B3 /* bikePedal.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = bikePedal.caf; sourceTree = "<group>"; };
 		EED599071B83C5C500A869B3 /* ghostSound.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = ghostSound.caf; sourceTree = "<group>"; };
-		EED599091B83CBA100A869B3 /* bikerAnimation.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = bikerAnimation.plist; sourceTree = "<group>"; };
+		EED599091B83CBA100A869B3 /* retroAnimation.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = retroAnimation.plist; sourceTree = "<group>"; };
 		EEDDFCE11BA33A7800A64486 /* AGSpriteButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AGSpriteButton.h; path = ../AGSpriteButton.h; sourceTree = "<group>"; };
 		EEDDFCE21BA33A7800A64486 /* AGSpriteButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AGSpriteButton.m; path = ../AGSpriteButton.m; sourceTree = "<group>"; };
 		EEDDFCE51BA3734100A64486 /* BWSegment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BWSegment.h; sourceTree = "<group>"; };
@@ -93,7 +93,7 @@
 		EEF8DBE91B9CEFED003ADB20 /* mayorAnimation.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = mayorAnimation.plist; sourceTree = "<group>"; };
 		EEF8DBEC1B9D30C4003ADB20 /* derikAnimation.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = derikAnimation.plist; sourceTree = "<group>"; };
 		EEF8DBEE1B9F4A6D003ADB20 /* maxAnimation.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = maxAnimation.plist; sourceTree = "<group>"; };
-		EEF8DBF01B9F4ADE003ADB20 /* dinoAnimation.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = dinoAnimation.plist; sourceTree = "<group>"; };
+		EEF8DBF01B9F4ADE003ADB20 /* dinosaurAnimation.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = dinosaurAnimation.plist; sourceTree = "<group>"; };
 		EEF8DBF21B9F5B05003ADB20 /* elfAnimation.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = elfAnimation.plist; sourceTree = "<group>"; };
 		EEF8DBFA1BA095F5003ADB20 /* GameData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameData.h; sourceTree = "<group>"; };
 		EEF8DBFB1BA095F5003ADB20 /* GameData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameData.m; sourceTree = "<group>"; };
@@ -255,11 +255,11 @@
 				EED599071B83C5C500A869B3 /* ghostSound.caf */,
 				EEF8DBDC1B99468A003ADB20 /* characterAnimation.plist */,
 				EEF8DBDE1B99FC68003ADB20 /* ninjaAnimation.plist */,
-				EED599091B83CBA100A869B3 /* bikerAnimation.plist */,
+				EED599091B83CBA100A869B3 /* retroAnimation.plist */,
 				EEF8DBE91B9CEFED003ADB20 /* mayorAnimation.plist */,
 				EEF8DBEC1B9D30C4003ADB20 /* derikAnimation.plist */,
 				EEF8DBEE1B9F4A6D003ADB20 /* maxAnimation.plist */,
-				EEF8DBF01B9F4ADE003ADB20 /* dinoAnimation.plist */,
+				EEF8DBF01B9F4ADE003ADB20 /* dinosaurAnimation.plist */,
 				EEF8DBF21B9F5B05003ADB20 /* elfAnimation.plist */,
 			);
 			name = Animations;
@@ -320,7 +320,7 @@
 		EEB665211B7BEE6200FDA352 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0640;
+				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = "Derik Flanary";
 				TargetAttributes = {
 					EEB665281B7BEE6200FDA352 = {
@@ -372,8 +372,8 @@
 				EEF8DBED1B9D30C4003ADB20 /* derikAnimation.plist in Resources */,
 				EEF8DBDF1B99FC68003ADB20 /* ninjaAnimation.plist in Resources */,
 				EEF8DBF31B9F5B05003ADB20 /* elfAnimation.plist in Resources */,
-				EED5990A1B83CBA100A869B3 /* bikerAnimation.plist in Resources */,
-				EEF8DBF11B9F4ADE003ADB20 /* dinoAnimation.plist in Resources */,
+				EED5990A1B83CBA100A869B3 /* retroAnimation.plist in Resources */,
+				EEF8DBF11B9F4ADE003ADB20 /* dinosaurAnimation.plist in Resources */,
 				EED599061B83C08900A869B3 /* bikePedal.caf in Resources */,
 				EEB6653F1B7BEE6200FDA352 /* Images.xcassets in Resources */,
 				EEF8DBEA1B9CEFED003ADB20 /* mayorAnimation.plist in Resources */,
@@ -504,6 +504,7 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -576,6 +577,7 @@
 				INFOPLIST_FILE = ProvoGhostTours/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.derikflanary.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
@@ -593,6 +595,7 @@
 				INFOPLIST_FILE = ProvoGhostTours/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.derikflanary.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
@@ -613,6 +616,7 @@
 				);
 				INFOPLIST_FILE = ProvoGhostToursTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "derikflanary.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ProvoGhostTours.app/ProvoGhostTours";
 			};
@@ -628,6 +632,7 @@
 				);
 				INFOPLIST_FILE = ProvoGhostToursTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "derikflanary.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ProvoGhostTours.app/ProvoGhostTours";
 			};

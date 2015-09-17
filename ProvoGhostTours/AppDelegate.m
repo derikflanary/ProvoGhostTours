@@ -35,13 +35,13 @@
         [defaults setObject:currentAppVersion forKey:@"appVersion"];
         [defaults synchronize];
         
-        [GameData sharedGameData].purchasesCharacters = @[@{@"name": @"max", @"purchased": @"Y"},
-                                                          @{@"name": @"derik", @"purchased": @"N"},
-                                                          @{@"name": @"ninja", @"purchased": @"N"},
-                                                          @{@"name": @"mayor", @"purchased": @"N"},
-                                                          @{@"name": @"elf", @"purchased": @"N"},
-                                                          @{@"name": @"dinosaur", @"purchased": @"N"},
-                                                          @{@"name": @"retro", @"purchased": @"N"}];
+        [GameData sharedGameData].purchasesCharacters = @[@{@"name": @"max", @"purchased": @"Y", @"title": @"Max", @"ghost":  @"Ghost1"},
+                                                          @{@"name": @"derik", @"purchased": @"N", @"title": @"Derik", @"ghost": @"Ghost1"},
+                                                          @{@"name": @"ninja", @"purchased": @"Y", @"title": @"Ninja", @"ghost": @"Ghost_ninja"},
+                                                          @{@"name": @"mayor", @"purchased": @"Y", @"title": @"Provo Mayor", @"ghost": @"Ghost_mayor"},
+                                                          @{@"name": @"elf", @"purchased": @"Y", @"title": @"Elf", @"ghost": @"Ghost_elf"},
+                                                          @{@"name": @"dinosaur", @"purchased": @"Y", @"title": @"Dinosaur", @"ghost": @"Ghost_dino"},
+                                                          @{@"name": @"retro", @"purchased": @"Y", @"title": @"Retro", @"ghost": @"Ghost2"}];
 
         [GameData sharedGameData].selectedCharacterIndex = 0;
         [GameData sharedGameData].selectedCharacter = @"max";
@@ -55,13 +55,14 @@
         [defaults setObject:currentAppVersion forKey:@"appVersion"];
         [defaults synchronize];
         NSLog(@"updated");
-        [GameData sharedGameData].purchasesCharacters = @[@{@"name": @"max", @"purchased": @"Y"},
-                                                          @{@"name": @"derik", @"purchased": @"N"},
-                                                          @{@"name": @"ninja", @"purchased": @"N"},
-                                                          @{@"name": @"mayor", @"purchased": @"N"},
-                                                          @{@"name": @"elf", @"purchased": @"N"},
-                                                          @{@"name": @"dinosaur", @"purchased": @"N"},
-                                                          @{@"name": @"retro", @"purchased": @"N"}];
+        [GameData sharedGameData].purchasesCharacters = @[@{@"name": @"max", @"purchased": @"Y", @"title": @"Max", @"ghost":  @"Ghost1"},
+                                                          @{@"name": @"derik", @"purchased": @"N", @"title": @"Derik", @"ghost": @"Ghost1"},
+                                                          @{@"name": @"ninja", @"purchased": @"N", @"title": @"Ninja", @"ghost": @"Ghost_ninja"},
+                                                          @{@"name": @"mayor", @"purchased": @"N", @"title": @"Provo Mayor", @"ghost": @"Ghost_mayor"},
+                                                          @{@"name": @"elf", @"purchased": @"N", @"title": @"Elf", @"ghost": @"Ghost_elf"},
+                                                          @{@"name": @"dinosaur", @"purchased": @"N", @"title": @"Dinosaur", @"ghost": @"Ghost_dino"},
+                                                          @{@"name": @"retro", @"purchased": @"N", @"title": @"Retro", @"ghost": @"Ghost2"}];
+
         [GameData sharedGameData].selectedCharacterIndex = 0;
         [GameData sharedGameData].selectedCharacter = @"max";
         [GameData sharedGameData].coins = 0;

@@ -49,6 +49,8 @@
 @property (nonatomic, assign) NSTimeInterval theCurrentTime;
 @property (nonatomic, strong) NSMutableArray *characterImageArray;
 @property (nonatomic, strong) NSMutableArray *characterAnimationArray;
+@property (nonatomic, strong) NSMutableArray *ghostImageArray;
+@property (nonatomic, assign) NSUInteger selectedInt;
 
 @end
 
@@ -227,16 +229,10 @@ static const uint32_t bikerCategory         = 0x1 << 2;
         [GameData sharedGameData].selectedCharacterIndex = 0;
     }
     
-    self.characterImageArray = [NSMutableArray array];
-    self.characterAnimationArray = [NSMutableArray array];
-    for (NSDictionary *dict in [GameData sharedGameData].purchasesCharacters) {
-        [self.characterImageArray addObject:dict[@"name"]];
-        [self.characterAnimationArray addObject:[NSString stringWithFormat:@"%@Animation", dict[@"name"]]];
-    }
+    [self setUpArrays];
     
-//    self.characterAnimationArray = @[@"maxAnimation", @"derikAnimation", @"ninjaAnimation", @"mayorAnimation", @"elfAnimation", @"dinoAnimation", @"bikerAnimation"];
-    NSUInteger selectedInt = [self.characterImageArray indexOfObject:[GameData sharedGameData].selectedCharacter];
-    self.biker = [SKSpriteNode spriteNodeWithImageNamed:[self.characterImageArray objectAtIndex:selectedInt]];
+    
+    self.biker = [SKSpriteNode spriteNodeWithImageNamed:[self.characterImageArray objectAtIndex:self.selectedInt]];
     self.biker.position = CGPointMake(self.player.position.x - 2, self.player.position.y + self.biker.size.height / 3);
     self.biker.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:self.biker.size];
     self.biker.physicsBody.categoryBitMask = bikerCategory;
@@ -245,13 +241,24 @@ static const uint32_t bikerCategory         = 0x1 << 2;
     self.biker.zPosition = 2;
     [self addChild:self.biker];
     
-    self.bikerAnimation = [self animationFromPlist:[self.characterAnimationArray objectAtIndex:selectedInt]];
+    self.bikerAnimation = [self animationFromPlist:[self.characterAnimationArray objectAtIndex:self.selectedInt]];
     
     [self rotateWheels];
     [self.biker runAction:self.bikerAnimation withKey:@"biker"];
     [self addTreeAtX:self.frame.size.width - 100];
 }
 
+- (void)setUpArrays{
+    self.characterImageArray = [NSMutableArray array];
+    self.characterAnimationArray = [NSMutableArray array];
+    self.ghostImageArray = [NSMutableArray array];
+    for (NSDictionary *dict in [GameData sharedGameData].purchasesCharacters) {
+        [self.characterImageArray addObject:dict[@"name"]];
+        [self.characterAnimationArray addObject:[NSString stringWithFormat:@"%@Animation", dict[@"name"]]];
+        [self.ghostImageArray addObject:dict[@"ghost"]];
+    }
+    self.selectedInt = [self.characterImageArray indexOfObject:[GameData sharedGameData].selectedCharacter];
+}
 - (void)startGame{
     
     if (!self.firstPlay) {
@@ -401,6 +408,7 @@ static const uint32_t bikerCategory         = 0x1 << 2;
     [[self.view viewWithTag:400] removeFromSuperview];
     [[self.view viewWithTag:500] removeFromSuperview];
     [[self.view viewWithTag:321] removeFromSuperview];
+    [[self.view viewWithTag:10] removeFromSuperview];
 }
 
 #pragma mark - Ghost Methods
@@ -413,11 +421,11 @@ static const uint32_t bikerCategory         = 0x1 << 2;
     int rangeX = maxX - minX;
     int actualX = (arc4random() % rangeX) + minX;
     
-    Ghost *ghost = [Ghost spriteNodeWithTexture:[SKTexture textureWithImageNamed:@"Ghost1"]];
+    Ghost *ghost = [Ghost spriteNodeWithTexture:[SKTexture textureWithImageNamed:[self.ghostImageArray objectAtIndex:self.selectedInt]]];
     [self.ghostArray addObject:ghost];
     //create sprite
     if (actualX > self.frame.size.width/2) {
-        ghost.texture = [SKTexture textureWithImageNamed:@"Ghost1right"];
+        ghost.texture = [SKTexture textureWithImageNamed:[NSString stringWithFormat:@"%@_right", [self.ghostImageArray objectAtIndex:self.selectedInt]]];
     }
     
     //Determine a random Y if the spawn's X is off screen
@@ -507,7 +515,7 @@ static const uint32_t bikerCategory         = 0x1 << 2;
     Ghost *ghost = [Ghost spriteNodeWithTexture:[SKTexture textureWithImageNamed:@"Ghost1"]];
     [self.ghostArray addObject:ghost];
     //create sprite
-    ghost.texture = [SKTexture textureWithImageNamed:@"Ghost1right"];
+    ghost.texture = [SKTexture textureWithImageNamed:@"Ghost1_right"];
     ghost.position = CGPointMake(CGRectGetMidX(self.frame) + 10, self.frame.size.height);
     ghost.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:ghost.size];
     ghost.physicsBody.dynamic = YES;

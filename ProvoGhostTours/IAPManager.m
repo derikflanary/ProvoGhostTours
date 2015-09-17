@@ -11,8 +11,6 @@
 
 @interface IAPManager () <SKProductsRequestDelegate, SKPaymentTransactionObserver>
 
-@property (nonatomic, assign) BOOL trialRestored;
-
 @end
 
 NSString *const IAPHelperProductPurchasedNotification = @"IAPHelperProductPurchasedNotification";
@@ -128,18 +126,13 @@ NSString *const IAPHelperProductRestoredNotification = @"IAPHelperProductRestore
 
 - (void)completeTransaction:(SKPaymentTransaction *)transaction {
     NSLog(@"completeTransaction...");
-    if ([transaction.originalTransaction.payment.productIdentifier isEqualToString:@"com.patter.hashed.trial"] && transaction.originalTransaction) {
-        self.trialRestored = YES;
-    }
+    
     [self provideContentForProductIdentifier:transaction.payment.productIdentifier];
     [[SKPaymentQueue defaultQueue] finishTransaction:transaction];
 }
 
 - (void)restoreTransaction:(SKPaymentTransaction *)transaction {
     NSLog(@"restoreTransaction...");
-    if ([transaction.originalTransaction.payment.productIdentifier isEqualToString:@"com.patter.hashed.trial"]) {
-        self.trialRestored = YES;
-    }
     
     [self provideContentForProductIdentifier:transaction.originalTransaction.payment.productIdentifier];
     [[SKPaymentQueue defaultQueue] finishTransaction:transaction];
@@ -159,13 +152,11 @@ NSString *const IAPHelperProductRestoredNotification = @"IAPHelperProductRestore
 - (void)provideContentForProductIdentifier:(NSString *)productIdentifier {
     
     [_purchasedProductIdentifiers addObject:productIdentifier];
-    if ([productIdentifier isEqualToString:@"com.patter.hashed.upgradetopro"]) {
-           
+    
     NSLog(@"Purchase saved");
     
-        [[NSNotificationCenter defaultCenter] postNotificationName:IAPHelperProductPurchasedNotification object:productIdentifier userInfo:nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName:IAPHelperProductPurchasedNotification object:productIdentifier userInfo:nil];
     
-    }
 }
 
 - (void)restoreCompletedTransactions {
@@ -174,7 +165,7 @@ NSString *const IAPHelperProductRestoredNotification = @"IAPHelperProductRestore
 }
 
 - (void)paymentQueueRestoreCompletedTransactionsFinished:(SKPaymentQueue *)queue{
-    [[NSNotificationCenter defaultCenter] postNotificationName:IAPHelperProductRestoredNotification object:self userInfo:@{@"trialRestored": [NSNumber numberWithBool:self.trialRestored]}];
+    [[NSNotificationCenter defaultCenter] postNotificationName:IAPHelperProductRestoredNotification object:nil];
 }
 
 @end
