@@ -17,6 +17,7 @@ static NSString* const GTGameDataUpdatedFromiCloud = @"GTGameDataUpdatedFromiClo
 @property (nonatomic, assign) int flashbangs;
 @property (nonatomic, assign) long coins;
 @property (nonatomic, assign) NSUInteger selectedCharacterIndex;
+@property (nonatomic, strong) NSString *selectedCharacter;
 @property (nonatomic, strong) NSArray *purchasesCharacters;
 
 + (instancetype)sharedGameData;

@@ -20,6 +20,7 @@ static NSString* const GTGameDataTotalCoinsKey = @"totalCoins";
 static NSString* const GTGameDataCharacterKey = @"selectedCharacterIndex";
 static NSString* const GTGameDataChecksumKey = @"GameDataChecksumKey";
 static NSString* const GTGameDataCharactersKey = @"GameDataCharactersKey";
+static NSString* const GTGameDataSelectedCharactersKey = @"GameDataSelectedCharactersKey";
 
 + (instancetype)sharedGameData {
     static id sharedInstance = nil;
@@ -41,6 +42,7 @@ static NSString* const GTGameDataCharactersKey = @"GameDataCharactersKey";
         _coins = [decoder decodeDoubleForKey: GTGameDataTotalCoinsKey];
         _selectedCharacterIndex = [decoder decodeIntegerForKey:GTGameDataCharacterKey];
         _purchasesCharacters = [decoder decodeObjectForKey:GTGameDataCharactersKey];
+        _selectedCharacter = [decoder decodeObjectForKey:GTGameDataSelectedCharactersKey];
     }
     return self;
 }
@@ -50,6 +52,7 @@ static NSString* const GTGameDataCharactersKey = @"GameDataCharactersKey";
     [encoder encodeDouble:self.coins forKey: GTGameDataTotalCoinsKey];
     [encoder encodeInteger:self.selectedCharacterIndex forKey:GTGameDataCharacterKey];
     [encoder encodeObject:self.purchasesCharacters forKey:GTGameDataCharactersKey];
+    [encoder encodeObject:self.selectedCharacter forKey:GTGameDataSelectedCharactersKey];
 }
 
 + (instancetype)loadInstance{

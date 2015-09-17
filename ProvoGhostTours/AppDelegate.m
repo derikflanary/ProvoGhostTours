@@ -35,8 +35,16 @@
         [defaults setObject:currentAppVersion forKey:@"appVersion"];
         [defaults synchronize];
         
-        [GameData sharedGameData].purchasesCharacters = @[@"P", @"P", @"N", @"N", @"N", @"N", @"N"];
+        [GameData sharedGameData].purchasesCharacters = @[@{@"name": @"max", @"purchased": @"Y"},
+                                                          @{@"name": @"derik", @"purchased": @"N"},
+                                                          @{@"name": @"ninja", @"purchased": @"N"},
+                                                          @{@"name": @"mayor", @"purchased": @"N"},
+                                                          @{@"name": @"elf", @"purchased": @"N"},
+                                                          @{@"name": @"dinosaur", @"purchased": @"N"},
+                                                          @{@"name": @"retro", @"purchased": @"N"}];
+
         [GameData sharedGameData].selectedCharacterIndex = 0;
+        [GameData sharedGameData].selectedCharacter = @"max";
         [GameData sharedGameData].coins = 0;
         [[GameData sharedGameData] save];
 
@@ -47,8 +55,15 @@
         [defaults setObject:currentAppVersion forKey:@"appVersion"];
         [defaults synchronize];
         NSLog(@"updated");
-        [GameData sharedGameData].purchasesCharacters = @[@"P", @"P", @"N", @"N", @"N", @"N", @"N"];
+        [GameData sharedGameData].purchasesCharacters = @[@{@"name": @"max", @"purchased": @"Y"},
+                                                          @{@"name": @"derik", @"purchased": @"N"},
+                                                          @{@"name": @"ninja", @"purchased": @"N"},
+                                                          @{@"name": @"mayor", @"purchased": @"N"},
+                                                          @{@"name": @"elf", @"purchased": @"N"},
+                                                          @{@"name": @"dinosaur", @"purchased": @"N"},
+                                                          @{@"name": @"retro", @"purchased": @"N"}];
         [GameData sharedGameData].selectedCharacterIndex = 0;
+        [GameData sharedGameData].selectedCharacter = @"max";
         [GameData sharedGameData].coins = 0;
         [[GameData sharedGameData] save];
     }

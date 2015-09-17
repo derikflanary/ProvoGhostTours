@@ -47,8 +47,8 @@
 @property (nonatomic, strong) NSString *leaderboardIdentifier;
 @property (nonatomic, assign) BOOL gamePaused;
 @property (nonatomic, assign) NSTimeInterval theCurrentTime;
-@property (nonatomic, strong) NSArray *characterImageArray;
-@property (nonatomic, strong) NSArray *characterAnimationArray;
+@property (nonatomic, strong) NSMutableArray *characterImageArray;
+@property (nonatomic, strong) NSMutableArray *characterAnimationArray;
 
 @end
 
@@ -227,10 +227,15 @@ static const uint32_t bikerCategory         = 0x1 << 2;
         [GameData sharedGameData].selectedCharacterIndex = 0;
     }
     
-    NSUInteger selectedInt = [GameData sharedGameData].selectedCharacterIndex;
-    self.characterImageArray = @[@"Max_1", @"Derik_1", @"Ninja_1", @"Mayor_1", @"Elf_1", @"Dino_1", @"Retro_1"];
-    self.characterAnimationArray = @[@"maxAnimation", @"derikAnimation", @"ninjaAnimation", @"mayorAnimation", @"elfAnimation", @"dinoAnimation", @"bikerAnimation"];
+    self.characterImageArray = [NSMutableArray array];
+    self.characterAnimationArray = [NSMutableArray array];
+    for (NSDictionary *dict in [GameData sharedGameData].purchasesCharacters) {
+        [self.characterImageArray addObject:dict[@"name"]];
+        [self.characterAnimationArray addObject:[NSString stringWithFormat:@"%@Animation", dict[@"name"]]];
+    }
     
+//    self.characterAnimationArray = @[@"maxAnimation", @"derikAnimation", @"ninjaAnimation", @"mayorAnimation", @"elfAnimation", @"dinoAnimation", @"bikerAnimation"];
+    NSUInteger selectedInt = [self.characterImageArray indexOfObject:[GameData sharedGameData].selectedCharacter];
     self.biker = [SKSpriteNode spriteNodeWithImageNamed:[self.characterImageArray objectAtIndex:selectedInt]];
     self.biker.position = CGPointMake(self.player.position.x - 2, self.player.position.y + self.biker.size.height / 3);
     self.biker.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:self.biker.size];
@@ -499,10 +504,10 @@ static const uint32_t bikerCategory         = 0x1 << 2;
 
 - (void)addTutorialGhost{
     
-    Ghost *ghost = [Ghost spriteNodeWithTexture:[SKTexture textureWithImageNamed:@"Ghost2"]];
+    Ghost *ghost = [Ghost spriteNodeWithTexture:[SKTexture textureWithImageNamed:@"Ghost1"]];
     [self.ghostArray addObject:ghost];
     //create sprite
-    ghost.texture = [SKTexture textureWithImageNamed:@"Ghost2right"];
+    ghost.texture = [SKTexture textureWithImageNamed:@"Ghost1right"];
     ghost.position = CGPointMake(CGRectGetMidX(self.frame) + 10, self.frame.size.height);
     ghost.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:ghost.size];
     ghost.physicsBody.dynamic = YES;
@@ -528,7 +533,6 @@ static const uint32_t bikerCategory         = 0x1 << 2;
     int maxZ = 4;
     int rangeZ = maxZ - minZ;
     int actualZ = (arc4random() % rangeZ) + minZ;
-    NSLog(@"%d", actualZ);
     if (actualZ == 2 || 0) {
         self.tree = [SKSpriteNode spriteNodeWithImageNamed:@"Tree3"];
     }else{

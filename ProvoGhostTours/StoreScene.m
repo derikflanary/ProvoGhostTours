@@ -30,7 +30,7 @@ typedef NS_ENUM(NSInteger, CharacterIndex) {
 
 @property (nonatomic, strong) SKLabelNode *characterLabel;
 @property (nonatomic, strong) NSArray *characterNamesArray;
-@property (nonatomic, strong) NSArray *imageNamesArray;
+@property (nonatomic, strong) NSMutableArray *imageNamesArray;
 @property (nonatomic, strong) NSArray *itemsArray;
 @property (nonatomic, strong) NSMutableArray *coinAmounts;
 @property (nonatomic, strong) UIButton *characterButton;
@@ -148,9 +148,6 @@ static NSString* const CharacterCost = @"$0.99";
 }
 
 - (void)segmentChanged:(id)sender{
-    
-    self.imageNamesArray = @[@"Max_1", @"Derik_1", @"Ninja_1",@"Mayor_1", @"Elf_1", @"Dino_1", @"Retro_1"];
-    self.itemsArray = @[@"Flashed", @"Flashlight"];
     //    if (self.segmentedControl.selectedItemIndex == 0) {
     //        [self.coverFlowView setPageItemsWithImageNames:self.imageNamesArray];
     //    }else{
@@ -162,7 +159,13 @@ static NSString* const CharacterCost = @"$0.99";
 #pragma mark - Cover Flow
 
 - (void)addCoverView{
-    self.imageNamesArray = @[@"Max_1", @"Derik_1", @"Ninja_1",@"Mayor_1", @"Elf_1", @"Dino_1", @"Retro_1"];
+    self.imageNamesArray = [NSMutableArray array];
+    for (NSDictionary *dict in [GameData sharedGameData].purchasesCharacters) {
+        [self.imageNamesArray addObject:dict[@"name"]];
+        
+    }
+    
+//    self.imageNamesArray = @[@"Max_1", @"Derik_1", @"Ninja_1",@"Mayor_1", @"Elf_1", @"Dino_1", @"Retro_1"];
     self.itemsArray = @[@"Flashed", @"Flashlight"];
     
     self.coverFlowView = [[CFCoverFlowView alloc] initWithFrame:CGRectMake(100.0, 100.0, self.view.frame.size.width, 55.0)];
@@ -212,7 +215,8 @@ static NSString* const CharacterCost = @"$0.99";
     }
     
     //Check if character has been purchased already
-    if ([[[GameData sharedGameData].purchasesCharacters objectAtIndex:index] isEqualToString:@"N"]) {
+    NSDictionary *dict = [[GameData sharedGameData].purchasesCharacters objectAtIndex:index];
+    if ([dict[@"purchased"] isEqualToString:@"N"]) {
         self.purchaseWithCoinButton.hidden = NO;
         [self.characterButton setTitle:CharacterCost forState:UIControlStateNormal];
     }else{
@@ -223,6 +227,7 @@ static NSString* const CharacterCost = @"$0.99";
 -(void)coverFlowView:(CFCoverFlowView *)coverFlowView didSelectPageItemAtIndex:(NSInteger)index{
     if (index == self.characterIndex) {
         [GameData sharedGameData].selectedCharacterIndex = index;
+        [GameData sharedGameData].selectedCharacter = [self.imageNamesArray objectAtIndex:index];
         [[GameData sharedGameData] save];
         [self.characterButton setTitle:@"Selected" forState:UIControlStateNormal];
     }
@@ -236,11 +241,12 @@ static NSString* const CharacterCost = @"$0.99";
 
     }else{
         
-        
         [self.characterButton setTitle:@"Selected" forState:UIControlStateNormal];
         [GameData sharedGameData].selectedCharacterIndex = self.characterIndex;
+        [GameData sharedGameData].selectedCharacter = [self.imageNamesArray objectAtIndex:self.characterIndex];
+        NSLog(@"%@", [GameData sharedGameData].selectedCharacter);
         [[GameData sharedGameData] save];
-        NSLog(@"Selected");
+
  
     }
 }
@@ -264,13 +270,15 @@ static NSString* const CharacterCost = @"$0.99";
 - (void)requestProducts{
     [[PGTIAPManager sharedInstance] requestProductsWithCompletionHandler:^(BOOL success, NSArray *products) {
         self.products = products;
-        NSLog(@"products: %@", products);
+//        NSLog(@"products: %@", products);
     }];
-    
 }
 
 - (void)productPurchased{
+    [self savePurchase];
     
+    [self.characterButton setTitle:@"Select" forState:UIControlStateNormal];
+    self.purchaseWithCoinButton.hidden = YES;
 }
 
 - (void)productRestored{
@@ -279,9 +287,7 @@ static NSString* const CharacterCost = @"$0.99";
 
 - (void)purchaseWithCoinsSelected{
     //update purchased characters
-    NSMutableArray *mutableCharactersPurchased = [GameData sharedGameData].purchasesCharacters.mutableCopy;
-    [mutableCharactersPurchased replaceObjectAtIndex:self.characterIndex withObject:@"P"];
-    [GameData sharedGameData].purchasesCharacters = mutableCharactersPurchased;
+    [self savePurchase];
     
     //update coins
     NSString *amountString = [self.coinAmounts objectAtIndex:self.characterIndex];
@@ -294,6 +300,18 @@ static NSString* const CharacterCost = @"$0.99";
     
     [self.characterButton setTitle:@"Select" forState:UIControlStateNormal];
     self.purchaseWithCoinButton.hidden = YES;
+}
+
+- (void)savePurchase{
+    NSMutableArray *mutableCharactersPurchased = [GameData sharedGameData].purchasesCharacters.mutableCopy;
+    NSDictionary *dict = [[GameData sharedGameData].purchasesCharacters objectAtIndex:self.characterIndex];
+    NSMutableDictionary *newDict = [NSMutableDictionary dictionary];
+    [newDict addEntriesFromDictionary:dict];
+    [newDict setObject:@"Y" forKey:@"purchased"];
+    [mutableCharactersPurchased replaceObjectAtIndex:self.characterIndex withObject:newDict];
+    [GameData sharedGameData].purchasesCharacters = mutableCharactersPurchased;
+    
+    [[GameData sharedGameData] save];
 }
 
 #pragma mark - Other Methods
