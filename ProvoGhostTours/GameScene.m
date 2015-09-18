@@ -52,6 +52,7 @@
 @property (nonatomic, strong) NSMutableArray *characterAnimationArray;
 @property (nonatomic, strong) NSMutableArray *ghostImageArray;
 @property (nonatomic, assign) NSUInteger selectedInt;
+@property (nonatomic, assign) BOOL superlightEngaged;
 
 @end
 
@@ -287,7 +288,7 @@ static const uint32_t bikerCategory         = 0x1 << 2;
     self.firstPlay = NO;
     
     [self addFlashlight];
-//    [self addSuperLight];
+    [self addSuperLight];
     [self addInGameObjects];
     
     //Set up arrays for ghost spawning and deleting
@@ -364,11 +365,13 @@ static const uint32_t bikerCategory         = 0x1 << 2;
         CGPathAddLineToPoint(path, NULL, -1 - offsetX, 413 - offsetY);
         CGPathAddLineToPoint(path, NULL, 83 - offsetX, -1 - offsetY);
         CGPathAddLineToPoint(path, NULL, 145 - offsetX, 3 - offsetY);
+        CGPathCloseSubpath(path);
     }else{
         CGPathMoveToPoint(path, NULL, 76 - offsetX, 168 - offsetY);
         CGPathAddLineToPoint(path, NULL, 0 - offsetX, 167 - offsetY);
         CGPathAddLineToPoint(path, NULL, 31 - offsetX, 0 - offsetY);
         CGPathAddLineToPoint(path, NULL, 50 - offsetX, 0 - offsetY);
+        CGPathCloseSubpath(path);
     }
     
     self.light.physicsBody = [SKPhysicsBody bodyWithPolygonFromPath:path];
@@ -384,10 +387,10 @@ static const uint32_t bikerCategory         = 0x1 << 2;
     //add the flashlight
     
     self.superLight = [SKSpriteNode spriteNodeWithImageNamed:@"superlight.png"];
-    self.superLight.alpha = .8;
+    self.superLight.alpha = .6;
     self.superLight.position = CGPointMake(0, self.superLight.size.height/2);
     [self.centerPoint addChild:self.superLight];
-    self.light.zPosition = 2;
+    self.superLight.zPosition = 2;
     
     CGFloat offsetX = self.superLight.frame.size.width/2;
     CGFloat offsetY = self.superLight.frame.size.height/2;
@@ -413,8 +416,6 @@ static const uint32_t bikerCategory         = 0x1 << 2;
         CGPathCloseSubpath(path);
     }
 
-    
-    
     CGPathCloseSubpath(path);
     
     self.superLight.physicsBody = [SKPhysicsBody bodyWithPolygonFromPath:path];
@@ -423,6 +424,9 @@ static const uint32_t bikerCategory         = 0x1 << 2;
     self.superLight.physicsBody.contactTestBitMask = ghostCategory;
     self.superLight.physicsBody.collisionBitMask = 0;
     self.superLight.physicsBody.usesPreciseCollisionDetection = YES;
+    
+    self.superlightEngaged = YES;
+    self.light.hidden = YES;
 }
 
 #pragma mark - Start Screen Button Methods
@@ -550,7 +554,7 @@ static const uint32_t bikerCategory         = 0x1 << 2;
             }
             
         }else{
-            [ghost collidedWithFlashlight:delta];
+            [ghost collidedWithFlashlight:delta Super:self.superlightEngaged];
         }
     }
     //remove dead ghosts

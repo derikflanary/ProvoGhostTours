@@ -13,7 +13,7 @@
 @property (nonatomic) NSTimeInterval timeContacted;
 @property (nonatomic, assign) BOOL isContacted;
 
-- (void)collidedWithFlashlight:(NSTimeInterval)delta;
+- (void)collidedWithFlashlight:(NSTimeInterval)delta Super:(BOOL)superlight;
 - (void)initialCollisionWithLight;
 - (void)die;
 @end

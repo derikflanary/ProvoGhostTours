@@ -10,10 +10,18 @@
 
 @implementation Ghost
 
-- (void)collidedWithFlashlight:(NSTimeInterval)delta{
-    if (self.alpha < 1) {
-        self.alpha = self.alpha + delta/2.5;
+- (void)collidedWithFlashlight:(NSTimeInterval)delta Super:(BOOL)superlight{
+    
+    if (!superlight) {
+        if (self.alpha < 1) {
+            self.alpha = self.alpha + delta/2.5;
+        }
+    }else{
+        if (self.alpha < 1) {
+            self.alpha = self.alpha + delta/1.25;
+        }
     }
+    
 }
 
 - (void)initialCollisionWithLight{
