@@ -13,6 +13,7 @@
 #import <GameKit/GameKit.h>
 #import "StoreScene.h"
 #import "GameData.h"
+#import "ProgressBar.h"
 
 @interface GameScene() <SKPhysicsContactDelegate, MPCoachMarksViewDelegate, GKGameCenterControllerDelegate>
 
@@ -53,6 +54,8 @@
 @property (nonatomic, strong) NSMutableArray *ghostImageArray;
 @property (nonatomic, assign) NSUInteger selectedInt;
 @property (nonatomic, assign) BOOL superlightEngaged;
+@property (nonatomic, strong) ProgressBar *progressBar;
+@property (nonatomic, assign) CGFloat progress;
 
 @end
 
@@ -99,9 +102,6 @@ static const uint32_t bikerCategory         = 0x1 << 2;
         self.ghostSound = [SKAction playSoundFileNamed:@"ghostSound.caf" waitForCompletion:NO];
         
         [self authenticateLocalPlayer];
-        
-        
-        
     }
     return self;
 }
@@ -114,8 +114,6 @@ static const uint32_t bikerCategory         = 0x1 << 2;
 
 - (void)didMoveToView:(SKView *)view {
     /* Setup your scene here */
-
-    
     [self addStartScreenButtons];
 }
 
@@ -233,7 +231,6 @@ static const uint32_t bikerCategory         = 0x1 << 2;
     
     [self setUpArrays];
     
-    
     self.biker = [SKSpriteNode spriteNodeWithImageNamed:[self.characterImageArray objectAtIndex:self.selectedInt]];
     self.biker.position = CGPointMake(self.player.position.x - 2, self.player.position.y + self.biker.size.height / 3);
     self.biker.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:self.biker.size];
@@ -248,6 +245,19 @@ static const uint32_t bikerCategory         = 0x1 << 2;
     [self rotateWheels];
     [self.biker runAction:self.bikerAnimation withKey:@"biker"];
     [self addTreeAtX:self.frame.size.width - 100];
+    
+}
+
+- (void)setUpProgressBar{
+    self.progressBar = [[ProgressBar alloc]initWithSize:CGSizeMake(16, 60)
+                                        backgroundColor:[UIColor blackColor]
+                                              fillColor:[UIColor whiteColor]
+                                            borderColor:[UIColor lightGrayColor]
+                                            borderWidth:1.0
+                                           cornerRadius:2.0];
+    self.progressBar.position = CGPointMake(self.biker.position.x + 100, 50);
+    self.progressBar.zPosition = 5;
+    [self addChild:self.progressBar];
 }
 
 - (void)setUpArrays{
@@ -286,9 +296,8 @@ static const uint32_t bikerCategory         = 0x1 << 2;
     }
 
     self.firstPlay = NO;
-    
+    [self setUpProgressBar];
     [self addFlashlight];
-    [self addSuperLight];
     [self addInGameObjects];
     
     //Set up arrays for ghost spawning and deleting
@@ -397,24 +406,22 @@ static const uint32_t bikerCategory         = 0x1 << 2;
     
     CGMutablePathRef path = CGPathCreateMutable();
     if (([[UIScreen mainScreen] scale] == 2.0)) {
-        CGPathMoveToPoint(path, NULL, 294 - offsetX, 368 - offsetY);
-        CGPathAddLineToPoint(path, NULL, 0 - offsetX, 368 - offsetY);
-        CGPathAddLineToPoint(path, NULL, 140 - offsetX, 0 - offsetY);
-        CGPathAddLineToPoint(path, NULL, 174 - offsetX, 0 - offsetY);
+        CGPathMoveToPoint(path, NULL, 342 - offsetX, 448 - offsetY);
+        CGPathAddLineToPoint(path, NULL, 0 - offsetX, 448 - offsetY);
+        CGPathAddLineToPoint(path, NULL, 158 - offsetX, 0 - offsetY);
+        CGPathAddLineToPoint(path, NULL, 216 - offsetX, 0 - offsetY);
         CGPathCloseSubpath(path);
     }else if (([[UIScreen mainScreen] scale] == 3.0)){
-        CGPathMoveToPoint(path, NULL, 441 - offsetX, 552 - offsetY);
-        CGPathAddLineToPoint(path, NULL, 0 - offsetX, 552 - offsetY);
-        CGPathAddLineToPoint(path, NULL, 210 - offsetX, 0 - offsetY);
-        CGPathAddLineToPoint(path, NULL, 261 - offsetX, 0 - offsetY);
+        CGPathMoveToPoint(path, NULL, 513 - offsetX, 672 - offsetY);
+        CGPathAddLineToPoint(path, NULL, 0 - offsetX, 672 - offsetY);
+        CGPathAddLineToPoint(path, NULL, 237 - offsetX, 0 - offsetY);
+        CGPathAddLineToPoint(path, NULL, 324 - offsetX, 0 - offsetY);
         CGPathCloseSubpath(path);
     }else{
-        CGPathMoveToPoint(path, NULL, 147 - offsetX, 184 - offsetY);
-        CGPathAddLineToPoint(path, NULL, 0 - offsetX, 184 - offsetY);
-        CGPathAddLineToPoint(path, NULL, 70 - offsetX, 1 - offsetY);
-        CGPathAddLineToPoint(path, NULL, 87 - offsetX, 0 - offsetY);
-        CGPathCloseSubpath(path);
-    }
+        CGPathMoveToPoint(path, NULL, 171 - offsetX, 224 - offsetY);
+        CGPathAddLineToPoint(path, NULL, 0 - offsetX, 224 - offsetY);
+        CGPathAddLineToPoint(path, NULL, 79 - offsetX, 0 - offsetY);
+        CGPathAddLineToPoint(path, NULL, 108 - offsetX, 0 - offsetY);    }
 
     CGPathCloseSubpath(path);
     
@@ -528,8 +535,6 @@ static const uint32_t bikerCategory         = 0x1 << 2;
             [GameData sharedGameData].score += 10;
             [self.scoreLabel setText:[NSString stringWithFormat:@"Score: %ld", [GameData sharedGameData].score]];
             
-            
-            
             //kill ghost
             [self.ghostArray removeObject:ghost];
             [removedGhostsArray addObject:ghost];
@@ -551,6 +556,19 @@ static const uint32_t bikerCategory         = 0x1 << 2;
                 
                 [GameData sharedGameData].coins += 1;
                 [self.coinLabel setText:[NSString stringWithFormat:@"Coins: %ld", [GameData sharedGameData].coins]];
+                
+                self.progress += .1;
+                NSLog(@"%f", self.progress);
+                if (!self.superlightEngaged) {
+                    if (self.progress > 1) {
+                        [self addSuperLight];
+                        [self.progressBar setProgress:0];
+                    }else{
+                        [self.progressBar setProgress:self.progress];
+                    }
+                }
+                
+                
             }
             
         }else{

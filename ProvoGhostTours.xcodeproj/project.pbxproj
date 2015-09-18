@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		6816C9EA36C3CDAAE1094A61 /* libPods-ProvoGhostTours.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E91B6BCCF656DF7FFF805E7 /* libPods-ProvoGhostTours.a */; };
+		EE2FC1BE1BAC723400EF7014 /* ProgressBar.m in Sources */ = {isa = PBXBuildFile; fileRef = EE2FC1BD1BAC723400EF7014 /* ProgressBar.m */; settings = {ASSET_TAGS = (); }; };
 		EEA1916D1B92CC4D005B0BE9 /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EEA1916C1B92CC4C005B0BE9 /* GameKit.framework */; };
 		EEA1916F1B92D8F1005B0BE9 /* GameScene.m in Sources */ = {isa = PBXBuildFile; fileRef = EEA1916E1B92D8F1005B0BE9 /* GameScene.m */; };
 		EEB6652F1B7BEE6200FDA352 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = EEB6652E1B7BEE6200FDA352 /* main.m */; };
@@ -53,6 +54,8 @@
 		2D35FA64800B4667499F13B5 /* Pods-ProvoGhostTours.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ProvoGhostTours.release.xcconfig"; path = "Pods/Target Support Files/Pods-ProvoGhostTours/Pods-ProvoGhostTours.release.xcconfig"; sourceTree = "<group>"; };
 		3CAA61AD23E236AF4B403FBA /* Pods-ProvoGhostTours.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ProvoGhostTours.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ProvoGhostTours/Pods-ProvoGhostTours.debug.xcconfig"; sourceTree = "<group>"; };
 		5E91B6BCCF656DF7FFF805E7 /* libPods-ProvoGhostTours.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ProvoGhostTours.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		EE2FC1BC1BAC723400EF7014 /* ProgressBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProgressBar.h; sourceTree = "<group>"; };
+		EE2FC1BD1BAC723400EF7014 /* ProgressBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProgressBar.m; sourceTree = "<group>"; };
 		EEA1916C1B92CC4C005B0BE9 /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
 		EEA1916E1B92D8F1005B0BE9 /* GameScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameScene.m; sourceTree = "<group>"; };
 		EEB665291B7BEE6200FDA352 /* ProvoGhostTours.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ProvoGhostTours.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -168,6 +171,8 @@
 				EEB665311B7BEE6200FDA352 /* AppDelegate.m */,
 				EEB665331B7BEE6200FDA352 /* GameScene.h */,
 				EEA1916E1B92D8F1005B0BE9 /* GameScene.m */,
+				EE2FC1BC1BAC723400EF7014 /* ProgressBar.h */,
+				EE2FC1BD1BAC723400EF7014 /* ProgressBar.m */,
 				EEF8DBE21B9A425F003ADB20 /* StoreScene.h */,
 				EEF8DBE31B9A425F003ADB20 /* StoreScene.m */,
 				EED598FE1B838EDC00A869B3 /* Ghost.h */,
@@ -437,6 +442,7 @@
 				EEC1F04C1BA769C200CFA72F /* PGTIAPManager.m in Sources */,
 				EEB6653A1B7BEE6200FDA352 /* GameViewController.m in Sources */,
 				EEB665321B7BEE6200FDA352 /* AppDelegate.m in Sources */,
+				EE2FC1BE1BAC723400EF7014 /* ProgressBar.m in Sources */,
 				EEF8DBE41B9A425F003ADB20 /* StoreScene.m in Sources */,
 				EEA1916F1B92D8F1005B0BE9 /* GameScene.m in Sources */,
 				EEDDFCEA1BA3734100A64486 /* BWSegmentedControl.m in Sources */,
