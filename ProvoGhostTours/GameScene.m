@@ -248,18 +248,6 @@ static const uint32_t bikerCategory         = 0x1 << 2;
     
 }
 
-- (void)setUpProgressBar{
-    self.progressBar = [[ProgressBar alloc]initWithSize:CGSizeMake(16, 60)
-                                        backgroundColor:[UIColor blackColor]
-                                              fillColor:[UIColor whiteColor]
-                                            borderColor:[UIColor lightGrayColor]
-                                            borderWidth:1.0
-                                           cornerRadius:2.0];
-    self.progressBar.position = CGPointMake(self.biker.position.x + 100, 50);
-    self.progressBar.zPosition = 5;
-    [self addChild:self.progressBar];
-}
-
 - (void)setUpArrays{
     self.characterImageArray = [NSMutableArray array];
     self.characterAnimationArray = [NSMutableArray array];
@@ -296,7 +284,6 @@ static const uint32_t bikerCategory         = 0x1 << 2;
     }
 
     self.firstPlay = NO;
-    [self setUpProgressBar];
     [self addFlashlight];
     [self addInGameObjects];
     
@@ -309,7 +296,6 @@ static const uint32_t bikerCategory         = 0x1 << 2;
     if (coachMarksShown) {
         [self addGhost];
     }
-    
 }
 
 - (void)addInGameObjects{
@@ -333,13 +319,14 @@ static const uint32_t bikerCategory         = 0x1 << 2;
     self.coinLabel.position = CGPointMake(self.scoreLabel.position.x, self.scoreLabel.position.y + margin * 2);
     [self addChild:self.coinLabel];
     
+    [self setUpProgressBar];
+    
     UIButton *flashButton = [[UIButton alloc]initWithFrame:CGRectMake(self.frame.size.width -50, self.frame.size.height - 50, 25, 25)];
     [flashButton setImage:[UIImage imageNamed:@"Flashed"] forState:UIControlStateNormal];
     [flashButton setImage:[UIImage imageNamed:@"Flashbang"] forState:UIControlStateSelected];
     [flashButton addTarget:self action:@selector(flashPressed:) forControlEvents:UIControlEventTouchUpInside];
     flashButton.tag = 10;
-    [self.view addSubview:flashButton];
-    
+//    [self.view addSubview:flashButton];
 }
 
 - (void)addFlashlight{
@@ -390,6 +377,21 @@ static const uint32_t bikerCategory         = 0x1 << 2;
     self.light.physicsBody.collisionBitMask = 0;
     self.light.physicsBody.usesPreciseCollisionDetection = YES;
 }
+
+#pragma mark - Superlight
+
+- (void)setUpProgressBar{
+    self.progressBar = [[ProgressBar alloc]initWithSize:CGSizeMake(16, 60)
+                                        backgroundColor:[UIColor colorWithWhite:0 alpha:.5]
+                                              fillColor:[UIColor whiteColor]
+                                            borderColor:[UIColor colorWithWhite:.7 alpha:.8]
+                                            borderWidth:1.0
+                                           cornerRadius:2.0];
+    self.progressBar.position = CGPointMake(20, self.coinLabel.position.y + 50);
+    self.progressBar.zPosition = 5;
+    [self addChild:self.progressBar];
+}
+
 
 - (void)addSuperLight{
     
@@ -543,32 +545,23 @@ static const uint32_t bikerCategory         = 0x1 << 2;
             [self runAction:self.ghostSound];
             
             int randomInt = (arc4random() % 10) + 1;
-            if (randomInt > 4) {
-                //update coins
-                SKSpriteNode *coin = [SKSpriteNode spriteNodeWithImageNamed:@"coin"];
-                coin.position = ghost.position;
-                coin.zPosition = 2;
-                [self addChild:coin];
+            if (randomInt > 5) {
                 
-                SKAction *die = [SKAction fadeOutWithDuration:1];
-                SKAction *remove = [SKAction removeFromParent];
-                [coin runAction:[SKAction sequence:@[die, remove]]];
+                [self coinLifeCycle:ghost.position];
                 
-                [GameData sharedGameData].coins += 1;
-                [self.coinLabel setText:[NSString stringWithFormat:@"Coins: %ld", [GameData sharedGameData].coins]];
+            }else if (randomInt <= 3){
                 
-                self.progress += .1;
-                NSLog(@"%f", self.progress);
+                [self batteryLifeCycle:ghost.position];
+                
                 if (!self.superlightEngaged) {
+                    self.progress += .51;
+                    
                     if (self.progress > 1) {
                         [self addSuperLight];
-                        [self.progressBar setProgress:0];
                     }else{
                         [self.progressBar setProgress:self.progress];
                     }
                 }
-                
-                
             }
             
         }else{
@@ -577,6 +570,38 @@ static const uint32_t bikerCategory         = 0x1 << 2;
     }
     //remove dead ghosts
     [self.contactedGhostArray removeObjectsInArray:removedGhostsArray];
+}
+
+- (void)coinLifeCycle:(CGPoint)position{
+    //update coins
+    SKSpriteNode *coin = [SKSpriteNode spriteNodeWithImageNamed:@"coin"];
+    coin.position = position;
+    coin.zPosition = 2;
+    [self addChild:coin];
+    
+    SKAction *die = [SKAction fadeOutWithDuration:1];
+    SKAction *remove = [SKAction removeFromParent];
+    [coin runAction:[SKAction sequence:@[die, remove]]];
+    
+    [GameData sharedGameData].coins += 1;
+    [self.coinLabel setText:[NSString stringWithFormat:@"Coins: %ld", [GameData sharedGameData].coins]];
+
+}
+
+- (void)batteryLifeCycle:(CGPoint)position{
+    if (self.superlightEngaged) {
+        return;
+    }
+    
+    SKSpriteNode *battery = [SKSpriteNode spriteNodeWithImageNamed:@"battery"];
+    battery.position = position;
+    battery.zPosition = 2;
+    [self addChild:battery];
+    
+    SKAction *die = [SKAction fadeOutWithDuration:1];
+    SKAction *remove = [SKAction removeFromParent];
+    [battery runAction:[SKAction sequence:@[die, remove]]];
+    
 }
 
 - (void)addTutorialGhost{
@@ -601,6 +626,7 @@ static const uint32_t bikerCategory         = 0x1 << 2;
     SKAction *actionMove = [SKAction moveTo:CGPointMake(CGRectGetMidX(self.frame), 100) duration:3];
     [ghost runAction:actionMove];
 }
+
 
 #pragma mark - Tree Methods
 
@@ -745,6 +771,20 @@ static const uint32_t bikerCategory         = 0x1 << 2;
     }
     
     [self updateWithTimeSinceLastUpdate:timeSinceLast];
+    
+    //Update progress if superlight is on
+    if (self.superlightEngaged) {
+        self.progress -= timeSinceLast * .075;
+        
+        if (self.progress > 0) {
+            self.progressBar.progress = self.progress;
+        }else{
+            self.light.hidden = NO;
+            [self.superLight removeFromParent];
+            self.superlightEngaged = NO;
+            self.progressBar.progress = 0;
+        }
+    }
 }
 
 #pragma mark - Animations
@@ -896,7 +936,10 @@ static const uint32_t bikerCategory         = 0x1 << 2;
     [ghost initialCollisionWithLight];
     
     ghost.isContacted = YES;
-    [self.contactedGhostArray addObject:ghost];
+    if (![self.contactedGhostArray containsObject:ghost]) {
+        [self.contactedGhostArray addObject:ghost];
+    }
+    
 }
 
 - (void)flashlight:(SKSpriteNode *)flashlight didStopCollidingWithGhost:(Ghost *)ghost{
