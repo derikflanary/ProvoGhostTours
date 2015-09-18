@@ -36,7 +36,7 @@
         [defaults synchronize];
         
         [GameData sharedGameData].purchasesCharacters = @[@{@"name": @"max", @"purchased": @"Y", @"title": @"Max", @"ghost":  @"Ghost1"},
-                                                          @{@"name": @"derik", @"purchased": @"N", @"title": @"Derik", @"ghost": @"Ghost1"},
+                                                          @{@"name": @"derik", @"purchased": @"Y", @"title": @"Derik", @"ghost": @"Ghost1"},
                                                           @{@"name": @"ninja", @"purchased": @"Y", @"title": @"Ninja", @"ghost": @"Ghost_ninja"},
                                                           @{@"name": @"mayor", @"purchased": @"Y", @"title": @"Provo Mayor", @"ghost": @"Ghost_mayor"},
                                                           @{@"name": @"elf", @"purchased": @"Y", @"title": @"Elf", @"ghost": @"Ghost_elf"},

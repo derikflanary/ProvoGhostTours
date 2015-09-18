@@ -531,6 +531,16 @@ static const uint32_t bikerCategory         = 0x1 << 2;
     
     NSMutableArray *removedGhostsArray = [NSMutableArray array];
     for (Ghost *ghost in self.contactedGhostArray) {
+        if (self.superlightEngaged && !ghost.enflamed) {
+        
+            SKAction *flameAnimation = [self animationFromPlist:@"flameAnimation"];
+            SKSpriteNode *flame = [SKSpriteNode spriteNodeWithImageNamed:@"flame1"];
+            flame.zPosition = 3;
+            flame.position = CGPointMake(0, - 10);
+            [ghost addChild:flame];
+            [flame runAction:flameAnimation];
+            ghost.enflamed = YES;
+        }
         if (ghost.alpha >= .9) {
             
             //update score
@@ -554,7 +564,7 @@ static const uint32_t bikerCategory         = 0x1 << 2;
                 [self batteryLifeCycle:ghost.position];
                 
                 if (!self.superlightEngaged) {
-                    self.progress += .12;
+                    self.progress += .13;
                     
                     if (self.progress > 1) {
                         [self addSuperLight];
@@ -807,6 +817,10 @@ static const uint32_t bikerCategory         = 0x1 << 2;
     
     float framesOverOneSecond = 1.0f/4.0f;
     
+    if ([animFrames count] < 2) {
+        framesOverOneSecond = 4;
+    }
+    
     return [SKAction repeatActionForever:[SKAction animateWithTextures:animFrames timePerFrame:framesOverOneSecond resize:NO restore:YES]]; // 6
     
 }
@@ -1037,6 +1051,7 @@ static const uint32_t bikerCategory         = 0x1 << 2;
     [self.audioPlayer stop];
     
     self.gameover = YES;
+    self.progress = 0;
     
     [self reportScore:[GameData sharedGameData].score];
 
@@ -1123,7 +1138,7 @@ static const uint32_t bikerCategory         = 0x1 << 2;
 }
 
 - (void)reportScore:(NSInteger)score{
-    
+    return;
     if (self.gameCenterEnabled) {
         GKScore *theScore = [[GKScore alloc] initWithLeaderboardIdentifier:_leaderboardIdentifier];
         theScore.value = score;

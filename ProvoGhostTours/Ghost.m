@@ -14,11 +14,11 @@
     
     if (!superlight) {
         if (self.alpha < 1) {
-            self.alpha = self.alpha + delta/2.5;
+            self.alpha = self.alpha + delta/2.25;
         }
     }else{
         if (self.alpha < 1) {
-            self.alpha = self.alpha + delta/1.25;
+            self.alpha = self.alpha + delta/1.10;
         }
     }
     
@@ -32,6 +32,7 @@
 }
 
 - (void)die{
+    [self runAction:[SKAction stop]];
     SKAction *grow = [SKAction resizeToWidth:self.size.width * 1.5 duration:.075];
     SKAction *shrink = [SKAction resizeToWidth:self.size.width * .75 duration:.075];
     SKAction *die = [SKAction fadeOutWithDuration:.15];
