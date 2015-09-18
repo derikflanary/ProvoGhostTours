@@ -203,7 +203,7 @@ static const uint32_t bikerCategory         = 0x1 << 2;
     background.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame));
     [self addChild:background];
     
-    self.movingBackground = [SKSpriteNode spriteNodeWithImageNamed:@"All Buildings"];
+    self.movingBackground = [SKSpriteNode spriteNodeWithImageNamed:@"Backdrop"];
     self.movingBackground.size = CGSizeMake(2562, self.frame.size.height);
     self.movingBackground.position = CGPointMake(self.frame.size.width, 0);
     self.movingBackground.anchorPoint = CGPointZero;
@@ -554,7 +554,7 @@ static const uint32_t bikerCategory         = 0x1 << 2;
                 [self batteryLifeCycle:ghost.position];
                 
                 if (!self.superlightEngaged) {
-                    self.progress += .51;
+                    self.progress += .12;
                     
                     if (self.progress > 1) {
                         [self addSuperLight];
@@ -749,7 +749,7 @@ static const uint32_t bikerCategory         = 0x1 << 2;
     if (self.movingBackground.position.x <= - 2600) {
         self.movingBackground.position = CGPointMake(self.frame.size.width, 0);
     }else{
-        self.movingBackground.position = CGPointMake(self.movingBackground.position.x - .75, self.movingBackground.position.y);
+        self.movingBackground.position = CGPointMake(self.movingBackground.position.x - .5, self.movingBackground.position.y);
     }
     
     //Move the trees
@@ -758,7 +758,7 @@ static const uint32_t bikerCategory         = 0x1 << 2;
         int actualSpawn = (arc4random() % 200) + 10;
         [self addTreeAtX:self.view.frame.size.width + actualSpawn];
     }else{
-        self.tree.position = CGPointMake(self.tree.position.x - .75, self.tree.position.y);
+        self.tree.position = CGPointMake(self.tree.position.x - .5, self.tree.position.y);
     }
 
     // Handle time delta.
