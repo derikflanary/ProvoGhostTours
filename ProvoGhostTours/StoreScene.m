@@ -68,7 +68,7 @@ static NSString* const CharacterCost = @"$0.99";
 
     [self requestProducts];
     
-    [self addSegmentedControl];
+//    [self addSegmentedControl];
     [self addCoverView];
     
     UIButton *backButton = [[UIButton alloc]initWithFrame:CGRectMake(25, 25, 25, 25)];
