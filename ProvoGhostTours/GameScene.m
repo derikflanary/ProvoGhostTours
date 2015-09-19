@@ -536,7 +536,7 @@ static const uint32_t bikerCategory         = 0x1 << 2;
             SKAction *flameAnimation = [self animationFromPlist:@"flameAnimation"];
             SKSpriteNode *flame = [SKSpriteNode spriteNodeWithImageNamed:@"flame1"];
             flame.zPosition = 3;
-            flame.position = CGPointMake(0, - 10);
+            flame.position = CGPointMake(0, - 7);
             [ghost addChild:flame];
             [flame runAction:flameAnimation];
             ghost.enflamed = YES;
@@ -555,6 +555,7 @@ static const uint32_t bikerCategory         = 0x1 << 2;
             [self runAction:self.ghostSound];
             
             int randomInt = (arc4random() % 10) + 1;
+            
             if (randomInt > 5) {
                 
                 [self coinLifeCycle:ghost.position];
@@ -562,16 +563,6 @@ static const uint32_t bikerCategory         = 0x1 << 2;
             }else if (randomInt <= 3){
                 
                 [self batteryLifeCycle:ghost.position];
-                
-                if (!self.superlightEngaged) {
-                    self.progress += .13;
-                    
-                    if (self.progress > 1) {
-                        [self addSuperLight];
-                    }else{
-                        [self.progressBar setProgress:self.progress];
-                    }
-                }
             }
             
         }else{
@@ -588,13 +579,17 @@ static const uint32_t bikerCategory         = 0x1 << 2;
     coin.position = position;
     coin.zPosition = 2;
     [self addChild:coin];
+    SKAction *move = [SKAction moveTo:CGPointMake(self.coinLabel.position.x + self.coinLabel.frame.size.width/2, self.coinLabel.position.y + self.coinLabel.frame.size.height/2) duration:.75];
     
-    SKAction *die = [SKAction fadeOutWithDuration:1];
     SKAction *remove = [SKAction removeFromParent];
-    [coin runAction:[SKAction sequence:@[die, remove]]];
-    
-    [GameData sharedGameData].coins += 1;
-    [self.coinLabel setText:[NSString stringWithFormat:@"Coins: %ld", [GameData sharedGameData].coins]];
+    [coin runAction:[SKAction sequence:@[move, remove]] completion:^{
+        
+        SKAction *scaleUp = [SKAction scaleTo:1.1 duration:.1];
+        SKAction *scaleDown = [SKAction scaleTo:1.0 duration:.1];
+        [self.coinLabel runAction:[SKAction sequence:@[scaleUp, scaleDown]]];
+        [GameData sharedGameData].coins += 1;
+        [self.coinLabel setText:[NSString stringWithFormat:@"Coins: %ld", [GameData sharedGameData].coins]];
+    }];
 
 }
 
@@ -608,9 +603,20 @@ static const uint32_t bikerCategory         = 0x1 << 2;
     battery.zPosition = 2;
     [self addChild:battery];
     
-    SKAction *die = [SKAction fadeOutWithDuration:1];
+    SKAction *move = [SKAction moveTo:self.progressBar.position duration:.75];
     SKAction *remove = [SKAction removeFromParent];
-    [battery runAction:[SKAction sequence:@[die, remove]]];
+    [battery runAction:[SKAction sequence:@[move, remove]] completion:^{
+        
+        if (!self.superlightEngaged) {
+            self.progress += .53;
+            
+            if (self.progress > 1) {
+                [self addSuperLight];
+            }else{
+                [self.progressBar setProgress:self.progress];
+            }
+        }
+    }];
     
 }
 
@@ -636,7 +642,6 @@ static const uint32_t bikerCategory         = 0x1 << 2;
     SKAction *actionMove = [SKAction moveTo:CGPointMake(CGRectGetMidX(self.frame), 100) duration:3];
     [ghost runAction:actionMove];
 }
-
 
 #pragma mark - Tree Methods
 
@@ -902,7 +907,6 @@ static const uint32_t bikerCategory         = 0x1 << 2;
         secondBody = contact.bodyA;
     }
     
-    
     if ((firstBody.categoryBitMask & flashlightCategory) != 0 &&
         (secondBody.categoryBitMask & ghostCategory) != 0)
     {
@@ -960,6 +964,7 @@ static const uint32_t bikerCategory         = 0x1 << 2;
     
     ghost.isContacted = NO;
     [self.contactedGhostArray removeObject:ghost];
+    
 }
 
 
