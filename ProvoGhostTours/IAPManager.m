@@ -154,8 +154,9 @@ NSString *const IAPHelperProductRestoredNotification = @"IAPHelperProductRestore
     [_purchasedProductIdentifiers addObject:productIdentifier];
     
     NSLog(@"Purchase saved");
+    NSDictionary *dict = @{@"productIdentifier": productIdentifier};
     
-    [[NSNotificationCenter defaultCenter] postNotificationName:IAPHelperProductPurchasedNotification object:productIdentifier userInfo:nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName:IAPHelperProductPurchasedNotification object:nil userInfo:dict];
     
 }
 
