@@ -2,8 +2,8 @@
   "images" : [
     {
       "idiom" : "universal",
-      "scale" : "1x",
-      "filename" : "Dino_1.png"
+      "filename" : "Dino1_1.png",
+      "scale" : "1x"
     },
     {
       "idiom" : "universal",

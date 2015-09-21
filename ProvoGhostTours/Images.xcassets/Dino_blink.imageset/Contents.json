@@ -2,8 +2,8 @@
   "images" : [
     {
       "idiom" : "universal",
-      "scale" : "1x",
-      "filename" : "Dino_blink.png"
+      "filename" : "Dino1_blink.png",
+      "scale" : "1x"
     },
     {
       "idiom" : "universal",

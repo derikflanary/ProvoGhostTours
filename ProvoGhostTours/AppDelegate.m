@@ -36,12 +36,12 @@
         [defaults synchronize];
         
         [GameData sharedGameData].purchasesCharacters = @[@{@"name": @"max", @"purchased": @"Y", @"title": @"Max", @"ghost":  @"Ghost1"},
-                                                          @{@"name": @"derik", @"purchased": @"Y", @"title": @"Derik", @"ghost": @"Ghost1"},
-                                                          @{@"name": @"ninja", @"purchased": @"Y", @"title": @"Ninja", @"ghost": @"Ghost_ninja"},
-                                                          @{@"name": @"mayor", @"purchased": @"Y", @"title": @"Provo Mayor", @"ghost": @"Ghost_mayor"},
-                                                          @{@"name": @"elf", @"purchased": @"Y", @"title": @"Elf", @"ghost": @"Ghost_elf"},
-                                                          @{@"name": @"dinosaur", @"purchased": @"Y", @"title": @"Dinosaur", @"ghost": @"Ghost_dino"},
-                                                          @{@"name": @"retro", @"purchased": @"Y", @"title": @"Retro", @"ghost": @"Ghost2"}];
+                                                          @{@"name": @"derik", @"purchased": @"N", @"title": @"Derik", @"ghost": @"Ghost1"},
+                                                          @{@"name": @"ninja", @"purchased": @"N", @"title": @"Ninja", @"ghost": @"Ghost_ninja"},
+                                                          @{@"name": @"mayor", @"purchased": @"N", @"title": @"Provo Mayor", @"ghost": @"Ghost_mayor"},
+                                                          @{@"name": @"elf", @"purchased": @"N", @"title": @"Elf", @"ghost": @"Ghost_elf"},
+                                                          @{@"name": @"dinosaur", @"purchased": @"N", @"title": @"Dinosaur", @"ghost": @"Ghost_dino"},
+                                                          @{@"name": @"retro", @"purchased": @"N", @"title": @"Retro", @"ghost": @"Ghost2"}];
 
         [GameData sharedGameData].selectedCharacterIndex = 0;
         [GameData sharedGameData].selectedCharacter = @"max";

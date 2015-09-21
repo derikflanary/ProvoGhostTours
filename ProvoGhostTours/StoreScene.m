@@ -84,7 +84,7 @@ static NSString* const CharacterCost = @"$0.99";
         
     }
     self.coinAmounts = [NSMutableArray array];
-    self.coinAmounts = @[@"0", @"0", @"100", @"500", @"500", @"500", @"500"].mutableCopy;
+    self.coinAmounts = @[@"0", @"100", @"500", @"500", @"500", @"500", @"500"].mutableCopy;
     
     self.characterLabel = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
     self.characterLabel.text = [self.characterNamesArray objectAtIndex:0];
