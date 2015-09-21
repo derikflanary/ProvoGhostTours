@@ -106,8 +106,10 @@ static NSString* const GTGameDataSelectedCharactersKey = @"GameDataSelectedChara
     
     long cloudCoins = [iCloudStore doubleForKey:GTGameDataTotalCoinsKey];
     self.coins = MAX(cloudCoins, self.coins);
+    if ([iCloudStore objectForKey:GTGameDataCharactersKey]) {
+        self.purchasesCharacters = [iCloudStore objectForKey:GTGameDataCharactersKey];
+    }
     
-    self.purchasesCharacters = [iCloudStore objectForKey:GTGameDataCharactersKey];
     
     [[NSNotificationCenter defaultCenter] postNotificationName: GTGameDataUpdatedFromiCloud object:nil];
 }
