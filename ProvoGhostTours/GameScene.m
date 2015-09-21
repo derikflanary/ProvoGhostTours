@@ -575,10 +575,15 @@ static const uint32_t bikerCategory         = 0x1 << 2;
 
 - (void)coinLifeCycle:(CGPoint)position{
     //update coins
-    SKSpriteNode *coin = [SKSpriteNode spriteNodeWithImageNamed:@"coin"];
+    
+    SKSpriteNode *coin = [SKSpriteNode spriteNodeWithImageNamed:@"Coin_1"];
     coin.position = position;
     coin.zPosition = 2;
     [self addChild:coin];
+    
+    SKAction *coinAnimation = [self animationFromPlist:@"coinAnimation"];
+    [coin runAction:coinAnimation];
+
     SKAction *move = [SKAction moveTo:CGPointMake(self.coinLabel.position.x + self.coinLabel.frame.size.width/2, self.coinLabel.position.y + self.coinLabel.frame.size.height/2) duration:.75];
     
     SKAction *remove = [SKAction removeFromParent];
@@ -598,7 +603,7 @@ static const uint32_t bikerCategory         = 0x1 << 2;
         return;
     }
     
-    SKSpriteNode *battery = [SKSpriteNode spriteNodeWithImageNamed:@"battery"];
+    SKSpriteNode *battery = [SKSpriteNode spriteNodeWithImageNamed:@"Battery"];
     battery.position = position;
     battery.zPosition = 2;
     [self addChild:battery];
@@ -608,7 +613,7 @@ static const uint32_t bikerCategory         = 0x1 << 2;
     [battery runAction:[SKAction sequence:@[move, remove]] completion:^{
         
         if (!self.superlightEngaged) {
-            self.progress += .53;
+            self.progress += .13;
             
             if (self.progress > 1) {
                 [self addSuperLight];
@@ -1182,6 +1187,8 @@ static const uint32_t bikerCategory         = 0x1 << 2;
 - (void)showCoachMarks{
     
     CGRect coachmark1 = CGRectMake(([UIScreen mainScreen].bounds.size.width - 125) / 2, 20, 125, 125);
+    CGRect coachmark2 = CGRectMake(0, self.view.frame.size.height - 120, 100, 120);
+    CGRect coachmark3 = CGRectMake(0, self.view.frame.size.height - 45, 100, 45);
     NSArray *coachMarks = @[
                             @{
                                 @"rect": [NSValue valueWithCGRect:coachmark1],
@@ -1196,7 +1203,26 @@ static const uint32_t bikerCategory         = 0x1 << 2;
                                 @"shape": [NSNumber numberWithInteger:SHAPE_CIRCLE],
                                 @"position":[NSNumber numberWithInteger:LABEL_POSITION_BOTTOM],
                                 @"alignment":[NSNumber numberWithInteger:LABEL_ALIGNMENT_RIGHT]
-                                }];
+                                },
+                            @{  @"rect":[NSValue valueWithCGRect:coachmark2],
+                                @"caption": @"Collect batteries and fill up the meter to super charge your light",
+                                @"shape": [NSNumber numberWithInteger:SHAPE_SQUARE],
+                                @"position":[NSNumber numberWithInteger:LABEL_POSITION_BOTTOM],
+                                @"alignment":[NSNumber numberWithInteger:LABEL_ALIGNMENT_LEFT],
+                                },
+                            @{  @"rect":[NSValue valueWithCGRect:coachmark3],
+                                @"caption": @"Collect coins to access new characters in the store",
+                                @"shape": [NSNumber numberWithInteger:SHAPE_SQUARE],
+                                @"position":[NSNumber numberWithInteger:LABEL_POSITION_BOTTOM],
+                                @"alignment":[NSNumber numberWithInteger:LABEL_ALIGNMENT_LEFT],
+                                },
+                            @{  @"rect":[NSValue valueWithCGRect:CGRectMake(0, 0, 0, 0)],
+                                @"caption": @"Enjoy your tour!",
+                                @"shape": [NSNumber numberWithInteger:SHAPE_SQUARE],
+                                @"position":[NSNumber numberWithInteger:LABEL_POSITION_BOTTOM],
+                                @"alignment":[NSNumber numberWithInteger:LABEL_ALIGNMENT_CENTER]
+                              }];
+
     MPCoachMarks *coachMarksView = [[MPCoachMarks alloc] initWithFrame:self.view.bounds coachMarks:coachMarks];
     [self.view addSubview:coachMarksView];
     coachMarksView.enableContinueLabel = NO;

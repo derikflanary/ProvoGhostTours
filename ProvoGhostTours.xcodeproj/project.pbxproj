@@ -10,6 +10,7 @@
 		6816C9EA36C3CDAAE1094A61 /* libPods-ProvoGhostTours.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E91B6BCCF656DF7FFF805E7 /* libPods-ProvoGhostTours.a */; };
 		EE2FC1BE1BAC723400EF7014 /* ProgressBar.m in Sources */ = {isa = PBXBuildFile; fileRef = EE2FC1BD1BAC723400EF7014 /* ProgressBar.m */; settings = {ASSET_TAGS = (); }; };
 		EE2FC1C01BACAEAD00EF7014 /* flameAnimation.plist in Resources */ = {isa = PBXBuildFile; fileRef = EE2FC1BF1BACAEAD00EF7014 /* flameAnimation.plist */; settings = {ASSET_TAGS = (); }; };
+		EE7C18B91BB0741300D5CBBA /* coinAnimation.plist in Resources */ = {isa = PBXBuildFile; fileRef = EE7C18B81BB0741300D5CBBA /* coinAnimation.plist */; settings = {ASSET_TAGS = (); }; };
 		EEA1916D1B92CC4D005B0BE9 /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EEA1916C1B92CC4C005B0BE9 /* GameKit.framework */; };
 		EEA1916F1B92D8F1005B0BE9 /* GameScene.m in Sources */ = {isa = PBXBuildFile; fileRef = EEA1916E1B92D8F1005B0BE9 /* GameScene.m */; };
 		EEB6652F1B7BEE6200FDA352 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = EEB6652E1B7BEE6200FDA352 /* main.m */; };
@@ -58,6 +59,7 @@
 		EE2FC1BC1BAC723400EF7014 /* ProgressBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProgressBar.h; sourceTree = "<group>"; };
 		EE2FC1BD1BAC723400EF7014 /* ProgressBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProgressBar.m; sourceTree = "<group>"; };
 		EE2FC1BF1BACAEAD00EF7014 /* flameAnimation.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = flameAnimation.plist; sourceTree = "<group>"; };
+		EE7C18B81BB0741300D5CBBA /* coinAnimation.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = coinAnimation.plist; sourceTree = "<group>"; };
 		EEA1916C1B92CC4C005B0BE9 /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
 		EEA1916E1B92D8F1005B0BE9 /* GameScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameScene.m; sourceTree = "<group>"; };
 		EEB665291B7BEE6200FDA352 /* ProvoGhostTours.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ProvoGhostTours.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -269,6 +271,7 @@
 				EEF8DBF01B9F4ADE003ADB20 /* dinosaurAnimation.plist */,
 				EEF8DBF21B9F5B05003ADB20 /* elfAnimation.plist */,
 				EE2FC1BF1BACAEAD00EF7014 /* flameAnimation.plist */,
+				EE7C18B81BB0741300D5CBBA /* coinAnimation.plist */,
 			);
 			name = Animations;
 			sourceTree = "<group>";
@@ -380,6 +383,7 @@
 				EEF8DBED1B9D30C4003ADB20 /* derikAnimation.plist in Resources */,
 				EEF8DBDF1B99FC68003ADB20 /* ninjaAnimation.plist in Resources */,
 				EEF8DBF31B9F5B05003ADB20 /* elfAnimation.plist in Resources */,
+				EE7C18B91BB0741300D5CBBA /* coinAnimation.plist in Resources */,
 				EED5990A1B83CBA100A869B3 /* retroAnimation.plist in Resources */,
 				EEF8DBF11B9F4ADE003ADB20 /* dinosaurAnimation.plist in Resources */,
 				EE2FC1C01BACAEAD00EF7014 /* flameAnimation.plist in Resources */,

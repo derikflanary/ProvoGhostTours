@@ -2,18 +2,18 @@
   "images" : [
     {
       "idiom" : "universal",
-      "scale" : "1x",
-      "filename" : "coin.png"
+      "filename" : "Coin_1.png",
+      "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "scale" : "2x",
-      "filename" : "coin@2x.png"
+      "filename" : "Coin_1@2x.png",
+      "scale" : "2x"
     },
     {
       "idiom" : "universal",
-      "scale" : "3x",
-      "filename" : "coin@3x.png"
+      "filename" : "Coin_1@3x.png",
+      "scale" : "3x"
     }
   ],
   "info" : {
