@@ -134,7 +134,7 @@ NSString *const IAPHelperProductRestoredNotification = @"IAPHelperProductRestore
 - (void)restoreTransaction:(SKPaymentTransaction *)transaction {
     NSLog(@"restoreTransaction...");
     
-    [self provideContentForProductIdentifier:transaction.originalTransaction.payment.productIdentifier];
+    [self provideContentForProductIdentifier:transaction.payment.productIdentifier];
     [[SKPaymentQueue defaultQueue] finishTransaction:transaction];
 }
 

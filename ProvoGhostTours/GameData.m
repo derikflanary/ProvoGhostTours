@@ -44,6 +44,8 @@ static NSString* const GTGameDataSelectedCharactersKey = @"GameDataSelectedChara
         _purchasesCharacters = [decoder decodeObjectForKey:GTGameDataCharactersKey];
         _selectedCharacter = [decoder decodeObjectForKey:GTGameDataSelectedCharactersKey];
     }
+    
+    [self updateFromiCloud:nil];
     return self;
 }
 
@@ -87,7 +89,6 @@ static NSString* const GTGameDataSelectedCharactersKey = @"GameDataSelectedChara
     if (self) {
         //1
         if([NSUbiquitousKeyValueStore defaultStore]) {
-            
             //2
             [[NSNotificationCenter defaultCenter] addObserver:self
                                                      selector:@selector(updateFromiCloud:)
@@ -106,6 +107,8 @@ static NSString* const GTGameDataSelectedCharactersKey = @"GameDataSelectedChara
     long cloudCoins = [iCloudStore doubleForKey:GTGameDataTotalCoinsKey];
     self.coins = MAX(cloudCoins, self.coins);
     
+    self.purchasesCharacters = [iCloudStore objectForKey:GTGameDataCharactersKey];
+    
     [[NSNotificationCenter defaultCenter] postNotificationName: GTGameDataUpdatedFromiCloud object:nil];
 }
 
@@ -116,9 +119,11 @@ static NSString* const GTGameDataSelectedCharactersKey = @"GameDataSelectedChara
     if (self.highScore > cloudHighScore) {
         [iCloudStore setDouble:self.highScore forKey: GTGameDataHighScoreKey];
     }
+
     if (self.coins > cloudCoins) {
         [iCloudStore setDouble:self.coins forKey:GTGameDataTotalCoinsKey];
     }
+    [iCloudStore setObject:self.purchasesCharacters forKey:GTGameDataCharactersKey];
         [iCloudStore synchronize];
     
 }
