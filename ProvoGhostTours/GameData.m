@@ -117,14 +117,13 @@ static NSString* const GTGameDataSelectedCharactersKey = @"GameDataSelectedChara
 -(void)updateiCloud{
     NSUbiquitousKeyValueStore *iCloudStore = [NSUbiquitousKeyValueStore defaultStore];
     long cloudHighScore = [iCloudStore doubleForKey: GTGameDataHighScoreKey];
-    long cloudCoins = [iCloudStore doubleForKey:GTGameDataTotalCoinsKey];
+    
     if (self.highScore > cloudHighScore) {
         [iCloudStore setDouble:self.highScore forKey: GTGameDataHighScoreKey];
     }
 
-    if (self.coins > cloudCoins) {
-        [iCloudStore setDouble:self.coins forKey:GTGameDataTotalCoinsKey];
-    }
+    [iCloudStore setDouble:self.coins forKey:GTGameDataTotalCoinsKey];
+    
     [iCloudStore setObject:self.purchasesCharacters forKey:GTGameDataCharactersKey];
         [iCloudStore synchronize];
     

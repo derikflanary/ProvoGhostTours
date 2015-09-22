@@ -16,6 +16,7 @@
     dispatch_once(&once, ^{
         NSSet * productIdentifiers = [NSSet setWithObjects:
                                       @"com.derikflanary.ProvoGhostTours.derik",
+                                      @"com.derikflanary.ProvoGhostTours.courtney",
                                       @"com.derikflanary.ProvoGhostTours.ninja",
                                       @"com.derikflanary.ProvoGhostTours.mayor",
                                       @"com.derikflanary.ProvoGhostTours.elf",

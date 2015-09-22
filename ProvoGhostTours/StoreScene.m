@@ -84,7 +84,7 @@ static NSString* const CharacterCost = @"$0.99";
         
     }
     self.coinAmounts = [NSMutableArray array];
-    self.coinAmounts = @[@"0", @"100", @"500", @"500", @"500", @"500", @"500"].mutableCopy;
+    self.coinAmounts = @[@"0", @"100", @"100", @"500", @"500", @"500", @"500", @"500"].mutableCopy;
     
     self.characterLabel = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
     self.characterLabel.text = [self.characterNamesArray objectAtIndex:0];
@@ -183,7 +183,6 @@ static NSString* const CharacterCost = @"$0.99";
         
     }
     
-//    self.imageNamesArray = @[@"Max_1", @"Derik_1", @"Ninja_1",@"Mayor_1", @"Elf_1", @"Dino_1", @"Retro_1"];
     self.itemsArray = @[@"Flashed", @"Flashlight"];
     
     self.coverFlowView = [[CFCoverFlowView alloc] initWithFrame:CGRectMake(100.0, 100.0, self.view.frame.size.width, 55.0)];
@@ -237,12 +236,7 @@ static NSString* const CharacterCost = @"$0.99";
     NSDictionary *dict = [[GameData sharedGameData].purchasesCharacters objectAtIndex:index];
     if ([dict[@"purchased"] isEqualToString:@"N"]) {
         self.purchaseWithCoinButton.hidden = NO;
-        
-//        if (![dict[@"name"] isEqualToString:@"derik"]) {
         [self.characterButton setTitle:CharacterCost forState:UIControlStateNormal];
-//        }else{
-//            self.characterButton.hidden = YES;
-//        }
     }else{
         self.purchaseWithCoinButton.hidden = YES;
     }
@@ -313,8 +307,6 @@ static NSString* const CharacterCost = @"$0.99";
 }
 
 - (void)purchaseWithCoinsSelected{
-    //update purchased characters
-    [self savePurchase:nil];
     
     //update coins
     NSString *amountString = [self.coinAmounts objectAtIndex:self.characterIndex];
@@ -322,8 +314,8 @@ static NSString* const CharacterCost = @"$0.99";
     [GameData sharedGameData].coins = [GameData sharedGameData].coins - amount;
     self.coinLabel.text = [NSString stringWithFormat:@"Coins: %ld", [GameData sharedGameData].coins];
     
-    //save purchase
-    [[GameData sharedGameData] save];
+    //update purchased characters
+    [self savePurchase:nil];
     
     [self.characterButton setTitle:@"Select" forState:UIControlStateNormal];
     self.purchaseWithCoinButton.hidden = YES;

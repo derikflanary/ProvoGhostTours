@@ -147,6 +147,17 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		EE0AE0831BB1BEC40066298B /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				EE2FC1BC1BAC723400EF7014 /* ProgressBar.h */,
+				EE2FC1BD1BAC723400EF7014 /* ProgressBar.m */,
+				EEF8DBFD1BA09B24003ADB20 /* KeychainWrapper */,
+				EEDDFCE41BA3734100A64486 /* Segmented Control */,
+			);
+			name = "Support Files";
+			sourceTree = "<group>";
+		};
 		EEB665201B7BEE6200FDA352 = {
 			isa = PBXGroup;
 			children = (
@@ -183,11 +194,8 @@
 				EEF8DBFB1BA095F5003ADB20 /* GameData.m */,
 				EEB665381B7BEE6200FDA352 /* GameViewController.h */,
 				EEB665391B7BEE6200FDA352 /* GameViewController.m */,
-				EE2FC1BC1BAC723400EF7014 /* ProgressBar.h */,
-				EE2FC1BD1BAC723400EF7014 /* ProgressBar.m */,
 				EEC1F04D1BA76A3900CFA72F /* Purchasing */,
-				EEDDFCE41BA3734100A64486 /* Segmented Control */,
-				EEF8DBFD1BA09B24003ADB20 /* KeychainWrapper */,
+				EE0AE0831BB1BEC40066298B /* Support Files */,
 				EEB6653E1B7BEE6200FDA352 /* Images.xcassets */,
 				EEF8DBEB1B9CEFF8003ADB20 /* Animations */,
 				EEB665401B7BEE6200FDA352 /* LaunchScreen.xib */,

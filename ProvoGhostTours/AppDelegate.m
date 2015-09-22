@@ -35,8 +35,9 @@
         [defaults setObject:currentAppVersion forKey:@"appVersion"];
         [defaults synchronize];
         
-        [GameData sharedGameData].purchasesCharacters = @[@{@"name": @"max", @"purchased": @"Y", @"title": @"Max", @"ghost":  @"Ghost1"},
+        [GameData sharedGameData].purchasesCharacters = @[@{@"name": @"max", @"purchased": @"Y", @"title": @"Max", @"ghost":@"Ghost1"},
                                                           @{@"name": @"derik", @"purchased": @"N", @"title": @"Derik", @"ghost": @"Ghost1"},
+                                                          @{@"name": @"girl", @"purchased": @"N", @"title": @"Courtney", @"ghost": @"Ghost1"},
                                                           @{@"name": @"ninja", @"purchased": @"N", @"title": @"Ninja", @"ghost": @"Ghost_ninja"},
                                                           @{@"name": @"mayor", @"purchased": @"N", @"title": @"Provo Mayor", @"ghost": @"Ghost_mayor"},
                                                           @{@"name": @"elf", @"purchased": @"N", @"title": @"Elf", @"ghost": @"Ghost_elf"},
@@ -47,6 +48,9 @@
         [GameData sharedGameData].selectedCharacter = @"max";
         [GameData sharedGameData].coins = 0;
         [[GameData sharedGameData] save];
+        
+        [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"MPCoachMarksShown"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
 
     } else if ([previousVersion isEqualToString:currentAppVersion]) {
         // same version
@@ -55,8 +59,9 @@
         [defaults setObject:currentAppVersion forKey:@"appVersion"];
         [defaults synchronize];
         NSLog(@"updated");
-        [GameData sharedGameData].purchasesCharacters = @[@{@"name": @"max", @"purchased": @"Y", @"title": @"Max", @"ghost":  @"Ghost1"},
+        [GameData sharedGameData].purchasesCharacters = @[@{@"name": @"max", @"purchased": @"Y", @"title": @"Max", @"ghost":@"Ghost1"},
                                                           @{@"name": @"derik", @"purchased": @"N", @"title": @"Derik", @"ghost": @"Ghost1"},
+                                                          @{@"name": @"girl", @"purchased": @"N", @"title": @"Courtney", @"ghost": @"Ghost1"},
                                                           @{@"name": @"ninja", @"purchased": @"N", @"title": @"Ninja", @"ghost": @"Ghost_ninja"},
                                                           @{@"name": @"mayor", @"purchased": @"N", @"title": @"Provo Mayor", @"ghost": @"Ghost_mayor"},
                                                           @{@"name": @"elf", @"purchased": @"N", @"title": @"Elf", @"ghost": @"Ghost_elf"},
@@ -67,6 +72,9 @@
         [GameData sharedGameData].selectedCharacter = @"max";
         [GameData sharedGameData].coins = 0;
         [[GameData sharedGameData] save];
+        
+        [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"MPCoachMarksShown"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
     }
 
     

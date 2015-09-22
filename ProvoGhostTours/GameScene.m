@@ -1030,7 +1030,7 @@ static const uint32_t bikerCategory         = 0x1 << 2;
     muteButton.tag = 300;
     [self.view addSubview:muteButton];
     
-    UIButton *shopButton = [[UIButton alloc]initWithFrame:CGRectMake(CGRectGetMidX(self.frame) - 25, 25, 25, 25)];
+    UIButton *shopButton = [[UIButton alloc]initWithFrame:CGRectMake(CGRectGetMidX(self.view.frame) - 12.5, 25, 25, 25)];
     [shopButton setImage:[UIImage imageNamed:@"shop_icon"] forState:UIControlStateNormal];
     [shopButton setImage:[UIImage imageNamed:@"shop_icon_alpha"] forState:UIControlStateSelected];
     [shopButton addTarget:self action:@selector(shopButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
