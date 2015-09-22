@@ -110,7 +110,6 @@ static NSString* const GTGameDataSelectedCharactersKey = @"GameDataSelectedChara
         self.purchasesCharacters = [iCloudStore objectForKey:GTGameDataCharactersKey];
     }
     
-    
     [[NSNotificationCenter defaultCenter] postNotificationName: GTGameDataUpdatedFromiCloud object:nil];
 }
 
@@ -124,7 +123,25 @@ static NSString* const GTGameDataSelectedCharactersKey = @"GameDataSelectedChara
 
     [iCloudStore setDouble:self.coins forKey:GTGameDataTotalCoinsKey];
     
-    [iCloudStore setObject:self.purchasesCharacters forKey:GTGameDataCharactersKey];
+    NSArray *cloudPurchases = [iCloudStore objectForKey:GTGameDataCharactersKey];
+    int count = 0;
+    int localCount = 0;
+    for (NSDictionary *dict in cloudPurchases) {
+
+        if ([dict[@"purchased"] isEqualToString:@"Y"]) {
+            count = count + 1;
+        }
+    }
+    for (NSDictionary *dict in self.purchasesCharacters) {
+        if ([dict[@"purchased"] isEqualToString:@"Y"]) {
+            localCount = localCount + 1;
+        }
+    }
+    
+    if (localCount > count) {
+        [iCloudStore setObject:self.purchasesCharacters forKey:GTGameDataCharactersKey];
+    }
+    
         [iCloudStore synchronize];
     
 }
