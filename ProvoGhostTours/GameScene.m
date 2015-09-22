@@ -90,6 +90,7 @@ static const uint32_t bikerCategory         = 0x1 << 2;
         self.audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:&error];
         self.audioPlayer.numberOfLoops = -1;
         self.audioPlayer.volume = 0.7;
+        self.ghostSound = [SKAction playSoundFileNamed:@"ghostSound.caf" waitForCompletion:NO];
         if (![[NSUserDefaults standardUserDefaults]boolForKey:@"SoundDisabled"]) {
             self.audioPlayer.volume = 0.7;
             self.ghostSound = [SKAction playSoundFileNamed:@"ghostSound.caf" waitForCompletion:NO];
@@ -99,7 +100,7 @@ static const uint32_t bikerCategory         = 0x1 << 2;
         }
 
         [self.audioPlayer play];
-        self.ghostSound = [SKAction playSoundFileNamed:@"ghostSound.caf" waitForCompletion:NO];
+        
         
         [self authenticateLocalPlayer];
     }
@@ -1148,7 +1149,7 @@ static const uint32_t bikerCategory         = 0x1 << 2;
 }
 
 - (void)reportScore:(NSInteger)score{
-    return;
+    
     if (self.gameCenterEnabled) {
         GKScore *theScore = [[GKScore alloc] initWithLeaderboardIdentifier:_leaderboardIdentifier];
         theScore.value = score;
