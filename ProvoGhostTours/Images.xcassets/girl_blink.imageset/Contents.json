@@ -2,7 +2,7 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "girl.png",
+      "filename" : "girl_blink.png",
       "scale" : "1x"
     },
     {

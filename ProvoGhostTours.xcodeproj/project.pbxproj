@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		6816C9EA36C3CDAAE1094A61 /* libPods-ProvoGhostTours.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E91B6BCCF656DF7FFF805E7 /* libPods-ProvoGhostTours.a */; };
+		EE0AE0851BB24BFB0066298B /* courtneyAnimation.plist in Resources */ = {isa = PBXBuildFile; fileRef = EE0AE0841BB24BFA0066298B /* courtneyAnimation.plist */; settings = {ASSET_TAGS = (); }; };
 		EE2FC1BE1BAC723400EF7014 /* ProgressBar.m in Sources */ = {isa = PBXBuildFile; fileRef = EE2FC1BD1BAC723400EF7014 /* ProgressBar.m */; settings = {ASSET_TAGS = (); }; };
 		EE2FC1C01BACAEAD00EF7014 /* flameAnimation.plist in Resources */ = {isa = PBXBuildFile; fileRef = EE2FC1BF1BACAEAD00EF7014 /* flameAnimation.plist */; settings = {ASSET_TAGS = (); }; };
 		EE7C18B91BB0741300D5CBBA /* coinAnimation.plist in Resources */ = {isa = PBXBuildFile; fileRef = EE7C18B81BB0741300D5CBBA /* coinAnimation.plist */; settings = {ASSET_TAGS = (); }; };
@@ -56,6 +57,7 @@
 		2D35FA64800B4667499F13B5 /* Pods-ProvoGhostTours.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ProvoGhostTours.release.xcconfig"; path = "Pods/Target Support Files/Pods-ProvoGhostTours/Pods-ProvoGhostTours.release.xcconfig"; sourceTree = "<group>"; };
 		3CAA61AD23E236AF4B403FBA /* Pods-ProvoGhostTours.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ProvoGhostTours.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ProvoGhostTours/Pods-ProvoGhostTours.debug.xcconfig"; sourceTree = "<group>"; };
 		5E91B6BCCF656DF7FFF805E7 /* libPods-ProvoGhostTours.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ProvoGhostTours.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		EE0AE0841BB24BFA0066298B /* courtneyAnimation.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = courtneyAnimation.plist; sourceTree = "<group>"; };
 		EE2FC1BC1BAC723400EF7014 /* ProgressBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProgressBar.h; sourceTree = "<group>"; };
 		EE2FC1BD1BAC723400EF7014 /* ProgressBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProgressBar.m; sourceTree = "<group>"; };
 		EE2FC1BF1BACAEAD00EF7014 /* flameAnimation.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = flameAnimation.plist; sourceTree = "<group>"; };
@@ -271,6 +273,7 @@
 				EED599051B83C08900A869B3 /* bikePedal.caf */,
 				EED599071B83C5C500A869B3 /* ghostSound.caf */,
 				EEF8DBDC1B99468A003ADB20 /* characterAnimation.plist */,
+				EE0AE0841BB24BFA0066298B /* courtneyAnimation.plist */,
 				EEF8DBDE1B99FC68003ADB20 /* ninjaAnimation.plist */,
 				EED599091B83CBA100A869B3 /* retroAnimation.plist */,
 				EEF8DBE91B9CEFED003ADB20 /* mayorAnimation.plist */,
@@ -394,6 +397,7 @@
 				EE7C18B91BB0741300D5CBBA /* coinAnimation.plist in Resources */,
 				EED5990A1B83CBA100A869B3 /* retroAnimation.plist in Resources */,
 				EEF8DBF11B9F4ADE003ADB20 /* dinosaurAnimation.plist in Resources */,
+				EE0AE0851BB24BFB0066298B /* courtneyAnimation.plist in Resources */,
 				EE2FC1C01BACAEAD00EF7014 /* flameAnimation.plist in Resources */,
 				EED599061B83C08900A869B3 /* bikePedal.caf in Resources */,
 				EEB6653F1B7BEE6200FDA352 /* Images.xcassets in Resources */,

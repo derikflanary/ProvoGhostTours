@@ -138,7 +138,7 @@ static NSString* const GTGameDataSelectedCharactersKey = @"GameDataSelectedChara
         }
     }
     
-    if (localCount > count) {
+    if (localCount > count || [self.purchasesCharacters count] > [cloudPurchases count]) {
         [iCloudStore setObject:self.purchasesCharacters forKey:GTGameDataCharactersKey];
     }
     
