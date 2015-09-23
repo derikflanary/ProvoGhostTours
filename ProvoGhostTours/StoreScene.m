@@ -33,6 +33,7 @@
 @property (nonatomic, strong) SKLabelNode *coinLabel;
 @property (nonatomic, strong) NSMutableArray *products;
 @property (nonatomic, strong) UIButton *restoreButton;
+@property (nonatomic, strong) UIButton *purchaseAllButton;
 @property (nonatomic, strong) SKLabelNode *abilityLabel;
 @end
 
@@ -72,14 +73,13 @@ static NSString* const CharacterCost = @"$0.99";
     self.characterNamesArray = [NSMutableArray array];
     self.characterNames = [NSMutableArray array];
     self.characterAbilities = [NSMutableArray array];
+    self.coinAmounts = [NSMutableArray array];
     for (NSDictionary *dict in [GameData sharedGameData].purchasesCharacters) {
         [self.characterNamesArray addObject:dict[@"title"]];
         [self.characterNames addObject:dict[@"name"]];
         [self.characterAbilities addObject:dict[@"ability"]];
+        [self.coinAmounts addObject:dict[@"cost"]];
     }
-
-    self.coinAmounts = [NSMutableArray array];
-    self.coinAmounts = @[@"0", @"100", @"100", @"500", @"500", @"500", @"500", @"500"].mutableCopy;
     
     self.characterLabel = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
     self.characterLabel.text = [self.characterNamesArray objectAtIndex:0];
@@ -99,7 +99,7 @@ static NSString* const CharacterCost = @"$0.99";
     [self addChild:self.abilityLabel];
     [self.abilityLabel runAction:[SKAction scaleTo:1 duration:.5]];
     
-    self.characterButton = [[UIButton alloc]initWithFrame:CGRectMake(CGRectGetMidX(self.frame) - 75, CGRectGetMaxY(self.coverFlowView.frame) + 20, 150, 50)];
+    self.characterButton = [[UIButton alloc]initWithFrame:CGRectMake(CGRectGetMidX(self.frame) - 75, CGRectGetMaxY(self.coverFlowView.frame) + 10, 150, 50)];
     [self.characterButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [self.characterButton setTitleColor:[UIColor colorWithWhite:1 alpha:.4] forState:UIControlStateHighlighted];
     [self.characterButton setTintColor:[UIColor whiteColor]];
@@ -112,11 +112,22 @@ static NSString* const CharacterCost = @"$0.99";
     [self.restoreButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [self.restoreButton setTitleColor:[UIColor colorWithWhite:1 alpha:.4] forState:UIControlStateHighlighted];
     [self.restoreButton setTintColor:[UIColor whiteColor]];
-    self.restoreButton.titleLabel.font = [UIFont fontWithName:@"Chalkduster" size:10];
+    self.restoreButton.titleLabel.font = [UIFont fontWithName:@"Chalkduster" size:11];
     [self.restoreButton addTarget:self action:@selector(restorePurchasesPressed) forControlEvents:UIControlEventTouchUpInside];
     self.restoreButton.tag = 80;
     [self.restoreButton setTitle:@"Restore Purchases" forState:UIControlStateNormal];
     [self.view addSubview:self.restoreButton];
+    
+    self.purchaseAllButton = [[UIButton alloc]initWithFrame:CGRectMake(CGRectGetMidX(self.frame) - 125, self.view.frame.size.height - 60, 250, 21)];
+    [self.purchaseAllButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [self.purchaseAllButton setTitleColor:[UIColor colorWithWhite:1 alpha:.4] forState:UIControlStateHighlighted];
+    [self.purchaseAllButton setTintColor:[UIColor whiteColor]];
+    self.purchaseAllButton.titleLabel.font = [UIFont fontWithName:@"Chalkduster" size:11];
+    [self.purchaseAllButton addTarget:self action:@selector(purchaseAllPressed) forControlEvents:UIControlEventTouchUpInside];
+    self.purchaseAllButton.tag = 90;
+    [self.purchaseAllButton setTitle:@"Unlock All Characters $2.99" forState:UIControlStateNormal];
+    [self.purchaseAllButton.titleLabel setTextAlignment:NSTextAlignmentCenter];
+    [self.view addSubview:self.purchaseAllButton];
     
     self.purchaseWithCoinButton = [[UIButton alloc]initWithFrame:CGRectMake(CGRectGetMidX(self.frame) - 75, CGRectGetMaxY(self.coverFlowView.frame) + 60, 150, 50)];
     [self.purchaseWithCoinButton setTitleColor:[UIColor yellowColor] forState:UIControlStateNormal];
@@ -334,16 +345,31 @@ static NSString* const CharacterCost = @"$0.99";
         [GameData sharedGameData].purchasesCharacters = mutableCharactersPurchased;
 
     }else{
-        NSArray *componentArray = [identifier componentsSeparatedByString:@"."];
-        NSString *character = [componentArray lastObject];
-        NSUInteger index = [self.characterNames indexOfObject:character];
-        NSDictionary *dict = [[GameData sharedGameData].purchasesCharacters objectAtIndex:index];
-        NSMutableDictionary *newDict = [NSMutableDictionary dictionary];
-        [newDict addEntriesFromDictionary:dict];
-        [newDict setObject:@"Y" forKey:@"purchased"];
-        NSMutableArray *mutableCharactersPurchased = [GameData sharedGameData].purchasesCharacters.mutableCopy;
-        [mutableCharactersPurchased replaceObjectAtIndex:index withObject:newDict];
-        [GameData sharedGameData].purchasesCharacters = mutableCharactersPurchased;
+        if ([identifier isEqualToString:@"com.derikflanary.ProvoGhostTours.all"]) {
+            for (NSDictionary *dict in [GameData sharedGameData].purchasesCharacters) {
+                NSMutableDictionary *newDict = [NSMutableDictionary dictionary];
+                [newDict addEntriesFromDictionary:dict];
+                [newDict setObject:@"Y" forKey:@"purchased"];
+                NSMutableArray *mutableCharactersPurchased = [GameData sharedGameData].purchasesCharacters.mutableCopy;
+                NSUInteger index = [mutableCharactersPurchased indexOfObject:dict];
+                [mutableCharactersPurchased replaceObjectAtIndex:index withObject:newDict];
+                [GameData sharedGameData].purchasesCharacters = mutableCharactersPurchased;
+                
+                self.purchaseAllButton.hidden = YES;
+            }
+        }else{
+            NSArray *componentArray = [identifier componentsSeparatedByString:@"."];
+            NSString *character = [componentArray lastObject];
+            NSUInteger index = [self.characterNames indexOfObject:character];
+            NSDictionary *dict = [[GameData sharedGameData].purchasesCharacters objectAtIndex:index];
+            NSMutableDictionary *newDict = [NSMutableDictionary dictionary];
+            [newDict addEntriesFromDictionary:dict];
+            [newDict setObject:@"Y" forKey:@"purchased"];
+            NSMutableArray *mutableCharactersPurchased = [GameData sharedGameData].purchasesCharacters.mutableCopy;
+            [mutableCharactersPurchased replaceObjectAtIndex:index withObject:newDict];
+            [GameData sharedGameData].purchasesCharacters = mutableCharactersPurchased;
+
+        }
     }
     
     [[GameData sharedGameData] save];
@@ -351,6 +377,16 @@ static NSString* const CharacterCost = @"$0.99";
 
 - (void)restorePurchasesPressed{
     [[PGTIAPManager sharedInstance] restoreCompletedTransactions];
+}
+
+- (void)purchaseAllPressed{
+    SKProduct *product = [SKProduct new];
+    for (SKProduct *prod in self.products) {
+        if ([prod.productIdentifier isEqualToString:@"com.derikflanary.ProvoGhostTours.%@"]) {
+            product = prod;
+        }
+    }
+    [[PGTIAPManager sharedInstance] buyProduct:product];
 }
 
 #pragma mark - Other Methods
@@ -365,6 +401,7 @@ static NSString* const CharacterCost = @"$0.99";
     [[self.view viewWithTag:50] removeFromSuperview];
     [[self.view viewWithTag:70] removeFromSuperview];
     [[self.view viewWithTag:80] removeFromSuperview];
+    [[self.view viewWithTag:90] removeFromSuperview];
     [self.characterLabel removeFromParent];
     [self.abilityLabel removeFromParent];
     

@@ -22,6 +22,7 @@
                                       @"com.derikflanary.ProvoGhostTours.elf",
                                       @"com.derikflanary.ProvoGhostTours.dinosaur",
                                       @"com.derikflanary.ProvoGhostTours.retro",
+                                      @"com.derikflanary.ProvoGhostTours.all",
                                       nil];
         sharedInstance = [[self alloc] initWithProductIdentifiers:productIdentifiers];
     });
