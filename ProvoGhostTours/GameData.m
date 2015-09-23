@@ -21,6 +21,7 @@ static NSString* const GTGameDataCharacterKey = @"selectedCharacterIndex";
 static NSString* const GTGameDataChecksumKey = @"GameDataChecksumKey";
 static NSString* const GTGameDataCharactersKey = @"GameDataCharactersKey";
 static NSString* const GTGameDataSelectedCharactersKey = @"GameDataSelectedCharactersKey";
+static NSString* const GTGameDataAllKey = @"GameDataAllKey";
 
 + (instancetype)sharedGameData {
     static id sharedInstance = nil;
@@ -43,6 +44,7 @@ static NSString* const GTGameDataSelectedCharactersKey = @"GameDataSelectedChara
         _selectedCharacterIndex = [decoder decodeIntegerForKey:GTGameDataCharacterKey];
         _purchasesCharacters = [decoder decodeObjectForKey:GTGameDataCharactersKey];
         _selectedCharacter = [decoder decodeObjectForKey:GTGameDataSelectedCharactersKey];
+        _allCharactersPurchased = [decoder decodeIntegerForKey:GTGameDataAllKey];
     }
     
     [self updateFromiCloud:nil];
@@ -55,6 +57,7 @@ static NSString* const GTGameDataSelectedCharactersKey = @"GameDataSelectedChara
     [encoder encodeInteger:self.selectedCharacterIndex forKey:GTGameDataCharacterKey];
     [encoder encodeObject:self.purchasesCharacters forKey:GTGameDataCharactersKey];
     [encoder encodeObject:self.selectedCharacter forKey:GTGameDataSelectedCharactersKey];
+    [encoder encodeInteger:self.allCharactersPurchased forKey:GTGameDataAllKey];
 }
 
 + (instancetype)loadInstance{
@@ -110,6 +113,11 @@ static NSString* const GTGameDataSelectedCharactersKey = @"GameDataSelectedChara
         self.purchasesCharacters = [iCloudStore objectForKey:GTGameDataCharactersKey];
     }
     
+    NSInteger cloudAll = [iCloudStore boolForKey:GTGameDataAllKey];
+    if (cloudAll > self.allCharactersPurchased) {
+        self.allCharactersPurchased = cloudAll;
+    }
+    
     [[NSNotificationCenter defaultCenter] postNotificationName: GTGameDataUpdatedFromiCloud object:nil];
 }
 
@@ -122,6 +130,10 @@ static NSString* const GTGameDataSelectedCharactersKey = @"GameDataSelectedChara
     }
 
     [iCloudStore setDouble:self.coins forKey:GTGameDataTotalCoinsKey];
+    
+    if (self.allCharactersPurchased == 1) {
+        [iCloudStore setBool:self.allCharactersPurchased forKey:GTGameDataAllKey];
+    }
     
     NSArray *cloudPurchases = [iCloudStore objectForKey:GTGameDataCharactersKey];
     int count = 0;

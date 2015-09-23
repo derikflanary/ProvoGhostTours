@@ -128,6 +128,9 @@ static NSString* const CharacterCost = @"$0.99";
     [self.purchaseAllButton setTitle:@"Unlock All Characters $2.99" forState:UIControlStateNormal];
     [self.purchaseAllButton.titleLabel setTextAlignment:NSTextAlignmentCenter];
     [self.view addSubview:self.purchaseAllButton];
+    if ([GameData sharedGameData].allCharactersPurchased == 1) {
+        self.purchaseAllButton.hidden = YES;
+    }
     
     self.purchaseWithCoinButton = [[UIButton alloc]initWithFrame:CGRectMake(CGRectGetMidX(self.frame) - 75, CGRectGetMaxY(self.coverFlowView.frame) + 60, 150, 50)];
     [self.purchaseWithCoinButton setTitleColor:[UIColor yellowColor] forState:UIControlStateNormal];
@@ -354,8 +357,9 @@ static NSString* const CharacterCost = @"$0.99";
                 NSUInteger index = [mutableCharactersPurchased indexOfObject:dict];
                 [mutableCharactersPurchased replaceObjectAtIndex:index withObject:newDict];
                 [GameData sharedGameData].purchasesCharacters = mutableCharactersPurchased;
-                
+                [GameData sharedGameData].allCharactersPurchased = 1;
                 self.purchaseAllButton.hidden = YES;
+                
             }
         }else{
             NSArray *componentArray = [identifier componentsSeparatedByString:@"."];
@@ -382,7 +386,7 @@ static NSString* const CharacterCost = @"$0.99";
 - (void)purchaseAllPressed{
     SKProduct *product = [SKProduct new];
     for (SKProduct *prod in self.products) {
-        if ([prod.productIdentifier isEqualToString:@"com.derikflanary.ProvoGhostTours.%@"]) {
+        if ([prod.productIdentifier isEqualToString:@"com.derikflanary.ProvoGhostTours.all"]) {
             product = prod;
         }
     }
