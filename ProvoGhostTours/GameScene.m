@@ -56,6 +56,8 @@
 @property (nonatomic, assign) BOOL superlightEngaged;
 @property (nonatomic, strong) ProgressBar *progressBar;
 @property (nonatomic, assign) CGFloat progress;
+@property (nonatomic, strong) UIButton *flashButton;
+@property (nonatomic) SKSpriteNode *shield;
 
 @end
 
@@ -64,6 +66,7 @@
 static const uint32_t flashlightCategory     =  0x1 << 0;
 static const uint32_t ghostCategory        =  0x1 << 1;
 static const uint32_t bikerCategory         = 0x1 << 2;
+static const uint32_t shieldCategory         = 0x1 << 3;
 
 - (id)initWithSize:(CGSize)size{
     if (self = [super initWithSize:size]) {
@@ -241,6 +244,7 @@ static const uint32_t bikerCategory         = 0x1 << 2;
     self.biker.zPosition = 2;
     [self addChild:self.biker];
     
+    
     self.bikerAnimation = [self animationFromPlist:[self.characterAnimationArray objectAtIndex:self.selectedInt]];
     
     [self rotateWheels];
@@ -322,12 +326,16 @@ static const uint32_t bikerCategory         = 0x1 << 2;
     
     [self setUpProgressBar];
     
-    UIButton *flashButton = [[UIButton alloc]initWithFrame:CGRectMake(self.frame.size.width -50, self.frame.size.height - 50, 25, 25)];
-    [flashButton setImage:[UIImage imageNamed:@"Flashed"] forState:UIControlStateNormal];
-    [flashButton setImage:[UIImage imageNamed:@"Flashbang"] forState:UIControlStateSelected];
-    [flashButton addTarget:self action:@selector(flashPressed:) forControlEvents:UIControlEventTouchUpInside];
-    flashButton.tag = 10;
-//    [self.view addSubview:flashButton];
+    if ([[GameData sharedGameData].selectedCharacter isEqualToString:@"ninja"]) {
+        self.flashButton = [[UIButton alloc]initWithFrame:CGRectMake(self.frame.size.width -50, self.frame.size.height - 50, 40, 40)];
+        [self.flashButton setImage:[UIImage imageNamed:@"Flashed"] forState:UIControlStateNormal];
+        [self.flashButton setImage:[UIImage imageNamed:@"Flashbang"] forState:UIControlStateSelected];
+        [self.flashButton addTarget:self action:@selector(flashPressed:) forControlEvents:UIControlEventTouchUpInside];
+        self.flashButton.tag = 10;
+        [self.view addSubview:self.flashButton];
+        self.flashButton.enabled = YES;
+    }
+    
 }
 
 - (void)addFlashlight{
@@ -338,8 +346,12 @@ static const uint32_t bikerCategory         = 0x1 << 2;
     if (!self.gameStart) {
         [self addChild:self.centerPoint];
     }
+    if ([[GameData sharedGameData].selectedCharacter isEqualToString:@"courtney"]) {
+        self.light = [SKSpriteNode spriteNodeWithImageNamed:@"girlLight"];
+    }else{
+        self.light = [SKSpriteNode spriteNodeWithImageNamed:@"LampLight"];
+    }
     
-    self.light = [SKSpriteNode spriteNodeWithImageNamed:@"LampLight"];
     self.light.alpha = 0.35;
     self.light.position = CGPointMake(0, self.light.size.height/2);
     [self.centerPoint addChild:self.light];
@@ -369,6 +381,28 @@ static const uint32_t bikerCategory         = 0x1 << 2;
         CGPathAddLineToPoint(path, NULL, 31 - offsetX, 0 - offsetY);
         CGPathAddLineToPoint(path, NULL, 50 - offsetX, 0 - offsetY);
         CGPathCloseSubpath(path);
+    }
+    
+    if ([[GameData sharedGameData].selectedCharacter isEqualToString:@"courtney"]) {
+        if (([[UIScreen mainScreen] scale] == 2.0)) {
+            CGPathMoveToPoint(path, NULL, 186 - offsetX, 320 - offsetY);
+            CGPathAddLineToPoint(path, NULL, 0 - offsetX, 320 - offsetY);
+            CGPathAddLineToPoint(path, NULL, 90 - offsetX, 1 - offsetY);
+            CGPathAddLineToPoint(path, NULL, 114 - offsetX, 1 - offsetY);
+            CGPathCloseSubpath(path);
+        }else if (([[UIScreen mainScreen] scale] == 3.0)){
+            CGPathMoveToPoint(path, NULL, 279 - offsetX, 480 - offsetY);
+            CGPathAddLineToPoint(path, NULL, -1 - offsetX, 480 - offsetY);
+            CGPathAddLineToPoint(path, NULL, 135 - offsetX, -1 - offsetY);
+            CGPathAddLineToPoint(path, NULL, 171 - offsetX, 3 - offsetY);
+            CGPathCloseSubpath(path);
+        }else{
+            CGPathMoveToPoint(path, NULL, 93 - offsetX, 160 - offsetY);
+            CGPathAddLineToPoint(path, NULL, 3 - offsetX, 160 - offsetY);
+            CGPathAddLineToPoint(path, NULL, 45 - offsetX, 1 - offsetY);
+            CGPathAddLineToPoint(path, NULL, 57 - offsetX, 1 - offsetY);
+            CGPathCloseSubpath(path);
+        }
     }
     
     self.light.physicsBody = [SKPhysicsBody bodyWithPolygonFromPath:path];
@@ -593,7 +627,13 @@ static const uint32_t bikerCategory         = 0x1 << 2;
         SKAction *scaleUp = [SKAction scaleTo:1.1 duration:.1];
         SKAction *scaleDown = [SKAction scaleTo:1.0 duration:.1];
         [self.coinLabel runAction:[SKAction sequence:@[scaleUp, scaleDown]]];
-        [GameData sharedGameData].coins += 1;
+        
+        if ([[GameData sharedGameData].selectedCharacter isEqualToString:@"mayor"]) {
+            [GameData sharedGameData].coins += 2;
+        }else{
+            [GameData sharedGameData].coins += 1;
+        }
+        
         [self.coinLabel setText:[NSString stringWithFormat:@"Coins: %ld", [GameData sharedGameData].coins]];
     }];
 
@@ -614,7 +654,12 @@ static const uint32_t bikerCategory         = 0x1 << 2;
     [battery runAction:[SKAction sequence:@[move, remove]] completion:^{
         
         if (!self.superlightEngaged) {
-            self.progress += .13;
+            if ([[GameData sharedGameData].selectedCharacter isEqualToString:@"derik"]) {
+                self.progress += .18;
+            }else{
+                self.progress += .13;
+            }
+            
             
             if (self.progress > 1) {
                 [self addSuperLight];
@@ -673,7 +718,7 @@ static const uint32_t bikerCategory         = 0x1 << 2;
     [self addChild:self.tree];
 }
 
-#pragma mark - Flash Bang
+#pragma mark - Abilities
 - (void)flashPressed:(UIButton*)sender{
     [self flashAnimation];
 }
@@ -687,6 +732,7 @@ static const uint32_t bikerCategory         = 0x1 << 2;
     SKAction *showGhosts = [SKAction performSelector:@selector(makeEveryGhostVisable) onTarget:self];
     SKAction *unflash = [SKAction colorizeWithColor:[UIColor clearColor] colorBlendFactor:1 duration:.25];
     [flashBackground runAction:[SKAction sequence:@[flash, showGhosts, unflash]]];
+    self.flashButton.enabled = NO;
 
 }
 
@@ -694,6 +740,19 @@ static const uint32_t bikerCategory         = 0x1 << 2;
     for (Ghost *ghost in self.ghostArray) {
         ghost.alpha = .89;
     }
+}
+
+- (void)addShield{
+    SKSpriteNode *shield = [SKSpriteNode spriteNodeWithImageNamed:@"Shield1"];
+    shield.position = CGPointMake(self.biker.position.x, self.biker.position.y + 5);
+    shield.alpha = .8;
+    shield.zPosition = 2;
+    shield.physicsBody = [SKPhysicsBody bodyWithCircleOfRadius:shield.size.width/2];
+    shield.physicsBody.categoryBitMask = shieldCategory;
+    shield.physicsBody.contactTestBitMask = ghostCategory;
+    shield.physicsBody.collisionBitMask = 0;
+    [self addChild:shield];
+
 }
 
 #pragma mark - Detector Methods

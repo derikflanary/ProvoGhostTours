@@ -15,22 +15,12 @@
 #import "PGTIAPManager.h"
 #import <StoreKit/StoreKit.h>
 
-typedef NS_ENUM(NSInteger, CharacterIndex) {
-    Maxxx,
-    Derik,
-    Ninja,
-    Mayor,
-    Elf,
-    Dino,
-    Retro
-};
-
-
 @interface StoreScene() <CFCoverFlowViewDelegate>
 
 @property (nonatomic, strong) SKLabelNode *characterLabel;
 @property (nonatomic, strong) NSMutableArray *characterNames;
 @property (nonatomic, strong) NSMutableArray *characterNamesArray;
+@property (nonatomic, strong) NSMutableArray *characterAbilities;
 @property (nonatomic, strong) NSMutableArray *imageNamesArray;
 @property (nonatomic, strong) NSArray *itemsArray;
 @property (nonatomic, strong) NSMutableArray *coinAmounts;
@@ -43,6 +33,7 @@ typedef NS_ENUM(NSInteger, CharacterIndex) {
 @property (nonatomic, strong) SKLabelNode *coinLabel;
 @property (nonatomic, strong) NSMutableArray *products;
 @property (nonatomic, strong) UIButton *restoreButton;
+@property (nonatomic, strong) SKLabelNode *abilityLabel;
 @end
 
 @implementation StoreScene
@@ -79,10 +70,14 @@ static NSString* const CharacterCost = @"$0.99";
     [self.view addSubview:backButton];
     
     self.characterNamesArray = [NSMutableArray array];
+    self.characterNames = [NSMutableArray array];
+    self.characterAbilities = [NSMutableArray array];
     for (NSDictionary *dict in [GameData sharedGameData].purchasesCharacters) {
         [self.characterNamesArray addObject:dict[@"title"]];
-        
+        [self.characterNames addObject:dict[@"name"]];
+        [self.characterAbilities addObject:dict[@"ability"]];
     }
+
     self.coinAmounts = [NSMutableArray array];
     self.coinAmounts = @[@"0", @"100", @"100", @"500", @"500", @"500", @"500", @"500"].mutableCopy;
     
@@ -90,10 +85,19 @@ static NSString* const CharacterCost = @"$0.99";
     self.characterLabel.text = [self.characterNamesArray objectAtIndex:0];
     self.characterLabel.fontSize = 32;
     self.characterLabel.zPosition = 2;
-    self.characterLabel.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMaxY(self.coverFlowView.frame) + 30);
+    self.characterLabel.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMaxY(self.coverFlowView.frame) + 70);
     [self.characterLabel setScale:0.1];
     [self addChild:self.characterLabel];
     [self.characterLabel runAction:[SKAction scaleTo:1 duration:.5]];
+    
+    self.abilityLabel = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
+    self.abilityLabel.text = [self.characterAbilities objectAtIndex:0];
+    self.abilityLabel.fontSize = 14;
+    self.abilityLabel.zPosition = 2;
+    self.abilityLabel.position = CGPointMake(CGRectGetMidX(self.view.frame), CGRectGetMaxY(self.coverFlowView.frame) + 30);
+    [self.abilityLabel setScale:0.1];
+    [self addChild:self.abilityLabel];
+    [self.abilityLabel runAction:[SKAction scaleTo:1 duration:.5]];
     
     self.characterButton = [[UIButton alloc]initWithFrame:CGRectMake(CGRectGetMidX(self.frame) - 75, CGRectGetMaxY(self.coverFlowView.frame) + 20, 150, 50)];
     [self.characterButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
@@ -141,10 +145,6 @@ static NSString* const CharacterCost = @"$0.99";
         [self.characterButton setTitle:@"Select" forState:UIControlStateNormal];
     }
     
-    self.characterNames = [NSMutableArray array];
-    for (NSDictionary *dict in [GameData sharedGameData].purchasesCharacters) {
-        [self.characterNames addObject:dict[@"name"]];
-    }
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(productPurchased:) name:IAPHelperProductPurchasedNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(productRestored) name:IAPHelperProductRestoredNotification object:nil];
@@ -211,6 +211,7 @@ static NSString* const CharacterCost = @"$0.99";
     self.characterButton.hidden = NO;
     
     self.characterLabel.text = [self.characterNamesArray objectAtIndex:index];
+    self.abilityLabel.text = [self.characterAbilities objectAtIndex:index];
     [self.purchaseWithCoinButton setTitle:[NSString stringWithFormat:@"%@ coins", [self.coinAmounts objectAtIndex:index]] forState:UIControlStateNormal];
     
     NSString *amountString = [self.coinAmounts objectAtIndex:index];
@@ -365,6 +366,7 @@ static NSString* const CharacterCost = @"$0.99";
     [[self.view viewWithTag:70] removeFromSuperview];
     [[self.view viewWithTag:80] removeFromSuperview];
     [self.characterLabel removeFromParent];
+    [self.abilityLabel removeFromParent];
     
 }
 

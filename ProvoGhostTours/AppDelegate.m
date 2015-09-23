@@ -35,14 +35,14 @@
         [defaults setObject:currentAppVersion forKey:@"appVersion"];
         [defaults synchronize];
         
-        [GameData sharedGameData].purchasesCharacters = @[@{@"name": @"max", @"purchased": @"Y", @"title": @"Max", @"ghost":@"Ghost1"},
-                                                          @{@"name": @"derik", @"purchased": @"N", @"title": @"Derik", @"ghost": @"Ghost1"},
-                                                          @{@"name": @"courtney", @"purchased": @"N", @"title": @"Courtney", @"ghost": @"Ghost1"},
-                                                          @{@"name": @"ninja", @"purchased": @"N", @"title": @"Ninja", @"ghost": @"Ghost_ninja"},
-                                                          @{@"name": @"mayor", @"purchased": @"N", @"title": @"Provo Mayor", @"ghost": @"Ghost_mayor"},
-                                                          @{@"name": @"elf", @"purchased": @"N", @"title": @"Elf", @"ghost": @"Ghost_elf"},
-                                                          @{@"name": @"dinosaur", @"purchased": @"N", @"title": @"Dinosaur", @"ghost": @"Ghost_dino"},
-                                                          @{@"name": @"retro", @"purchased": @"N", @"title": @"Retro", @"ghost": @"Ghost2"}];
+        [GameData sharedGameData].purchasesCharacters = @[@{@"name": @"max", @"purchased": @"Y", @"title": @"Max", @"ghost":@"Ghost1", @"ability": @""},
+                                                          @{@"name": @"derik", @"purchased": @"Y", @"title": @"Derik", @"ghost": @"Ghost1", @"ability": @"Less batteries needed to charge flashlight"},
+                                                          @{@"name": @"courtney", @"purchased": @"Y", @"title": @"Courtney", @"ghost": @"Ghost1", @"ability": @"Use a wider flashlight"},
+                                                          @{@"name": @"ninja", @"purchased": @"Y", @"title": @"Ninja", @"ghost": @"Ghost_ninja", @"ability": @"Use a flashbomb on the ghosts"},
+                                                          @{@"name": @"mayor", @"purchased": @"Y", @"title": @"Provo Mayor", @"ghost": @"Ghost_mayor", @"ability": @"Double your coin intake"},
+                                                          @{@"name": @"elf", @"purchased": @"Y", @"title": @"Elf", @"ghost": @"Ghost_elf", @"ability": @"Create a temporary barrier"},
+                                                          @{@"name": @"dinosaur", @"purchased": @"Y", @"title": @"Dinosaur", @"ghost": @"Ghost_dino", @"ability": @"None"},
+                                                          @{@"name": @"retro", @"purchased": @"Y", @"title": @"Retro", @"ghost": @"Ghost2", @"ability": @"None"}];
 
         [GameData sharedGameData].selectedCharacterIndex = 0;
         [GameData sharedGameData].selectedCharacter = @"max";
@@ -59,14 +59,14 @@
         [defaults setObject:currentAppVersion forKey:@"appVersion"];
         [defaults synchronize];
         NSLog(@"updated");
-        [GameData sharedGameData].purchasesCharacters = @[@{@"name": @"max", @"purchased": @"Y", @"title": @"Max", @"ghost":@"Ghost1"},
-                                                          @{@"name": @"derik", @"purchased": @"N", @"title": @"Derik", @"ghost": @"Ghost1"},
-                                                          @{@"name": @"courtney", @"purchased": @"N", @"title": @"Courtney", @"ghost": @"Ghost1"},
-                                                          @{@"name": @"ninja", @"purchased": @"N", @"title": @"Ninja", @"ghost": @"Ghost_ninja"},
-                                                          @{@"name": @"mayor", @"purchased": @"N", @"title": @"Provo Mayor", @"ghost": @"Ghost_mayor"},
-                                                          @{@"name": @"elf", @"purchased": @"N", @"title": @"Elf", @"ghost": @"Ghost_elf"},
-                                                          @{@"name": @"dinosaur", @"purchased": @"N", @"title": @"Dinosaur", @"ghost": @"Ghost_dino"},
-                                                          @{@"name": @"retro", @"purchased": @"N", @"title": @"Retro", @"ghost": @"Ghost2"}];
+        [GameData sharedGameData].purchasesCharacters = @[@{@"name": @"max", @"purchased": @"Y", @"title": @"Max", @"ghost":@"Ghost1", @"ability": @"None"},
+                                                          @{@"name": @"derik", @"purchased": @"Y", @"title": @"Derik", @"ghost": @"Ghost1", @"ability": @"Less batteries needed to charge flashlight"},
+                                                          @{@"name": @"courtney", @"purchased": @"Y", @"title": @"Courtney", @"ghost": @"Ghost1", @"ability": @"Use a wider flashlight"},
+                                                          @{@"name": @"ninja", @"purchased": @"Y", @"title": @"Ninja", @"ghost": @"Ghost_ninja", @"ability": @"Use a flashbomb on the ghosts"},
+                                                          @{@"name": @"mayor", @"purchased": @"Y", @"title": @"Provo Mayor", @"ghost": @"Ghost_mayor", @"ability": @"Double your coin intake"},
+                                                          @{@"name": @"elf", @"purchased": @"Y", @"title": @"Elf", @"ghost": @"Ghost_elf", @"ability": @"Create a temporary barrier"},
+                                                          @{@"name": @"dinosaur", @"purchased": @"Y", @"title": @"Dinosaur", @"ghost": @"Ghost_dino", @"ability": @"None"},
+                                                          @{@"name": @"retro", @"purchased": @"Y", @"title": @"Retro", @"ghost": @"Ghost2", @"ability": @"None"}];
 
         [GameData sharedGameData].selectedCharacterIndex = 0;
         [GameData sharedGameData].selectedCharacter = @"max";
