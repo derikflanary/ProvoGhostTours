@@ -57,6 +57,7 @@
 @property (nonatomic, strong) ProgressBar *progressBar;
 @property (nonatomic, assign) CGFloat progress;
 @property (nonatomic, strong) UIButton *flashButton;
+@property (nonatomic, strong) UIButton *shieldButton;
 @property (nonatomic) SKSpriteNode *shield;
 
 @end
@@ -334,6 +335,16 @@ static const uint32_t shieldCategory         = 0x1 << 3;
         self.flashButton.tag = 10;
         [self.view addSubview:self.flashButton];
         self.flashButton.enabled = YES;
+    }
+    
+    if ([[GameData sharedGameData].selectedCharacter isEqualToString:@"elf"]) {
+        self.shieldButton = [[UIButton alloc]initWithFrame:CGRectMake(self.frame.size.width -50, self.frame.size.height - 50, 40, 40)];
+        [self.shieldButton setImage:[UIImage imageNamed:@"shieldIcon"] forState:UIControlStateNormal];
+        [self.shieldButton setImage:[UIImage imageNamed:@"shieldIcon"] forState:UIControlStateSelected];
+        [self.shieldButton addTarget:self action:@selector(shieldPressed:) forControlEvents:UIControlEventTouchUpInside];
+        self.shieldButton.tag = 10;
+        [self.view addSubview:self.shieldButton];
+        self.shieldButton.enabled = YES;
     }
     
 }
@@ -742,6 +753,11 @@ static const uint32_t shieldCategory         = 0x1 << 3;
     }
 }
 
+- (void)shieldPressed:(UIButton *)sender{
+    self.shieldButton.enabled = NO;
+    [self addShield];
+}
+
 - (void)addShield{
     SKSpriteNode *shield = [SKSpriteNode spriteNodeWithImageNamed:@"Shield1"];
     shield.position = CGPointMake(self.biker.position.x, self.biker.position.y + 5);
@@ -752,8 +768,14 @@ static const uint32_t shieldCategory         = 0x1 << 3;
     shield.physicsBody.contactTestBitMask = ghostCategory;
     shield.physicsBody.collisionBitMask = 0;
     [self addChild:shield];
-
+    
+    SKAction *delay = [SKAction waitForDuration:4];
+    SKAction *fade = [SKAction fadeOutWithDuration:1];
+    SKAction *remove = [SKAction removeFromParent];
+    [shield runAction:[SKAction sequence:@[delay, fade, remove]]];
+    
 }
+
 
 #pragma mark - Detector Methods
 
@@ -986,6 +1008,19 @@ static const uint32_t shieldCategory         = 0x1 << 3;
         ghost.alpha = .8;
         [self ghostCollidesWithBiker];
     }
+    
+    if ((firstBody.categoryBitMask & ghostCategory) != 0 &&
+        (secondBody.categoryBitMask & shieldCategory) != 0)
+    {
+        Ghost *ghost = (Ghost *)firstBody.node;
+        [ghost removeAllActions];
+        SKTexture *right = [SKTexture textureWithImageNamed:[NSString stringWithFormat:@"%@_right", [self.ghostImageArray objectAtIndex:self.selectedInt]]];
+        SKTexture *left = [SKTexture textureWithImageNamed:[self.ghostImageArray objectAtIndex:self.selectedInt]];
+        SKAction *bump = [SKAction animateWithTextures:@[right,left] timePerFrame:.25];
+        [ghost runAction:[SKAction repeatActionForever:bump]];
+
+    }
+
 }
 
 - (void)didEndContact:(SKPhysicsContact *)contact{
