@@ -134,7 +134,7 @@ static NSString* const GTGameDataAllKey = @"GameDataAllKey";
     if (self.allCharactersPurchased == 1) {
         [iCloudStore setBool:self.allCharactersPurchased forKey:GTGameDataAllKey];
     }
-    
+
     NSArray *cloudPurchases = [iCloudStore objectForKey:GTGameDataCharactersKey];
     int count = 0;
     int localCount = 0;
@@ -150,7 +150,7 @@ static NSString* const GTGameDataAllKey = @"GameDataAllKey";
         }
     }
     
-    if (localCount > count || [self.purchasesCharacters count] > [cloudPurchases count]) {
+    if (localCount >= count || [self.purchasesCharacters count] > [cloudPurchases count]) {
         [iCloudStore setObject:self.purchasesCharacters forKey:GTGameDataCharactersKey];
     }
     

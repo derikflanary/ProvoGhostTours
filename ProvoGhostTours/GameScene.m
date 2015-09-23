@@ -818,16 +818,24 @@ static const uint32_t shieldCategory         = 0x1 << 3;
         maxSpawn = 6;
         self.minDuration = 8;
         self.maxDuration = 10;
-    }else{
+    }else if([GameData sharedGameData].score < 1000){
         minSpawn = 3;
         maxSpawn = 5;
         self.minDuration = 7;
         self.maxDuration = 10;
+    }else{
+        minSpawn = 3;
+        maxSpawn = 4;
+        self.minDuration = 7;
+        self.maxDuration = 9;
     }
     
     int rangeSpawn = maxSpawn - minSpawn;
     int actualSpawn = (arc4random() % rangeSpawn) + minSpawn;
     
+    if ([[GameData sharedGameData].selectedCharacter isEqualToString:@"dinosaur"]) {
+        actualSpawn += 1;
+    }
     //spawn new ghost if time between spawns has happended
     self.lastSpawnTimeInterval += timeSinceLast;
     

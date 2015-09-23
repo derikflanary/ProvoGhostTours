@@ -40,7 +40,7 @@
                                                           @{@"name": @"courtney", @"purchased": @"N", @"title": @"Courtney", @"ghost": @"Ghost1", @"ability": @"Use a wider flashlight", @"cost": @"300"},
                                                           @{@"name": @"mayor", @"purchased": @"N", @"title": @"Provo Mayor", @"ghost": @"Ghost_mayor", @"ability": @"Double your coin intake",@"cost": @"300"},
                                                           @{@"name": @"ninja", @"purchased": @"N", @"title": @"Ninja", @"ghost": @"Ghost_ninja", @"ability": @"Use a flashbomb on the ghosts", @"cost": @"500"},
-                                                          @{@"name": @"dinosaur", @"purchased": @"N", @"title": @"Dinosaur", @"ghost": @"Ghost_dino", @"ability": @"None", @"cost": @"500"},
+                                                          @{@"name": @"dinosaur", @"purchased": @"N", @"title": @"Dinosaur", @"ghost": @"Ghost_dino", @"ability": @"Ghosts move slower", @"cost": @"500"},
                                                           @{@"name": @"elf", @"purchased": @"Y", @"title": @"Elf", @"ghost": @"Ghost_elf", @"ability": @"Create a temporary barrier", @"cost": @"1000"},
                                                           @{@"name": @"retro", @"purchased": @"N", @"title": @"Retro", @"ghost": @"Ghost2", @"ability": @"", @"cost": @"100"}];
         
@@ -65,8 +65,8 @@
                                                           @{@"name": @"courtney", @"purchased": @"N", @"title": @"Courtney", @"ghost": @"Ghost1", @"ability": @"Use a wider flashlight", @"cost": @"300"},
                                                           @{@"name": @"mayor", @"purchased": @"N", @"title": @"Provo Mayor", @"ghost": @"Ghost_mayor", @"ability": @"Double your coin intake",@"cost": @"300"},
                                                           @{@"name": @"ninja", @"purchased": @"N", @"title": @"Ninja", @"ghost": @"Ghost_ninja", @"ability": @"Use a flashbomb on the ghosts", @"cost": @"500"},
-                                                          @{@"name": @"dinosaur", @"purchased": @"N", @"title": @"Dinosaur", @"ghost": @"Ghost_dino", @"ability": @"None", @"cost": @"500"},
-                                                          @{@"name": @"elf", @"purchased": @"N", @"title": @"Elf", @"ghost": @"Ghost_elf", @"ability": @"Create a temporary barrier", @"cost": @"1000"},
+                                                          @{@"name": @"dinosaur", @"purchased": @"N", @"title": @"Dinosaur", @"ghost": @"Ghost_dino", @"ability": @"Ghosts move slower", @"cost": @"500"},
+                                                          @{@"name": @"elf", @"purchased": @"Y", @"title": @"Elf", @"ghost": @"Ghost_elf", @"ability": @"Create a temporary barrier", @"cost": @"1000"},
                                                           @{@"name": @"retro", @"purchased": @"N", @"title": @"Retro", @"ghost": @"Ghost2", @"ability": @"", @"cost": @"100"}];
 
         [GameData sharedGameData].selectedCharacterIndex = 0;

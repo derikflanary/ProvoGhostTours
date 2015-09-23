@@ -108,7 +108,7 @@ static NSString* const CharacterCost = @"$0.99";
     self.characterButton.tag = 30;
     [self.view addSubview:self.characterButton];
     
-    self.restoreButton = [[UIButton alloc]initWithFrame:CGRectMake(CGRectGetMidX(self.frame) - 75, self.view.frame.size.height - 30, 150, 21)];
+    self.restoreButton = [[UIButton alloc]initWithFrame:CGRectMake(CGRectGetMidX(self.frame) - 75, self.view.frame.size.height - 25, 150, 21)];
     [self.restoreButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [self.restoreButton setTitleColor:[UIColor colorWithWhite:1 alpha:.4] forState:UIControlStateHighlighted];
     [self.restoreButton setTintColor:[UIColor whiteColor]];
@@ -118,7 +118,7 @@ static NSString* const CharacterCost = @"$0.99";
     [self.restoreButton setTitle:@"Restore Purchases" forState:UIControlStateNormal];
     [self.view addSubview:self.restoreButton];
     
-    self.purchaseAllButton = [[UIButton alloc]initWithFrame:CGRectMake(CGRectGetMidX(self.frame) - 125, self.view.frame.size.height - 60, 250, 21)];
+    self.purchaseAllButton = [[UIButton alloc]initWithFrame:CGRectMake(CGRectGetMidX(self.frame) - 125, self.view.frame.size.height - 45, 250, 21)];
     [self.purchaseAllButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [self.purchaseAllButton setTitleColor:[UIColor colorWithWhite:1 alpha:.4] forState:UIControlStateHighlighted];
     [self.purchaseAllButton setTintColor:[UIColor whiteColor]];
@@ -132,7 +132,7 @@ static NSString* const CharacterCost = @"$0.99";
         self.purchaseAllButton.hidden = YES;
     }
     
-    self.purchaseWithCoinButton = [[UIButton alloc]initWithFrame:CGRectMake(CGRectGetMidX(self.frame) - 75, CGRectGetMaxY(self.coverFlowView.frame) + 60, 150, 50)];
+    self.purchaseWithCoinButton = [[UIButton alloc]initWithFrame:CGRectMake(CGRectGetMidX(self.frame) - 75, CGRectGetMaxY(self.coverFlowView.frame) + 45, 150, 50)];
     [self.purchaseWithCoinButton setTitleColor:[UIColor yellowColor] forState:UIControlStateNormal];
     [self.purchaseWithCoinButton setTitleColor:[UIColor colorWithWhite:1 alpha:.4] forState:UIControlStateHighlighted];
     [self.purchaseWithCoinButton setTintColor:[UIColor whiteColor]];
