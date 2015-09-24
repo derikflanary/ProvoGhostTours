@@ -342,7 +342,7 @@ static const uint32_t shieldCategory         = 0x1 << 3;
         [self.shieldButton setImage:[UIImage imageNamed:@"shieldIcon"] forState:UIControlStateNormal];
         [self.shieldButton setImage:[UIImage imageNamed:@"shieldIcon"] forState:UIControlStateSelected];
         [self.shieldButton addTarget:self action:@selector(shieldPressed:) forControlEvents:UIControlEventTouchUpInside];
-        self.shieldButton.tag = 10;
+        self.shieldButton.tag = 110;
         [self.view addSubview:self.shieldButton];
         self.shieldButton.enabled = YES;
     }
@@ -508,6 +508,9 @@ static const uint32_t shieldCategory         = 0x1 << 3;
     StoreScene *storeScene = [[StoreScene alloc]initWithSize:self.size];
     SKTransition *transition = [SKTransition fadeWithDuration:.65];
     [self.view presentScene:storeScene transition:transition];
+    
+    [[GameData sharedGameData] reset];
+    
     [[self.view viewWithTag:200] removeFromSuperview];
     [[self.view viewWithTag:100] removeFromSuperview];
     [[self.view viewWithTag:300] removeFromSuperview];
@@ -515,6 +518,7 @@ static const uint32_t shieldCategory         = 0x1 << 3;
     [[self.view viewWithTag:500] removeFromSuperview];
     [[self.view viewWithTag:321] removeFromSuperview];
     [[self.view viewWithTag:10] removeFromSuperview];
+    [[self.view viewWithTag:110] removeFromSuperview];
 }
 
 #pragma mark - Ghost Methods
@@ -1179,7 +1183,10 @@ static const uint32_t shieldCategory         = 0x1 << 3;
     [[self.view viewWithTag:300] removeFromSuperview];
     [[self.view viewWithTag:400] removeFromSuperview];
     [[self.view viewWithTag:500] removeFromSuperview];
-    [[GameData sharedGameData]reset];
+    [[self.view viewWithTag:10] removeFromSuperview];
+    [[self.view viewWithTag:110] removeFromSuperview];
+    
+    [[GameData sharedGameData] reset];
     [self startGame];
 }
 
