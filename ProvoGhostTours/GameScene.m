@@ -177,11 +177,6 @@ static const uint32_t shieldCategory         = 0x1 << 3;
     shopButton.tag = 500;
     [self.view addSubview:shopButton];
     
-    if ([[NSUserDefaults standardUserDefaults] integerForKey:@"highScore"]) {
-        [GameData sharedGameData].highScore = [[NSUserDefaults standardUserDefaults] integerForKey:@"highScore"];
-        [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"highScore"];
-    }
-    
     self.highscoreLabel = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
     self.highscoreLabel.text = [NSString stringWithFormat:@"High Score: %lu", [GameData sharedGameData].highScore];
     self.highscoreLabel.fontSize = 14;

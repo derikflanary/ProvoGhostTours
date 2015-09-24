@@ -303,7 +303,6 @@ static NSString* const CharacterCost = @"$0.99";
     [[PGTIAPManager sharedInstance] requestProductsWithCompletionHandler:^(BOOL success, NSArray *products) {
         self.products = products.mutableCopy;
 
-//        NSLog(@"products: %@", products);
     }];
 }
 

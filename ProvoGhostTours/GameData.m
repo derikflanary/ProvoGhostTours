@@ -109,6 +109,7 @@ static NSString* const GTGameDataAllKey = @"GameDataAllKey";
     
     long cloudCoins = [iCloudStore doubleForKey:GTGameDataTotalCoinsKey];
     self.coins = MAX(cloudCoins, self.coins);
+    
     if ([iCloudStore objectForKey:GTGameDataCharactersKey]) {
         self.purchasesCharacters = [iCloudStore objectForKey:GTGameDataCharactersKey];
     }
@@ -128,8 +129,14 @@ static NSString* const GTGameDataAllKey = @"GameDataAllKey";
     if (self.highScore > cloudHighScore) {
         [iCloudStore setDouble:self.highScore forKey: GTGameDataHighScoreKey];
     }
-
-    [iCloudStore setDouble:self.coins forKey:GTGameDataTotalCoinsKey];
+    
+    if (![[NSUserDefaults standardUserDefaults] boolForKey:@"NewLaunch"]) {
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"NewLaunch"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+    }else{
+        [iCloudStore setDouble:self.coins forKey:GTGameDataTotalCoinsKey];
+    }
+    
     
     if (self.allCharactersPurchased == 1) {
         [iCloudStore setBool:self.allCharactersPurchased forKey:GTGameDataAllKey];
