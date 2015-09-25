@@ -833,7 +833,7 @@ static const uint32_t shieldCategory         = 0x1 << 3;
     int actualSpawn = (arc4random() % rangeSpawn) + minSpawn;
     
     if ([[GameData sharedGameData].selectedCharacter isEqualToString:@"dinosaur"]) {
-        actualSpawn += 1;
+        actualSpawn += .5;
     }
     //spawn new ghost if time between spawns has happended
     self.lastSpawnTimeInterval += timeSinceLast;
