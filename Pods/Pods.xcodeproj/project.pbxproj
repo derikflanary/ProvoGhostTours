@@ -7,67 +7,69 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		00D748396679828F0B09F416C9533B00 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E15BBCC2FEC77BBBDB4294064F13510 /* Foundation.framework */; };
-		6C05E9D684A3CB3A7065DED8F3554EBB /* MPCoachMarks-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = A9FEF4254DD2B07D5E506B4EB15C2F6D /* MPCoachMarks-dummy.m */; };
-		8EEB8ADDB977DD9065B5A3472AE9F8D4 /* MPCoachMarks.m in Sources */ = {isa = PBXBuildFile; fileRef = 016B21D1ED5BBF6C9D2EE89650A71508 /* MPCoachMarks.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
-		92F1E35F669F3577447574B3A406B530 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E15BBCC2FEC77BBBDB4294064F13510 /* Foundation.framework */; };
+		00D748396679828F0B09F416C9533B00 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E95080AA7107071DE8C3ACB3CD78CC88 /* Foundation.framework */; };
+		321227D30BA3912C3B03EDC926C0D597 /* MPCoachMarks.h in Headers */ = {isa = PBXBuildFile; fileRef = 30953B217DD4AC08E0FC85A6D4ECEBDA /* MPCoachMarks.h */; };
+		3B28C386CC6628E7BF3041004A3450F6 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 377645E367953ECCCB3D9BB341270250 /* QuartzCore.framework */; };
+		662C726229DC349D1900077D7731AE72 /* MPCoachMarks.m in Sources */ = {isa = PBXBuildFile; fileRef = 804C01318B9F7865FE4A812AC0C9C739 /* MPCoachMarks.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		71C12E97FB47F7ED95A9B335E8CF8726 /* MPCoachMarks-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = A5591CB1A1F14B45E0D8E2AB4AEBD112 /* MPCoachMarks-dummy.m */; };
 		99489543E7EB360BDA2E08D31127DA71 /* Pods-ProvoGhostTours-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = D329CDD0356EC5211C95054B9EBB1C51 /* Pods-ProvoGhostTours-dummy.m */; };
-		AC9C0512777DB06F53412FB5586F672A /* MPCoachMarks.h in Headers */ = {isa = PBXBuildFile; fileRef = 13769CE7119213A264957734BE566494 /* MPCoachMarks.h */; };
-		C47BA235BB210650D6C4C80123A8A84A /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 03E1061EDC3B0479A6E4C4AE293C063C /* QuartzCore.framework */; };
-		F17D86913C5435043A91BC3FC56A7FBF /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B1091D2D8E3437C009951365F2F165D0 /* CoreGraphics.framework */; };
+		C098C83FFC660818166A65AED9C03ABD /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E95080AA7107071DE8C3ACB3CD78CC88 /* Foundation.framework */; };
+		C52CBB64842D954804D31C1373D7A653 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 56C97021A6BC26C892DE8CEF6F8C6A21 /* CoreGraphics.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		043464BEA1B6343542C9550291EA9413 /* PBXContainerItemProxy */ = {
+		731CDF1C7A89D1E547EE9FE376FDE7EE /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = A99C2B21FFEC7A5DF470191F75E16A03;
+			remoteGlobalIDString = DAEE2F36DBFFDE09AA521D74B61BF69B;
 			remoteInfo = MPCoachMarks;
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		016B21D1ED5BBF6C9D2EE89650A71508 /* MPCoachMarks.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MPCoachMarks.m; path = MPCoachMarks/MPCoachMarks.m; sourceTree = "<group>"; };
-		02AED186FDC1ED3B59F3D8359258A285 /* arrow-down.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "arrow-down.png"; path = "MPCoachMarks/arrows/arrow-down.png"; sourceTree = "<group>"; };
-		03E1061EDC3B0479A6E4C4AE293C063C /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS8.3.sdk/System/Library/Frameworks/QuartzCore.framework; sourceTree = DEVELOPER_DIR; };
-		13769CE7119213A264957734BE566494 /* MPCoachMarks.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MPCoachMarks.h; path = MPCoachMarks/MPCoachMarks.h; sourceTree = "<group>"; };
-		15A8AF67DC95FC7FBB59036AA60C5108 /* arrow-left.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "arrow-left.png"; path = "MPCoachMarks/arrows/arrow-left.png"; sourceTree = "<group>"; };
-		1B0CD047F8402514DFE8C55F034213A2 /* MPCoachMarks-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "MPCoachMarks-prefix.pch"; sourceTree = "<group>"; };
+		0F1B621279864C639072331E46087B77 /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
+		0F5C6315A6FBDE54D5FA08D2BD4C9FD7 /* arrow-top@3x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "arrow-top@3x.png"; path = "MPCoachMarks/arrows/arrow-top@3x.png"; sourceTree = "<group>"; };
 		207A2718AF9C32F32E8B5D6337585E1E /* Pods-ProvoGhostTours-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-ProvoGhostTours-acknowledgements.markdown"; sourceTree = "<group>"; };
-		20D113AB6D0A69E1A64763ACB1176CBA /* arrow-top@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "arrow-top@2x.png"; path = "MPCoachMarks/arrows/arrow-top@2x.png"; sourceTree = "<group>"; };
-		2C90242D56F97F47FC832BA22F38FA0D /* arrow-right@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "arrow-right@2x.png"; path = "MPCoachMarks/arrows/arrow-right@2x.png"; sourceTree = "<group>"; };
 		2FB0C20E5E5A550906782524C59D07C0 /* Pods-ProvoGhostTours.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-ProvoGhostTours.debug.xcconfig"; sourceTree = "<group>"; };
-		3E15BBCC2FEC77BBBDB4294064F13510 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS8.3.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
-		46E39C178EB424F8CBF4328FFBED6E00 /* arrow-right@3x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "arrow-right@3x.png"; path = "MPCoachMarks/arrows/arrow-right@3x.png"; sourceTree = "<group>"; };
-		492233B7FB60609D02332ADAB8B165D3 /* arrow-right.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "arrow-right.png"; path = "MPCoachMarks/arrows/arrow-right.png"; sourceTree = "<group>"; };
+		30953B217DD4AC08E0FC85A6D4ECEBDA /* MPCoachMarks.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MPCoachMarks.h; path = MPCoachMarks/MPCoachMarks.h; sourceTree = "<group>"; };
+		377645E367953ECCCB3D9BB341270250 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS8.3.sdk/System/Library/Frameworks/QuartzCore.framework; sourceTree = DEVELOPER_DIR; };
+		56C97021A6BC26C892DE8CEF6F8C6A21 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS8.3.sdk/System/Library/Frameworks/CoreGraphics.framework; sourceTree = DEVELOPER_DIR; };
+		5AAD4E9632FD13887CFFD803272532C4 /* arrow-down@3x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "arrow-down@3x.png"; path = "MPCoachMarks/arrows/arrow-down@3x.png"; sourceTree = "<group>"; };
+		5E2DA8AD7B77D39BD528A775F2876D8A /* arrow-top.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "arrow-top.png"; path = "MPCoachMarks/arrows/arrow-top.png"; sourceTree = "<group>"; };
 		66C58844D2F6B09C3D6D55E746214790 /* Pods-ProvoGhostTours-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-ProvoGhostTours-acknowledgements.plist"; sourceTree = "<group>"; };
-		6FF13A02E4DB1094E6D7FCCDDA103820 /* arrow-left@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "arrow-left@2x.png"; path = "MPCoachMarks/arrows/arrow-left@2x.png"; sourceTree = "<group>"; };
-		72E8347DC8A9BBD9CDD45F07D102F44A /* MPCoachMarks-Private.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "MPCoachMarks-Private.xcconfig"; sourceTree = "<group>"; };
+		68174990D622F72FBAE15F8F0EAF324D /* arrow-right@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "arrow-right@2x.png"; path = "MPCoachMarks/arrows/arrow-right@2x.png"; sourceTree = "<group>"; };
+		69B27E79218F36348771A35366DB6467 /* arrow-right.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "arrow-right.png"; path = "MPCoachMarks/arrows/arrow-right.png"; sourceTree = "<group>"; };
+		78FC4AF320E73E0FADABD58142CF07CF /* arrow-left.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "arrow-left.png"; path = "MPCoachMarks/arrows/arrow-left.png"; sourceTree = "<group>"; };
+		7D2EF73C2DC6E4E8926FB06936EF8DF9 /* MPCoachMarks-Private.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "MPCoachMarks-Private.xcconfig"; sourceTree = "<group>"; };
+		8001696944BC911E243F661E86EE7E70 /* arrow-down@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "arrow-down@2x.png"; path = "MPCoachMarks/arrows/arrow-down@2x.png"; sourceTree = "<group>"; };
+		8002382452AC179A7E96902FB81C7203 /* arrow-left@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "arrow-left@2x.png"; path = "MPCoachMarks/arrows/arrow-left@2x.png"; sourceTree = "<group>"; };
+		804C01318B9F7865FE4A812AC0C9C739 /* MPCoachMarks.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MPCoachMarks.m; path = MPCoachMarks/MPCoachMarks.m; sourceTree = "<group>"; };
 		80C1BC8010F862BC2ECD5E81BC3121ED /* Pods-ProvoGhostTours.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-ProvoGhostTours.release.xcconfig"; sourceTree = "<group>"; };
-		8486785903982E1FE8CABC7596E5E004 /* arrow-left@3x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "arrow-left@3x.png"; path = "MPCoachMarks/arrows/arrow-left@3x.png"; sourceTree = "<group>"; };
 		8AC1DF4507E8F7B241EC4B543BB25C47 /* libPods-ProvoGhostTours.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ProvoGhostTours.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		94295C661371F2998B478851449AD35B /* arrow-down@3x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "arrow-down@3x.png"; path = "MPCoachMarks/arrows/arrow-down@3x.png"; sourceTree = "<group>"; };
-		9D60421327795FF041C4E13A5DA3156A /* arrow-top.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "arrow-top.png"; path = "MPCoachMarks/arrows/arrow-top.png"; sourceTree = "<group>"; };
-		A2A2F4CC8F1138A6C211241118F05C89 /* MPCoachMarks.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = MPCoachMarks.xcconfig; sourceTree = "<group>"; };
-		A9FEF4254DD2B07D5E506B4EB15C2F6D /* MPCoachMarks-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "MPCoachMarks-dummy.m"; sourceTree = "<group>"; };
-		AC9B008B557DB18B6A78FA02D33A3D1B /* libMPCoachMarks.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libMPCoachMarks.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		B1091D2D8E3437C009951365F2F165D0 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS8.3.sdk/System/Library/Frameworks/CoreGraphics.framework; sourceTree = DEVELOPER_DIR; };
+		8C19253D5FBF9F809EBF821F188A4EDC /* MPCoachMarks-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "MPCoachMarks-prefix.pch"; sourceTree = "<group>"; };
+		916F5D90BF9077E84F55D21C97F823B7 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
+		96705EA0FEFE958E198CF09EF388E5D7 /* libMPCoachMarks.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libMPCoachMarks.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		A5591CB1A1F14B45E0D8E2AB4AEBD112 /* MPCoachMarks-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "MPCoachMarks-dummy.m"; sourceTree = "<group>"; };
+		AA23B80F86276A7910644DBB9B0D1FE1 /* arrow-top@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "arrow-top@2x.png"; path = "MPCoachMarks/arrows/arrow-top@2x.png"; sourceTree = "<group>"; };
+		B7DB15986D680228C6543F57894FCBC0 /* arrow-down.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "arrow-down.png"; path = "MPCoachMarks/arrows/arrow-down.png"; sourceTree = "<group>"; };
+		B9F98DBA0E1219244B21E90B15326C5E /* arrow-left@3x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "arrow-left@3x.png"; path = "MPCoachMarks/arrows/arrow-left@3x.png"; sourceTree = "<group>"; };
 		BA6428E9F66FD5A23C0A2E06ED26CD2F /* Podfile */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		C0074A0AB63C2A69490A7073075EA7F0 /* arrow-top@3x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "arrow-top@3x.png"; path = "MPCoachMarks/arrows/arrow-top@3x.png"; sourceTree = "<group>"; };
-		C58627C508EB34D68ED4D8C32A9C933C /* arrow-down@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "arrow-down@2x.png"; path = "MPCoachMarks/arrows/arrow-down@2x.png"; sourceTree = "<group>"; };
+		C7D3616B89CC1E5B77DAE01E9DCF967F /* arrow-right@3x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "arrow-right@3x.png"; path = "MPCoachMarks/arrows/arrow-right@3x.png"; sourceTree = "<group>"; };
 		D329CDD0356EC5211C95054B9EBB1C51 /* Pods-ProvoGhostTours-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-ProvoGhostTours-dummy.m"; sourceTree = "<group>"; };
 		E7E99C1C89607472AAACEEDA848DD042 /* Pods-ProvoGhostTours-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-ProvoGhostTours-resources.sh"; sourceTree = "<group>"; };
+		E95080AA7107071DE8C3ACB3CD78CC88 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS8.3.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		FE881F5CB9D76103A63F45300DFFD5CE /* MPCoachMarks.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = MPCoachMarks.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		4E294A48952631EEF12EE23DBE330095 /* Frameworks */ = {
+		3906A3FDA0B2C26E9C8814BF237DBF70 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F17D86913C5435043A91BC3FC56A7FBF /* CoreGraphics.framework in Frameworks */,
-				92F1E35F669F3577447574B3A406B530 /* Foundation.framework in Frameworks */,
-				C47BA235BB210650D6C4C80123A8A84A /* QuartzCore.framework in Frameworks */,
+				C52CBB64842D954804D31C1373D7A653 /* CoreGraphics.framework in Frameworks */,
+				C098C83FFC660818166A65AED9C03ABD /* Foundation.framework in Frameworks */,
+				3B28C386CC6628E7BF3041004A3450F6 /* QuartzCore.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -90,34 +92,41 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		24F3662D4D5366C7DDF90C345918056D /* Resources */ = {
+		3201AE52DE68235CA50554C9323D2F58 /* Crashlytics */ = {
 			isa = PBXGroup;
 			children = (
-				02AED186FDC1ED3B59F3D8359258A285 /* arrow-down.png */,
-				C58627C508EB34D68ED4D8C32A9C933C /* arrow-down@2x.png */,
-				94295C661371F2998B478851449AD35B /* arrow-down@3x.png */,
-				15A8AF67DC95FC7FBB59036AA60C5108 /* arrow-left.png */,
-				6FF13A02E4DB1094E6D7FCCDDA103820 /* arrow-left@2x.png */,
-				8486785903982E1FE8CABC7596E5E004 /* arrow-left@3x.png */,
-				492233B7FB60609D02332ADAB8B165D3 /* arrow-right.png */,
-				2C90242D56F97F47FC832BA22F38FA0D /* arrow-right@2x.png */,
-				46E39C178EB424F8CBF4328FFBED6E00 /* arrow-right@3x.png */,
-				9D60421327795FF041C4E13A5DA3156A /* arrow-top.png */,
-				20D113AB6D0A69E1A64763ACB1176CBA /* arrow-top@2x.png */,
-				C0074A0AB63C2A69490A7073075EA7F0 /* arrow-top@3x.png */,
+				6AC82AE753FCC4EFD855FE8A15BCBC96 /* Frameworks */,
 			);
-			name = Resources;
+			path = Crashlytics;
 			sourceTree = "<group>";
 		};
-		4A4E8107A5AAD853C829BAC92F58DC6D /* MPCoachMarks */ = {
+		355A03B17CD97742401E46C2FA34E7DB /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				13769CE7119213A264957734BE566494 /* MPCoachMarks.h */,
-				016B21D1ED5BBF6C9D2EE89650A71508 /* MPCoachMarks.m */,
-				24F3662D4D5366C7DDF90C345918056D /* Resources */,
-				A9EECE0A4A80F26E7A7EE9E1FA824D5F /* Support Files */,
+				3201AE52DE68235CA50554C9323D2F58 /* Crashlytics */,
+				9B1DD284DB49E87F2FA5C4B8DB0AD7AD /* Fabric */,
+				37ED0C8E5E129336A3A9400C45F84161 /* MPCoachMarks */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		37ED0C8E5E129336A3A9400C45F84161 /* MPCoachMarks */ = {
+			isa = PBXGroup;
+			children = (
+				30953B217DD4AC08E0FC85A6D4ECEBDA /* MPCoachMarks.h */,
+				804C01318B9F7865FE4A812AC0C9C739 /* MPCoachMarks.m */,
+				9B40B5C49FD8B6E07C1D05D0255E3B27 /* Resources */,
+				8D0655A2CD166EDF6DDBAB79DBE20A57 /* Support Files */,
 			);
 			path = MPCoachMarks;
+			sourceTree = "<group>";
+		};
+		4939234853B363FAD7FCA572505CCF99 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				0F1B621279864C639072331E46087B77 /* Fabric.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		4FC0D09CC07E29AB7F72DFD897EC8D5E /* Targets Support Files */ = {
@@ -131,11 +140,19 @@
 		5764799A2697346A2BA53BE1694037F5 /* iOS */ = {
 			isa = PBXGroup;
 			children = (
-				B1091D2D8E3437C009951365F2F165D0 /* CoreGraphics.framework */,
-				3E15BBCC2FEC77BBBDB4294064F13510 /* Foundation.framework */,
-				03E1061EDC3B0479A6E4C4AE293C063C /* QuartzCore.framework */,
+				56C97021A6BC26C892DE8CEF6F8C6A21 /* CoreGraphics.framework */,
+				E95080AA7107071DE8C3ACB3CD78CC88 /* Foundation.framework */,
+				377645E367953ECCCB3D9BB341270250 /* QuartzCore.framework */,
 			);
 			name = iOS;
+			sourceTree = "<group>";
+		};
+		6AC82AE753FCC4EFD855FE8A15BCBC96 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				916F5D90BF9077E84F55D21C97F823B7 /* Crashlytics.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		7DB346D0F39D3F0E887471402A8071AB = {
@@ -143,30 +160,57 @@
 			children = (
 				BA6428E9F66FD5A23C0A2E06ED26CD2F /* Podfile */,
 				122DA2E5084A4393C29BE363C764795C /* Frameworks */,
-				84A22342820030F799260EB6E6B75D6C /* Pods */,
+				355A03B17CD97742401E46C2FA34E7DB /* Pods */,
 				CCA510CFBEA2D207524CDA0D73C3B561 /* Products */,
 				4FC0D09CC07E29AB7F72DFD897EC8D5E /* Targets Support Files */,
 			);
 			sourceTree = "<group>";
 		};
-		84A22342820030F799260EB6E6B75D6C /* Pods */ = {
+		81FCE28D53A83622A9583FA7AD9C9FB2 /* Base */ = {
 			isa = PBXGroup;
 			children = (
-				4A4E8107A5AAD853C829BAC92F58DC6D /* MPCoachMarks */,
+				4939234853B363FAD7FCA572505CCF99 /* Frameworks */,
 			);
-			name = Pods;
+			name = Base;
 			sourceTree = "<group>";
 		};
-		A9EECE0A4A80F26E7A7EE9E1FA824D5F /* Support Files */ = {
+		8D0655A2CD166EDF6DDBAB79DBE20A57 /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
-				A2A2F4CC8F1138A6C211241118F05C89 /* MPCoachMarks.xcconfig */,
-				72E8347DC8A9BBD9CDD45F07D102F44A /* MPCoachMarks-Private.xcconfig */,
-				A9FEF4254DD2B07D5E506B4EB15C2F6D /* MPCoachMarks-dummy.m */,
-				1B0CD047F8402514DFE8C55F034213A2 /* MPCoachMarks-prefix.pch */,
+				FE881F5CB9D76103A63F45300DFFD5CE /* MPCoachMarks.xcconfig */,
+				7D2EF73C2DC6E4E8926FB06936EF8DF9 /* MPCoachMarks-Private.xcconfig */,
+				A5591CB1A1F14B45E0D8E2AB4AEBD112 /* MPCoachMarks-dummy.m */,
+				8C19253D5FBF9F809EBF821F188A4EDC /* MPCoachMarks-prefix.pch */,
 			);
 			name = "Support Files";
 			path = "../Target Support Files/MPCoachMarks";
+			sourceTree = "<group>";
+		};
+		9B1DD284DB49E87F2FA5C4B8DB0AD7AD /* Fabric */ = {
+			isa = PBXGroup;
+			children = (
+				81FCE28D53A83622A9583FA7AD9C9FB2 /* Base */,
+			);
+			path = Fabric;
+			sourceTree = "<group>";
+		};
+		9B40B5C49FD8B6E07C1D05D0255E3B27 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				B7DB15986D680228C6543F57894FCBC0 /* arrow-down.png */,
+				8001696944BC911E243F661E86EE7E70 /* arrow-down@2x.png */,
+				5AAD4E9632FD13887CFFD803272532C4 /* arrow-down@3x.png */,
+				78FC4AF320E73E0FADABD58142CF07CF /* arrow-left.png */,
+				8002382452AC179A7E96902FB81C7203 /* arrow-left@2x.png */,
+				B9F98DBA0E1219244B21E90B15326C5E /* arrow-left@3x.png */,
+				69B27E79218F36348771A35366DB6467 /* arrow-right.png */,
+				68174990D622F72FBAE15F8F0EAF324D /* arrow-right@2x.png */,
+				C7D3616B89CC1E5B77DAE01E9DCF967F /* arrow-right@3x.png */,
+				5E2DA8AD7B77D39BD528A775F2876D8A /* arrow-top.png */,
+				AA23B80F86276A7910644DBB9B0D1FE1 /* arrow-top@2x.png */,
+				0F5C6315A6FBDE54D5FA08D2BD4C9FD7 /* arrow-top@3x.png */,
+			);
+			name = Resources;
 			sourceTree = "<group>";
 		};
 		B9FDF80610B10B354122DC6B9AA8CD23 /* Pods-ProvoGhostTours */ = {
@@ -186,7 +230,7 @@
 		CCA510CFBEA2D207524CDA0D73C3B561 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				AC9B008B557DB18B6A78FA02D33A3D1B /* libMPCoachMarks.a */,
+				96705EA0FEFE958E198CF09EF388E5D7 /* libMPCoachMarks.a */,
 				8AC1DF4507E8F7B241EC4B543BB25C47 /* libPods-ProvoGhostTours.a */,
 			);
 			name = Products;
@@ -195,11 +239,11 @@
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
-		41D58440BD7C80BA15244DE40C213480 /* Headers */ = {
+		8577CC20714D5573C47CA72B60B6DC12 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AC9C0512777DB06F53412FB5586F672A /* MPCoachMarks.h in Headers */,
+				321227D30BA3912C3B03EDC926C0D597 /* MPCoachMarks.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -216,20 +260,20 @@
 			buildRules = (
 			);
 			dependencies = (
-				53AFD3F4D89FA44B89CE4C0D6D3B7180 /* PBXTargetDependency */,
+				AD835D3295863512BE39FB0609BE5B59 /* PBXTargetDependency */,
 			);
 			name = "Pods-ProvoGhostTours";
 			productName = "Pods-ProvoGhostTours";
 			productReference = 8AC1DF4507E8F7B241EC4B543BB25C47 /* libPods-ProvoGhostTours.a */;
 			productType = "com.apple.product-type.library.static";
 		};
-		A99C2B21FFEC7A5DF470191F75E16A03 /* MPCoachMarks */ = {
+		DAEE2F36DBFFDE09AA521D74B61BF69B /* MPCoachMarks */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 54C3651632FF7D1CF391793EC47A5E5A /* Build configuration list for PBXNativeTarget "MPCoachMarks" */;
+			buildConfigurationList = E0D2E29B33ABD12D2481BA98BB7A6835 /* Build configuration list for PBXNativeTarget "MPCoachMarks" */;
 			buildPhases = (
-				9E9180D73244BBA213FC0FDA56ED85AD /* Sources */,
-				4E294A48952631EEF12EE23DBE330095 /* Frameworks */,
-				41D58440BD7C80BA15244DE40C213480 /* Headers */,
+				496D1887058463541DC7391EA637CDE8 /* Sources */,
+				3906A3FDA0B2C26E9C8814BF237DBF70 /* Frameworks */,
+				8577CC20714D5573C47CA72B60B6DC12 /* Headers */,
 			);
 			buildRules = (
 			);
@@ -237,7 +281,7 @@
 			);
 			name = MPCoachMarks;
 			productName = MPCoachMarks;
-			productReference = AC9B008B557DB18B6A78FA02D33A3D1B /* libMPCoachMarks.a */;
+			productReference = 96705EA0FEFE958E198CF09EF388E5D7 /* libMPCoachMarks.a */;
 			productType = "com.apple.product-type.library.static";
 		};
 /* End PBXNativeTarget section */
@@ -261,13 +305,22 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				A99C2B21FFEC7A5DF470191F75E16A03 /* MPCoachMarks */,
+				DAEE2F36DBFFDE09AA521D74B61BF69B /* MPCoachMarks */,
 				353412375A9DED5BFBBA8F58E353700C /* Pods-ProvoGhostTours */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXSourcesBuildPhase section */
+		496D1887058463541DC7391EA637CDE8 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				71C12E97FB47F7ED95A9B335E8CF8726 /* MPCoachMarks-dummy.m in Sources */,
+				662C726229DC349D1900077D7731AE72 /* MPCoachMarks.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		5EDE883AE1DAA103AB45675FDEC3A5CC /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -276,30 +329,21 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		9E9180D73244BBA213FC0FDA56ED85AD /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				6C05E9D684A3CB3A7065DED8F3554EBB /* MPCoachMarks-dummy.m in Sources */,
-				8EEB8ADDB977DD9065B5A3472AE9F8D4 /* MPCoachMarks.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		53AFD3F4D89FA44B89CE4C0D6D3B7180 /* PBXTargetDependency */ = {
+		AD835D3295863512BE39FB0609BE5B59 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = MPCoachMarks;
-			target = A99C2B21FFEC7A5DF470191F75E16A03 /* MPCoachMarks */;
-			targetProxy = 043464BEA1B6343542C9550291EA9413 /* PBXContainerItemProxy */;
+			target = DAEE2F36DBFFDE09AA521D74B61BF69B /* MPCoachMarks */;
+			targetProxy = 731CDF1C7A89D1E547EE9FE376FDE7EE /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		436B1D99861FC73565CB621D6AFF39E0 /* Release */ = {
+		2A0366380F4F6C4012E23DE578DB630B /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 72E8347DC8A9BBD9CDD45F07D102F44A /* MPCoachMarks-Private.xcconfig */;
+			baseConfigurationReference = 7D2EF73C2DC6E4E8926FB06936EF8DF9 /* MPCoachMarks-Private.xcconfig */;
 			buildSettings = {
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_PREFIX_HEADER = "Target Support Files/MPCoachMarks/MPCoachMarks-prefix.pch";
@@ -328,6 +372,22 @@
 				SKIP_INSTALL = YES;
 			};
 			name = Release;
+		};
+		6AA5402A2ACEFF7DDB3F0D07B05C0BDB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7D2EF73C2DC6E4E8926FB06936EF8DF9 /* MPCoachMarks-Private.xcconfig */;
+			buildSettings = {
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/MPCoachMarks/MPCoachMarks-prefix.pch";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
 		};
 		7A317F5355F6BB6F70BB7995B22D8C93 /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -418,22 +478,6 @@
 			};
 			name = Release;
 		};
-		B3D8FBB1772B02154D08B445AC5D8B68 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 72E8347DC8A9BBD9CDD45F07D102F44A /* MPCoachMarks-Private.xcconfig */;
-			buildSettings = {
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/MPCoachMarks/MPCoachMarks-prefix.pch";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
-				MTL_ENABLE_DEBUG_INFO = YES;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-			};
-			name = Debug;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -446,20 +490,20 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		54C3651632FF7D1CF391793EC47A5E5A /* Build configuration list for PBXNativeTarget "MPCoachMarks" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				B3D8FBB1772B02154D08B445AC5D8B68 /* Debug */,
-				436B1D99861FC73565CB621D6AFF39E0 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 		D952A46DEBE81D0570918088E350B235 /* Build configuration list for PBXNativeTarget "Pods-ProvoGhostTours" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				7A317F5355F6BB6F70BB7995B22D8C93 /* Debug */,
 				5B9936706190DCDD6D457685137F46A1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		E0D2E29B33ABD12D2481BA98BB7A6835 /* Build configuration list for PBXNativeTarget "MPCoachMarks" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6AA5402A2ACEFF7DDB3F0D07B05C0BDB /* Debug */,
+				2A0366380F4F6C4012E23DE578DB630B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

@@ -8,6 +8,8 @@
 
 #import "AppDelegate.h"
 #import "GameData.h"
+#import <Crashlytics/Crashlytics.h>
+#import <Fabric/Fabric.h>
 
 @interface AppDelegate ()
 
@@ -78,6 +80,7 @@
         [[NSUserDefaults standardUserDefaults] synchronize];
     }
 
+    [Fabric with:@[[Crashlytics class]]];
     
     return YES;
 }

@@ -3,6 +3,8 @@
 
 target 'ProvoGhostTours' do
 pod 'MPCoachMarks'
+pod 'Fabric'
+pod 'Crashlytics'
 end
 
 target 'ProvoGhostToursTests' do

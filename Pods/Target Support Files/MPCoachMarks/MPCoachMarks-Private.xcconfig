@@ -1,6 +1,6 @@
 #include "MPCoachMarks.xcconfig"
 GCC_PREPROCESSOR_DEFINITIONS = $(inherited) COCOAPODS=1
-HEADER_SEARCH_PATHS = "${PODS_ROOT}/Headers/Private" "${PODS_ROOT}/Headers/Private/MPCoachMarks" "${PODS_ROOT}/Headers/Public" "${PODS_ROOT}/Headers/Public/MPCoachMarks"
+HEADER_SEARCH_PATHS = "${PODS_ROOT}/Headers/Private" "${PODS_ROOT}/Headers/Private/MPCoachMarks" "${PODS_ROOT}/Headers/Public" "${PODS_ROOT}/Headers/Public/Crashlytics" "${PODS_ROOT}/Headers/Public/Crashlytics/Crashlytics" "${PODS_ROOT}/Headers/Public/Fabric" "${PODS_ROOT}/Headers/Public/Fabric/Fabric" "${PODS_ROOT}/Headers/Public/MPCoachMarks"
 OTHER_LDFLAGS = ${MPCOACHMARKS_OTHER_LDFLAGS}
 PODS_ROOT = ${SRCROOT}
 SKIP_INSTALL = YES

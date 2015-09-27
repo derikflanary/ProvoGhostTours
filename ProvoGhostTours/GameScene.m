@@ -858,7 +858,7 @@ static const uint32_t shieldCategory         = 0x1 << 3;
     if (self.movingBackground.position.x <= - 2600) {
         self.movingBackground.position = CGPointMake(self.frame.size.width, 0);
     }else{
-        self.movingBackground.position = CGPointMake(self.movingBackground.position.x - .5, self.movingBackground.position.y);
+        self.movingBackground.position = CGPointMake(self.movingBackground.position.x - .3, self.movingBackground.position.y);
     }
     
     //Move the trees
@@ -867,7 +867,7 @@ static const uint32_t shieldCategory         = 0x1 << 3;
         int actualSpawn = (arc4random() % 200) + 10;
         [self addTreeAtX:self.view.frame.size.width + actualSpawn];
     }else{
-        self.tree.position = CGPointMake(self.tree.position.x - .5, self.tree.position.y);
+        self.tree.position = CGPointMake(self.tree.position.x - .3, self.tree.position.y);
     }
 
     // Handle time delta.

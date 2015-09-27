@@ -308,6 +308,7 @@
 				EEB665261B7BEE6200FDA352 /* Frameworks */,
 				EEB665271B7BEE6200FDA352 /* Resources */,
 				5A1462305229439F5FB0F4E8 /* Copy Pods Resources */,
+				EE716F3F1BB5CDBB0047AA7F /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -445,6 +446,19 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ProvoGhostTours/Pods-ProvoGhostTours-resources.sh\"\n";
 			showEnvVarsInLog = 0;
+		};
+		EE716F3F1BB5CDBB0047AA7F /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Fabric/Fabric.framework/run\" c9541433c5e713982968e55e36e018d8a5a9e7a8 cd626cccc3c7f65515208d4e7c39df59501edd5a3e9f961b6e2269fe87d98721";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -601,11 +615,11 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = ProvoGhostTours/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.derikflanary.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "dbbfe7ee-de33-4632-9daa-90fd6bb8ae67";
+				PROVISIONING_PROFILE = "38bd527d-e812-47dc-bda6-07e8d40548b3";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -619,11 +633,11 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = ProvoGhostTours/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.derikflanary.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "dbbfe7ee-de33-4632-9daa-90fd6bb8ae67";
+				PROVISIONING_PROFILE = "38bd527d-e812-47dc-bda6-07e8d40548b3";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;

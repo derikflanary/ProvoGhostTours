@@ -32,13 +32,13 @@
 }
 
 - (void)die{
-    [self runAction:[SKAction stop]];
+//    [self runAction:[SKAction stop]];
     SKAction *grow = [SKAction resizeToWidth:self.size.width * 1.5 duration:.075];
     SKAction *shrink = [SKAction resizeToWidth:self.size.width * .75 duration:.075];
     SKAction *die = [SKAction fadeOutWithDuration:.15];
     SKAction *remove = [SKAction removeFromParent];
     [self runAction:die];
-    [self runAction:[SKAction sequence:@[grow, shrink, die, remove]]];
+    [self runAction:[SKAction sequence:@[grow, shrink, remove]]];
 }
 
 @end
