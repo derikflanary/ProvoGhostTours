@@ -1,4 +1,4 @@
-//
+
 //  GameData.m
 //  ProvoGhostTours
 //
@@ -130,10 +130,13 @@ static NSString* const GTGameDataAllKey = @"GameDataAllKey";
         [iCloudStore setDouble:self.highScore forKey: GTGameDataHighScoreKey];
     }
     
-    if (![[NSUserDefaults standardUserDefaults] boolForKey:@"NewLaunch"]) {
-        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"NewLaunch"];
-        [[NSUserDefaults standardUserDefaults] synchronize];
-    }else{
+    long cloudCoins = [iCloudStore doubleForKey:GTGameDataTotalCoinsKey];
+    
+//    if (![[NSUserDefaults standardUserDefaults] boolForKey:@"NewLaunch"]) {
+//        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"NewLaunch"];
+//        [[NSUserDefaults standardUserDefaults] synchronize];
+//    }else
+    if (self.coins){
         [iCloudStore setDouble:self.coins forKey:GTGameDataTotalCoinsKey];
     }
     
@@ -161,8 +164,8 @@ static NSString* const GTGameDataAllKey = @"GameDataAllKey";
         [iCloudStore setObject:self.purchasesCharacters forKey:GTGameDataCharactersKey];
     }
     
-        [iCloudStore synchronize];
-    
+    [iCloudStore synchronize];
+    [self updateFromiCloud:nil];
 }
 
 #pragma mark - Action Methods

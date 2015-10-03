@@ -45,7 +45,7 @@
         
         [GameData sharedGameData].selectedCharacterIndex = 0;
         [GameData sharedGameData].selectedCharacter = @"max";
-        [GameData sharedGameData].coins = 0;
+//        [GameData sharedGameData].coins = 0;
         [GameData sharedGameData].allCharactersPurchased = 0;
         [[GameData sharedGameData] save];
         
@@ -71,7 +71,6 @@
 
         [GameData sharedGameData].selectedCharacterIndex = 0;
         [GameData sharedGameData].selectedCharacter = @"max";
-        [GameData sharedGameData].coins = 0;
         [GameData sharedGameData].allCharactersPurchased = 0;
         [[GameData sharedGameData] save];
         

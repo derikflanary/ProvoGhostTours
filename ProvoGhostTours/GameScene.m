@@ -105,7 +105,6 @@ static const uint32_t shieldCategory         = 0x1 << 3;
 
         [self.audioPlayer play];
         
-        
         [self authenticateLocalPlayer];
     }
     return self;
@@ -1164,8 +1163,12 @@ static const uint32_t shieldCategory         = 0x1 << 3;
     
     self.gameover = YES;
     self.progress = 0;
+    if (![GameData sharedGameData].highScore) {
+        [self reportScore:[GameData sharedGameData].score];
+    }else{
+        [self reportScore:[GameData sharedGameData].highScore];
+    }
     
-    [self reportScore:[GameData sharedGameData].score];
 
 }
 
