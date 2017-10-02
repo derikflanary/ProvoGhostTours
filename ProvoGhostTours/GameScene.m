@@ -14,6 +14,7 @@
 #import "StoreScene.h"
 #import "GameData.h"
 #import "ProgressBar.h"
+#import <StoreKit/StoreKit.h>
 
 @interface GameScene() <SKPhysicsContactDelegate, MPCoachMarksViewDelegate, GKGameCenterControllerDelegate>
 
@@ -124,7 +125,7 @@ static const uint32_t shieldCategory         = 0x1 << 3;
 - (void)addStartScreenButtons{
     
     self.titleLabel = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
-    self.titleLabel.text = @"Provo Ghost Tours";
+    self.titleLabel.text = @"Ghost Tour";
     self.titleLabel.fontSize = 36;
     self.titleLabel.zPosition = 4;
     self.titleLabel.position = CGPointMake(CGRectGetMidX(self.frame),
@@ -653,7 +654,7 @@ static const uint32_t shieldCategory         = 0x1 << 3;
         return;
     }
     
-    SKSpriteNode *battery = [SKSpriteNode spriteNodeWithImageNamed:@"Battery"];
+    SKSpriteNode *battery = [SKSpriteNode spriteNodeWithImageNamed:@"battery"];
     battery.position = position;
     battery.zPosition = 2;
     [self addChild:battery];
@@ -1102,6 +1103,9 @@ static const uint32_t shieldCategory         = 0x1 << 3;
 
     if ([GameData sharedGameData].score > [GameData sharedGameData].highScore) {
         [GameData sharedGameData].highScore = [GameData sharedGameData].score;
+        if([SKStoreReviewController class]){
+            [SKStoreReviewController requestReview];
+        }
     }
     [[GameData sharedGameData]save];
     

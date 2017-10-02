@@ -7,11 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		6816C9EA36C3CDAAE1094A61 /* libPods-ProvoGhostTours.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E91B6BCCF656DF7FFF805E7 /* libPods-ProvoGhostTours.a */; };
-		EE0AE0851BB24BFB0066298B /* courtneyAnimation.plist in Resources */ = {isa = PBXBuildFile; fileRef = EE0AE0841BB24BFA0066298B /* courtneyAnimation.plist */; settings = {ASSET_TAGS = (); }; };
-		EE2FC1BE1BAC723400EF7014 /* ProgressBar.m in Sources */ = {isa = PBXBuildFile; fileRef = EE2FC1BD1BAC723400EF7014 /* ProgressBar.m */; settings = {ASSET_TAGS = (); }; };
-		EE2FC1C01BACAEAD00EF7014 /* flameAnimation.plist in Resources */ = {isa = PBXBuildFile; fileRef = EE2FC1BF1BACAEAD00EF7014 /* flameAnimation.plist */; settings = {ASSET_TAGS = (); }; };
-		EE7C18B91BB0741300D5CBBA /* coinAnimation.plist in Resources */ = {isa = PBXBuildFile; fileRef = EE7C18B81BB0741300D5CBBA /* coinAnimation.plist */; settings = {ASSET_TAGS = (); }; };
+		53DF949D04F7095876096E64 /* libPods-ProvoGhostToursTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 28CAB8B52217E007975CE12A /* libPods-ProvoGhostToursTests.a */; };
+		951717D3252EBFF074FE348B /* libPods-ProvoGhostTours.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BB5D391621D0D20D4435ACEC /* libPods-ProvoGhostTours.a */; };
+		EE0AE0851BB24BFB0066298B /* courtneyAnimation.plist in Resources */ = {isa = PBXBuildFile; fileRef = EE0AE0841BB24BFA0066298B /* courtneyAnimation.plist */; };
+		EE2FC1BE1BAC723400EF7014 /* ProgressBar.m in Sources */ = {isa = PBXBuildFile; fileRef = EE2FC1BD1BAC723400EF7014 /* ProgressBar.m */; };
+		EE2FC1C01BACAEAD00EF7014 /* flameAnimation.plist in Resources */ = {isa = PBXBuildFile; fileRef = EE2FC1BF1BACAEAD00EF7014 /* flameAnimation.plist */; };
+		EE7C18B91BB0741300D5CBBA /* coinAnimation.plist in Resources */ = {isa = PBXBuildFile; fileRef = EE7C18B81BB0741300D5CBBA /* coinAnimation.plist */; };
 		EEA1916D1B92CC4D005B0BE9 /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EEA1916C1B92CC4C005B0BE9 /* GameKit.framework */; };
 		EEA1916F1B92D8F1005B0BE9 /* GameScene.m in Sources */ = {isa = PBXBuildFile; fileRef = EEA1916E1B92D8F1005B0BE9 /* GameScene.m */; };
 		EEB6652F1B7BEE6200FDA352 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = EEB6652E1B7BEE6200FDA352 /* main.m */; };
@@ -54,9 +55,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		2D35FA64800B4667499F13B5 /* Pods-ProvoGhostTours.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ProvoGhostTours.release.xcconfig"; path = "Pods/Target Support Files/Pods-ProvoGhostTours/Pods-ProvoGhostTours.release.xcconfig"; sourceTree = "<group>"; };
-		3CAA61AD23E236AF4B403FBA /* Pods-ProvoGhostTours.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ProvoGhostTours.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ProvoGhostTours/Pods-ProvoGhostTours.debug.xcconfig"; sourceTree = "<group>"; };
-		5E91B6BCCF656DF7FFF805E7 /* libPods-ProvoGhostTours.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ProvoGhostTours.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		00B62610351A4FFDB1CA4697 /* Pods-ProvoGhostTours.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ProvoGhostTours.release.xcconfig"; path = "Pods/Target Support Files/Pods-ProvoGhostTours/Pods-ProvoGhostTours.release.xcconfig"; sourceTree = "<group>"; };
+		28CAB8B52217E007975CE12A /* libPods-ProvoGhostToursTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ProvoGhostToursTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		6F525E72B517D9F8462EA4EE /* Pods-ProvoGhostToursTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ProvoGhostToursTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ProvoGhostToursTests/Pods-ProvoGhostToursTests.debug.xcconfig"; sourceTree = "<group>"; };
+		BB5D391621D0D20D4435ACEC /* libPods-ProvoGhostTours.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ProvoGhostTours.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		CD1B868F2A865FA334B66EAE /* Pods-ProvoGhostToursTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ProvoGhostToursTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ProvoGhostToursTests/Pods-ProvoGhostToursTests.release.xcconfig"; sourceTree = "<group>"; };
+		E6E0E69CB68233D0C2D9E9BF /* Pods-ProvoGhostTours.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ProvoGhostTours.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ProvoGhostTours/Pods-ProvoGhostTours.debug.xcconfig"; sourceTree = "<group>"; };
 		EE0AE0841BB24BFA0066298B /* courtneyAnimation.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = courtneyAnimation.plist; sourceTree = "<group>"; };
 		EE2FC1BC1BAC723400EF7014 /* ProgressBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProgressBar.h; sourceTree = "<group>"; };
 		EE2FC1BD1BAC723400EF7014 /* ProgressBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProgressBar.m; sourceTree = "<group>"; };
@@ -116,8 +120,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6816C9EA36C3CDAAE1094A61 /* libPods-ProvoGhostTours.a in Frameworks */,
 				EEA1916D1B92CC4D005B0BE9 /* GameKit.framework in Frameworks */,
+				951717D3252EBFF074FE348B /* libPods-ProvoGhostTours.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -125,17 +129,20 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				53DF949D04F7095876096E64 /* libPods-ProvoGhostToursTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		3748B7C24B7404A50AD4E2AF /* Pods */ = {
+		61BCD54DB38694CA8A91363F /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				3CAA61AD23E236AF4B403FBA /* Pods-ProvoGhostTours.debug.xcconfig */,
-				2D35FA64800B4667499F13B5 /* Pods-ProvoGhostTours.release.xcconfig */,
+				E6E0E69CB68233D0C2D9E9BF /* Pods-ProvoGhostTours.debug.xcconfig */,
+				00B62610351A4FFDB1CA4697 /* Pods-ProvoGhostTours.release.xcconfig */,
+				6F525E72B517D9F8462EA4EE /* Pods-ProvoGhostToursTests.debug.xcconfig */,
+				CD1B868F2A865FA334B66EAE /* Pods-ProvoGhostToursTests.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -144,7 +151,8 @@
 			isa = PBXGroup;
 			children = (
 				EEA1916C1B92CC4C005B0BE9 /* GameKit.framework */,
-				5E91B6BCCF656DF7FFF805E7 /* libPods-ProvoGhostTours.a */,
+				BB5D391621D0D20D4435ACEC /* libPods-ProvoGhostTours.a */,
+				28CAB8B52217E007975CE12A /* libPods-ProvoGhostToursTests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -166,8 +174,8 @@
 				EEB6652B1B7BEE6200FDA352 /* ProvoGhostTours */,
 				EEB6654A1B7BEE6200FDA352 /* ProvoGhostToursTests */,
 				EEB6652A1B7BEE6200FDA352 /* Products */,
-				3748B7C24B7404A50AD4E2AF /* Pods */,
 				EB4A2B69A1DC688D4079D893 /* Frameworks */,
+				61BCD54DB38694CA8A91363F /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -303,12 +311,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = EEB665511B7BEE6200FDA352 /* Build configuration list for PBXNativeTarget "ProvoGhostTours" */;
 			buildPhases = (
-				167CE6053D546E7E6609FB15 /* Check Pods Manifest.lock */,
+				A2EB5F34DADE79FC71318290 /* [CP] Check Pods Manifest.lock */,
 				EEB665251B7BEE6200FDA352 /* Sources */,
 				EEB665261B7BEE6200FDA352 /* Frameworks */,
 				EEB665271B7BEE6200FDA352 /* Resources */,
-				5A1462305229439F5FB0F4E8 /* Copy Pods Resources */,
-				EE716F3F1BB5CDBB0047AA7F /* ShellScript */,
+				F2A15F4622FD214BB51F485D /* [CP] Embed Pods Frameworks */,
+				6E04E71DD5456ECFA1BCF4B7 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -323,9 +331,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = EEB665541B7BEE6200FDA352 /* Build configuration list for PBXNativeTarget "ProvoGhostToursTests" */;
 			buildPhases = (
+				ED225E88D3F054C6B671687C /* [CP] Check Pods Manifest.lock */,
 				EEB665431B7BEE6200FDA352 /* Sources */,
 				EEB665441B7BEE6200FDA352 /* Frameworks */,
 				EEB665451B7BEE6200FDA352 /* Resources */,
+				540B8DA1B973DDDE3B740CF1 /* [CP] Embed Pods Frameworks */,
+				0290F1C1E7BF063244FFCD64 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -343,7 +354,7 @@
 		EEB665211B7BEE6200FDA352 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0700;
+				LastUpgradeCheck = 0900;
 				ORGANIZATIONNAME = "Derik Flanary";
 				TargetAttributes = {
 					EEB665281B7BEE6200FDA352 = {
@@ -417,29 +428,44 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		167CE6053D546E7E6609FB15 /* Check Pods Manifest.lock */ = {
+		0290F1C1E7BF063244FFCD64 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Check Pods Manifest.lock";
+			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ProvoGhostToursTests/Pods-ProvoGhostToursTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		5A1462305229439F5FB0F4E8 /* Copy Pods Resources */ = {
+		540B8DA1B973DDDE3B740CF1 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Copy Pods Resources";
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ProvoGhostToursTests/Pods-ProvoGhostToursTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		6E04E71DD5456ECFA1BCF4B7 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -447,18 +473,50 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ProvoGhostTours/Pods-ProvoGhostTours-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		EE716F3F1BB5CDBB0047AA7F /* ShellScript */ = {
+		A2EB5F34DADE79FC71318290 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
+			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Fabric/Fabric.framework/run\" c9541433c5e713982968e55e36e018d8a5a9e7a8 cd626cccc3c7f65515208d4e7c39df59501edd5a3e9f961b6e2269fe87d98721";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		ED225E88D3F054C6B671687C /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		F2A15F4622FD214BB51F485D /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ProvoGhostTours/Pods-ProvoGhostTours-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -531,13 +589,21 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -576,13 +642,21 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -608,14 +682,14 @@
 		};
 		EEB665521B7BEE6200FDA352 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3CAA61AD23E236AF4B403FBA /* Pods-ProvoGhostTours.debug.xcconfig */;
+			baseConfigurationReference = E6E0E69CB68233D0C2D9E9BF /* Pods-ProvoGhostTours.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = ProvoGhostTours/ProvoGhostTours.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = ProvoGhostTours/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.derikflanary.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -626,14 +700,14 @@
 		};
 		EEB665531B7BEE6200FDA352 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 2D35FA64800B4667499F13B5 /* Pods-ProvoGhostTours.release.xcconfig */;
+			baseConfigurationReference = 00B62610351A4FFDB1CA4697 /* Pods-ProvoGhostTours.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = ProvoGhostTours/ProvoGhostTours.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = ProvoGhostTours/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.derikflanary.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -644,6 +718,7 @@
 		};
 		EEB665551B7BEE6200FDA352 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6F525E72B517D9F8462EA4EE /* Pods-ProvoGhostToursTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -664,6 +739,7 @@
 		};
 		EEB665561B7BEE6200FDA352 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = CD1B868F2A865FA334B66EAE /* Pods-ProvoGhostToursTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				FRAMEWORK_SEARCH_PATHS = (

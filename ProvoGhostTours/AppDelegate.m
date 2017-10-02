@@ -8,8 +8,6 @@
 
 #import "AppDelegate.h"
 #import "GameData.h"
-#import <Crashlytics/Crashlytics.h>
-#import <Fabric/Fabric.h>
 
 @interface AppDelegate ()
 
@@ -37,7 +35,7 @@
         [GameData sharedGameData].purchasesCharacters = @[@{@"name": @"max", @"purchased": @"Y", @"title": @"Max", @"ghost":@"Ghost1", @"ability": @"", @"cost": @"0"},
                                                           @{@"name": @"derik", @"purchased": @"N", @"title": @"Derik", @"ghost": @"Ghost1", @"ability": @"Less batteries needed to charge flashlight", @"cost": @"200"},
                                                           @{@"name": @"courtney", @"purchased": @"N", @"title": @"Courtney", @"ghost": @"Ghost1", @"ability": @"Use a wider flashlight", @"cost": @"300"},
-                                                          @{@"name": @"mayor", @"purchased": @"N", @"title": @"Provo Mayor", @"ghost": @"Ghost_mayor", @"ability": @"Double your coin intake",@"cost": @"300"},
+                                                          @{@"name": @"mayor", @"purchased": @"N", @"title": @"City Mayor", @"ghost": @"Ghost_mayor", @"ability": @"Double your coin intake",@"cost": @"300"},
                                                           @{@"name": @"ninja", @"purchased": @"N", @"title": @"Ninja", @"ghost": @"Ghost_ninja", @"ability": @"Use a flashbomb on the ghosts", @"cost": @"500"},
                                                           @{@"name": @"dinosaur", @"purchased": @"N", @"title": @"Dinosaur", @"ghost": @"Ghost_dino", @"ability": @"Ghosts move slower", @"cost": @"500"},
                                                           @{@"name": @"elf", @"purchased": @"N", @"title": @"Elf", @"ghost": @"Ghost_elf", @"ability": @"Create a temporary barrier", @"cost": @"1000"},
@@ -78,8 +76,6 @@
         [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"NewLaunch"];
         [[NSUserDefaults standardUserDefaults] synchronize];
     }
-
-    [Fabric with:@[[Crashlytics class]]];
     
     return YES;
 }

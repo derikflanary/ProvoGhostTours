@@ -7,231 +7,222 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		00D748396679828F0B09F416C9533B00 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E95080AA7107071DE8C3ACB3CD78CC88 /* Foundation.framework */; };
-		321227D30BA3912C3B03EDC926C0D597 /* MPCoachMarks.h in Headers */ = {isa = PBXBuildFile; fileRef = 30953B217DD4AC08E0FC85A6D4ECEBDA /* MPCoachMarks.h */; };
-		3B28C386CC6628E7BF3041004A3450F6 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 377645E367953ECCCB3D9BB341270250 /* QuartzCore.framework */; };
-		662C726229DC349D1900077D7731AE72 /* MPCoachMarks.m in Sources */ = {isa = PBXBuildFile; fileRef = 804C01318B9F7865FE4A812AC0C9C739 /* MPCoachMarks.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
-		71C12E97FB47F7ED95A9B335E8CF8726 /* MPCoachMarks-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = A5591CB1A1F14B45E0D8E2AB4AEBD112 /* MPCoachMarks-dummy.m */; };
-		99489543E7EB360BDA2E08D31127DA71 /* Pods-ProvoGhostTours-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = D329CDD0356EC5211C95054B9EBB1C51 /* Pods-ProvoGhostTours-dummy.m */; };
-		C098C83FFC660818166A65AED9C03ABD /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E95080AA7107071DE8C3ACB3CD78CC88 /* Foundation.framework */; };
-		C52CBB64842D954804D31C1373D7A653 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 56C97021A6BC26C892DE8CEF6F8C6A21 /* CoreGraphics.framework */; };
+		0F69A50F79A67C78893443A8CA869960 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 12992E853CAE14F2102525E0D84ADAB5 /* Foundation.framework */; };
+		13FA7472AFDE4B6340E1D70EB38C61A4 /* MPCoachMarks.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D744E725208ABC06A11F151B036D2C1 /* MPCoachMarks.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		14A60C204698CED93D2F38E842A756CE /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 409899CE1143F81E8130E2069D59605B /* CoreGraphics.framework */; };
+		33EA84523F43F27711C1DDAE15BAB6F9 /* MPCoachMarks-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 0098FE34BE1E2096601017C65B68D56F /* MPCoachMarks-dummy.m */; };
+		506E85C7181FA336020408A0CAFF881F /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F7BDB2580B244756CFA046131516EF2 /* QuartzCore.framework */; };
+		83FDAED28C23EFE2BA9EA8D7B2E85803 /* Pods-ProvoGhostTours-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = D240BACC8701DADA4C86A6D90BA4DD8D /* Pods-ProvoGhostTours-dummy.m */; };
+		8C7301F55985447D6A2303437339F710 /* MPCoachMarks.h in Headers */ = {isa = PBXBuildFile; fileRef = ABC00FBCA84E50EEEE5C45E51A95CA82 /* MPCoachMarks.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		EB39619A724CFF5401EFCFF662678FA4 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 12992E853CAE14F2102525E0D84ADAB5 /* Foundation.framework */; };
+		FA4D2694BF349B42A36D559B673191E4 /* Pods-ProvoGhostToursTests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = E460BDB184B7C3C1E6577EB5289A037E /* Pods-ProvoGhostToursTests-dummy.m */; };
+		FEFDFEA6D62BB3D052A60E6878FE4302 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 12992E853CAE14F2102525E0D84ADAB5 /* Foundation.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		731CDF1C7A89D1E547EE9FE376FDE7EE /* PBXContainerItemProxy */ = {
+		B3FDDE2056C576AA3A3BF03372676758 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = DAEE2F36DBFFDE09AA521D74B61BF69B;
+			remoteGlobalIDString = C976447683AEA5CCE60F9AFCE44B399A;
 			remoteInfo = MPCoachMarks;
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		0F1B621279864C639072331E46087B77 /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
-		0F5C6315A6FBDE54D5FA08D2BD4C9FD7 /* arrow-top@3x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "arrow-top@3x.png"; path = "MPCoachMarks/arrows/arrow-top@3x.png"; sourceTree = "<group>"; };
-		207A2718AF9C32F32E8B5D6337585E1E /* Pods-ProvoGhostTours-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-ProvoGhostTours-acknowledgements.markdown"; sourceTree = "<group>"; };
-		2FB0C20E5E5A550906782524C59D07C0 /* Pods-ProvoGhostTours.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-ProvoGhostTours.debug.xcconfig"; sourceTree = "<group>"; };
-		30953B217DD4AC08E0FC85A6D4ECEBDA /* MPCoachMarks.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MPCoachMarks.h; path = MPCoachMarks/MPCoachMarks.h; sourceTree = "<group>"; };
-		377645E367953ECCCB3D9BB341270250 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS8.3.sdk/System/Library/Frameworks/QuartzCore.framework; sourceTree = DEVELOPER_DIR; };
-		56C97021A6BC26C892DE8CEF6F8C6A21 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS8.3.sdk/System/Library/Frameworks/CoreGraphics.framework; sourceTree = DEVELOPER_DIR; };
-		5AAD4E9632FD13887CFFD803272532C4 /* arrow-down@3x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "arrow-down@3x.png"; path = "MPCoachMarks/arrows/arrow-down@3x.png"; sourceTree = "<group>"; };
-		5E2DA8AD7B77D39BD528A775F2876D8A /* arrow-top.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "arrow-top.png"; path = "MPCoachMarks/arrows/arrow-top.png"; sourceTree = "<group>"; };
-		66C58844D2F6B09C3D6D55E746214790 /* Pods-ProvoGhostTours-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-ProvoGhostTours-acknowledgements.plist"; sourceTree = "<group>"; };
-		68174990D622F72FBAE15F8F0EAF324D /* arrow-right@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "arrow-right@2x.png"; path = "MPCoachMarks/arrows/arrow-right@2x.png"; sourceTree = "<group>"; };
-		69B27E79218F36348771A35366DB6467 /* arrow-right.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "arrow-right.png"; path = "MPCoachMarks/arrows/arrow-right.png"; sourceTree = "<group>"; };
-		78FC4AF320E73E0FADABD58142CF07CF /* arrow-left.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "arrow-left.png"; path = "MPCoachMarks/arrows/arrow-left.png"; sourceTree = "<group>"; };
-		7D2EF73C2DC6E4E8926FB06936EF8DF9 /* MPCoachMarks-Private.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "MPCoachMarks-Private.xcconfig"; sourceTree = "<group>"; };
-		8001696944BC911E243F661E86EE7E70 /* arrow-down@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "arrow-down@2x.png"; path = "MPCoachMarks/arrows/arrow-down@2x.png"; sourceTree = "<group>"; };
-		8002382452AC179A7E96902FB81C7203 /* arrow-left@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "arrow-left@2x.png"; path = "MPCoachMarks/arrows/arrow-left@2x.png"; sourceTree = "<group>"; };
-		804C01318B9F7865FE4A812AC0C9C739 /* MPCoachMarks.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MPCoachMarks.m; path = MPCoachMarks/MPCoachMarks.m; sourceTree = "<group>"; };
-		80C1BC8010F862BC2ECD5E81BC3121ED /* Pods-ProvoGhostTours.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-ProvoGhostTours.release.xcconfig"; sourceTree = "<group>"; };
-		8AC1DF4507E8F7B241EC4B543BB25C47 /* libPods-ProvoGhostTours.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ProvoGhostTours.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		8C19253D5FBF9F809EBF821F188A4EDC /* MPCoachMarks-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "MPCoachMarks-prefix.pch"; sourceTree = "<group>"; };
-		916F5D90BF9077E84F55D21C97F823B7 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
-		96705EA0FEFE958E198CF09EF388E5D7 /* libMPCoachMarks.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libMPCoachMarks.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		A5591CB1A1F14B45E0D8E2AB4AEBD112 /* MPCoachMarks-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "MPCoachMarks-dummy.m"; sourceTree = "<group>"; };
-		AA23B80F86276A7910644DBB9B0D1FE1 /* arrow-top@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "arrow-top@2x.png"; path = "MPCoachMarks/arrows/arrow-top@2x.png"; sourceTree = "<group>"; };
-		B7DB15986D680228C6543F57894FCBC0 /* arrow-down.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "arrow-down.png"; path = "MPCoachMarks/arrows/arrow-down.png"; sourceTree = "<group>"; };
-		B9F98DBA0E1219244B21E90B15326C5E /* arrow-left@3x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "arrow-left@3x.png"; path = "MPCoachMarks/arrows/arrow-left@3x.png"; sourceTree = "<group>"; };
-		BA6428E9F66FD5A23C0A2E06ED26CD2F /* Podfile */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		C7D3616B89CC1E5B77DAE01E9DCF967F /* arrow-right@3x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "arrow-right@3x.png"; path = "MPCoachMarks/arrows/arrow-right@3x.png"; sourceTree = "<group>"; };
-		D329CDD0356EC5211C95054B9EBB1C51 /* Pods-ProvoGhostTours-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-ProvoGhostTours-dummy.m"; sourceTree = "<group>"; };
-		E7E99C1C89607472AAACEEDA848DD042 /* Pods-ProvoGhostTours-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-ProvoGhostTours-resources.sh"; sourceTree = "<group>"; };
-		E95080AA7107071DE8C3ACB3CD78CC88 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS8.3.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
-		FE881F5CB9D76103A63F45300DFFD5CE /* MPCoachMarks.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = MPCoachMarks.xcconfig; sourceTree = "<group>"; };
+		0098FE34BE1E2096601017C65B68D56F /* MPCoachMarks-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "MPCoachMarks-dummy.m"; sourceTree = "<group>"; };
+		0BFDBF84697795AB75714BE9D3C01814 /* Pods-ProvoGhostTours-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-ProvoGhostTours-acknowledgements.plist"; sourceTree = "<group>"; };
+		12992E853CAE14F2102525E0D84ADAB5 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.3.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		1350A013A190F7D566AB12D30BF22D8F /* MPCoachMarks.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = MPCoachMarks.xcconfig; sourceTree = "<group>"; };
+		21DDDA36EE49E85B82904A492FFE09E2 /* arrow-top@3x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "arrow-top@3x.png"; path = "MPCoachMarks/arrows/arrow-top@3x.png"; sourceTree = "<group>"; };
+		23F139D3F49C4476E45BD1EC10FB3626 /* arrow-down.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "arrow-down.png"; path = "MPCoachMarks/arrows/arrow-down.png"; sourceTree = "<group>"; };
+		2F07FE01072C543B825AF5260EEA451F /* MPCoachMarks-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "MPCoachMarks-prefix.pch"; sourceTree = "<group>"; };
+		3B03CE38D5E0E57BB9EFA282296EBF66 /* Pods-ProvoGhostToursTests-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-ProvoGhostToursTests-frameworks.sh"; sourceTree = "<group>"; };
+		409899CE1143F81E8130E2069D59605B /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.3.sdk/System/Library/Frameworks/CoreGraphics.framework; sourceTree = DEVELOPER_DIR; };
+		4C09F33EA2EBA26DE59D02ACF71766FC /* arrow-right.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "arrow-right.png"; path = "MPCoachMarks/arrows/arrow-right.png"; sourceTree = "<group>"; };
+		5A3B9AB957A8FC5DB3FA258FA73EC9BC /* Pods-ProvoGhostTours-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-ProvoGhostTours-frameworks.sh"; sourceTree = "<group>"; };
+		5F7BDB2580B244756CFA046131516EF2 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.3.sdk/System/Library/Frameworks/QuartzCore.framework; sourceTree = DEVELOPER_DIR; };
+		62CBD3CDBFAA53D79109C2DB49F94D3D /* arrow-left.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "arrow-left.png"; path = "MPCoachMarks/arrows/arrow-left.png"; sourceTree = "<group>"; };
+		6FA1387604984302E9B04C6D7A8791F1 /* Pods-ProvoGhostToursTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-ProvoGhostToursTests.debug.xcconfig"; sourceTree = "<group>"; };
+		75E23439BCBE672CB3A7D437637487A5 /* arrow-left@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "arrow-left@2x.png"; path = "MPCoachMarks/arrows/arrow-left@2x.png"; sourceTree = "<group>"; };
+		7C1585F50C6FFCE2CCC594B2FE5ED4F0 /* arrow-top@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "arrow-top@2x.png"; path = "MPCoachMarks/arrows/arrow-top@2x.png"; sourceTree = "<group>"; };
+		8C06F42C851C6F98BD5E6D912C1D11D4 /* Pods-ProvoGhostTours.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-ProvoGhostTours.debug.xcconfig"; sourceTree = "<group>"; };
+		8D744E725208ABC06A11F151B036D2C1 /* MPCoachMarks.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MPCoachMarks.m; path = MPCoachMarks/MPCoachMarks.m; sourceTree = "<group>"; };
+		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		98242BCB680601D8F7E74BEAC271D0AC /* libPods-ProvoGhostTours.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ProvoGhostTours.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		9BA8E838447BB3FBFB3CBBDC023997B7 /* arrow-right@3x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "arrow-right@3x.png"; path = "MPCoachMarks/arrows/arrow-right@3x.png"; sourceTree = "<group>"; };
+		A1C2DF49A53FDE6F2F05BFF10E4E7351 /* arrow-right@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "arrow-right@2x.png"; path = "MPCoachMarks/arrows/arrow-right@2x.png"; sourceTree = "<group>"; };
+		A88CAD8BEAEC0B61ADA4DDEAA839AA40 /* Pods-ProvoGhostToursTests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-ProvoGhostToursTests-acknowledgements.markdown"; sourceTree = "<group>"; };
+		ABC00FBCA84E50EEEE5C45E51A95CA82 /* MPCoachMarks.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MPCoachMarks.h; path = MPCoachMarks/MPCoachMarks.h; sourceTree = "<group>"; };
+		B290FF94678F64CD3E6522C3AF54F299 /* Pods-ProvoGhostTours.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-ProvoGhostTours.release.xcconfig"; sourceTree = "<group>"; };
+		BB9D291AFB03D56F7A2A5A7C72E32B57 /* Pods-ProvoGhostTours-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-ProvoGhostTours-acknowledgements.markdown"; sourceTree = "<group>"; };
+		C24B886697448DE3A0E575A02F445FCC /* libMPCoachMarks.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libMPCoachMarks.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		CB93206AF1DBE11464EBECEE7BD7BA9A /* arrow-top.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "arrow-top.png"; path = "MPCoachMarks/arrows/arrow-top.png"; sourceTree = "<group>"; };
+		CF84DEE7CC48A8076DE42B5B7A697F9B /* arrow-down@3x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "arrow-down@3x.png"; path = "MPCoachMarks/arrows/arrow-down@3x.png"; sourceTree = "<group>"; };
+		D240BACC8701DADA4C86A6D90BA4DD8D /* Pods-ProvoGhostTours-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-ProvoGhostTours-dummy.m"; sourceTree = "<group>"; };
+		D3350DC186795C1571D94FF73B28D002 /* Pods-ProvoGhostToursTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-ProvoGhostToursTests.release.xcconfig"; sourceTree = "<group>"; };
+		E460BDB184B7C3C1E6577EB5289A037E /* Pods-ProvoGhostToursTests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-ProvoGhostToursTests-dummy.m"; sourceTree = "<group>"; };
+		E58B1FD69277591C0BE5CC3828347131 /* libPods-ProvoGhostToursTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ProvoGhostToursTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		EA0AEE20FD752BA12AED72112550F86F /* Pods-ProvoGhostTours-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-ProvoGhostTours-resources.sh"; sourceTree = "<group>"; };
+		ED754194E72CFAF4792F30338B2CFC28 /* arrow-down@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "arrow-down@2x.png"; path = "MPCoachMarks/arrows/arrow-down@2x.png"; sourceTree = "<group>"; };
+		F1513B7CFD9C3B947E77BE149ECAAFB2 /* arrow-left@3x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "arrow-left@3x.png"; path = "MPCoachMarks/arrows/arrow-left@3x.png"; sourceTree = "<group>"; };
+		F55E8ADC5082BB7E63F59240F0E26BFC /* Pods-ProvoGhostToursTests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-ProvoGhostToursTests-acknowledgements.plist"; sourceTree = "<group>"; };
+		FBDCB65F7B3211BD67F4C44BB316BF4B /* Pods-ProvoGhostToursTests-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-ProvoGhostToursTests-resources.sh"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		3906A3FDA0B2C26E9C8814BF237DBF70 /* Frameworks */ = {
+		75BC1DE08040C2A1E705C7A1F4BFA174 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C52CBB64842D954804D31C1373D7A653 /* CoreGraphics.framework in Frameworks */,
-				C098C83FFC660818166A65AED9C03ABD /* Foundation.framework in Frameworks */,
-				3B28C386CC6628E7BF3041004A3450F6 /* QuartzCore.framework in Frameworks */,
+				FEFDFEA6D62BB3D052A60E6878FE4302 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		C28D89D55F9C51F7B1842ECCCFFD0BE9 /* Frameworks */ = {
+		8C6E549FFEE8614909775C7F98A5CF9A /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				00D748396679828F0B09F416C9533B00 /* Foundation.framework in Frameworks */,
+				14A60C204698CED93D2F38E842A756CE /* CoreGraphics.framework in Frameworks */,
+				0F69A50F79A67C78893443A8CA869960 /* Foundation.framework in Frameworks */,
+				506E85C7181FA336020408A0CAFF881F /* QuartzCore.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		93CAA2522D82399ADA91D00FA88F8944 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EB39619A724CFF5401EFCFF662678FA4 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		122DA2E5084A4393C29BE363C764795C /* Frameworks */ = {
+		05FAEAAA8867E5F5035FEAAC02E3C770 /* Targets Support Files */ = {
 			isa = PBXGroup;
 			children = (
-				5764799A2697346A2BA53BE1694037F5 /* iOS */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		3201AE52DE68235CA50554C9323D2F58 /* Crashlytics */ = {
-			isa = PBXGroup;
-			children = (
-				6AC82AE753FCC4EFD855FE8A15BCBC96 /* Frameworks */,
-			);
-			path = Crashlytics;
-			sourceTree = "<group>";
-		};
-		355A03B17CD97742401E46C2FA34E7DB /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				3201AE52DE68235CA50554C9323D2F58 /* Crashlytics */,
-				9B1DD284DB49E87F2FA5C4B8DB0AD7AD /* Fabric */,
-				37ED0C8E5E129336A3A9400C45F84161 /* MPCoachMarks */,
-			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
-		37ED0C8E5E129336A3A9400C45F84161 /* MPCoachMarks */ = {
-			isa = PBXGroup;
-			children = (
-				30953B217DD4AC08E0FC85A6D4ECEBDA /* MPCoachMarks.h */,
-				804C01318B9F7865FE4A812AC0C9C739 /* MPCoachMarks.m */,
-				9B40B5C49FD8B6E07C1D05D0255E3B27 /* Resources */,
-				8D0655A2CD166EDF6DDBAB79DBE20A57 /* Support Files */,
-			);
-			path = MPCoachMarks;
-			sourceTree = "<group>";
-		};
-		4939234853B363FAD7FCA572505CCF99 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				0F1B621279864C639072331E46087B77 /* Fabric.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		4FC0D09CC07E29AB7F72DFD897EC8D5E /* Targets Support Files */ = {
-			isa = PBXGroup;
-			children = (
-				B9FDF80610B10B354122DC6B9AA8CD23 /* Pods-ProvoGhostTours */,
+				133B76F84A315B54F77BB69953C716F2 /* Pods-ProvoGhostTours */,
+				BBB795FE3829F6D467DC9874DF11E8CF /* Pods-ProvoGhostToursTests */,
 			);
 			name = "Targets Support Files";
 			sourceTree = "<group>";
 		};
-		5764799A2697346A2BA53BE1694037F5 /* iOS */ = {
+		122DA2E5084A4393C29BE363C764795C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				56C97021A6BC26C892DE8CEF6F8C6A21 /* CoreGraphics.framework */,
-				E95080AA7107071DE8C3ACB3CD78CC88 /* Foundation.framework */,
-				377645E367953ECCCB3D9BB341270250 /* QuartzCore.framework */,
-			);
-			name = iOS;
-			sourceTree = "<group>";
-		};
-		6AC82AE753FCC4EFD855FE8A15BCBC96 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				916F5D90BF9077E84F55D21C97F823B7 /* Crashlytics.framework */,
+				5A4DBD434EA75DD3EDD3494C46AE6968 /* iOS */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		7DB346D0F39D3F0E887471402A8071AB = {
+		133B76F84A315B54F77BB69953C716F2 /* Pods-ProvoGhostTours */ = {
 			isa = PBXGroup;
 			children = (
-				BA6428E9F66FD5A23C0A2E06ED26CD2F /* Podfile */,
-				122DA2E5084A4393C29BE363C764795C /* Frameworks */,
-				355A03B17CD97742401E46C2FA34E7DB /* Pods */,
-				CCA510CFBEA2D207524CDA0D73C3B561 /* Products */,
-				4FC0D09CC07E29AB7F72DFD897EC8D5E /* Targets Support Files */,
-			);
-			sourceTree = "<group>";
-		};
-		81FCE28D53A83622A9583FA7AD9C9FB2 /* Base */ = {
-			isa = PBXGroup;
-			children = (
-				4939234853B363FAD7FCA572505CCF99 /* Frameworks */,
-			);
-			name = Base;
-			sourceTree = "<group>";
-		};
-		8D0655A2CD166EDF6DDBAB79DBE20A57 /* Support Files */ = {
-			isa = PBXGroup;
-			children = (
-				FE881F5CB9D76103A63F45300DFFD5CE /* MPCoachMarks.xcconfig */,
-				7D2EF73C2DC6E4E8926FB06936EF8DF9 /* MPCoachMarks-Private.xcconfig */,
-				A5591CB1A1F14B45E0D8E2AB4AEBD112 /* MPCoachMarks-dummy.m */,
-				8C19253D5FBF9F809EBF821F188A4EDC /* MPCoachMarks-prefix.pch */,
-			);
-			name = "Support Files";
-			path = "../Target Support Files/MPCoachMarks";
-			sourceTree = "<group>";
-		};
-		9B1DD284DB49E87F2FA5C4B8DB0AD7AD /* Fabric */ = {
-			isa = PBXGroup;
-			children = (
-				81FCE28D53A83622A9583FA7AD9C9FB2 /* Base */,
-			);
-			path = Fabric;
-			sourceTree = "<group>";
-		};
-		9B40B5C49FD8B6E07C1D05D0255E3B27 /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-				B7DB15986D680228C6543F57894FCBC0 /* arrow-down.png */,
-				8001696944BC911E243F661E86EE7E70 /* arrow-down@2x.png */,
-				5AAD4E9632FD13887CFFD803272532C4 /* arrow-down@3x.png */,
-				78FC4AF320E73E0FADABD58142CF07CF /* arrow-left.png */,
-				8002382452AC179A7E96902FB81C7203 /* arrow-left@2x.png */,
-				B9F98DBA0E1219244B21E90B15326C5E /* arrow-left@3x.png */,
-				69B27E79218F36348771A35366DB6467 /* arrow-right.png */,
-				68174990D622F72FBAE15F8F0EAF324D /* arrow-right@2x.png */,
-				C7D3616B89CC1E5B77DAE01E9DCF967F /* arrow-right@3x.png */,
-				5E2DA8AD7B77D39BD528A775F2876D8A /* arrow-top.png */,
-				AA23B80F86276A7910644DBB9B0D1FE1 /* arrow-top@2x.png */,
-				0F5C6315A6FBDE54D5FA08D2BD4C9FD7 /* arrow-top@3x.png */,
-			);
-			name = Resources;
-			sourceTree = "<group>";
-		};
-		B9FDF80610B10B354122DC6B9AA8CD23 /* Pods-ProvoGhostTours */ = {
-			isa = PBXGroup;
-			children = (
-				207A2718AF9C32F32E8B5D6337585E1E /* Pods-ProvoGhostTours-acknowledgements.markdown */,
-				66C58844D2F6B09C3D6D55E746214790 /* Pods-ProvoGhostTours-acknowledgements.plist */,
-				D329CDD0356EC5211C95054B9EBB1C51 /* Pods-ProvoGhostTours-dummy.m */,
-				E7E99C1C89607472AAACEEDA848DD042 /* Pods-ProvoGhostTours-resources.sh */,
-				2FB0C20E5E5A550906782524C59D07C0 /* Pods-ProvoGhostTours.debug.xcconfig */,
-				80C1BC8010F862BC2ECD5E81BC3121ED /* Pods-ProvoGhostTours.release.xcconfig */,
+				BB9D291AFB03D56F7A2A5A7C72E32B57 /* Pods-ProvoGhostTours-acknowledgements.markdown */,
+				0BFDBF84697795AB75714BE9D3C01814 /* Pods-ProvoGhostTours-acknowledgements.plist */,
+				D240BACC8701DADA4C86A6D90BA4DD8D /* Pods-ProvoGhostTours-dummy.m */,
+				5A3B9AB957A8FC5DB3FA258FA73EC9BC /* Pods-ProvoGhostTours-frameworks.sh */,
+				EA0AEE20FD752BA12AED72112550F86F /* Pods-ProvoGhostTours-resources.sh */,
+				8C06F42C851C6F98BD5E6D912C1D11D4 /* Pods-ProvoGhostTours.debug.xcconfig */,
+				B290FF94678F64CD3E6522C3AF54F299 /* Pods-ProvoGhostTours.release.xcconfig */,
 			);
 			name = "Pods-ProvoGhostTours";
 			path = "Target Support Files/Pods-ProvoGhostTours";
 			sourceTree = "<group>";
 		};
-		CCA510CFBEA2D207524CDA0D73C3B561 /* Products */ = {
+		1627EF8F0CBE382005D6EF287467151C /* MPCoachMarks */ = {
 			isa = PBXGroup;
 			children = (
-				96705EA0FEFE958E198CF09EF388E5D7 /* libMPCoachMarks.a */,
-				8AC1DF4507E8F7B241EC4B543BB25C47 /* libPods-ProvoGhostTours.a */,
+				ABC00FBCA84E50EEEE5C45E51A95CA82 /* MPCoachMarks.h */,
+				8D744E725208ABC06A11F151B036D2C1 /* MPCoachMarks.m */,
+				D357739FFDBEB12CA83F0A496B776E53 /* Resources */,
+				7D9AAF70E109F31D9D0BF8841F33AA6B /* Support Files */,
+			);
+			path = MPCoachMarks;
+			sourceTree = "<group>";
+		};
+		5A4DBD434EA75DD3EDD3494C46AE6968 /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				409899CE1143F81E8130E2069D59605B /* CoreGraphics.framework */,
+				12992E853CAE14F2102525E0D84ADAB5 /* Foundation.framework */,
+				5F7BDB2580B244756CFA046131516EF2 /* QuartzCore.framework */,
+			);
+			name = iOS;
+			sourceTree = "<group>";
+		};
+		7D9AAF70E109F31D9D0BF8841F33AA6B /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				1350A013A190F7D566AB12D30BF22D8F /* MPCoachMarks.xcconfig */,
+				0098FE34BE1E2096601017C65B68D56F /* MPCoachMarks-dummy.m */,
+				2F07FE01072C543B825AF5260EEA451F /* MPCoachMarks-prefix.pch */,
+			);
+			name = "Support Files";
+			path = "../Target Support Files/MPCoachMarks";
+			sourceTree = "<group>";
+		};
+		7DB346D0F39D3F0E887471402A8071AB = {
+			isa = PBXGroup;
+			children = (
+				93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */,
+				122DA2E5084A4393C29BE363C764795C /* Frameworks */,
+				84A22342820030F799260EB6E6B75D6C /* Pods */,
+				FBB52260D900444C2AE3FE1D7F07F9D4 /* Products */,
+				05FAEAAA8867E5F5035FEAAC02E3C770 /* Targets Support Files */,
+			);
+			sourceTree = "<group>";
+		};
+		84A22342820030F799260EB6E6B75D6C /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				1627EF8F0CBE382005D6EF287467151C /* MPCoachMarks */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		BBB795FE3829F6D467DC9874DF11E8CF /* Pods-ProvoGhostToursTests */ = {
+			isa = PBXGroup;
+			children = (
+				A88CAD8BEAEC0B61ADA4DDEAA839AA40 /* Pods-ProvoGhostToursTests-acknowledgements.markdown */,
+				F55E8ADC5082BB7E63F59240F0E26BFC /* Pods-ProvoGhostToursTests-acknowledgements.plist */,
+				E460BDB184B7C3C1E6577EB5289A037E /* Pods-ProvoGhostToursTests-dummy.m */,
+				3B03CE38D5E0E57BB9EFA282296EBF66 /* Pods-ProvoGhostToursTests-frameworks.sh */,
+				FBDCB65F7B3211BD67F4C44BB316BF4B /* Pods-ProvoGhostToursTests-resources.sh */,
+				6FA1387604984302E9B04C6D7A8791F1 /* Pods-ProvoGhostToursTests.debug.xcconfig */,
+				D3350DC186795C1571D94FF73B28D002 /* Pods-ProvoGhostToursTests.release.xcconfig */,
+			);
+			name = "Pods-ProvoGhostToursTests";
+			path = "Target Support Files/Pods-ProvoGhostToursTests";
+			sourceTree = "<group>";
+		};
+		D357739FFDBEB12CA83F0A496B776E53 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				23F139D3F49C4476E45BD1EC10FB3626 /* arrow-down.png */,
+				ED754194E72CFAF4792F30338B2CFC28 /* arrow-down@2x.png */,
+				CF84DEE7CC48A8076DE42B5B7A697F9B /* arrow-down@3x.png */,
+				62CBD3CDBFAA53D79109C2DB49F94D3D /* arrow-left.png */,
+				75E23439BCBE672CB3A7D437637487A5 /* arrow-left@2x.png */,
+				F1513B7CFD9C3B947E77BE149ECAAFB2 /* arrow-left@3x.png */,
+				4C09F33EA2EBA26DE59D02ACF71766FC /* arrow-right.png */,
+				A1C2DF49A53FDE6F2F05BFF10E4E7351 /* arrow-right@2x.png */,
+				9BA8E838447BB3FBFB3CBBDC023997B7 /* arrow-right@3x.png */,
+				CB93206AF1DBE11464EBECEE7BD7BA9A /* arrow-top.png */,
+				7C1585F50C6FFCE2CCC594B2FE5ED4F0 /* arrow-top@2x.png */,
+				21DDDA36EE49E85B82904A492FFE09E2 /* arrow-top@3x.png */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		FBB52260D900444C2AE3FE1D7F07F9D4 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				C24B886697448DE3A0E575A02F445FCC /* libMPCoachMarks.a */,
+				98242BCB680601D8F7E74BEAC271D0AC /* libPods-ProvoGhostTours.a */,
+				E58B1FD69277591C0BE5CC3828347131 /* libPods-ProvoGhostToursTests.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -239,41 +230,57 @@
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
-		8577CC20714D5573C47CA72B60B6DC12 /* Headers */ = {
+		4F1686A4A97F60995648561A71734689 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				321227D30BA3912C3B03EDC926C0D597 /* MPCoachMarks.h in Headers */,
+				8C7301F55985447D6A2303437339F710 /* MPCoachMarks.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		353412375A9DED5BFBBA8F58E353700C /* Pods-ProvoGhostTours */ = {
+		6AA268C3A5AFC070C1A318C1AFDF9B8C /* Pods-ProvoGhostTours */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = D952A46DEBE81D0570918088E350B235 /* Build configuration list for PBXNativeTarget "Pods-ProvoGhostTours" */;
+			buildConfigurationList = 42A0BCC6EE9118E78160CD0EB5E40E62 /* Build configuration list for PBXNativeTarget "Pods-ProvoGhostTours" */;
 			buildPhases = (
-				5EDE883AE1DAA103AB45675FDEC3A5CC /* Sources */,
-				C28D89D55F9C51F7B1842ECCCFFD0BE9 /* Frameworks */,
+				E2428A169A01740AB1F249FC4C588C41 /* Sources */,
+				75BC1DE08040C2A1E705C7A1F4BFA174 /* Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				AD835D3295863512BE39FB0609BE5B59 /* PBXTargetDependency */,
+				ED3862D6D943E4CE167DF2EF3372E810 /* PBXTargetDependency */,
 			);
 			name = "Pods-ProvoGhostTours";
 			productName = "Pods-ProvoGhostTours";
-			productReference = 8AC1DF4507E8F7B241EC4B543BB25C47 /* libPods-ProvoGhostTours.a */;
+			productReference = 98242BCB680601D8F7E74BEAC271D0AC /* libPods-ProvoGhostTours.a */;
 			productType = "com.apple.product-type.library.static";
 		};
-		DAEE2F36DBFFDE09AA521D74B61BF69B /* MPCoachMarks */ = {
+		704990D2872530681D50A4EB39567E86 /* Pods-ProvoGhostToursTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = E0D2E29B33ABD12D2481BA98BB7A6835 /* Build configuration list for PBXNativeTarget "MPCoachMarks" */;
+			buildConfigurationList = 0B89B1365152CA7CFF41F604A2301F2B /* Build configuration list for PBXNativeTarget "Pods-ProvoGhostToursTests" */;
 			buildPhases = (
-				496D1887058463541DC7391EA637CDE8 /* Sources */,
-				3906A3FDA0B2C26E9C8814BF237DBF70 /* Frameworks */,
-				8577CC20714D5573C47CA72B60B6DC12 /* Headers */,
+				9AFC6008D719E198FEA81E0715C2599F /* Sources */,
+				93CAA2522D82399ADA91D00FA88F8944 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Pods-ProvoGhostToursTests";
+			productName = "Pods-ProvoGhostToursTests";
+			productReference = E58B1FD69277591C0BE5CC3828347131 /* libPods-ProvoGhostToursTests.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		C976447683AEA5CCE60F9AFCE44B399A /* MPCoachMarks */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 01851E90017732826572B0CFCCFADFCC /* Build configuration list for PBXNativeTarget "MPCoachMarks" */;
+			buildPhases = (
+				AEE235B299BD199EDE1DFBB6FE780A85 /* Sources */,
+				8C6E549FFEE8614909775C7F98A5CF9A /* Frameworks */,
+				4F1686A4A97F60995648561A71734689 /* Headers */,
 			);
 			buildRules = (
 			);
@@ -281,7 +288,7 @@
 			);
 			name = MPCoachMarks;
 			productName = MPCoachMarks;
-			productReference = 96705EA0FEFE958E198CF09EF388E5D7 /* libMPCoachMarks.a */;
+			productReference = C24B886697448DE3A0E575A02F445FCC /* libMPCoachMarks.a */;
 			productType = "com.apple.product-type.library.static";
 		};
 /* End PBXNativeTarget section */
@@ -290,8 +297,8 @@
 		D41D8CD98F00B204E9800998ECF8427E /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0700;
-				LastUpgradeCheck = 0700;
+				LastSwiftUpdateCheck = 0830;
+				LastUpgradeCheck = 0900;
 			};
 			buildConfigurationList = 2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -301,132 +308,139 @@
 				en,
 			);
 			mainGroup = 7DB346D0F39D3F0E887471402A8071AB;
-			productRefGroup = CCA510CFBEA2D207524CDA0D73C3B561 /* Products */;
+			productRefGroup = FBB52260D900444C2AE3FE1D7F07F9D4 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				DAEE2F36DBFFDE09AA521D74B61BF69B /* MPCoachMarks */,
-				353412375A9DED5BFBBA8F58E353700C /* Pods-ProvoGhostTours */,
+				C976447683AEA5CCE60F9AFCE44B399A /* MPCoachMarks */,
+				6AA268C3A5AFC070C1A318C1AFDF9B8C /* Pods-ProvoGhostTours */,
+				704990D2872530681D50A4EB39567E86 /* Pods-ProvoGhostToursTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXSourcesBuildPhase section */
-		496D1887058463541DC7391EA637CDE8 /* Sources */ = {
+		9AFC6008D719E198FEA81E0715C2599F /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				71C12E97FB47F7ED95A9B335E8CF8726 /* MPCoachMarks-dummy.m in Sources */,
-				662C726229DC349D1900077D7731AE72 /* MPCoachMarks.m in Sources */,
+				FA4D2694BF349B42A36D559B673191E4 /* Pods-ProvoGhostToursTests-dummy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		5EDE883AE1DAA103AB45675FDEC3A5CC /* Sources */ = {
+		AEE235B299BD199EDE1DFBB6FE780A85 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				99489543E7EB360BDA2E08D31127DA71 /* Pods-ProvoGhostTours-dummy.m in Sources */,
+				33EA84523F43F27711C1DDAE15BAB6F9 /* MPCoachMarks-dummy.m in Sources */,
+				13FA7472AFDE4B6340E1D70EB38C61A4 /* MPCoachMarks.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E2428A169A01740AB1F249FC4C588C41 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				83FDAED28C23EFE2BA9EA8D7B2E85803 /* Pods-ProvoGhostTours-dummy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		AD835D3295863512BE39FB0609BE5B59 /* PBXTargetDependency */ = {
+		ED3862D6D943E4CE167DF2EF3372E810 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = MPCoachMarks;
-			target = DAEE2F36DBFFDE09AA521D74B61BF69B /* MPCoachMarks */;
-			targetProxy = 731CDF1C7A89D1E547EE9FE376FDE7EE /* PBXContainerItemProxy */;
+			target = C976447683AEA5CCE60F9AFCE44B399A /* MPCoachMarks */;
+			targetProxy = B3FDDE2056C576AA3A3BF03372676758 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		2A0366380F4F6C4012E23DE578DB630B /* Release */ = {
+		0C3852D0187717704CD6E268DCDFE9C6 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 7D2EF73C2DC6E4E8926FB06936EF8DF9 /* MPCoachMarks-Private.xcconfig */;
+			baseConfigurationReference = 1350A013A190F7D566AB12D30BF22D8F /* MPCoachMarks.xcconfig */;
 			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_PREFIX_HEADER = "Target Support Files/MPCoachMarks/MPCoachMarks-prefix.pch";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PRIVATE_HEADERS_FOLDER_PATH = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PUBLIC_HEADERS_FOLDER_PATH = "";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		219D97C77B312DD8479CE5079B80DA3F /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = D3350DC186795C1571D94FF73B28D002 /* Pods-ProvoGhostToursTests.release.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				MACH_O_TYPE = staticlib;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				OTHER_LDFLAGS = "";
 				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 			};
 			name = Release;
 		};
-		5B9936706190DCDD6D457685137F46A1 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 80C1BC8010F862BC2ECD5E81BC3121ED /* Pods-ProvoGhostTours.release.xcconfig */;
-			buildSettings = {
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
-				MTL_ENABLE_DEBUG_INFO = NO;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-			};
-			name = Release;
-		};
-		6AA5402A2ACEFF7DDB3F0D07B05C0BDB /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 7D2EF73C2DC6E4E8926FB06936EF8DF9 /* MPCoachMarks-Private.xcconfig */;
-			buildSettings = {
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/MPCoachMarks/MPCoachMarks-prefix.pch";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
-				MTL_ENABLE_DEBUG_INFO = YES;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-			};
-			name = Debug;
-		};
-		7A317F5355F6BB6F70BB7995B22D8C93 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 2FB0C20E5E5A550906782524C59D07C0 /* Pods-ProvoGhostTours.debug.xcconfig */;
-			buildSettings = {
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
-				MTL_ENABLE_DEBUG_INFO = YES;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-			};
-			name = Debug;
-		};
-		A2A3FCA6599E8034578E80B9179C76CD /* Debug */ = {
+		507EA1A2C854D911E61D1549FCCF7E68 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGNING_REQUIRED = NO;
 				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
+					"POD_CONFIGURATION_DEBUG=1",
 					"DEBUG=1",
 					"$(inherited)",
 				);
@@ -437,73 +451,193 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				ONLY_ACTIVE_ARCH = YES;
+				PROVISIONING_PROFILE_SPECIFIER = NO_SIGNING/;
 				STRIP_INSTALLED_PRODUCT = NO;
 				SYMROOT = "${SRCROOT}/../build";
 			};
 			name = Debug;
 		};
-		AB66C978656E240C917407B296597F92 /* Release */ = {
+		B2D5B8F4123AAA5068AEB40A97421B52 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8C06F42C851C6F98BD5E6D912C1D11D4 /* Pods-ProvoGhostTours.debug.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				MACH_O_TYPE = staticlib;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		BC3BC4399C3B6E3101028FB58D9870C6 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGNING_REQUIRED = NO;
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_PREPROCESSOR_DEFINITIONS = "RELEASE=1";
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"POD_CONFIGURATION_RELEASE=1",
+					"$(inherited)",
+				);
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				PROVISIONING_PROFILE_SPECIFIER = NO_SIGNING/;
 				STRIP_INSTALLED_PRODUCT = NO;
 				SYMROOT = "${SRCROOT}/../build";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
 		};
+		C191032027839DE8534306236B6CA680 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6FA1387604984302E9B04C6D7A8791F1 /* Pods-ProvoGhostToursTests.debug.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				MACH_O_TYPE = staticlib;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		CCB8439EC745E6AEABD3BF5B739CA27D /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1350A013A190F7D566AB12D30BF22D8F /* MPCoachMarks.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/MPCoachMarks/MPCoachMarks-prefix.pch";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PRIVATE_HEADERS_FOLDER_PATH = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PUBLIC_HEADERS_FOLDER_PATH = "";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		F621C332CF5D7474162B746D244A0E7D /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = B290FF94678F64CD3E6522C3AF54F299 /* Pods-ProvoGhostTours.release.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				MACH_O_TYPE = staticlib;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		01851E90017732826572B0CFCCFADFCC /* Build configuration list for PBXNativeTarget "MPCoachMarks" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0C3852D0187717704CD6E268DCDFE9C6 /* Debug */,
+				CCB8439EC745E6AEABD3BF5B739CA27D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		0B89B1365152CA7CFF41F604A2301F2B /* Build configuration list for PBXNativeTarget "Pods-ProvoGhostToursTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C191032027839DE8534306236B6CA680 /* Debug */,
+				219D97C77B312DD8479CE5079B80DA3F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				A2A3FCA6599E8034578E80B9179C76CD /* Debug */,
-				AB66C978656E240C917407B296597F92 /* Release */,
+				507EA1A2C854D911E61D1549FCCF7E68 /* Debug */,
+				BC3BC4399C3B6E3101028FB58D9870C6 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		D952A46DEBE81D0570918088E350B235 /* Build configuration list for PBXNativeTarget "Pods-ProvoGhostTours" */ = {
+		42A0BCC6EE9118E78160CD0EB5E40E62 /* Build configuration list for PBXNativeTarget "Pods-ProvoGhostTours" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				7A317F5355F6BB6F70BB7995B22D8C93 /* Debug */,
-				5B9936706190DCDD6D457685137F46A1 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		E0D2E29B33ABD12D2481BA98BB7A6835 /* Build configuration list for PBXNativeTarget "MPCoachMarks" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				6AA5402A2ACEFF7DDB3F0D07B05C0BDB /* Debug */,
-				2A0366380F4F6C4012E23DE578DB630B /* Release */,
+				B2D5B8F4123AAA5068AEB40A97421B52 /* Debug */,
+				F621C332CF5D7474162B746D244A0E7D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
